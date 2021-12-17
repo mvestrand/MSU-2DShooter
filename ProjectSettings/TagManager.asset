@@ -11,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Shot
+  - Player
+  - PlayerGraze
+  - PlayerShot
+  - Enemy
+  - EnemyShot
   - 
   - 
   - 
@@ -38,9 +38,27 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
+  - name: BG_Far
     uniqueID: 3884667925
+    locked: 0
+  - name: BG_Mid
+    uniqueID: 2362186473
+    locked: 0
+  - name: BG_Close
+    uniqueID: 1273575749
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: PlayerShot
+    uniqueID: 1413029445
+    locked: 0
+  - name: Player
+    uniqueID: 3071072837
+    locked: 0
+  - name: EnemyShot
+    uniqueID: 2134215895
+    locked: 0
+  - name: Enemy
+    uniqueID: 654830451
     locked: 0
