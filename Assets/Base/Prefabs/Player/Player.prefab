@@ -275,18 +275,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3328b65ceeb4f24cbeacc557db6cf2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentCharge: 0
-  maximumCharge: 0
-  rechargeRate: 0
-  rechargeDelay: 0
-  breakRequiresFullRecharge: 0
-  brokenRechargeDelay: 0
-  breakEffect: {fileID: 0}
   onBreak:
     m_PersistentCalls:
       m_Calls: []
+  onActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  onReset:
+    m_PersistentCalls:
+      m_Calls: []
+  onBreakClear:
+    m_PersistentCalls:
+      m_Calls: []
+  onChargeFull:
+    m_PersistentCalls:
+      m_Calls: []
+  breakEffect: {fileID: 0}
+  initialCharge: 0
+  maximumCharge: 0
+  rechargeRate: 0
+  rechargeDelay: 0.5
+  dischargeRate: 0
+  breakRequiresFullRecharge: 0
+  brokenRechargeDelay: 1
   damageModifier: {fileID: 11400000, guid: 48e4ad6213c0e284e8689b4b234ced17, type: 2}
   chargeModifier: {fileID: 11400000, guid: 87306cc102b85604191d665dea9b4b36, type: 2}
+  breakOnFullDrain: 1
+  disableOnDeactivate: 0
+  disableOnBreak: 0
 --- !u!1 &4158717808732573770
 GameObject:
   m_ObjectHideFlags: 0

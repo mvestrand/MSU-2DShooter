@@ -1,20 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.Events;
+
 using Sirenix.OdinInspector;
 
-public class SpecialAbility : MonoBehaviour, ISpecialAbility {
+using MVest;
 
-    [Header("Charge Settings")]
-    [Tooltip("Charge needed to activate this ability")]
-    public float maximumCharge = 100;
+[System.Serializable]
+public class SpecialAbility : ISpecialAbility {
+
+    #region Runtime Fields
+    [Header("Runtime Data")]
     [Tooltip("The current charge of the ability")]
-    public float currentCharge = 0;
+    [ShowInInspector] private float _currentCharge = 0;
+    [Tooltip("Is the ability currently full")]
+    [ShowInInspector] private bool _isFull = false;
+    public bool IsFull { get { return _isFull; } }
+    [Tooltip("Is the ability currently activated")]
+    [ShowInInspector] private bool _isActive = false;
+    public bool IsActive { get { return _isActive; } }
+    private float _lastChargedTime;
+    private float _lastActivatedTime;
+    #endregion
+
+    #region Configuration Fields
+    [Header("Charge Settings")]
+    [Min(1)][Tooltip("Charge needed to activate this ability")]
+    public float maximumCharge = 100;
     [Tooltip("The charge of this ability at initialization")]
     public float initialCharge = 0;
     [Tooltip("The rate the ability discharges when active")]
     public float activeDischargeRate = 1f;
-
+    [Tooltip("Whether or not activation requires having a full charge")]
+    public bool activateRequiresFullCharge = true;
+    [Tooltip("Minimum activation charge")]
+    public float minimumActivationCharge = 1;
 
     [Header("Passive Charge Settings")]
     [Tooltip("Does the ability passively charge up over time")]
@@ -37,90 +59,131 @@ public class SpecialAbility : MonoBehaviour, ISpecialAbility {
     public float passiveDischargeRate = 0;
     [Tooltip("Delay after receiving some charge before passive discharging begins (sec)")]
     public float passiveDischargeDelay = 0f;
+    #endregion
 
-    [Header("Runtime Debug")]
-    [System.NonSerialized][ShowInInspector]
-    [Tooltip("Is the ability currently full")]
-    public bool isFull = false;
-    [Tooltip("Is the ability currently activated")]
-    [System.NonSerialized][ShowInInspector]
-    public bool isActive = false;
-    private float lastChargedTime;
-    private float lastActivatedTime;
+    #region Public Properties
+    public float CurrentCharge { 
+        get { return _currentCharge; } 
+        set { 
+            if (value == _currentCharge) // Return early if there is no change in the 0
+                return;
+            if (value > _currentCharge) {
+                float deltaCharge = _currentCharge - value;
+                _currentCharge = value;
+                _lastChargedTime = Time.time;                
+                UpdateFull();
+                _currentCharge = Mathf.Min(_currentCharge, maximumCharge);
+                onChargeGain.Invoke(deltaCharge);
+            } else {
+                float deltaCharge = _currentCharge - value;
+                _currentCharge = value;
+                UpdateFull();
+                _currentCharge = Mathf.Max(_currentCharge, 0);
+                onChargeLoss.Invoke(deltaCharge);
+            }
+        }
+    }
+    #endregion
 
-    public void ModifyCharge(float charge) {
-        currentCharge += charge;
-        if (charge > 0)
-            lastChargedTime = Time.time;
-        isFull = currentCharge >= maximumCharge;
-        currentCharge = Mathf.Clamp(currentCharge, 0, maximumCharge);
+    #region Event Hooks
+    [FoldoutGroup("Events")] public UnityEvent onFull;
+    [FoldoutGroup("Events")] public UnityEvent onLoseFull; // Called when ability is no longer full but has not been activated 
+    [FoldoutGroup("Events")] public UnityEvent onActivate;
+    [FoldoutGroup("Events")] public UnityEvent onDeactivate;
+    [FoldoutGroup("Events")] public UnityFloatEvent onChargeGain;
+    [FoldoutGroup("Events")] public UnityFloatEvent onChargeLoss;
+    
+    #endregion
+
+    #region Public Methods
+    public void ModifyCharge(float deltaCharge) {
+        if (deltaCharge == 0) 
+            return;
+        _currentCharge += deltaCharge;
+    }
+
+    public bool CanActivate() {
+        return _isFull || (!activateRequiresFullCharge && _currentCharge >= minimumActivationCharge);
     }
 
     public void Activate() {
-        if (!isFull)
+        if (!CanActivate())
             return;
-        isActive = true;
+        _isActive = true;
+        _isFull = false;
         OnPowerStart();
     }
 
     public void Deactivate() {
-        if (!isActive)
+        if (!_isActive)
             return;
-        isActive = false;
-        isFull = false;
-        lastActivatedTime = Time.time;
+        _isActive = false;
+        _lastActivatedTime = Time.time;
         OnPowerEnd();
     }
 
+    public void Update() {
+        UpdateCharge();
+        if (_isActive)
+            OnPowerActiveUpdate();
+    }
+
+    public void Reset() {
+        _currentCharge = initialCharge;
+    }
+    #endregion
+
+    #region Subclass Override Methods
     protected virtual void OnPowerStart() {}
     protected virtual void OnPowerActiveUpdate() {}
     protected virtual void OnPowerEnd() {}
+    #endregion
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Initialize();
-    }
-
-    // Update is called once per frame
-    void Update() {
-        UpdateCharge();
-    }
-
-    void Initialize() {
-        currentCharge = initialCharge;
-    }
-
-
-    void UpdateCharge() {
-        if (isActive) {
+    #region Private Methods
+    private void UpdateCharge() {
+        if (_isActive) {
             OnPowerActiveUpdate();
-            currentCharge -= activeDischargeRate * Time.deltaTime;
-            if (currentCharge <= 0) {
-                currentCharge = 0;
+            _currentCharge -= activeDischargeRate * Time.deltaTime;
+            if (_currentCharge <= 0) {
+                _currentCharge = 0;
                 Deactivate();
             }
         }
         else if (hasPassiveCharge && 
-            currentCharge < passiveChargeMaximum && 
-            lastActivatedTime + passiveChargeDelay <= Time.time) 
+            _currentCharge < passiveChargeMaximum && 
+            _lastActivatedTime + passiveChargeDelay <= Time.time) 
         {
-            currentCharge = Mathf.MoveTowards(currentCharge, passiveChargeMaximum, passiveChargeRate * Time.deltaTime);
-            isFull = (currentCharge >= maximumCharge);
-            currentCharge = Mathf.Clamp(currentCharge, 0, maximumCharge);
+            _currentCharge = Mathf.MoveTowards(_currentCharge, passiveChargeMaximum, passiveChargeRate * Time.deltaTime);
+            UpdateFull();
+            _currentCharge = Mathf.Clamp(_currentCharge, 0, maximumCharge);
         } 
         else if (hasPassiveDischarge && 
-            currentCharge > passiveDischargeMinimum && 
-            lastChargedTime + passiveDischargeDelay <= Time.time &&
-            (!isFull || dischargesAfterFull)) 
+            _currentCharge > passiveDischargeMinimum && 
+            _lastChargedTime + passiveDischargeDelay <= Time.time &&
+            (!_isFull || dischargesAfterFull)) 
         {
-            currentCharge = Mathf.MoveTowards(currentCharge, passiveDischargeMinimum, passiveDischargeRate * Time.deltaTime);
-            isFull = (currentCharge >= maximumCharge);
-            currentCharge = Mathf.Clamp(currentCharge, 0, maximumCharge);
+            _currentCharge = Mathf.MoveTowards(_currentCharge, passiveDischargeMinimum, passiveDischargeRate * Time.deltaTime);
+            UpdateFull();
+            _currentCharge = Mathf.Clamp(_currentCharge, 0, maximumCharge);
         }
     }
+
+    private void UpdateFull() {
+    if (_currentCharge >= maximumCharge) {
+        if (!_isFull) {
+            _isFull = true;
+            onFull.Invoke(); // Only call onFull the first frame that it is set full
+        }
+    }
+    else {
+        if (_isFull) {
+            _isFull = false;
+            onLoseFull.Invoke();
+        }
+    }
+    #endregion
+}
+
 }
 
 public interface ISpecialAbility {
