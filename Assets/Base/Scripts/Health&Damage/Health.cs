@@ -8,11 +8,12 @@ using UnityEngine;
 /// 
 /// Implementation Notes: 2D Rigidbodies must be set to never sleep for this to interact with trigger stay damage
 /// </summary>
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, IDamagable
 {
     [Header("Team Settings")]
-    [Tooltip("The team associated with this damage")]
-    public int teamId = 0;
+    [Tooltip("The team associated with this health")]
+    [SerializeField] private int _teamId;
+    public int TeamId { get { return _teamId; } }
 
     [Header("Health Settings")]
     [Tooltip("The default health value")]
@@ -120,7 +121,7 @@ public class Health : MonoBehaviour
 
     public void HandleDamage(Damage damage) {
         if (shield != null && shield.IsActive) {
-            shield.AbsorbDamage(damage);
+            shield.HandleDamage(damage);
             damage.NotifyAbsorb();
         } else {
             TakeDamage(damage.damageAmount * damageModifier.Modify(damage.element));

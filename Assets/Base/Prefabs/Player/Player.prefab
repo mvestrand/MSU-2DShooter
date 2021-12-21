@@ -311,7 +311,10 @@ MonoBehaviour:
   animator: {fileID: 0}
   myRigidbody: {fileID: 4158717808732573772}
   moveSpeed: 10
+  focusSpeedModifier: 0.7
   rotationSpeed: 60
+  useBoundingBox: 1
+  boundingBox: {fileID: 11400000, guid: 651a992040b2c0645ba6ee787038f4b0, type: 2}
   aimMode: 1
   movementMode: 2
 --- !u!114 &4158717808732573763
@@ -326,7 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c9a4613bbc6ce4b809b21678067793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamId: 0
+  _teamId: 0
   defaultHealth: 1
   maximumHealth: 1
   currentHealth: 1
@@ -336,7 +339,7 @@ MonoBehaviour:
   currentLives: 3
   maximumLives: 5
   damageModifier: {fileID: 0}
-  shield: {fileID: 0}
+  shield: {fileID: 347857042730639177}
   deathEffect: {fileID: 6218169049356006189, guid: 68794701c80057447857bb433e54c579, type: 3}
   hitEffect: {fileID: 5156419567158778961, guid: d35295653acdbe24081a5caee3d9c353, type: 3}
 --- !u!50 &4158717808732573772
@@ -388,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75388997f8d4264a86b7441dc9ea74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3562651836113712045, guid: aee1688b385340b4bab2b46707955895, type: 3}
+  projectilePrefab: {fileID: 4099572394843378986, guid: aee1688b385340b4bab2b46707955895, type: 3}
   projectileHolder: {fileID: 0}
   isPlayerControlled: 1
   fireRate: 0.05
@@ -401,6 +404,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4158717808732573775}
     m_Modifications:
+    - target: {fileID: 33985427046422138, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
+      propertyPath: rechargeRate
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 33985427046422138, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
+      propertyPath: dischargeRate
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 33985427046422138, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
+      propertyPath: initialCharge
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 33985427046422138, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
+      propertyPath: maximumCharge
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 33985427046422138, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
+      propertyPath: rechargeDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2787234976951095299, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
       propertyPath: m_Name
       value: ShieldBase
@@ -449,8 +472,53 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6704135979348545014, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7342911559386081178, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
+--- !u!114 &347857042730639177 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 33985427046422138, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
+  m_PrefabInstance: {fileID: 336481017776277811}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2451458765455710512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3328b65ceeb4f24cbeacc557db6cf2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2451458765455710512 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2787234976951095299, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
+  m_PrefabInstance: {fileID: 336481017776277811}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &3167396510729704636
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2451458765455710512}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!4 &4984150731108546700 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4719817614963896767, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}

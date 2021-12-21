@@ -10,6 +10,8 @@ public class InputManager : MonoBehaviour
 {
     // A global reference for the input manager that outher scripts can access to read the input
     public static InputManager instance;
+    public bool playerHasControl = true;
+
 
     /// <summary>
     /// Description:
@@ -53,9 +55,12 @@ public class InputManager : MonoBehaviour
         firePressed = default;
         fireHeld = default;
 
+        shieldPressed = default;
+        shieldHeld = default;
+
+        focusHeld = default;
+
         pausePressed = default;
-
-
     }
 
     [Header("Player Movement Input")]
@@ -129,6 +134,63 @@ public class InputManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         firePressed = false;
     }
+
+    [Header("Player Shield Input")]
+    [Tooltip("Whether or not the shield button was pressed this frame")]
+    public bool shieldPressed;
+    [Tooltip("Whether or not the shield button is being held")]
+    public bool shieldHeld;
+
+    /// <summary>
+    /// Description:
+    /// Reads the shield input from the input action's call back context
+    /// Input:
+    /// InputAction.CallbackContext context
+    /// Returns:
+    /// void
+    /// </summary>
+    /// <param name="context">The input action callback context meant to be read for firing</param>
+    public void ReadShieldInput(InputAction.CallbackContext context)
+    {
+        shieldPressed = !context.canceled;
+        shieldHeld = !context.canceled;
+        StartCoroutine(ResetShieldStart());
+    }
+
+    /// <summary>
+    /// Description
+    /// Coroutine that resets the shield pressed variable after one frame
+    /// Inputs:
+    /// none
+    /// Returns: 
+    /// IEnumerator
+    /// </summary>
+    /// <returns>IEnumerator: Allows this to function as a coroutine</returns>
+    private IEnumerator ResetShieldStart()
+    {
+        yield return new WaitForEndOfFrame();
+        shieldPressed = false;
+    }
+
+    [Header("Player Focus Input")]
+    [Tooltip("Whether or not the focus button is being held")]
+    public bool focusHeld;
+
+    /// <summary>
+    /// Description:
+    /// Reads the shield input from the input action's call back context
+    /// Input:
+    /// InputAction.CallbackContext context
+    /// Returns:
+    /// void
+    /// </summary>
+    /// <param name="context">The input action callback context meant to be read for firing</param>
+    public void ReadFocusInput(InputAction.CallbackContext context)
+    {
+        focusHeld = !context.canceled;
+        StartCoroutine(ResetShieldStart());
+    }
+
 
     [Header("Pause Input")]
     public bool pausePressed;

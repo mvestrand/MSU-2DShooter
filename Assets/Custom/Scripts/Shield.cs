@@ -7,12 +7,13 @@ using Sirenix.OdinInspector;
 
 using MVest;
 
-public class Shield : MonoBehaviour
+public class Shield : MonoBehaviour, IDamagable
 {
     #region Runtime Fields
     [FoldoutGroup("Runtime Data")]
     [Tooltip("Current shield charge remaining")]
     [ShowInInspector] private float _currentCharge;
+    public float CurrentCharge { get { return _currentCharge; } }
     [FoldoutGroup("Runtime Data")]
     [Tooltip("Whether or not the shield is broken")]
     [FoldoutGroup("Runtime Data")]
@@ -28,6 +29,7 @@ public class Shield : MonoBehaviour
     public bool IsFull { get { return _isFull; } }
     private float _brokeAtTime;
     private float _disabledAtTime;
+    private Animator _animator;
     #endregion
 
     #region Event Hooks
@@ -40,36 +42,45 @@ public class Shield : MonoBehaviour
     #endregion
 
     #region Configuration Fields
-
+    [FoldoutGroup("Effects")]
     [Tooltip("Effect created when the shield breaks")]
     public GameObject breakEffect;
 
-
+    [Tooltip("The team associated with this health")]
+    [SerializeField] private int _teamId;
+    public int TeamId { get { return _teamId; } }
     [Min(0)][Tooltip("The initial charge of the shield")]
-    public float initialCharge;
-    [Min(0)][Tooltip("Maximum shield charge value")]
-    public float maximumCharge;
+    public float initialCharge = 0;
+    public bool startActive = false;
+    [Min(0)]
+    [Tooltip("Minimum charge to activate the shield")]
+    public float minimumActivateCharge = 10;
+    [Min(0)]
+    [Tooltip("Maximum shield charge value")]
+    public float maximumCharge = 100;
     [Min(0)][Tooltip("Rate the shield recharges (points / sec)")]
-    public float rechargeRate;
+    public float rechargeRate = 20;
     [Min(0)][Tooltip("Time delay before shield begins recharging (sec)")]
-    public float rechargeDelay;
+    public float rechargeDelay = .75f;
 
     [Min(0)][Tooltip("Charge used while active (points / sec)")]
-    public float dischargeRate;
+    public float dischargeRate = 40;
 
 
     [Tooltip("Whether or not breaking requires a full recharge")]
-    public bool breakRequiresFullRecharge;
+    public bool breakRequiresFullRecharge = false;
     [Tooltip("Delay before recharging begins after being broken")]
-    public float brokenRechargeDelay;
+    public float brokenRechargeDelay = 1.5f;
 
 
     [Tooltip("Damage taken from incoming elemental damage")]
     [NotNull]
     public ElementModifier damageModifier;
+    public float damageModScale = 10f;
     [Tooltip("Charge generated from incoming elemental damage")]
     [NotNull]
     public ElementModifier chargeModifier;
+    public float chargeModScale = 1;
 
     [Tooltip("The special to charge using this shield")]
     public ISpecialAbility special;
@@ -82,6 +93,11 @@ public class Shield : MonoBehaviour
     #endregion
 
     #region Public Methods
+
+    public bool CanActivate() {
+        return !_isBroken && !_isActive && _currentCharge >= minimumActivateCharge;
+    }
+
 
     [ContextMenu("Reset")]
     public void Reset() {
@@ -97,6 +113,7 @@ public class Shield : MonoBehaviour
     public void Activate() {
         if (!IsActive) {
             _isActive = true;
+            _animator.SetBool("Active", true);
             onActivate.Invoke();
         }
     }
@@ -106,6 +123,7 @@ public class Shield : MonoBehaviour
         if (IsActive) {
             _isActive = false;
             _disabledAtTime = Time.time;
+            _animator.SetBool("Active", false);
             onDeactivate.Invoke();
         }
     }
@@ -114,7 +132,6 @@ public class Shield : MonoBehaviour
     public void Break() {
         _isBroken = true;
         _brokeAtTime = Time.time;
-        _isActive = false;
         _currentCharge = 0;
         onBreak.Invoke();
         Deactivate();
@@ -143,11 +160,10 @@ public class Shield : MonoBehaviour
             Deactivate();
     }
 
-    public void AbsorbDamage(Damage damage) {
-        Debug.Assert(IsActive, "Shield AbsorbDamage() should not be called while inactive");
-
-        special?.ModifyCharge(chargeModifier.Modify(damage.element) * damage.chargeAmount);
-        _currentCharge -= damageModifier.Modify(damage.element) * damage.damageAmount;
+    public void HandleDamage(Damage damage) {
+        Debug.Assert(IsActive, "Shield HandleDamage() should not be called while inactive");
+        special?.ModifyCharge(chargeModifier.Modify(damage.element) * damage.chargeAmount * chargeModScale);
+        _currentCharge -= damageModifier.Modify(damage.element) * damage.damageAmount * damageModScale;
         if (_currentCharge <= 0) {
             Break();
         }
@@ -157,6 +173,17 @@ public class Shield : MonoBehaviour
     #endregion
 
     #region Unity Messages    
+
+    void Start() {
+        _animator = GetComponent<Animator>();
+        _currentCharge = initialCharge;
+        if(startActive)
+            Activate();
+        else
+            Deactivate();
+        _animator.Play("Entry");
+
+    }
 
     void Update() {
         UpdateBrokenDelay();

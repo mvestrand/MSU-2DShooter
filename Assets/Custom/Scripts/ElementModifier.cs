@@ -36,6 +36,8 @@ public struct ElementModifierData {
     public float defaultModifier;
     public Dictionary<Element, float> Modifier;
     public float GetModifier(Element element) {
+        if (element == null)
+            return defaultModifier;
         float modifier;
         if (Modifier.TryGetValue(element, out modifier))
             return modifier;

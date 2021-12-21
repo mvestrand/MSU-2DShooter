@@ -17,11 +17,19 @@ public class Controller : MonoBehaviour
     [Header("Movement Variables")]
     [Tooltip("The speed at which the player will move.")]
     public float moveSpeed = 10.0f;
+    [Tooltip("Focus speed modifier")]
+    public float focusSpeedModifier = 0.7f;
     [Tooltip("The speed at which the player rotates in asteroids movement mode")]
     public float rotationSpeed = 60f;
 
+    [Tooltip("Should the player be restricted to the bounding box")]
+    public bool useBoundingBox = false;
+    [Tooltip("The bounding box which the player is limited to")]
+    public BoundingBoxVariable boundingBox;
+
     //The InputManager to read input from
     private InputManager inputManager;
+    private Health _playerHealth;
 
     /// <summary>
     /// Enum which stores different aiming modes
@@ -82,6 +90,7 @@ public class Controller : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        _playerHealth = GetComponent<Health>();
         SetupInput();
     }
 
@@ -138,6 +147,19 @@ public class Controller : MonoBehaviour
         // Move the player
         MovePlayer(movementVector);
         LookAtPoint(lookPosition);
+        HandleShieldInput();
+    }
+
+    private void HandleShieldInput()
+    {
+        if (inputManager.shieldPressed && _playerHealth.shield != null && _playerHealth.shield.CanActivate())
+        {
+            _playerHealth?.shield.Activate();
+        }
+        else if (!inputManager.shieldHeld && _playerHealth.shield != null && _playerHealth.shield.IsActive)
+        {
+            _playerHealth?.shield.Deactivate();
+        }
     }
 
     /// <summary>
@@ -230,7 +252,11 @@ public class Controller : MonoBehaviour
                 movement.y = 0;
             }
             // Move the player's transform
-            transform.position = transform.position + (movement * Time.deltaTime * moveSpeed);
+            float focusMod = (inputManager.focusHeld && inputManager.playerHasControl ? focusSpeedModifier : 1);
+            transform.position = transform.position + (focusMod * movement * Time.deltaTime * moveSpeed);
+            if (useBoundingBox && boundingBox.Value != null)
+                transform.position = boundingBox.Value.ClampXY(transform.position);
+            
         }
     }
 

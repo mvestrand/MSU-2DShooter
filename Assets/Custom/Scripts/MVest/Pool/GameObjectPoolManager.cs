@@ -21,7 +21,7 @@ public class GameObjectPoolManager : MonoBehaviour
         }
     }
 
-    private Dictionary<int, GameObjectPool> pools;
+    private Dictionary<int, GameObjectPool> pools = new Dictionary<int, GameObjectPool>();
 
     void Awake() {
         if (_instance == null) {

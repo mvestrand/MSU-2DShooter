@@ -117,10 +117,17 @@ public class Damage : MonoBehaviour
     /// <param name="collisionGameObject">The game object that has been collided with</param>
     private void DealDamage(GameObject collisionGameObject)
     {
+        Shield collidedShield = collisionGameObject.GetComponent<Shield>();
         Health collidedHealth = collisionGameObject.GetComponent<Health>();
-        if (collidedHealth != null)
+        if (collidedShield != null && collidedShield.IsActive)
         {
-            if (collidedHealth.teamId != this.teamId)
+            if (collidedShield.TeamId != this.teamId)
+            {
+                collidedShield.HandleDamage(this);
+            }
+        } else if (collidedHealth != null)
+        {
+            if (collidedHealth.TeamId != this.teamId)
             {
                 collidedHealth.HandleDamage(this);
             }

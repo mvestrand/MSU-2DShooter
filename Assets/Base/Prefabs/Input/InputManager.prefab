@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.9546767, y: 7.9668612, z: -2.712886}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -48,8 +49,12 @@ MonoBehaviour:
   verticalMoveAxis: 0
   horizontalLookAxis: 0
   verticalLookAxis: 0
-  fireButton: 0
-  pauseButton: 0
+  firePressed: 0
+  fireHeld: 0
+  shieldPressed: 0
+  shieldHeld: 0
+  focusHeld: 0
+  pausePressed: 0
 --- !u!114 &1429887281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +144,42 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c480be52-650c-4b92-a215-ad1949e377f6
     m_ActionName: Player/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6766868123646520303}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: ReadShieldInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 37350bcd-2005-44d5-90dd-23964b8868bd
+    m_ActionName: Player/Shield[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fb774352-df48-4e0f-8064-455ab70705af
+    m_ActionName: Player/Focus[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6ba36b62-e965-4fd7-a6ac-2d9c7209d7ea
+    m_ActionName: Player/NextPhase[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8130d699-bd53-4286-8f80-987ff6a6caeb
+    m_ActionName: Player/PrevPhase[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a4f0c416-0f68-4d8b-b1c4-5def9ebdf0ad
+    m_ActionName: Player/Special[/Keyboard/v]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e75dd6dd-3123-409d-8fb1-cde1572c4425
+    m_ActionName: Player/Dash
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

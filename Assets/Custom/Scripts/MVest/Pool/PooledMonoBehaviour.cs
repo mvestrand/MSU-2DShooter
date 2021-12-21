@@ -54,7 +54,8 @@ public abstract class PooledMonoBehaviour : MonoBehaviour, IPoolableObject {
             obj = Instantiate<PooledMonoBehaviour>(_prefab);
             obj._prefab = _prefab;
         }
-        obj.transform.parent = _pool.transform;
+        if (_pool != null)
+            obj.transform.parent = _pool.transform;
         return obj.gameObject;
     }
 
@@ -68,16 +69,19 @@ public abstract class PooledMonoBehaviour : MonoBehaviour, IPoolableObject {
     }
 
     public void OnTakeFromPool(GameObject obj) {
-
         obj.transform.parent = _pool.transform;
+        obj.transform.SetPositionAndRotation(transform.localPosition, transform.localRotation);
+        obj.transform.localScale = transform.localScale;
+
         PooledMonoBehaviour comp;
         obj.TryGetComponent<PooledMonoBehaviour>(out comp);
-        comp.Reset();
+        comp.PreReactivate();
         obj.SetActive(true);
+        comp.PreRestart();
     }
 
 
-    public GameObject Get() {
+    private GameObject GetObject() {
         if (_pool == null) {
             if (GameObjectPoolManager.Instance == null) {
                 return CreatePooledItem();
@@ -85,6 +89,70 @@ public abstract class PooledMonoBehaviour : MonoBehaviour, IPoolableObject {
             _pool = GameObjectPoolManager.Instance.GetPool(this);
         }
         return _pool.Get();
+    }
+
+    public GameObject Get() {
+        GameObject obj = GetObject();
+        PooledMonoBehaviour comp;
+        obj.TryGetComponent<PooledMonoBehaviour>(out comp);
+        comp.Restart();
+        return obj;
+    }
+
+    public GameObject Get(Transform parent) {
+        GameObject obj = GetObject();
+        obj.transform.parent = parent;
+        PooledMonoBehaviour comp;
+        obj.TryGetComponent<PooledMonoBehaviour>(out comp);
+        comp.Restart();
+        return obj;
+    }
+
+    public GameObject Get(Vector3 position, Quaternion rotation) {
+        GameObject obj = GetObject();
+        obj.transform.SetPositionAndRotation(position, rotation);
+        PooledMonoBehaviour comp;
+        obj.TryGetComponent<PooledMonoBehaviour>(out comp);
+        comp.Restart();
+        return obj;
+    }
+
+    public GameObject Get(Vector3 position, Quaternion rotation, Transform parent) {
+        GameObject obj = GetObject();
+        obj.transform.parent = parent;
+        obj.transform.SetPositionAndRotation(position, rotation);
+        PooledMonoBehaviour comp;
+        obj.TryGetComponent<PooledMonoBehaviour>(out comp);
+        comp.Restart();
+        return obj;
+    }
+
+    public T Get<T>() {
+        GameObject  obj = Get();
+        T comp;
+        obj.TryGetComponent<T>(out comp);
+        return comp;
+    }
+
+    public T Get<T>(Transform parent) {
+        GameObject  obj = Get(parent);
+        T comp;
+        obj.TryGetComponent<T>(out comp);
+        return comp;
+    }
+
+    public T Get<T>(Vector3 position, Quaternion rotation) {
+        GameObject  obj = Get(position, rotation);
+        T comp;
+        obj.TryGetComponent<T>(out comp);
+        return comp;
+    }
+
+    public T Get<T>(Vector3 position, Quaternion rotation, Transform parent) {
+        GameObject  obj = Get(position, rotation, parent);
+        T comp;
+        obj.TryGetComponent<T>(out comp);
+        return comp;
     }
 
     public void Release() {
@@ -95,7 +163,9 @@ public abstract class PooledMonoBehaviour : MonoBehaviour, IPoolableObject {
         }
     }
 
-    protected abstract void Reset();
+    protected virtual void PreReactivate() {}
+    protected virtual void PreRestart() {}
+    protected abstract void Restart();
 }
 
 }

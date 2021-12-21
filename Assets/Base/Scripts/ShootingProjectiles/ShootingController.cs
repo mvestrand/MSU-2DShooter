@@ -10,7 +10,7 @@ public class ShootingController : MonoBehaviour
 {
     [Header("GameObject/Component References")]
     [Tooltip("The projectile to be fired.")]
-    public GameObject projectilePrefab = null;
+    public Projectile projectilePrefab = null;
     [Tooltip("The transform in the heirarchy which holds projectiles if any")]
     public Transform projectileHolder = null;
 
@@ -144,8 +144,9 @@ public class ShootingController : MonoBehaviour
         // Check that the prefab is valid
         if (projectilePrefab != null)
         {
+
             // Create the projectile
-            GameObject projectileGameObject = Instantiate(projectilePrefab, transform.position, transform.rotation, null);
+            GameObject projectileGameObject = projectilePrefab.Get(transform.position, transform.rotation);
 
             // Account for spread
             Vector3 rotationEulerAngles = projectileGameObject.transform.rotation.eulerAngles;

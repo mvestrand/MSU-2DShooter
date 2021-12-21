@@ -16,6 +16,7 @@ public class GameObjectPool : MonoBehaviour {
         obj.transform.parent = this.transform;
         return obj;
     }
+
     public void Release(GameObject element) { pool.Release(element); }
 
     internal ObjectPool<GameObject> pool;
