@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class Enemy : MonoBehaviour
 {
+    public event System.Action<Enemy> onDeath;
+
     [Header("Settings")]
     [Tooltip("The speed at which the enemy moves.")]
     public float moveSpeed = 5.0f;
@@ -18,6 +20,10 @@ public class Enemy : MonoBehaviour
     public Transform followTarget = null;
     [Tooltip("The distance at which the enemy begins following the follow target.")]
     public float followRange = 10.0f;
+
+
+
+
 
     [Header("Shooting")]
     [Tooltip("The enemy's gun components")]
@@ -112,6 +118,7 @@ public class Enemy : MonoBehaviour
     {
         AddToScore();
         IncrementEnemiesDefeated();
+        onDeath?.Invoke(this);
     }
 
     /// <summary>
