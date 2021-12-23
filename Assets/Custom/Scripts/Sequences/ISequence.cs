@@ -6,6 +6,7 @@ using UnityEngine;
 
 public enum SequenceState {
     Unplayed,
+    Delaying,
     Playing,
     Finishing,
     CleanedUp

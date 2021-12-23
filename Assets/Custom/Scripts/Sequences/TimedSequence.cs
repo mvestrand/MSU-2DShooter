@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Playables;
 
 
@@ -13,45 +14,64 @@ public class TimedSequence : MonoBehaviour, ISequence
     [Tooltip("Play this sequence immediately")]
     [SerializeField] private bool playOnAwake = false;
 
-
-    [HorizontalGroup("MinBlockTime", Width = 15)]
+    [FoldoutGroup("Time Settings")]
+    [HorizontalGroup("Time Settings/MinBlockTime", Width = 15)]
     [HideLabel]
     [Tooltip("Whether or not this sequence has a minimum block time")]
     [SerializeField] private bool useMinBlockTime = false;
 
-    [HorizontalGroup("MinBlockTime")][EnableIf("useMinBlockTime")]
+    [FoldoutGroup("Time Settings")]
+    [HorizontalGroup("Time Settings/MinBlockTime")][EnableIf("useMinBlockTime")]
     [Tooltip("Minimum time the sequence will block for")]
     [SerializeField] private float minBlockTime = 1f;
 
 
-    [HorizontalGroup("MaxBlockTime", Width = 15)]
+    [FoldoutGroup("Time Settings")]
+    [HorizontalGroup("Time Settings/MaxBlockTime", Width = 15)]
     [HideLabel]
     [Tooltip("Whether or not this sequence has a maximum block time")]
     [SerializeField] private bool useMaxBlockTime = false;
 
-    [HorizontalGroup("MaxBlockTime")][EnableIf("useMaxBlockTime")]
+    [FoldoutGroup("Time Settings")]
+    [HorizontalGroup("Time Settings/MaxBlockTime")][EnableIf("useMaxBlockTime")]
     [Tooltip("Maximum time the sequence will block for")]
     [SerializeField] private float maxBlockTime = 10f;
 
 
-    [HorizontalGroup("SoftTimeLimit", Width = 15)]
+    [FoldoutGroup("Time Settings")]
+    [HorizontalGroup("Time Settings/SoftTimeLimit", Width = 15)]
     [HideLabel]
     [Tooltip("Whether or not to tell objects to end after a given time")]
     [SerializeField] private bool useSoftTimeLimit = false;
 
-    [HorizontalGroup("SoftTimeLimit")][EnableIf("useSoftTimeLimit")]
+    [FoldoutGroup("Time Settings")]
+    [HorizontalGroup("Time Settings/SoftTimeLimit")][EnableIf("useSoftTimeLimit")]
     [Tooltip("Maximum time before telling objects to end")]
     [SerializeField] private float softTimeLimit = 10f;
 
 
-    [HorizontalGroup("HardTimeLimit", Width = 15)]
+    [FoldoutGroup("Time Settings")]
+    [HorizontalGroup("Time Settings/HardTimeLimit", Width = 15)]
     [HideLabel]
     [Tooltip("Whether or not to force objects to end after a given time")]
     [SerializeField] private bool useHardTimeLimit = false;
 
-    [HorizontalGroup("HardTimeLimit")][EnableIf("useHardTimeLimit")]
+    [FoldoutGroup("Time Settings")]
+    [HorizontalGroup("Time Settings/HardTimeLimit")][EnableIf("useHardTimeLimit")]
     [Tooltip("Maximum time before forcing objects to end")]
     [SerializeField] private float hardTimeLimit = 20f;
+
+    [FoldoutGroup("Events")]
+    public UnityEvent onPlay;
+    [FoldoutGroup("Events")]
+    public UnityEvent onFinish;
+    [FoldoutGroup("Events")]
+    public UnityEvent onCleanup;
+
+    [Tooltip("A PlayableDirector component to play")]
+    [SerializeField] private PlayableDirector director;
+    [Tooltip("An animator component to play")]
+    [SerializeField] private Animator animator;
     #endregion
 
 
@@ -62,8 +82,6 @@ public class TimedSequence : MonoBehaviour, ISequence
 
     private SequenceState _state = SequenceState.Unplayed;
     public SequenceState State { get { return _state; } }
-    [SerializeField] private PlayableDirector director;
-    [SerializeField] private Animator animator;
 
     private bool _forceBlock = true;
     private bool _allowFinish = false;
@@ -97,10 +115,10 @@ public class TimedSequence : MonoBehaviour, ISequence
         _allowFinish = false;
         _allowCleanup = false;
         this.gameObject.SetActive(true);
+        this.enabled = true;
         if (director != null)
             director.Play();
-        if (director != null)
-            animator.Play("Entry");
+        onPlay.Invoke();
     }
 
     public virtual void Finish()
@@ -108,49 +126,55 @@ public class TimedSequence : MonoBehaviour, ISequence
         _state = SequenceState.Finishing;
         if (animator != null)
             animator.SetTrigger("finish");
+        onFinish.Invoke();
+
     }
 
     public virtual void Cleanup()
     {
-        Debug.Log("Cleanup()");
         _state = SequenceState.CleanedUp;
         if (director != null)
             director.Stop();
         this.gameObject.SetActive(false);
+        onCleanup.Invoke();
     }
 
     public virtual void Clear()
     {
         // Clean up if called while the sequence is running
-        if (_state == SequenceState.Playing || _state == SequenceState.Finishing)
-            Cleanup(); 
+        if (_state == SequenceState.Playing || _state == SequenceState.Finishing) {
+            bool wasActive = this.gameObject.activeInHierarchy;
+            Cleanup();
+            if (wasActive)
+                this.gameObject.SetActive(true);
+        }
         _state = SequenceState.Unplayed;
         _startTime = Mathf.NegativeInfinity;
     }
 
-    public void AllowUnblock() {
+    public virtual void AllowUnblock() {
         _forceBlock = false;
     }
 
-    public void AllowFinish() {
+    public virtual void AllowFinish() {
         _allowFinish = true;
     }
 
-    public void AllowCleanup() {
+    public virtual void AllowCleanup() {
         _allowCleanup = true;
     }
+
+    
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        if (playOnAwake) {
+        // Check state to prevent duplicate plays calls when play is called externally
+        if (playOnAwake && _state == SequenceState.Unplayed) { 
             this.Play();
         }
     }
 
-    private bool PastTime(float timelimit) {
-        return Time.time > _startTime + timelimit;
-    }
 
     // Update is called once per frame
     protected virtual void Update()
@@ -173,5 +197,8 @@ public class TimedSequence : MonoBehaviour, ISequence
         }
     }
 
+    private bool PastTime(float timelimit) {
+        return Time.time > _startTime + timelimit;
+    }
 
 }

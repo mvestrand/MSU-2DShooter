@@ -1,49 +1,46 @@
 // using System.Collections;
-// using System.Collections.Generic;
-// using UnityEngine;
+
+using System.Collections.Generic;
+
+using UnityEngine;
 
 
 
-// public class LinearSequence : TimedSequence {
-
-//     [Tooltip("Play this sequence immediately")]
-//     [SerializeField] private bool playOnAwake = false;
-//     [Tooltip("Whether or not this sequence has a time limit")]
-//     [SerializeField] private bool useSoftTimeLimit = false;
-//     [Tooltip("The time (sec) after which to end the sequence early. No more sequences will play, but it will still block on the last played sequence")]
-//     [SerializeField] private float softTimeLimit = 60f;
-//     [Tooltip("Whether or not this sequence should block until it is done playing")]
-//     [SerializeField] private bool blockUntilFinished = true;
-//     [Tooltip("The sub-sequences which will play in order")]
-//     public List<ISequence> sequences = new List<ISequence>();
 
 
 
-//     private float _startTime;
-//     private int curIndex;
-//     private List<ISequence> running = new List<ISequence>();
-//     private bool _hasStarted = false;
+public class LinearSequence : TimedSequence {
 
-//     public bool WasPlayed { get { return _hasStarted; } } 
+    [System.Serializable]
+    public struct SequenceData {
 
-//     public bool Block {
-//         get {
-//             return !CurrentHasNoBlock()                         // Block if the current sequence is blocking
-//                 || (!_isEnding && curIndex != sequences.Count)  // -OR-  Block if not ending early and we aren't at the end of our sequence 
-//                 || (blockUntilFinished && !_hasFinished);       // -OR-  Block if we are waiting until everything is finished
-//         }
-//     }
+        [Tooltip("The sequence to play")]
+        public TimedSequence sequence;
 
-//     public bool Finished {get { return _hasFinished; } }
-//     public bool NeedsCleanup { get { return _hasStarted && !_hasFinished; } }  // This cleans itself up when it finishes
+    }
 
-//     private bool _isEnding;
-//     private bool _hasFinished;
+    public List<SequenceData> sequenceData = new List<SequenceData>();
 
-//     void Start() {
-//         if (playOnAwake)
-//             Play();
-//     }
+    [Tooltip("The sub-sequences which will play in order")]
+    public List<TimedSequence> sequences = new List<TimedSequence>();
+
+    private List<TimedSequence> running = new List<TimedSequence>();
+
+    private int curIndex;
+
+    public override void Play()
+    {
+        base.Play();
+        curIndex = 0;
+    }
+
+    protected override void Update() {
+        base.Update();
+        if (State == SequenceState.Playing) {
+            AdvanceSequence();
+        }
+    }
+
 
 //     void Update() {
 //         if (_hasFinished)
@@ -110,33 +107,37 @@
 //         }
 //     }
     
-//     private void AdvanceSequence() {
-//         while (CurrentHasNoBlock()) {
-//             if (curIndex < sequences.Count - 1) { // Play the next sequence if there is one
-//                 ISequence nextSequence = sequences[curIndex + 1];
-//                 PlaySubsequence(nextSequence);
-//             }
-//             curIndex++;
-//         }
-//     }
+    private void AdvanceSequence() {
+        while (CurrentHasNoBlock()) {
+            if (curIndex < sequences.Count - 1) { // Play the next sequence if there is one
+                TimedSequence nextSequence = sequences[curIndex + 1];
+                PlaySubsequence(nextSequence);
+            }
+            curIndex++;
+        }
+    }
 
-//     private bool CurrentHasNoBlock() {
-//         return curIndex < sequences.Count && !sequences[curIndex].Block;
-//     }
+    private void CheckForUnblock() {
+        if (CurrentHasNoBlock()) {
+            AllowUnblock();
+        }
+    }
 
-//     private void PlaySubsequence(ISequence sequence) {
-//         sequence.Play();
-//         running.Add(sequence);
-//     }
+    private bool CurrentHasNoBlock() {
+        return curIndex < sequences.Count && !sequences[curIndex].Block;
+    }
 
-//     private void CompleteFinishedSequences() {
-//         for (int i = running.Count-1; i >= 0; i--) {
-//             if (running[i].Finished) {
-//                 if (running[i].NeedsCleanup)
-//                     running[i].Cleanup();
-//                 running.RemoveAt(i);
-//             }
-//         }
-//     }
+    private void PlaySubsequence(TimedSequence sequence) {
+        sequence.Play();
+        running.Add(sequence);
+    }
 
-// }
+    private void CompleteFinishedSequences() {
+        for (int i = running.Count-1; i >= 0; i--) {
+            if (running[i].State == SequenceState.CleanedUp) {
+                running.RemoveAt(i);
+            }
+        }
+    }
+
+}
