@@ -7,18 +7,15 @@ using UnityEngine;
 public enum SequenceState {
     Unplayed,
     Playing,
-    Finished,
+    Finishing,
     CleanedUp
 }
 
 public interface ISequence {
-    //SequenceState GetState();
-    bool WasPlayed { get; } // Has the sequence been played
+    SequenceState State { get; } // Current run state of the sequence
     bool Block { get; } // Should the sequence block other sequences
-    bool Finished { get; } // Is the sequence finished executing
-    bool NeedsCleanup { get; } // Does this sequence need cleanup
     void Play(); // Start the sequence: spawn/activate objects, begin timers
-    void EndEarly(); // Force the sequence to start ending: move objects off screen, play effects
+    void Finish(); // Force the sequence to start ending: move objects off screen, play effects
     void Cleanup(); // Clean up after the sequence: despawn/deactivate objects
     void CheckFlag(ISequenceFlag flag, out FlagStatus status);
     void Clear(); // Reset all runtime state to initial values
@@ -32,8 +29,10 @@ public interface ISequenceFlag {
 }
 
 public struct FlagStatus {
+    public bool isNonNull;
     public bool set;
     public int iValue;
     public float fValue;
+
 }
 

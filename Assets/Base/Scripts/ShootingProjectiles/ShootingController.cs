@@ -18,6 +18,13 @@ public class ShootingController : MonoBehaviour
     [Tooltip("Whether this shooting controller is controled by the player")]
     public bool isPlayerControlled = false;
 
+    [Tooltip("Which controller channels mean this should fire")]
+    [SerializeField] private GunChannel channel = GunChannel.Gun0;
+    public GunChannel Channel { get { return channel; } }
+    public bool ShouldFire(int shootChannels) {
+        return ((int)channel & shootChannels) != 0;
+    }
+
     [Header("Firing Settings")]
     [Tooltip("The minimum time between projectiles being fired.")]
     public float fireRate = 0.05f;
@@ -159,5 +166,9 @@ public class ShootingController : MonoBehaviour
                 projectileGameObject.transform.SetParent(projectileHolder);
             }
         }
+    }
+
+    public void Reset() {
+        lastFired = Mathf.NegativeInfinity;
     }
 }

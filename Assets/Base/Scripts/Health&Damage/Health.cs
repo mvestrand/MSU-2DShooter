@@ -285,4 +285,8 @@ public class Health : MonoBehaviour, IDamagable
     public void OnGraze() {
 
     }
+
+    public void Reset() {
+        currentHealth = defaultHealth;
+    }
 }

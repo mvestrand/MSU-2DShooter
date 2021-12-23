@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using MVest;
+
 /// <summary>
 /// A class which controls enemy behaviour
 /// </summary>
-public class Enemy : MonoBehaviour
+public class Enemy : PooledMonoBehaviour
 {
     public event System.Action<Enemy> onDeath;
+    public event System.Action<Enemy> onDespawn;
 
     [Header("Settings")]
     [Tooltip("The speed at which the enemy moves.")]
@@ -22,7 +25,7 @@ public class Enemy : MonoBehaviour
     public float followRange = 10.0f;
 
 
-
+    public EnemyController controller = null;
 
 
     [Header("Shooting")]
@@ -32,7 +35,7 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Enum to help with shooting modes
     /// </summary>
-    public enum ShootMode { None, ShootAll };
+    public enum ShootMode { None, ShootAll, ShootSelect };
 
     [Tooltip("The way the enemy shoots:\n" +
         "None: Enemy does not shoot.\n" +
@@ -42,7 +45,7 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Enum to help wih different movement modes
     /// </summary>
-    public enum MovementModes { NoMovement, FollowTarget, Scroll };
+    public enum MovementModes { NoMovement, FollowTarget, Scroll, PhysicsTarget, Instant };
 
     [Tooltip("The way this enemy will move\n" +
         "NoMovement: This enemy will not move.\n" +
@@ -52,6 +55,7 @@ public class Enemy : MonoBehaviour
 
     //The direction that this enemy will try to scroll if it is set as a scrolling enemy.
     [SerializeField] private Vector3 scrollDirection = Vector3.right;
+
 
     /// <summary>
     /// Description:
@@ -63,7 +67,11 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void LateUpdate()
     {
-        HandleBehaviour();       
+        HandleBehaviour();
+        if (controller != null && controller.ShouldDespawn(transform.position)) {
+            onDespawn?.Invoke(this);
+            this.Release();
+        }
     }
 
     /// <summary>
@@ -76,6 +84,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        //rb = GetComponent<Rigidbody2D>();
         if (movementMode == MovementModes.FollowTarget && followTarget == null)
         {
             if (GameManager.instance != null && GameManager.instance.player != null)
@@ -96,10 +105,10 @@ public class Enemy : MonoBehaviour
     private void HandleBehaviour()
     {
         // Check if the target is in range, then move
-        if (followTarget != null && (followTarget.position - transform.position).magnitude < followRange)
-        {
-            MoveEnemy();
-        }
+        // if (followTarget != null && (followTarget.position - transform.position).magnitude < followRange)
+        // {
+        MoveEnemy();
+        // }
         // Attempt to shoot, according to this enemy's shooting mode
         TryToShoot();
     }
@@ -162,15 +171,25 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void MoveEnemy()
     {
-        // Determine correct movement
-        Vector3 movement = GetDesiredMovement();
+        switch (movementMode) {
+            case MovementModes.Instant:
+                transform.position = controller.Position;
+                transform.rotation = controller.Rotation;
+                break;
+            case MovementModes.PhysicsTarget:
+                break;
+            default:
+                // Determine correct movement
+                Vector3 movement = GetDesiredMovement();
 
-        // Determine correct rotation
-        Quaternion rotationToTarget = GetDesiredRotation();
+                // Determine correct rotation
+                Quaternion rotationToTarget = GetDesiredRotation();
 
-        // Move and rotate the enemy
-        transform.position = transform.position + movement;
-        transform.rotation = rotationToTarget;
+                // Move and rotate the enemy
+                transform.position = transform.position + movement;
+                transform.rotation = rotationToTarget;
+                break;
+        }
     }
 
     /// <summary>
@@ -246,6 +265,14 @@ public class Enemy : MonoBehaviour
                 foreach (ShootingController gun in guns)
                 {
                     gun.Fire();
+                }
+                break;
+            case ShootMode.ShootSelect:
+                if (controller == null)
+                    break;
+                foreach (var gun in guns) {
+                    if (gun.ShouldFire(controller.ShootChannels))
+                        gun.Fire();
                 }
                 break;
         }
@@ -335,5 +362,18 @@ public class Enemy : MonoBehaviour
             }
         }
         return scrollDirection;
+    }
+
+    protected override void Restart() {
+        if (TryGetComponent<Health>(out var health))
+            health.Reset();
+        foreach (var gun in guns) {
+            gun.Reset();
+        }
+        if (TryGetComponent<Rigidbody2D>(out var rb)) {
+            //rb.position = transform.position;
+            //rb.rotation = transform.rotation.;
+        }
+
     }
 }
