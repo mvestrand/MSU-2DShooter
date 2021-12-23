@@ -133,12 +133,10 @@ public class TimedSequence : MonoBehaviour, ISequence
     }
 
     public void AllowFinish() {
-        Debug.Log("AllowFinish()");
         _allowFinish = true;
     }
 
     public void AllowCleanup() {
-        Debug.Log("AllowCleanup()");
         _allowCleanup = true;
     }
 

@@ -271,12 +271,13 @@ public class Health : MonoBehaviour, IDamagable
         if (gameObject.tag == "Player" && GameManager.instance != null)
         {
             GameManager.instance.GameOver();
+            Destroy(this.gameObject);
         }
-        if (gameObject.GetComponent<Enemy>() != null)
+        else if (gameObject.TryGetComponent<Enemy>(out var enemy))
         {
-            gameObject.GetComponent<Enemy>().DoBeforeDestroy();
+            enemy.DoBeforeDestroy();
+            enemy.Release();
         }
-        Destroy(this.gameObject);
     }
 
     /// <summary>

@@ -15,7 +15,7 @@ public abstract class PooledMonoBehaviour : MonoBehaviour, IPoolableObject {
     [SerializeField] protected int _maxPoolSize = 10000;
     [FoldoutGroup("Pooling Settings")]
     [SerializeField] protected int _defaultPoolCapacity = 10;
-    private GameObjectPool _pool;
+    [ShowInInspector] private GameObjectPool _pool;
     private PooledMonoBehaviour _prefab;
 
     public int defaultPoolCapacity() {
@@ -54,8 +54,10 @@ public abstract class PooledMonoBehaviour : MonoBehaviour, IPoolableObject {
             obj = Instantiate<PooledMonoBehaviour>(_prefab);
             obj._prefab = _prefab;
         }
-        if (_pool != null)
+        if (_pool != null) {
             obj.transform.parent = _pool.transform;
+            obj._pool = _pool;
+        }
         return obj.gameObject;
     }
 
@@ -156,10 +158,11 @@ public abstract class PooledMonoBehaviour : MonoBehaviour, IPoolableObject {
     }
 
     public void Release() {
+
         if (_pool != null) {
             _pool.Release(this.gameObject);
         } else {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 

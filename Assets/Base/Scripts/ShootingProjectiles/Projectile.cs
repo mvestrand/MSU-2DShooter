@@ -24,6 +24,7 @@ public class Projectile : PooledMonoBehaviour
     private void Update()
     {
         MoveProjectile();
+        CheckBounds();
     }
 
     /// <summary>
@@ -41,7 +42,7 @@ public class Projectile : PooledMonoBehaviour
     }
 
     private void CheckBounds() {
-        if (despawnBoundingBox.Value != null && !despawnBoundingBox.Value.Contains(transform.position))
+        if (!despawnBoundingBox.Value.Contains(transform.position))
             this.Release();
     }
 

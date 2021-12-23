@@ -370,10 +370,10 @@ public class Enemy : PooledMonoBehaviour
         foreach (var gun in guns) {
             gun.Reset();
         }
-        if (TryGetComponent<Rigidbody2D>(out var rb)) {
-            //rb.position = transform.position;
-            //rb.rotation = transform.rotation.;
-        }
+        // if (TryGetComponent<Rigidbody2D>(out var rb)) {
+        //     //rb.position = transform.position;
+        //     //rb.rotation = transform.rotation.;
+        // }
 
     }
 }
