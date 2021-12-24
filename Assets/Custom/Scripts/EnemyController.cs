@@ -14,16 +14,17 @@ public class EnemyController : MonoBehaviour {
     public const int AllGuns = 255;
 
 
-    [NotNull] public BoundingBoxVariable despawnBox;
+    [NonSerialized] public BoundingBox despawnBox;
     public bool canDespawn = false;
 
     public bool ShouldDespawn(Vector3 position) {
         return canDespawn
-            && despawnBox.Value != null
-            && !despawnBox.Value.Contains(position);
+            && despawnBox != null
+            && !despawnBox.Contains(position);
     }
 
     public int ShootChannels = AllGuns;
+    public Enemy.MovementModes movementMode = Enemy.MovementModes.NoInput;
 
     public Vector3 Position {
         get {

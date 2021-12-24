@@ -7,6 +7,8 @@ using UnityEngine.Playables;
 
 using Sirenix.OdinInspector;
 
+using MVest;
+
 public class TimedSequence : MonoBehaviour, ISequence
 {
     #region Configuration Fields
@@ -61,6 +63,8 @@ public class TimedSequence : MonoBehaviour, ISequence
     [Tooltip("Maximum time before forcing objects to end")]
     [SerializeField] private float hardTimeLimit = 20f;
 
+
+
     [FoldoutGroup("Events")]
     public UnityEvent onPlay;
     [FoldoutGroup("Events")]
@@ -101,16 +105,12 @@ public class TimedSequence : MonoBehaviour, ISequence
     }
 
 
-    public virtual void CheckFlag(ISequenceFlag flag, out FlagStatus status) {
-        status = new FlagStatus();
-    }
-
-
     public virtual void Play()
     {
         if (_state != SequenceState.Unplayed)
             this.Clear();
         _state = SequenceState.Playing;
+        _startTime = Time.time;
         _forceBlock = true;
         _allowFinish = false;
         _allowCleanup = false;
@@ -119,6 +119,7 @@ public class TimedSequence : MonoBehaviour, ISequence
         if (director != null)
             director.Play();
         onPlay.Invoke();
+        Debug.LogFormat("Play({0})", gameObject.HierarchyName());
     }
 
     public virtual void Finish()
@@ -127,7 +128,7 @@ public class TimedSequence : MonoBehaviour, ISequence
         if (animator != null)
             animator.SetTrigger("finish");
         onFinish.Invoke();
-
+        Debug.LogFormat("Finish({0})", gameObject.HierarchyName());
     }
 
     public virtual void Cleanup()
@@ -137,6 +138,7 @@ public class TimedSequence : MonoBehaviour, ISequence
             director.Stop();
         this.gameObject.SetActive(false);
         onCleanup.Invoke();
+        Debug.LogFormat("Cleanup({0})", gameObject.HierarchyName());
     }
 
     public virtual void Clear()
@@ -150,6 +152,7 @@ public class TimedSequence : MonoBehaviour, ISequence
         }
         _state = SequenceState.Unplayed;
         _startTime = Mathf.NegativeInfinity;
+        Debug.LogFormat("Clear({0})", gameObject.HierarchyName());
     }
 
     public virtual void AllowUnblock() {
@@ -179,7 +182,7 @@ public class TimedSequence : MonoBehaviour, ISequence
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (_state == SequenceState.Playing || _state == SequenceState.Finishing) {
+        if (IsRunning()) {
 
             // Check if we should clean up this sequence
             if ((_allowCleanup && (PastTime(minBlockTime) || !useMinBlockTime) )

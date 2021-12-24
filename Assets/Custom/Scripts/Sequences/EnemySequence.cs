@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Sirenix.OdinInspector;
+
+[RequireComponent(typeof(BoundingBox))]
 public class EnemySequence : TimedSequence {
 
     [Header("Enemy Settings")]
@@ -26,6 +28,13 @@ public class EnemySequence : TimedSequence {
     private int _enemiesDefeated = 0;
     public int EnemiesDefeated { get { return _enemiesDefeated; } }
     public int TotalEnemies { get { return enemyPrefabs.Count; } }
+
+    private void Awake() {
+        BoundingBox despawnBox = GetComponent<BoundingBox>();
+        foreach (var controller in controllers) {
+            controller.despawnBox = despawnBox;
+        }
+    }
 
     public override void Play() {
         base.Play();
@@ -104,5 +113,14 @@ public class EnemySequence : TimedSequence {
             controller.canDespawn = true;
         }
     }
+
+
+    // Debugging settings
+    
+
+
+
+
+
 
 }
