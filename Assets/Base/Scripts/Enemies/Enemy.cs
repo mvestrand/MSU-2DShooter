@@ -23,6 +23,7 @@ public class Enemy : PooledMonoBehaviour
     [Tooltip("The score value for defeating this enemy")]
     public int scoreValue = 5;
 
+
     [Header("Following Settings")]
     [Tooltip("The transform of the object that this enemy should follow.")]
     public Transform followTarget = null;
@@ -236,7 +237,43 @@ public class Enemy : PooledMonoBehaviour
                     movementMode = controller.movementMode;
                     break;
             }
+        } else {
+            movementMode = defaultMovementMode;
         }
+    }
+
+    public void Attach(EnemyController controller) {
+        this.controller = controller;
+        controller.onFireShot += this.FireTrigger;
+    }
+
+    public void DetachController() {
+        controller.onFireShot -= this.FireTrigger;
+        controller = null;
+    }
+
+    public void FireTrigger() {
+        switch (shootMode)
+        {
+            case ShootMode.None:
+                break;
+            case ShootMode.ShootAll:
+                if (controller.ShootChannels != 0) {
+                    foreach (ShootingController gun in guns)
+                    {
+                        gun.FireTrigger();
+                    }
+                }
+                break;
+            case ShootMode.ShootSelect:
+                if (controller == null)
+                    break;
+                foreach (var gun in guns) {
+                    if (gun.ShouldFire(controller.ShootChannels))
+                        gun.FireTrigger();
+                }
+                break;
+        }        
     }
 
     public float GetAngle(Vector3 target) {
@@ -313,9 +350,11 @@ public class Enemy : PooledMonoBehaviour
             case ShootMode.None:
                 break;
             case ShootMode.ShootAll:
-                foreach (ShootingController gun in guns)
-                {
-                    gun.Fire();
+                if (controller == null || controller.ShootChannels != 0) {
+                    foreach (ShootingController gun in guns)
+                    {
+                        gun.FireHeld();
+                    }
                 }
                 break;
             case ShootMode.ShootSelect:
@@ -323,7 +362,7 @@ public class Enemy : PooledMonoBehaviour
                     break;
                 foreach (var gun in guns) {
                     if (gun.ShouldFire(controller.ShootChannels))
-                        gun.Fire();
+                        gun.FireHeld();
                 }
                 break;
         }

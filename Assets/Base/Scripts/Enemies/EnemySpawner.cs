@@ -98,10 +98,10 @@ public class EnemySpawner : MonoBehaviour
             {
                 enemy.followTarget = target;
             }
-            foreach (ShootingController gun in shootingControllers)
-            {
-                gun.projectileHolder = projectileHolder;
-            }
+            // foreach (ShootingController gun in shootingControllers)
+            // {
+            //     gun.projectileHolder = projectileHolder;
+            // }
 
             // Incremment the spawn count
             currentlySpawned++;

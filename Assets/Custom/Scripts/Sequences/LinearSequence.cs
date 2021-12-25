@@ -62,10 +62,9 @@ public class LinearSequence : TimedSequence {
     protected override void Update() {
         if (this.IsRunning()) {
             base.Update();
-            Debug.Log("Hello");
-                if (State == SequenceState.Playing) {
-                    AdvanceSequence();
-                }
+            if (State == SequenceState.Playing) {
+                AdvanceSequence();
+            }
             //     CheckForUnblock();
             //     RemoveFinishedSequences();
             //     if (running.Count == 0) {

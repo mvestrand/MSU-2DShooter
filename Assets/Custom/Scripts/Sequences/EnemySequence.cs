@@ -23,8 +23,9 @@ public class EnemySequence : TimedSequence {
 
     [ReadOnly][ShowInInspector] private List<Enemy> enemyInstances = new List<Enemy>();
 
-    private bool _cleared = false;
-    public bool Cleared { get { return _cleared; } }
+    private bool _sequenceCompleted = false;
+    public bool Cleared { get { return _sequenceCompleted; } }
+    private int _enemiesAvailable = 0;
     private int _enemiesDefeated = 0;
     public int EnemiesDefeated { get { return _enemiesDefeated; } }
     public int TotalEnemies { get { return enemyPrefabs.Count; } }
@@ -36,18 +37,20 @@ public class EnemySequence : TimedSequence {
         }
     }
 
+    public void Spawn(int prefabIndex, EnemyController controller) {
+        Enemy newEnemy = enemyPrefabs[prefabIndex].Get<Enemy>(controller.Position, controller.Rotation);
+        AttachEnemy(newEnemy, controller);
+    }
+
     public override void Play() {
         base.Play();
 
         _enemiesDefeated = 0;
-        _cleared = false;
+        _sequenceCompleted = false;
+        _enemiesAvailable = controllers.Count;
 
-        for (int i = 0; i < enemyPrefabs.Count; i++) {
-            Enemy newEnemy = enemyPrefabs[i].Get<Enemy>(controllers[i].Position, controllers[i].Rotation);
-            enemyInstances.Add(newEnemy);
-            newEnemy.onDespawn += EnemyDespawned;
-            newEnemy.onDeath += EnemyDestroyed;
-            newEnemy.controller = controllers[i];
+        foreach (var controller in controllers) {
+            controller.owningSequence = this;
         }
     }
 
@@ -59,6 +62,7 @@ public class EnemySequence : TimedSequence {
         foreach (var enemy in enemyInstances) {
             enemy.onDeath -= EnemyDestroyed;
             enemy.onDespawn -= EnemyDespawned;
+            enemy.DetachController();
             enemy.Release();
         }
         enemyInstances.Clear();
@@ -69,7 +73,8 @@ public class EnemySequence : TimedSequence {
     {
         base.Clear();
         _enemiesDefeated = 0;
-        _cleared = false;
+        _sequenceCompleted = false;
+        _enemiesAvailable = controllers.Count;
     }
 
     protected override void Update()
@@ -78,23 +83,32 @@ public class EnemySequence : TimedSequence {
     }
 
     private void EnemyDestroyed(Enemy enemy) {
-        enemyInstances.Remove(enemy);
-        enemy.onDeath -= EnemyDestroyed;
-        enemy.onDespawn -= EnemyDespawned;
-        enemy.controller = null;
+        DetachEnemy(enemy);
         _enemiesDefeated++;
-        if (enemyInstances.Count == 0) {
-            _cleared = true;
+        if (_enemiesAvailable <= 0) {
+            _sequenceCompleted = true;
             NoMoreEnemiesRemaining();
         }
     }
 
-    private void EnemyDespawned(Enemy enemy) {
+    private void AttachEnemy(Enemy enemy, EnemyController controller) {
+            enemyInstances.Add(enemy);
+            enemy.onDespawn += EnemyDespawned;
+            enemy.onDeath += EnemyDestroyed;
+            enemy.Attach(controller);
+    }
+
+    public void DetachEnemy(Enemy enemy) {
         enemyInstances.Remove(enemy);
         enemy.onDeath -= EnemyDestroyed;
         enemy.onDespawn -= EnemyDespawned;
-        enemy.controller = null;
-        if (enemyInstances.Count == 0) {
+        _enemiesAvailable--;
+        enemy.DetachController();
+    }
+
+    private void EnemyDespawned(Enemy enemy) {
+        DetachEnemy(enemy);
+        if (_enemiesAvailable <= 0) {
             NoMoreEnemiesRemaining();
         }
     }
@@ -115,11 +129,18 @@ public class EnemySequence : TimedSequence {
     }
 
 
-    // Debugging settings
-    
 
-
-
+    private static int controlNo;
+    [ContextMenu("Grab Controllers")]
+    private void GrabControllers() {
+        controlNo = 0;
+        controllers.Clear();
+        foreach (var controller in GetComponentsInChildren<EnemyController>()) {
+            controller.gameObject.name = string.Format("E{0:D3}", controlNo);
+            controllers.Add(controller);
+            controlNo++;
+        }
+    }
 
 
 

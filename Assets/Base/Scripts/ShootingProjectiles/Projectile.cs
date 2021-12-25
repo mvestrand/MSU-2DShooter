@@ -11,6 +11,7 @@ public class Projectile : PooledMonoBehaviour
 {
     [Tooltip("The distance this projectile will move each second.")]
     public float projectileSpeed = 3.0f;
+    public float turnSpeed = 0.0f;
     public BoundingBoxVariable despawnBoundingBox;
 
     /// <summary>
@@ -38,6 +39,7 @@ public class Projectile : PooledMonoBehaviour
     private void MoveProjectile()
     {
         // move the transform
+        transform.eulerAngles += new Vector3(0, 0, turnSpeed * Time.deltaTime);
         transform.position = transform.position + transform.up * projectileSpeed * Time.deltaTime;
     }
 

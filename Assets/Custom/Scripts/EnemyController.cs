@@ -6,16 +6,33 @@ using System;
 
 using MVest;
 
-public class EnemyController : MonoBehaviour {
+public class EnemyController : MonoBehaviour
+{
+
+    private static Dictionary<Enemy.MovementModes, string> moveModeIcons =
+        new Dictionary<Enemy.MovementModes, string>() {
+            {Enemy.MovementModes.Coast, "Help"},
+        };
 
     public bool useLocalRotation = false;
 
-    public const int Gun0 = 1, Gun1 = 2, Gun2 = 4, Gun3 = 8, Gun4 = 16, Gun5 = 32, Gun6=64, Gun7=128;
+    public const int Gun0 = 1, Gun1 = 2, Gun2 = 4, Gun3 = 8, Gun4 = 16, Gun5 = 32, Gun6 = 64, Gun7 = 128;
     public const int AllGuns = 255;
 
 
     [NonSerialized] public BoundingBox despawnBox;
-    public bool canDespawn = false;
+
+    public bool canDespawn;
+    public bool shootEnabled;
+    public event Action onFireShot;
+
+    public int prefabIndex;
+    [NonSerialized] public EnemySequence owningSequence;
+
+
+    public void Fire() {
+        onFireShot.Invoke();
+    }
 
     public bool ShouldDespawn(Vector3 position) {
         return canDespawn
@@ -23,8 +40,13 @@ public class EnemyController : MonoBehaviour {
             && !despawnBox.Contains(position);
     }
 
+    public void Spawn() {
+        if (owningSequence != null)
+            owningSequence.Spawn(prefabIndex, this);
+    }
+
     public int ShootChannels = AllGuns;
-    public Enemy.MovementModes movementMode = Enemy.MovementModes.NoInput;
+    public Enemy.MovementModes movementMode = Enemy.MovementModes.Instant;
 
     public Vector3 Position {
         get {

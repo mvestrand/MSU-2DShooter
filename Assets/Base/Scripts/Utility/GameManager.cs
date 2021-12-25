@@ -320,6 +320,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void LevelCleared()
     {
+        Debug.Log("You Win!");
         PlayerPrefs.SetInt("score", score);
         if (uiManager != null)
         {
