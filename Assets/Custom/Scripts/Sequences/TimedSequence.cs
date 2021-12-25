@@ -204,4 +204,22 @@ public class TimedSequence : MonoBehaviour, ISequence
         return Time.time > _startTime + timelimit;
     }
 
+
+    [Tooltip("Suppress warning that there are unregistered director or animator components on this object.")]
+    [FoldoutGroup("Warnings", 100000)]
+    [ToggleLeft]
+    public bool suppressUnregisteredComponentsWarning = false;
+    protected virtual void Awake() {
+        if (!suppressUnregisteredComponentsWarning) {
+            // Sanity checks
+            if (director == null && TryGetComponent<PlayableDirector>(out var dir)) {
+                Debug.LogWarningFormat("Sequence object ({0}) has a director component that is not registered with its sequence script", gameObject.HierarchyName());
+            }
+            if (animator == null && TryGetComponent<PlayableDirector>(out var anim)) {
+                Debug.LogWarningFormat("Sequence object ({0}) has a director component that is not registered with its sequence script", gameObject.HierarchyName());
+            }
+        }
+    }
+
+ 
 }

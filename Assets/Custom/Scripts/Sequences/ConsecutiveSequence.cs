@@ -7,7 +7,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 
-public class LinearSequence : TimedSequence {
+public class ConsecutiveSequence : TimedSequence {
 
     [System.Serializable]
     public struct SequenceData {
@@ -65,11 +65,11 @@ public class LinearSequence : TimedSequence {
             if (State == SequenceState.Playing) {
                 AdvanceSequence();
             }
-            //     CheckForUnblock();
-            //     RemoveFinishedSequences();
-            //     if (running.Count == 0) {
-            //         Cleanup();
-            //     }
+            CheckForUnblock();
+            RemoveFinishedSequences();
+            if (running.Count == 0) {
+                Cleanup();
+            }
         }
     }
 
@@ -83,11 +83,11 @@ public class LinearSequence : TimedSequence {
         }
     }
 
-    // private void CheckForUnblock() {
-    //     if (CurrentHasNoBlock() && (State == SequenceState.Finishing || curIndex >= sequences.Count)) {
-    //         AllowUnblock();
-    //     }
-    // }
+    private void CheckForUnblock() {
+        if (CurrentHasNoBlock() && (State == SequenceState.Finishing || curIndex >= sequences.Count)) {
+            AllowUnblock();
+        }
+    }
 
     private bool CurrentHasNoBlock() {
         return curIndex >= sequences.Count || !sequences[curIndex].sequence.Block;

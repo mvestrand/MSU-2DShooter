@@ -30,7 +30,7 @@ public class EnemySequence : TimedSequence {
     public int EnemiesDefeated { get { return _enemiesDefeated; } }
     public int TotalEnemies { get { return enemyPrefabs.Count; } }
 
-    private void Awake() {
+    protected override void Awake() {
         BoundingBox despawnBox = GetComponent<BoundingBox>();
         foreach (var controller in controllers) {
             controller.despawnBox = despawnBox;
