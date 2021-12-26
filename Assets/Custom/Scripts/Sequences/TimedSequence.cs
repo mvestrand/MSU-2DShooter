@@ -13,8 +13,12 @@ public class TimedSequence : MonoBehaviour, ISequence
 {
     #region Configuration Fields
 
+    [Tooltip("The descriptive name of this sequence")]
+    [SerializeField] private string _sequenceName;
+
+
     [Tooltip("Play this sequence immediately")]
-    [SerializeField] private bool playOnAwake = false;
+    [SerializeField] public bool playOnAwake = false;
 
     [FoldoutGroup("Time Settings")]
     [HorizontalGroup("Time Settings/MinBlockTime", Width = 15)]
@@ -91,7 +95,27 @@ public class TimedSequence : MonoBehaviour, ISequence
     private bool _allowFinish = false;
     private bool _allowCleanup = false;
 
-    
+
+    public virtual string GetPrefix() {
+        return "TS";
+    }
+    public virtual string GetName() {
+        return _sequenceName;
+    }
+
+    public string GetGeneratedName(int num) {
+        string seqName = "";
+        if (_sequenceName != null && _sequenceName.Trim().Length > 0) {
+            seqName = " (" + _sequenceName.Trim() + ")";
+        }
+        return System.String.Format("{0}-{1:D3}{2}", this.GetPrefix(), num, seqName);
+    }
+
+    public void AssignGeneratedName(int num) {
+        this.gameObject.name = GetGeneratedName(num);
+    }
+
+
     public bool IsRunning() {
         return _state == SequenceState.Playing || _state == SequenceState.Finishing;
     }
@@ -167,7 +191,11 @@ public class TimedSequence : MonoBehaviour, ISequence
         _allowCleanup = true;
     }
 
-    
+    #region Unity Messages
+    protected virtual void Awake() {
+        RunSanityChecks();
+    }
+
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -199,6 +227,7 @@ public class TimedSequence : MonoBehaviour, ISequence
 
         }
     }
+    #endregion
 
     private bool PastTime(float timelimit) {
         return Time.time > _startTime + timelimit;
@@ -209,17 +238,52 @@ public class TimedSequence : MonoBehaviour, ISequence
     [FoldoutGroup("Warnings", 100000)]
     [ToggleLeft]
     public bool suppressUnregisteredComponentsWarning = false;
-    protected virtual void Awake() {
+    [Tooltip("Suppress warning that there are unregistered director or animator components on this object.")]
+    [FoldoutGroup("Warnings", 100000)]
+    [ToggleLeft]
+    public bool suppressPlayOnAwakeWarning = false;
+
+    private void RunSanityChecks() {
         if (!suppressUnregisteredComponentsWarning) {
-            // Sanity checks
             if (director == null && TryGetComponent<PlayableDirector>(out var dir)) {
                 Debug.LogWarningFormat("Sequence object ({0}) has a director component that is not registered with its sequence script", gameObject.HierarchyName());
             }
             if (animator == null && TryGetComponent<PlayableDirector>(out var anim)) {
-                Debug.LogWarningFormat("Sequence object ({0}) has a director component that is not registered with its sequence script", gameObject.HierarchyName());
+                Debug.LogWarningFormat("Sequence object ({0}) has an animator component that is not registered with its sequence script", gameObject.HierarchyName());
+            }
+        }
+        if (!suppressPlayOnAwakeWarning) {
+            if (director != null && director.playOnAwake) {
+                Debug.LogWarningFormat("Sequence object ({0}) has director set to play on awake. This can cause multiple play calls.", gameObject.HierarchyName());
             }
         }
     }
 
- 
+
+    [ContextMenu("Set as the current sequence")]
+    public void SetAsCurrentActiveSequence() {
+
+        Transform root = transform.root;
+
+        // Disable the root sequence if not this
+        if (root.TryGetComponent<TimedSequence>(out var rootSeq)) {
+            if (rootSeq != this) {
+                rootSeq.playOnAwake = false;
+                rootSeq.gameObject.SetActive(false);
+            }
+        }
+
+        // Disable all connected sequences
+        foreach (TimedSequence sequence in root.GetComponentsInChildren<TimedSequence>()) {
+            if (rootSeq != this) {
+                sequence.playOnAwake = false;
+                sequence.gameObject.SetActive(false);
+            }
+        }
+
+        // Set this to active and play on awake
+        this.playOnAwake = true;
+        this.gameObject.SetActiveInHierarchy();
+    }
+    
 }

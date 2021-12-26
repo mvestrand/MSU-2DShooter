@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
     [NonSerialized] public BoundingBox despawnBox;
 
     public bool canDespawn;
-    public bool shootEnabled;
+    public bool shootEnabled = true;
     public event Action onFireShot;
 
     public int prefabIndex;

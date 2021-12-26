@@ -350,7 +350,7 @@ public class Enemy : PooledMonoBehaviour
             case ShootMode.None:
                 break;
             case ShootMode.ShootAll:
-                if (controller == null || controller.ShootChannels != 0) {
+                if (controller == null || controller.shootEnabled && controller.ShootChannels != 0) {
                     foreach (ShootingController gun in guns)
                     {
                         gun.FireHeld();
@@ -358,7 +358,7 @@ public class Enemy : PooledMonoBehaviour
                 }
                 break;
             case ShootMode.ShootSelect:
-                if (controller == null)
+                if (controller == null || !controller.shootEnabled)
                     break;
                 foreach (var gun in guns) {
                     if (gun.ShouldFire(controller.ShootChannels))

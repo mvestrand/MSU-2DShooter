@@ -129,10 +129,10 @@ AnimationClip:
         outWeight: 0
       - serializedVersion: 3
         time: 2.1666667
-        value: 255
-        inSlope: 117.69231
-        outSlope: -122.4
-        tangentMode: 69
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -147,17 +147,17 @@ AnimationClip:
         outWeight: 0
       - serializedVersion: 3
         time: 6.383333
-        value: 255
-        inSlope: 119.53126
-        outSlope: 0
-        tangentMode: 69
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: ShootChannels
+    attribute: shootEnabled
     path: 
     classID: 114
     script: {fileID: 11500000, guid: f3b64e7383bc756458e60a5a82ddff0c, type: 3}
@@ -185,7 +185,7 @@ AnimationClip:
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 0
-      attribute: 3030775704
+      attribute: 1259483538
       script: {fileID: 11500000, guid: f3b64e7383bc756458e60a5a82ddff0c, type: 3}
       typeID: 114
       customType: 0
@@ -473,10 +473,10 @@ AnimationClip:
         outWeight: 0
       - serializedVersion: 3
         time: 2.1666667
-        value: 255
-        inSlope: 117.69231
-        outSlope: -122.4
-        tangentMode: 69
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -491,17 +491,17 @@ AnimationClip:
         outWeight: 0
       - serializedVersion: 3
         time: 6.383333
-        value: 255
-        inSlope: 119.53126
-        outSlope: 0
-        tangentMode: 69
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: ShootChannels
+    attribute: shootEnabled
     path: 
     classID: 114
     script: {fileID: 11500000, guid: f3b64e7383bc756458e60a5a82ddff0c, type: 3}

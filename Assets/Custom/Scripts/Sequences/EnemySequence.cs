@@ -4,7 +4,6 @@ using UnityEngine;
 
 using Sirenix.OdinInspector;
 
-[RequireComponent(typeof(BoundingBox))]
 public class EnemySequence : TimedSequence {
 
     [Header("Enemy Settings")]
@@ -30,8 +29,11 @@ public class EnemySequence : TimedSequence {
     public int EnemiesDefeated { get { return _enemiesDefeated; } }
     public int TotalEnemies { get { return enemyPrefabs.Count; } }
 
+    public BoundingBoxReference boundingBox;
+
     protected override void Awake() {
-        BoundingBox despawnBox = GetComponent<BoundingBox>();
+        base.Awake();
+        BoundingBox despawnBox = boundingBox.Value;
         foreach (var controller in controllers) {
             controller.despawnBox = despawnBox;
         }
@@ -51,6 +53,7 @@ public class EnemySequence : TimedSequence {
 
         foreach (var controller in controllers) {
             controller.owningSequence = this;
+            controller.gameObject.SetActive(true);
         }
     }
 
@@ -66,6 +69,9 @@ public class EnemySequence : TimedSequence {
             enemy.Release();
         }
         enemyInstances.Clear();
+        foreach (var controller in controllers) {
+            controller.gameObject.SetActive(false);
+        }
         base.Cleanup();
     }
 
@@ -140,6 +146,10 @@ public class EnemySequence : TimedSequence {
             controllers.Add(controller);
             controlNo++;
         }
+    }
+
+    public override string GetPrefix() {
+        return "EN";
     }
 
 

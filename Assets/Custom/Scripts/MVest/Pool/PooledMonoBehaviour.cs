@@ -47,16 +47,19 @@ public abstract class PooledMonoBehaviour : MonoBehaviour, IPoolableObject {
 
     public GameObject CreatePooledItem() {
         PooledMonoBehaviour obj;
-        if (_prefab == null) {
-            obj = Instantiate<PooledMonoBehaviour>(this);
-            obj._prefab = this;
-        } else {
-            obj = Instantiate<PooledMonoBehaviour>(_prefab);
-            obj._prefab = _prefab;
-        }
+        // if (_prefab == null) {
+        obj = Instantiate<PooledMonoBehaviour>(this);
+        obj._prefab = this;
+        // } 
+        // else { // This should never happen?
+        //     obj = Instantiate<PooledMonoBehaviour>(_prefab);
+        //     obj._prefab = _prefab;
+        // }
+
         if (_pool != null) {
             obj.transform.parent = _pool.transform;
             obj._pool = _pool;
+            obj.name = System.String.Format("{0} #{1:D4}", this.name, _pool.GetNextId());
         }
         return obj.gameObject;
     }

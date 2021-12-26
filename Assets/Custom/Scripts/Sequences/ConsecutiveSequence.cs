@@ -109,5 +109,31 @@ public class ConsecutiveSequence : TimedSequence {
     }
 
 
+    public override string GetPrefix() {
+        return "SER";
+    }
 
+    [ContextMenu("Grab Sub-Sequences")]
+    private void GrabSequences() {
+        int seqNo = 0;
+        List<SequenceData> newSequences = new List<SequenceData>();
+        foreach (Transform child in transform) {
+            if (child.TryGetComponent<TimedSequence>(out var sequence)) {
+
+                // Get existing sequence settings
+                SequenceData seqData = new SequenceData();
+                foreach (var oldSequence in sequences) {
+                    if (oldSequence.sequence == sequence) {
+                        seqData = oldSequence;
+                        break;
+                    }
+                }
+                seqData.sequence = sequence;
+                newSequences.Add(seqData);
+                sequence.AssignGeneratedName(seqNo);
+                seqNo++;
+            }
+        }
+        sequences = newSequences;
+    }
 }

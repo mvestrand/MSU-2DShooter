@@ -17,6 +17,11 @@ public class GameObjectPool : MonoBehaviour {
         return obj;
     }
 
+    private int _nextId = 0;
+    public int GetNextId() {
+        return _nextId++;
+    }
+
     public void Release(GameObject element) { pool.Release(element); }
 
     internal ObjectPool<GameObject> pool;
