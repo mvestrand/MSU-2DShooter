@@ -24,7 +24,7 @@ public class EnemySequence : TimedSequence {
 
     private bool _sequenceCompleted = false;
     public bool Cleared { get { return _sequenceCompleted; } }
-    private int _enemiesAvailable = 0;
+    [ShowInInspector] private int _enemiesAvailable = 0;
     private int _enemiesDefeated = 0;
     public int EnemiesDefeated { get { return _enemiesDefeated; } }
     public int TotalEnemies { get { return enemyPrefabs.Count; } }
@@ -142,7 +142,7 @@ public class EnemySequence : TimedSequence {
         controlNo = 0;
         controllers.Clear();
         foreach (var controller in GetComponentsInChildren<EnemyController>()) {
-            controller.gameObject.name = string.Format("E{0:D3}", controlNo);
+            controller.gameObject.name = string.Format("E{1}-{0:D3}", controlNo, controller.prefabIndex);
             controllers.Add(controller);
             controlNo++;
         }
@@ -152,6 +152,14 @@ public class EnemySequence : TimedSequence {
         return "EN";
     }
 
+
+    public override void ValidateSequence()
+    {
+        base.ValidateSequence();
+        if (!this.enabled)
+            return;
+        GrabControllers();
+    }
 
 
 }

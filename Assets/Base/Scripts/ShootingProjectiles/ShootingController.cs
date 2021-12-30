@@ -10,6 +10,7 @@ using MVest;
 /// <summary>
 /// A class which controlls player aiming and shooting
 /// </summary>
+[SelectionBase]
 public class ShootingController : MonoBehaviour
 {
     [Header("GameObject/Component References")]
@@ -137,9 +138,9 @@ public class ShootingController : MonoBehaviour
     // The last time this component was fired
     private float lastFired = Mathf.NegativeInfinity;
 
-    [Header("Effects")]
+    [FoldoutGroup("Effects", 1000)]
     [Tooltip("The effect to create when this fires")]
-    public GameObject fireEffect;
+    public EffectRef fireEffect;
 
     //The input manager which manages player input
     private InputManager inputManager = null;
@@ -253,11 +254,7 @@ public class ShootingController : MonoBehaviour
     {
         // Launches a projectile
         SpawnProjectiles();
-
-        if (fireEffect != null)
-        {
-            Instantiate(fireEffect, transform.position, transform.rotation, null);
-        }
+        fireEffect.Fire(transform);
 
         // Restart the cooldown
         lastFired = Time.time;

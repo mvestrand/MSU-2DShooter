@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
+using Sirenix.OdinInspector;
+
+using MVest;
+
 /// <summary>
 /// This class handles the health state of a game object.
 /// 
 /// Implementation Notes: 2D Rigidbodies must be set to never sleep for this to interact with trigger stay damage
 /// </summary>
-public class Health : MonoBehaviour, IDamagable
+public class Health : MonoBehaviour
 {
+    private static WaitForFixedUpdate waitForFixed = new WaitForFixedUpdate();
+
     [Header("Team Settings")]
     [Tooltip("The team associated with this health")]
     [SerializeField] private int _teamId;
@@ -120,14 +126,25 @@ public class Health : MonoBehaviour, IDamagable
     }
 
     public void HandleDamage(Damage damage) {
-        if (shield != null && shield.IsActive) {
-            shield.HandleDamage(damage);
-            damage.NotifyAbsorb();
-        } else {
-            TakeDamage(damage.damageAmount * damageModifier.Modify(damage.element));
-            damage.NotifyHit();
+        if (shield == null || !shield.IsActive || damage.ignoreShield) {
+            // TODO fix this to allow for shields that don't provide full coverage
+            //  --  This could maybe be done with raytracing?
+            // -OR- check if the damage hits the health object but not the shield object
+            //      using WaitForFixed to make the health be checked last
+            if (TakeDamage(damage.damageAmount * damageModifier.Modify(damage.element))) {
+                damage.NotifyHit();
+            }
         }
     }
+
+    // private IEnumerator WaitForShieldCollision(Damage damage) {
+    //     yield return waitForFixed;
+    //     if (damage == null) { // The damage object no longer exists
+    //         // Does this never happen? or often happen?
+    //         Debug.Log("Damage object no longer exists");
+    //         yield break;
+    //     }
+    // }
 
 
     /// <summary>
@@ -139,22 +156,24 @@ public class Health : MonoBehaviour, IDamagable
     /// void (no return)
     /// </summary>
     /// <param name="damageAmount">The amount of damage to take</param>
-    public void TakeDamage(float damage)
+    public bool TakeDamage(float damage)
     {
         if (isInvincableFromDamage || isAlwaysInvincible)
         {
-            return;
+            return false;
         }
         else
         {
-            if (hitEffect != null)
-            {
-                Instantiate(hitEffect, transform.position, transform.rotation, null);
-            }
+            hitEffect.Fire(transform);
+            // if (hitEffect != null)
+            // {
+            //     Instantiate(hitEffect, transform.position, transform.rotation, null);
+            // }
             timeToBecomeDamagableAgain = Time.time + invincibilityTime;
             isInvincableFromDamage = true;
             currentHealth -= damage;
             CheckDeath();
+            return true;
         }
     }
 
@@ -177,11 +196,12 @@ public class Health : MonoBehaviour, IDamagable
         CheckDeath();
     }
 
-    [Header("Effects & Polish")]
+    [FoldoutGroup("Effects", 1000)]
     [Tooltip("The effect to create when this health dies")]
-    public GameObject deathEffect;
+    public EffectRef deathEffect;
+    [FoldoutGroup("Effects", 1000)]
     [Tooltip("The effect to create when this health is damaged")]
-    public GameObject hitEffect;
+    public EffectRef hitEffect;
 
     /// <summary>
     /// Description:
@@ -214,10 +234,11 @@ public class Health : MonoBehaviour, IDamagable
     /// </summary>
     public void Die()
     {
-        if (deathEffect != null)
-        {
-            Instantiate(deathEffect, transform.position, transform.rotation, null);
-        }
+        deathEffect.Fire(transform);
+        // if (deathEffect != null)
+        // {
+        //     Instantiate(deathEffect, transform.position, transform.rotation, null);
+        // }
 
         if (useLives)
         {
@@ -254,10 +275,9 @@ public class Health : MonoBehaviour, IDamagable
             {
                 gameObject.GetComponent<Enemy>().DoBeforeDestroy();
             }
-            Destroy(this.gameObject);
+            gameObject.DestroyPooled();
         }
     }
-
     /// <summary>
     /// Description:
     /// Handles death when lives are not being used
@@ -271,7 +291,7 @@ public class Health : MonoBehaviour, IDamagable
         if (gameObject.tag == "Player" && GameManager.instance != null)
         {
             GameManager.instance.GameOver();
-            Destroy(this.gameObject);
+            gameObject.DestroyPooled();
         }
         else if (gameObject.TryGetComponent<Enemy>(out var enemy))
         {

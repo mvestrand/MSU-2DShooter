@@ -83,23 +83,36 @@ public class TimedSequence : MonoBehaviour, ISequence
     #endregion
 
 
-    private bool _waitingOnMinTime;
-
-    private float _startTime = Mathf.NegativeInfinity;
+    [FoldoutGroup("Debug",-10000)]
+    [FoldoutGroup("Debug/TimedSequence",-10000)][ShowIf("@UnityEngine.Application.isPlaying")]
+    [ShowInInspector][Sirenix.OdinInspector.ReadOnly] private float _startTime = Mathf.NegativeInfinity;
     public float StartTime {get { return _startTime; } }
 
-    private SequenceState _state = SequenceState.Unplayed;
+    [FoldoutGroup("Debug",-10000)]
+    [FoldoutGroup("Debug/TimedSequence",-10000)][ShowIf("@UnityEngine.Application.isPlaying")]
+    [ShowInInspector][Sirenix.OdinInspector.ReadOnly] private SequenceState _state = SequenceState.Unplayed;
     public SequenceState State { get { return _state; } }
 
-    private bool _forceBlock = true;
-    private bool _allowFinish = false;
-    private bool _allowCleanup = false;
+    [FoldoutGroup("Debug",-10000)]
+    [FoldoutGroup("Debug/TimedSequence",-10000)][ShowIf("@UnityEngine.Application.isPlaying")]
+    [ShowInInspector][Sirenix.OdinInspector.ReadOnly] private bool _forceBlock = true;
+    [FoldoutGroup("Debug",-10000)]
+    [FoldoutGroup("Debug/TimedSequence",-10000)][ShowIf("@UnityEngine.Application.isPlaying")]
+    [ShowInInspector][Sirenix.OdinInspector.ReadOnly] private bool _allowFinish = false;
+    [FoldoutGroup("Debug",-10000)]
+    [FoldoutGroup("Debug/TimedSequence",-10000)][ShowIf("@UnityEngine.Application.isPlaying")]
+    [ShowInInspector][Sirenix.OdinInspector.ReadOnly] private bool _allowCleanup = false;
 
+    [FoldoutGroup("Debug",-10000)]
+    [FoldoutGroup("Debug/TimedSequence",-10000)][ShowIf("@UnityEngine.Application.isPlaying")]
+    [ShowInInspector][Sirenix.OdinInspector.ReadOnly]
+    private bool _block; // For debugging
 
     public virtual string GetPrefix() {
         return "TS";
     }
     public virtual string GetName() {
+
         return _sequenceName;
     }
 
@@ -115,24 +128,47 @@ public class TimedSequence : MonoBehaviour, ISequence
         this.gameObject.name = GetGeneratedName(num);
     }
 
-
     public bool IsRunning() {
         return _state == SequenceState.Playing || _state == SequenceState.Finishing;
     }
 
     public bool Block { 
         get {
-            return (_state == SequenceState.Playing || _state == SequenceState.Finishing)
-                && ((useMinBlockTime && !PastTime(minBlockTime))
-                    || (useMaxBlockTime && !PastTime(maxBlockTime) && _forceBlock));
+            _block = IsRunning() 
+                && BeforeMaxBlock() 
+                && (BeforeMinBlock() || _forceBlock);
+            return _block;
         }
     }
+
+    private bool BeforeMinBlock() {
+        return useMinBlockTime && !PastTime(minBlockTime);
+    }
+
+    private bool BeforeMaxBlock() {
+        return !useMaxBlockTime || !PastTime(maxBlockTime);
+    }
+
+    private bool BeforeSoftTimeLimit() {
+        return !useSoftTimeLimit || !PastTime(softTimeLimit);
+    }
+
+    private bool BeforeHardTimeLimit() {
+        return !useHardTimeLimit || !PastTime(hardTimeLimit);
+    }
+
+
 
 
     public virtual void Play()
     {
-        if (_state != SequenceState.Unplayed)
+        if (!this.enabled) {
+            Debug.LogFormat("Skipping ({0})", gameObject.HierarchyName());
+            return;
+        }
+        if (_state != SequenceState.Unplayed) {
             this.Clear();
+        }
         _state = SequenceState.Playing;
         _startTime = Time.time;
         _forceBlock = true;
@@ -213,7 +249,7 @@ public class TimedSequence : MonoBehaviour, ISequence
         if (IsRunning()) {
 
             // Check if we should clean up this sequence
-            if ((_allowCleanup && (PastTime(minBlockTime) || !useMinBlockTime) )
+            if ((_allowCleanup && !BeforeMinBlock() )
                 || (useHardTimeLimit && PastTime(hardTimeLimit) ))
             {
                 this.Cleanup();
@@ -227,6 +263,13 @@ public class TimedSequence : MonoBehaviour, ISequence
 
         }
     }
+
+    protected virtual void OnDestroy() {
+        if (IsRunning()) {
+            this.Cleanup();
+        }
+    }
+
     #endregion
 
     private bool PastTime(float timelimit) {
@@ -248,7 +291,7 @@ public class TimedSequence : MonoBehaviour, ISequence
             if (director == null && TryGetComponent<PlayableDirector>(out var dir)) {
                 Debug.LogWarningFormat("Sequence object ({0}) has a director component that is not registered with its sequence script", gameObject.HierarchyName());
             }
-            if (animator == null && TryGetComponent<PlayableDirector>(out var anim)) {
+            if (animator == null && TryGetComponent<Animator>(out var anim)) {
                 Debug.LogWarningFormat("Sequence object ({0}) has an animator component that is not registered with its sequence script", gameObject.HierarchyName());
             }
         }
@@ -257,6 +300,9 @@ public class TimedSequence : MonoBehaviour, ISequence
                 Debug.LogWarningFormat("Sequence object ({0}) has director set to play on awake. This can cause multiple play calls.", gameObject.HierarchyName());
             }
         }
+        if (!this.enabled) {
+            Debug.LogWarningFormat("Sequence object ({0}) is disabled.", gameObject.HierarchyName());
+        }
     }
 
 
@@ -264,6 +310,7 @@ public class TimedSequence : MonoBehaviour, ISequence
     public void SetAsCurrentActiveSequence() {
 
         Transform root = transform.root;
+
 
         // Disable the root sequence if not this
         if (root.TryGetComponent<TimedSequence>(out var rootSeq)) {
@@ -274,8 +321,9 @@ public class TimedSequence : MonoBehaviour, ISequence
         }
 
         // Disable all connected sequences
-        foreach (TimedSequence sequence in root.GetComponentsInChildren<TimedSequence>()) {
-            if (rootSeq != this) {
+        foreach (TimedSequence sequence in root.GetComponentsInChildren<TimedSequence>(true)) {
+            //Debug.Log(sequence.gameObject.HierarchyName());
+            if (sequence != this) {
                 sequence.playOnAwake = false;
                 sequence.gameObject.SetActive(false);
             }
@@ -286,4 +334,16 @@ public class TimedSequence : MonoBehaviour, ISequence
         this.gameObject.SetActiveInHierarchy();
     }
     
+    
+    [ContextMenu("Validate Sequence")]
+    public void CallValidateSequence() {
+        this.ValidateSequence();
+    }
+
+
+    public virtual void ValidateSequence() {
+        RunSanityChecks();
+    }
+
+
 }

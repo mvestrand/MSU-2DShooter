@@ -12,14 +12,14 @@ public class ConcurrentSequence : TimedSequence
         [Tooltip("The sequence to play")]
         [HideLabel]
         public TimedSequence sequence;
-        [HorizontalGroup("Data", 0.05f)]
+        [HorizontalGroup("Data", 15)]
         [HideLabel]
         [Tooltip("Enable or disable usage of a starting time delay")]
         public bool hasDelayTime;
-        [HorizontalGroup("Data", 0.25f, LabelWidth = 60)][EnableIf("hasDelayTime")]
-        [Tooltip("The time to wait before playing the sequence")]
+        [HorizontalGroup("Data", 0.25f, LabelWidth = 35)][EnableIf("hasDelayTime")]
+        [Tooltip("The time to wait before playing the sequence")][LabelText("Delay")]
         public float delayTime;
-        [HorizontalGroup("Data", 0.25f, LabelWidth = 60)]
+        [HorizontalGroup("Data", 0.25f, LabelWidth = 35, MarginLeft = 10)]
         [EnableIf("hasDelayTime")]
         [LabelText("Block")]
         [Tooltip("Block until this sequence has started playing")]
@@ -140,4 +140,18 @@ public class ConcurrentSequence : TimedSequence
         }
         sequences = newSequences;
     }
+
+    public override void ValidateSequence()
+    {
+        base.ValidateSequence();
+        if (!this.enabled)
+            return;
+        GrabSequences();
+        foreach (Transform child in transform) {
+            if (child.TryGetComponent<TimedSequence>(out var sequence)) {
+                sequence.ValidateSequence();
+            }
+        }
+    }
+
 }

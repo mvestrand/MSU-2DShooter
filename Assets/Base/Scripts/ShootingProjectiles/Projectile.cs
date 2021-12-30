@@ -7,6 +7,7 @@ using MVest;
 /// <summary>
 /// A class to make projectiles move
 /// </summary>
+[SelectionBase]
 public class Projectile : PooledMonoBehaviour
 {
     [Tooltip("The distance this projectile will move each second.")]

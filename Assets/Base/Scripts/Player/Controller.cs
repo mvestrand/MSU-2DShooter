@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// This class controls player movement
 /// </summary>
+[SelectionBase]
 public class Controller : MonoBehaviour
 {
     [Header("GameObject/Component References")]

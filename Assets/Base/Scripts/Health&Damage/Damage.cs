@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using MVest;
+
 /// <summary>
 /// This class handles the dealing of damage to health components.
 /// </summary>
@@ -19,9 +21,9 @@ public class Damage : MonoBehaviour
     [Tooltip("Elemental type of the damage (null is untyped)")]
     public Element element;
     [Tooltip("Prefab to spawn after doing damage")]
-    public GameObject hitEffect = null;
+    public EffectRef hitEffect = new EffectRef();
     [Tooltip("Prefab to spawn when absorbed")]
-    public GameObject absorbEffect = null;
+    public EffectRef absorbEffect = new EffectRef();
     [Tooltip("Whether or not to destroy the attached game object after dealing damage")]
     public bool destroyAfterDamage = true;
     [Tooltip("Whether or not to destory the attached game object after being absorbed")]
@@ -33,10 +35,12 @@ public class Damage : MonoBehaviour
     [Tooltip("Whether or not to apply damage on non-trigger collider collisions")]
     public bool dealDamageOnCollision = false;
 
+    public bool ignoreShield = false;
+
 
     [Header("Graze Settings")]
     [Tooltip("Prefab to spawn after grazing the player")]
-    public GameObject grazeEffect = null;
+    public EffectRef grazeEffect = new EffectRef();
     [Tooltip("Whether or not this damage can trigger a graze when triggers collide")]
     public bool grazeOnTriggerEnter = true;
     [Tooltip("Whether or not this damage can trigger a graze when triggers stay, for multiple over time")]
@@ -46,6 +50,8 @@ public class Damage : MonoBehaviour
     [Tooltip("Delay time after creation before the damage can cause a graze effect (sec)")]
     public float initialGrazeDelay = 0f;
     private static int GrazeCollisionLayer = 8;
+
+    public IntReference pointsOnGraze = new IntReference();
 
 
     /// <summary>
@@ -119,7 +125,7 @@ public class Damage : MonoBehaviour
     {
         Shield collidedShield = collisionGameObject.GetComponent<Shield>();
         Health collidedHealth = collisionGameObject.GetComponent<Health>();
-        if (collidedShield != null && collidedShield.IsActive)
+        if (collidedShield != null && collidedShield.IsActive && !this.ignoreShield)
         {
             if (collidedShield.TeamId != this.teamId)
             {
@@ -131,7 +137,7 @@ public class Damage : MonoBehaviour
             {
                 collidedHealth.HandleDamage(this);
             }
-        }
+        } 
     }
 
 
@@ -139,17 +145,18 @@ public class Damage : MonoBehaviour
     /// Notify this damage that it was a hit
     /// </summary>
     public void NotifyHit() {
-        if (hitEffect != null)
-        {
-            Instantiate(hitEffect, transform.position, transform.rotation, null);
-        }
+        hitEffect.Fire(transform);
         if (destroyAfterDamage)
         {
-            if (gameObject.GetComponent<Enemy>() != null)
+            if (TryGetComponent<Enemy>(out var enemy))
             {
-                gameObject.GetComponent<Enemy>().DoBeforeDestroy();
+                enemy.DoBeforeDestroy();
             }
-            Destroy(this.gameObject);
+            if (TryGetComponent<Health>(out var health)) {
+                health.Die();
+            } else {
+                gameObject.DestroyPooled();
+            }
         }
     }
 
@@ -157,17 +164,23 @@ public class Damage : MonoBehaviour
     /// Notify this damage that it was absorbed
     /// </summary>
     public void NotifyAbsorb() {
-        if (absorbEffect != null)
-        {
-            Instantiate(absorbEffect, transform.position, transform.rotation, null);
-        }
+        absorbEffect.Fire(transform);
+        // if (absorbEffect != null)
+        // {
+        //     absorbEffect.Fire(transform.position, transform.rotation);
+        //     Instantiate(absorbEffect, transform.position, transform.rotation, null);
+        // }
         if (destroyAfterAbsorb)
         {
-            if (gameObject.GetComponent<Enemy>() != null)
+            if (TryGetComponent<Enemy>(out var enemy))
             {
-                gameObject.GetComponent<Enemy>().DoBeforeDestroy();
+                enemy.DoBeforeDestroy();
             }
-            Destroy(this.gameObject);
+            if (TryGetComponent<Health>(out var health)) {
+                health.Die();
+            } else {
+                gameObject.DestroyPooled();
+            }
         }
     }
 
@@ -190,12 +203,18 @@ public class Damage : MonoBehaviour
     /// <param name="collisionGameObject">The target object to graze against</param>
     private void GrazeObject(GameObject collisionGameObject) {
         GrazeArea target = collisionGameObject.GetComponent<GrazeArea>();
-        target.Owner.OnGraze();
-        lastGraze = Time.time;   
-        if (grazeEffect != null)
-        {
-            Instantiate(grazeEffect, transform.position, transform.rotation, null);
+        if (target.Owner.TeamId == teamId) // Ignore objects on our team
+            return;
+        if (pointsOnGraze != null && pointsOnGraze > 0) {
+            GameManager.AddScore(pointsOnGraze);
         }
+        target.Owner.OnGraze();
+        lastGraze = Time.time;
+        grazeEffect.Fire(transform);
+        // if (grazeEffect != null)
+        // {
+        //     Instantiate(grazeEffect, transform.position, transform.rotation, null);
+        // }
     }
 
 

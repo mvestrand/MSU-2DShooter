@@ -7,10 +7,14 @@ using MVest;
 /// <summary>
 /// A class which controls enemy behaviour
 /// </summary>
+[SelectionBase]
 public class Enemy : PooledMonoBehaviour
 {
     public event System.Action<Enemy> onDeath;
     public event System.Action<Enemy> onDespawn;
+
+    [SerializeField] private float _spawnRadius;
+    public float SpawnRadius { get { return _spawnRadius; } }
 
 
 
@@ -18,6 +22,13 @@ public class Enemy : PooledMonoBehaviour
     [Header("Settings")]
     [Tooltip("The max speed at which the enemy can move (m/s).")]
     public float moveSpeed = 5.0f;
+    public float curSpeed = 5.0f;
+
+    public float maxSpeed = 5.0f;
+    public float deceleration = 1f;
+    public float acceleration = 1f;
+
+
     [Tooltip("The max speed at which the enemy can turn (deg / s).")]
     public float turnSpeed = 10000;
     [Tooltip("The score value for defeating this enemy")]
@@ -41,7 +52,7 @@ public class Enemy : PooledMonoBehaviour
     /// <summary>
     /// Enum to help with shooting modes
     /// </summary>
-    public enum ShootMode { None, ShootAll, ShootSelect };
+    public enum ShootMode { None, ShootAll, ShootSelect, ShootTriggerOnly };
 
     [Tooltip("The way the enemy shoots:\n" +
         "None: Enemy does not shoot.\n" +
@@ -51,7 +62,7 @@ public class Enemy : PooledMonoBehaviour
     /// <summary>
     /// Enum to help wih different movement modes
     /// </summary>
-    public enum MovementModes { NoMovement, FollowTarget, Scroll, PhysicsTarget, Instant, Coast, Default, NoInput };
+    public enum MovementModes { NoMovement, FollowTarget, Scroll, PhysicsTarget, Instant, Coast, Turret, Default, NoInput };
 
     [Tooltip("The way this enemy will move\n" +
         "NoMovement: This enemy will not move.\n" +
@@ -80,7 +91,6 @@ public class Enemy : PooledMonoBehaviour
             onDespawn?.Invoke(this);
             this.Release();
         }
-
     }
 
     /// <summary>
@@ -185,11 +195,21 @@ public class Enemy : PooledMonoBehaviour
         switch (movementMode)
         {
             case MovementModes.Instant:
+                if (controller == null)
+                    return;
                 transform.position = controller.Position;
                 transform.rotation = controller.Rotation;
                 break;
             case MovementModes.PhysicsTarget:
                 // ---- Unimplemented ------
+                break;
+            case MovementModes.Turret: // Stop and aim at the player
+                if (followTarget != null && Vector3.Distance(transform.position, followTarget.position) > followRange) {
+                    float targetAngle = GetAngle((followTarget.position - transform.position).normalized);
+                    float currentAngle = transform.eulerAngles.z;
+                    transform.eulerAngles = new Vector3(0, 0, Mathf.MoveTowardsAngle(currentAngle, targetAngle, Time.deltaTime * turnSpeed));
+                }
+                transform.position = controller.Position;
                 break;
             case MovementModes.Coast:
             case MovementModes.FollowTarget:
@@ -198,7 +218,9 @@ public class Enemy : PooledMonoBehaviour
                     float currentAngle = transform.eulerAngles.z;
                     transform.eulerAngles = new Vector3(0, 0, Mathf.MoveTowardsAngle(currentAngle, targetAngle, Time.deltaTime * turnSpeed));
                 }
-                transform.position += -transform.up * Time.deltaTime;
+                if (movementMode != MovementModes.Turret) {
+                   transform.position += -transform.up * Time.deltaTime;
+                }
                 break;
             default:
                 // Determine correct movement
@@ -210,6 +232,33 @@ public class Enemy : PooledMonoBehaviour
                 // Move and rotate the enemy
                 transform.position = transform.position + movement;
                 transform.rotation = rotationToTarget;
+                break;
+        }
+    }
+
+    public void SetMovementMode(MovementModes mode) {
+        switch (mode)
+        {
+            case MovementModes.NoInput:
+                break;
+            case MovementModes.Coast:
+                followTarget = null;
+                break;
+            case MovementModes.Turret:
+                movementMode = MovementModes.Turret;
+                if (followTarget == null)
+                    followTarget = GameManager.instance.player?.transform;
+                break;
+            case MovementModes.FollowTarget:
+                movementMode = MovementModes.FollowTarget;
+                if (followTarget == null)
+                    followTarget = GameManager.instance.player?.transform;
+                break;
+            case MovementModes.Default:
+                movementMode = defaultMovementMode;
+                break;
+            default:
+                movementMode = mode;
                 break;
         }
     }
@@ -226,10 +275,16 @@ public class Enemy : PooledMonoBehaviour
                 case MovementModes.Coast:
                     followTarget = null;
                     break;
-                case MovementModes.FollowTarget:
+                case MovementModes.Turret:
+                    movementMode = MovementModes.Turret;
                     if (followTarget == null)
                         followTarget = GameManager.instance.player?.transform;
                     break;
+                case MovementModes.FollowTarget:
+                    movementMode = MovementModes.FollowTarget;
+                    if (followTarget == null)
+                        followTarget = GameManager.instance.player?.transform;
+                    break;                
                 case MovementModes.Default:
                     movementMode = defaultMovementMode;
                     break;
@@ -266,6 +321,14 @@ public class Enemy : PooledMonoBehaviour
                 }
                 break;
             case ShootMode.ShootSelect:
+                if (controller == null)
+                    break;
+                foreach (var gun in guns) {
+                    if (gun.ShouldFire(controller.ShootChannels))
+                        gun.FireTrigger();
+                }
+                break;
+            case ShootMode.ShootTriggerOnly:
                 if (controller == null)
                     break;
                 foreach (var gun in guns) {
@@ -347,6 +410,7 @@ public class Enemy : PooledMonoBehaviour
     {
         switch (shootMode)
         {
+            case ShootMode.ShootTriggerOnly:
             case ShootMode.None:
                 break;
             case ShootMode.ShootAll:

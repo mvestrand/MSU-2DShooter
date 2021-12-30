@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d51ded5f624a2458e5b708016665e6, type: 3}
+  m_Name: WeaponChargeAbility
+  m_EditorClassIdentifier: 
+  _value:
+    variableToUse: {fileID: 0}
+    maximumCharge: 100
+    initialCharge: 0
+    activeDischargeRate: 1
+    activateRequiresFullCharge: 1
+    minimumActivationCharge: 1
+    hasPassiveCharge: 0
+    passiveChargeMaximum: 0
+    passiveChargeRate: 0
+    passiveChargeDelay: 0
+    hasPassiveDischarge: 0
+    dischargesAfterFull: 0
+    passiveDischargeMinimum: 0
+    passiveDischargeRate: 0
+    passiveDischargeDelay: 0
+    onFull:
+      m_PersistentCalls:
+        m_Calls: []
+    onLoseFull:
+      m_PersistentCalls:
+        m_Calls: []
+    onActivate:
+      m_PersistentCalls:
+        m_Calls: []
+    onDeactivate:
+      m_PersistentCalls:
+        m_Calls: []
+    onChargeGain:
+      m_PersistentCalls:
+        m_Calls: []
+    onChargeLoss:
+      m_PersistentCalls:
+        m_Calls: []
+  _debugColor: {r: 1, g: 1, b: 1, a: 1}

@@ -37,7 +37,6 @@ public class ConsecutiveSequence : TimedSequence {
         curIndex = 0;
         if (sequences.Count > 0) {
             sequences[0].sequence.Play();
-
         }
     }
 
@@ -56,17 +55,18 @@ public class ConsecutiveSequence : TimedSequence {
 
 
     public override void Clear() {
+        Debug.Log("Help");
         curIndex = 0;
     }
     
     protected override void Update() {
         if (this.IsRunning()) {
             base.Update();
+            CheckForUnblock();
+            RemoveFinishedSequences();
             if (State == SequenceState.Playing) {
                 AdvanceSequence();
             }
-            CheckForUnblock();
-            RemoveFinishedSequences();
             if (running.Count == 0) {
                 Cleanup();
             }
@@ -135,5 +135,18 @@ public class ConsecutiveSequence : TimedSequence {
             }
         }
         sequences = newSequences;
+    }
+
+    public override void ValidateSequence()
+    {
+        base.ValidateSequence();
+        if (!this.enabled)
+            return;
+        GrabSequences();
+        foreach (Transform child in transform) {
+            if (child.TryGetComponent<TimedSequence>(out var sequence)) {
+                sequence.ValidateSequence();
+            }
+        }
     }
 }
