@@ -9,12 +9,15 @@ public sealed class SpawnController : MonoBehaviour
 {
     private static int collisionLayer;
 
-    static SpawnController() {
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+    private static void GetCollisionLayer() {
         collisionLayer = LayerMask.NameToLayer("SpawnObject");
         if (collisionLayer == -1) {
-            Debug.LogError("To use spawn areas the collision layer \"SpawnObject\" must exist");
+            Debug.LogError("To use spawn areas the collision layer \"SpawnObject\" must exist"); 
         }
     }
+
+
 
     [Tooltip("This determines how far outside the spawn box this object should be to not spawn on screen")]
     [SerializeField] Rect maxAABB;
@@ -41,16 +44,14 @@ public sealed class SpawnController : MonoBehaviour
     }
 
     private void ValidateSettings() {
-        if (gameObject.layer != collisionLayer) {
-            if (collisionLayer != -1) {
-                Debug.LogWarningFormat("Spawn controller {0} is not set to layer \"SpawnObject\". Setting to correct layer", this.GetExtendedName());
-                gameObject.layer = collisionLayer;
-            } else {
-                Debug.LogWarningFormat("Spawn controller {0} is not set to layer \"SpawnObject\". The correct layer does not exist (try reloading assemblies)", this.GetExtendedName());
-            }
+        if (collisionLayer == -1) {
+            Debug.LogError("To use spawn areas the collision layer \"SpawnObjects\" must exist"); 
+        } 
+        else if (gameObject.layer != collisionLayer) {
+            Debug.LogWarningFormat("Spawn controller {0} is not set to layer \"SpawnObject\". Setting to correct layer", this.GetExtendedName());
+            gameObject.layer = collisionLayer;
         }
     }
-
     
     void OnTriggerEnter2D(Collider2D other) {
         _hasLeftSpawnBox = false;

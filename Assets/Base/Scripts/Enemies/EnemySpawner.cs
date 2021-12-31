@@ -91,7 +91,7 @@ public class EnemySpawner : MonoBehaviour
             // Create the enemy gameobject
             GameObject enemyGameObject = Instantiate(enemyPrefab, spawnLocation, enemyPrefab.transform.rotation, null);
             Enemy enemy = enemyGameObject.GetComponent<Enemy>();
-            ShootingController[] shootingControllers = enemyGameObject.GetComponentsInChildren<ShootingController>();
+            Gun[] shootingControllers = enemyGameObject.GetComponentsInChildren<Gun>();
 
             // Setup the enemy if necessary
             if (enemy != null)

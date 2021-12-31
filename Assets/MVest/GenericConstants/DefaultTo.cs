@@ -19,7 +19,7 @@ namespace MVest {
         public T Value {
             get { return (_set ? _value : defaultValue); }
             set { _value = value; _set = true; }
-        }        
+        }
 
         public DefaultTo(T value) {
             _value = value;
@@ -31,5 +31,7 @@ namespace MVest {
         public static implicit operator T(DefaultTo<T,C> d) => (d._set ? d._value : defaultValue);
         public static implicit operator DefaultTo<T,C>(T t) => (new DefaultTo<T,C>(t));
     }
+
+
 
 }

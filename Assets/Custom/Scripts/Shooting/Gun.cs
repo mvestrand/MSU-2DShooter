@@ -11,7 +11,7 @@ using MVest;
 /// A class which controlls player aiming and shooting
 /// </summary>
 [SelectionBase]
-public class ShootingController : MonoBehaviour
+public class Gun : MonoBehaviour
 {
     [Header("GameObject/Component References")]
     [Tooltip("The projectiles to be fired.")]
@@ -293,19 +293,6 @@ public class ShootingController : MonoBehaviour
             shotObj.TryGetComponent<Damage>(out var damage);
             damage.teamId = this.teamId;
         }
-
-        // // Check that the prefab is valid
-        // if (projectilePrefab != null)
-        // {
-
-        //     // Create the projectile
-        //     GameObject projectileGameObject = projectilePrefab.Get(transform.position, transform.rotation);
-
-        //     // Account for spread
-        //     Vector3 rotationEulerAngles = projectileGameObject.transform.rotation.eulerAngles;
-        //     rotationEulerAngles.z += Random.Range(-projectileSpread, projectileSpread);
-        //     projectileGameObject.transform.rotation = Quaternion.Euler(rotationEulerAngles);
-        // }
     }
 
     public void Reset() {
@@ -323,4 +310,6 @@ public class ShootingController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, 0.25f);
         Gizmos.DrawWireCube(transform.position + transform.up * 0.25f, new Vector3(.1f, .1f, .1f));
     }
+
+
 }

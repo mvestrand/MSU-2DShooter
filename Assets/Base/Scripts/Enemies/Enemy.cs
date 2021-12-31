@@ -47,7 +47,7 @@ public class Enemy : PooledMonoBehaviour
 
     [Header("Shooting")]
     [Tooltip("The enemy's gun components")]
-    public List<ShootingController> guns = new List<ShootingController>();
+    public List<Gun> guns = new List<Gun>();
 
     /// <summary>
     /// Enum to help with shooting modes
@@ -314,7 +314,7 @@ public class Enemy : PooledMonoBehaviour
                 break;
             case ShootMode.ShootAll:
                 if (controller.ShootChannels != 0) {
-                    foreach (ShootingController gun in guns)
+                    foreach (Gun gun in guns)
                     {
                         gun.FireTrigger();
                     }
@@ -415,7 +415,7 @@ public class Enemy : PooledMonoBehaviour
                 break;
             case ShootMode.ShootAll:
                 if (controller == null || controller.shootEnabled && controller.ShootChannels != 0) {
-                    foreach (ShootingController gun in guns)
+                    foreach (Gun gun in guns)
                     {
                         gun.FireHeld();
                     }

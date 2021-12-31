@@ -15,7 +15,7 @@ public class WeaponCharge : ChargedAbility {
     public bool shouldResetWeaponLevel = false;
     public bool shouldResetWeaponCharge = false;
     [FoldoutGroup("Effects")] public EffectRef upgradeEffect;
-    public List<ShootingController> weaponTiers;
+    public List<Gun> weaponTiers;
     [Min(0)]
     public int curWeapon;
 

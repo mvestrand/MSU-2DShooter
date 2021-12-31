@@ -10,37 +10,17 @@ using MVest;
 [DisallowMultipleComponent]
 public sealed class SpawnArea : MonoBehaviour
 {
-
-
-    public ObjectHookRef<SpawnArea> hookAsset;
-    [SerializeField] Rect bounds;
-
-
-    private BoxCollider2D _collider2D;
-    private BoxCollider2D _Collider2D {
-        get {
-            if (_collider2D == null)
-                _collider2D = GetComponent<BoxCollider2D>();
-            return _collider2D;
-        }
+    #region Public Interface
+    public Bounds GetBounds() {
+        return _Collider2D.bounds;
     }
+    #endregion
 
-    private void Awake() {
+ 
+    #region Unity Messages
+    void Awake() {
         _collider2D = GetComponent<BoxCollider2D>();
         ValidateSettings();
-    }
-
-    private void ValidateSettings() {
-        if (!_collider2D.isTrigger) {
-            Debug.LogWarningFormat("Spawn area collider {0} is not set to trigger. Setting to trigger", this.GetExtendedName());
-            _collider2D.isTrigger = true;
-        }
-        if (LayerMask.NameToLayer("SpawnArea") == -1) {
-            Debug.LogError("To use spawn areas the collision layer \"SpawnArea\" must exist");
-        } else if (gameObject.layer != LayerMask.NameToLayer("SpawnArea")) {
-            Debug.LogWarningFormat("Spawn area layer {0} is not set to \"SpawnArea\". Setting to correct layer", this.GetExtendedName());
-            gameObject.layer = LayerMask.NameToLayer("SpawnArea");
-        }
     }
 
     void OnDrawGizmos() {
@@ -52,18 +32,40 @@ public sealed class SpawnArea : MonoBehaviour
         Gizmos.color = Color.blue;
         GizmoExtras.DrawBounds(_Collider2D.bounds);
     }
+    #endregion
 
-    void OnEnable() {
-        hookAsset.Attach(this);
+
+    #region Private Static 
+    private static int collisionLayer;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+    private static void GetCollisionLayer() {
+        collisionLayer = LayerMask.NameToLayer("SpawnArea");
+        if (collisionLayer == -1) {
+            Debug.LogError("To use spawn areas the collision layer \"SpawnArea\" must exist"); 
+        }
     }
+    #endregion
 
-    void OnDisable() {
-        hookAsset.Detach(this);
+    #region Private Fields
+    private BoxCollider2D _collider2D;
+    private BoxCollider2D _Collider2D {
+        get {
+            if (_collider2D == null)
+                _collider2D = GetComponent<BoxCollider2D>();
+            return _collider2D;
+        }
     }
+    #endregion
 
-    public Bounds GetBounds() {
-        return _Collider2D.bounds;
+
+    private void ValidateSettings() {
+        if (collisionLayer == -1) {
+            Debug.LogError("To use spawn areas the collision layer \"SpawnArea\" must exist");
+        } else if (gameObject.layer != collisionLayer) {
+            Debug.LogWarningFormat("Spawn area layer {0} is not set to \"SpawnArea\". Setting to correct layer", this.GetExtendedName());
+            gameObject.layer = collisionLayer;
+        }
     }
-
 
 }
