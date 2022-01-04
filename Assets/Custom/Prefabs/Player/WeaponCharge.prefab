@@ -52,7 +52,7 @@ MonoBehaviour:
   minimumActivationCharge: 1
   hasPassiveCharge: 0
   passiveChargeMaximum: 100
-  passiveChargeRate: 3
+  passiveChargeRate: 30
   passiveChargeDelay: 5
   hasPassiveDischarge: 0
   dischargesAfterFull: 0
@@ -61,7 +61,19 @@ MonoBehaviour:
   passiveDischargeDelay: 0
   onFull:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8725309600519572239}
+        m_TargetAssemblyTypeName: ChargedAbility, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onLoseFull:
     m_PersistentCalls:
       m_Calls: []
@@ -83,6 +95,7 @@ MonoBehaviour:
   shouldResetWeaponCharge: 1
   upgradeEffect:
     effect: {fileID: 0}
+    preload: 0
     offset: {x: 0, y: 0, z: 0}
   weaponTiers:
   - {fileID: 0}

@@ -63,7 +63,7 @@ public sealed class SpawnArea : MonoBehaviour
         if (collisionLayer == -1) {
             Debug.LogError("To use spawn areas the collision layer \"SpawnArea\" must exist");
         } else if (gameObject.layer != collisionLayer) {
-            Debug.LogWarningFormat("Spawn area layer {0} is not set to \"SpawnArea\". Setting to correct layer", this.GetExtendedName());
+            Debug.LogWarningFormat("Spawn area layer {0} is not set to \"SpawnArea\". Setting to correct layer", this.FullName());
             gameObject.layer = collisionLayer;
         }
     }

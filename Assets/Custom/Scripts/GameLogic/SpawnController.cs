@@ -48,7 +48,7 @@ public sealed class SpawnController : MonoBehaviour
             Debug.LogError("To use spawn areas the collision layer \"SpawnObjects\" must exist"); 
         } 
         else if (gameObject.layer != collisionLayer) {
-            Debug.LogWarningFormat("Spawn controller {0} is not set to layer \"SpawnObject\". Setting to correct layer", this.GetExtendedName());
+            Debug.LogWarningFormat("Spawn controller {0} is not set to layer \"SpawnObject\". Setting to correct layer", this.FullName());
             gameObject.layer = collisionLayer;
         }
     }

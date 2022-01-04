@@ -115,6 +115,10 @@ public class InputManager : MonoBehaviour
     /// <param name="context">The input action callback context meant to be read for firing</param>
     public void ReadFireInput(InputAction.CallbackContext context)
     {
+        if (context.started) // Prevent duplicate callbacks
+            return;
+        // Debug.LogFormat("ReadFireInput[{0}]({1})", Time.frameCount, Time.realtimeSinceStartupAsDouble);
+
         firePressed = !context.canceled;
         fireHeld = !context.canceled;
         StartCoroutine(ResetFireStart());
@@ -132,6 +136,7 @@ public class InputManager : MonoBehaviour
     private IEnumerator ResetFireStart()
     {
         yield return new WaitForEndOfFrame();
+        // Debug.LogFormat("ResetFireStart[{0}]({1})", Time.frameCount, Time.realtimeSinceStartupAsDouble);
         firePressed = false;
     }
 
@@ -152,6 +157,9 @@ public class InputManager : MonoBehaviour
     /// <param name="context">The input action callback context meant to be read for firing</param>
     public void ReadShieldInput(InputAction.CallbackContext context)
     {
+        if (context.started) // Prevent duplicate callbacks
+            return;
+
         shieldPressed = !context.canceled;
         shieldHeld = !context.canceled;
         StartCoroutine(ResetShieldStart());

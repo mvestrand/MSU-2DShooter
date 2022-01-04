@@ -164,7 +164,7 @@ public class Health : MonoBehaviour
         }
         else
         {
-            hitEffect.Fire(transform);
+            hitEffect.Play(transform);
             // if (hitEffect != null)
             // {
             //     Instantiate(hitEffect, transform.position, transform.rotation, null);
@@ -234,7 +234,7 @@ public class Health : MonoBehaviour
     /// </summary>
     public void Die()
     {
-        deathEffect.Fire(transform);
+        deathEffect.Play(transform);
         // if (deathEffect != null)
         // {
         //     Instantiate(deathEffect, transform.position, transform.rotation, null);

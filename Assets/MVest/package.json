@@ -1,0 +1,15 @@
+{
+    "name": "invalid.mvest.unity-extensions",
+    "version": "0.1.0",
+    "displayName": "MVest Unity Extensions",
+    "description": "My personal extensions library for Unity",
+    "unity": "2021.1",
+    "dependencies": {
+
+    },
+    "keywords": ["library","utility"],
+    "author": {
+        "name": "Max Vestrand",
+        "email": "maxvestrand@gmail.com"
+    }
+}

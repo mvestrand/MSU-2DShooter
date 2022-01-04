@@ -142,7 +142,7 @@ public class Shield : MonoBehaviour
             _isActive = true;
             _animator.SetBool("Active", true);
             if (playEffect)
-                activateEffect.Fire(transform);
+                activateEffect.Play(transform);
             onActivate.Invoke();
         }
     }
@@ -158,7 +158,7 @@ public class Shield : MonoBehaviour
             _disabledAtTime = Time.time;
             _animator.SetBool("Active", false);
             if (playEffect) 
-                deactivateEffect.Fire(transform);
+                deactivateEffect.Play(transform);
             onDeactivate.Invoke();
         }
     }
@@ -168,7 +168,7 @@ public class Shield : MonoBehaviour
         _isBroken = true;
         _brokeAtTime = Time.time;
         _currentCharge = 0;
-        breakEffect.Fire(transform);
+        breakEffect.Play(transform);
         onBreak.Invoke();
         Deactivate();
     }
@@ -205,10 +205,10 @@ public class Shield : MonoBehaviour
         _currentCharge -= damageModifier.Modify(damage.element) * damage.damageAmount * damageModScale;
         _animator.SetTrigger("Hit");
         if (_currentCharge <= 0) {
-            hitAllEffect.Fire(transform);
+            hitAllEffect.Play(transform);
             Break();
         } else {
-            hitNoBreakEffect.Fire(transform);
+            hitNoBreakEffect.Play(transform);
         }
         damage.NotifyAbsorb();
     }

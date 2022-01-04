@@ -44,33 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75388997f8d4264a86b7441dc9ea74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotPrefabs:
-  - {fileID: 4099572394843378986, guid: d8d6bdd8a51016345941a467b6f23258, type: 3}
-  shots:
-  - prefabIndex: 0
-    posOffset: {x: 0.25, y: -0.25}
-    rotatedOffset: {x: 0, y: 0}
-    dirOffset: 0
-    dirSpread: 0
-    speedOffset: 0
-    speedSpread: 0
-  - prefabIndex: 0
-    posOffset: {x: -0.25, y: -0.25}
-    rotatedOffset: {x: 0, y: 0}
-    dirOffset: 0
-    dirSpread: 0
-    speedOffset: 0
-    speedSpread: 0
-  AllowedShootingBox:
-    useConstant: 0
-    constantValue: {fileID: 0}
-    variable: {fileID: 11400000, guid: b90074bcc1787c5429b5c1791d3f99eb, type: 2}
-  isPlayerControlled: 1
-  channel: 1
-  teamId: 0
-  state: 1
-  fireRate: 0.05
   fireEffect:
     effect: {fileID: 884667244779187023, guid: be212b68d139d634ca081595cdc8f281, type: 3}
     offset: {x: 0, y: 0, z: 0}
+  despawnBox:
+    hook: {fileID: 11400000, guid: c8cd88d8a9602034a9329093188975e1, type: 2}
+  gunType: {fileID: 11400000, guid: 4f07e46db63be894a99348969957395b, type: 2}
+  teamId: 0
+  isPlayerControlled: 1
+  channel: 1
   fireOnTrigger: 0
+  onTriggerFire:
+    m_PersistentCalls:
+      m_Calls: []

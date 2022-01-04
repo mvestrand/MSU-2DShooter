@@ -143,5 +143,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _path: 
   _maxPoolSize: 10000
-  _defaultPoolCapacity: 10
+  _defaultPoolCapacity: 20
   lifetime: 3

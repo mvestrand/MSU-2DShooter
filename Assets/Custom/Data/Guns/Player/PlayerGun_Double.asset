@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bbddbaca55f2e344ab6a2024f9ea809, type: 3}
+  m_Name: PlayerGun_Double
+  m_EditorClassIdentifier: 
+  fireEffect:
+    effect: {fileID: 884667244779187023, guid: be212b68d139d634ca081595cdc8f281, type: 3}
+    preload: 0
+    offset: {x: 0, y: 0, z: 0}
+  shotPrefabs:
+  - prefab: {fileID: 4099572394843378986, guid: d8d6bdd8a51016345941a467b6f23258, type: 3}
+    preloadCount: 0
+  shots:
+  - prefabIndex: 0
+    posOffset: {x: -0.25, y: -0.25}
+    rotatedOffset: {x: 0, y: 0}
+    dirOffset: 0
+    dirSpread: 0
+    speedOffset: 0
+    speedSpread: 0
+  - prefabIndex: 0
+    posOffset: {x: 0.25, y: -0.25}
+    rotatedOffset: {x: 0, y: 0}
+    dirOffset: 0
+    dirSpread: 0
+    speedOffset: 0
+    speedSpread: 0
+  fireRate: 0.05
+  useSimplifiedUpdate: 0
+  fireOnTrigger: 0
+  warmupTime:
+    _set: 0
+    _value: 0
+  cooldownTime:
+    _set: 0
+    _value: 0
+  minBurstSize:
+    _set: 0
+    _value: 0
+  maxBurstSize:
+    _set: 0
+    _value: 0

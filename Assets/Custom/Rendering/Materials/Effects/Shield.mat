@@ -105,6 +105,8 @@ Material:
     - _OcclusionStrength: 1
     - _Offset: 0.4
     - _Parallax: 0.02
+    - _PatternInverseWeight: 1
+    - _PatternWeight: 0.3
     - _PulseAlpha: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0

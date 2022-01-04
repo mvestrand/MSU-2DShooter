@@ -145,7 +145,7 @@ public class Damage : MonoBehaviour
     /// Notify this damage that it was a hit
     /// </summary>
     public void NotifyHit() {
-        hitEffect.Fire(transform);
+        hitEffect.Play(transform);
         if (destroyAfterDamage)
         {
             if (TryGetComponent<Enemy>(out var enemy))
@@ -164,7 +164,7 @@ public class Damage : MonoBehaviour
     /// Notify this damage that it was absorbed
     /// </summary>
     public void NotifyAbsorb() {
-        absorbEffect.Fire(transform);
+        absorbEffect.Play(transform);
         // if (absorbEffect != null)
         // {
         //     absorbEffect.Fire(transform.position, transform.rotation);
@@ -210,7 +210,7 @@ public class Damage : MonoBehaviour
         }
         target.Owner.OnGraze();
         lastGraze = Time.time;
-        grazeEffect.Fire(transform);
+        grazeEffect.Play(transform);
         // if (grazeEffect != null)
         // {
         //     Instantiate(grazeEffect, transform.position, transform.rotation, null);

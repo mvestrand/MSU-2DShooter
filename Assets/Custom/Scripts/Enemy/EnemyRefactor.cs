@@ -14,7 +14,7 @@ public class EnemyRefactor : PooledMonoBehaviour {
     protected void Update() {
 
     }
-    protected override void Restart() {}
+    public override void Restart() {}
 
     
 }

@@ -128,8 +128,6 @@ public class Enemy : PooledMonoBehaviour
         // {
 
         MoveEnemy();
-        // }
-        // Attempt to shoot, according to this enemy's shooting mode
         TryToShoot();
     }
 
@@ -316,7 +314,7 @@ public class Enemy : PooledMonoBehaviour
                 if (controller.ShootChannels != 0) {
                     foreach (Gun gun in guns)
                     {
-                        gun.FireTrigger();
+                        gun.SetFireTrigger();
                     }
                 }
                 break;
@@ -325,7 +323,7 @@ public class Enemy : PooledMonoBehaviour
                     break;
                 foreach (var gun in guns) {
                     if (gun.ShouldFire(controller.ShootChannels))
-                        gun.FireTrigger();
+                        gun.SetFireTrigger();
                 }
                 break;
             case ShootMode.ShootTriggerOnly:
@@ -333,7 +331,7 @@ public class Enemy : PooledMonoBehaviour
                     break;
                 foreach (var gun in guns) {
                     if (gun.ShouldFire(controller.ShootChannels))
-                        gun.FireTrigger();
+                        gun.SetFireTrigger();
                 }
                 break;
         }        
@@ -417,16 +415,26 @@ public class Enemy : PooledMonoBehaviour
                 if (controller == null || controller.shootEnabled && controller.ShootChannels != 0) {
                     foreach (Gun gun in guns)
                     {
-                        gun.FireHeld();
+                        gun.FireHeld(true);
+                    }
+                } else {
+                    foreach (Gun gun in guns)
+                    {
+                        gun.FireHeld(false);
                     }
                 }
                 break;
             case ShootMode.ShootSelect:
-                if (controller == null || !controller.shootEnabled)
+                if (controller == null || !controller.shootEnabled) {
+                    foreach (var gun in guns) {
+                        if (gun.ShouldFire(controller.ShootChannels))
+                            gun.FireHeld(false);
+                    }
                     break;
+                }
                 foreach (var gun in guns) {
                     if (gun.ShouldFire(controller.ShootChannels))
-                        gun.FireHeld();
+                        gun.FireHeld(true);
                 }
                 break;
         }
@@ -518,7 +526,7 @@ public class Enemy : PooledMonoBehaviour
         return scrollDirection;
     }
 
-    protected override void Restart() {
+    public override void Restart() {
         if (TryGetComponent<Health>(out var health))
             health.Reset();
         foreach (var gun in guns) {

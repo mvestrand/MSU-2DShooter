@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+using UnityEngine.Events;
+
 using Sirenix.OdinInspector;
 
 using MVest;
@@ -13,161 +15,177 @@ using MVest;
 [SelectionBase]
 public class Gun : MonoBehaviour
 {
-    [Header("GameObject/Component References")]
-    [Tooltip("The projectiles to be fired.")]
-    public List<Projectile> shotPrefabs = new List<Projectile>();
-    public List<ProjectileData> shots = new List<ProjectileData>();
+    [Tooltip("Object hook for the projectile despawn box")][SerializeField] 
+    private ObjectHookRef<BoundingBox> despawnBox;
+    [Tooltip("The GunType object to use for this gun")]
+    [SerializeField][Required] private GunType gunType;
+    [Tooltip("The owning team of this gun")]
+    public int teamId = 1;
 
 
-    [System.Serializable]
-    public struct ProjectileData {
-        [Tooltip("Which projectile to spawn")]
-        public int prefabIndex;
-        [Tooltip("Position offset to spawn at")]
-        public Vector2 posOffset;
-        [Tooltip("How much offset to give the projectile after rotating")]
-        public Vector2 rotatedOffset;
-
-        [Tooltip("How many degrees to offset the projectile")]
-        [BoxGroup("Direction")]
-        [HorizontalGroup("Direction/Box",0.5f)]
-        [LabelText("Offset:")]
-        [LabelWidth(50)]
-        public float dirOffset;
-        [BoxGroup("Direction")]
-        [LabelWidth(50)]
-        [Tooltip("The random offset from dir")][Min(0)]
-        [HorizontalGroup("Direction/Box",0.5f)]
-        [LabelText("Spread:")]
-        public float dirSpread;
-
-        [BoxGroup("Speed")]
-        [LabelWidth(50)]
-        [HorizontalGroup("Speed/Box",0.5f)]
-        [LabelText("Offset:")]
-        [Tooltip("How much extra speed to give the projectile")]
-        public float speedOffset;
-        [LabelWidth(50)]
-        [HorizontalGroup("Speed/Box",0.5f)]
-        [LabelText("Spread:")]
-        [Tooltip("How much to randomly adjust projectile speed")]
-        public float speedSpread;
-    }
-
-
-    public BoundingBoxReference AllowedShootingBox;
-
-    [Header("Input")]
     [Tooltip("Whether this shooting controller is controled by the player")]
     public bool isPlayerControlled = false;
 
     [Tooltip("Which controller channels mean this should fire")]
     [SerializeField] private GunChannel channel = GunChannel.Gun0;
     public GunChannel Channel { get { return channel; } }
-    public bool ShouldFire(int shootChannels) {
-        return ((int)channel & shootChannels) != 0;
-    }
-
-    [System.Flags] public enum FireState {
-        Idle = 1,
-        Warmup = 2,
-        Firing = 4,
-        Cooldown = 8
-    }
-
-    public int teamId = 1;
-
-    // [BoxGroup("Aim At Target While:")]
-    // [HorizontalGroup("Aim At Target While:/Hor", 0.25f)]
-    // [LabelText("Idle")][LabelWidth(20)]
-    // public bool aimIdle = false;
-
-    // [BoxGroup("Aim At Target While:")]
-    // [HorizontalGroup("Aim At Target While:/Hor", 0.25f)]
-    // [LabelText("Idle")][LabelWidth(20)]
-    // public bool aimWarmup = false;
-
-    // [BoxGroup("Aim At Target While:")]
-    // [HorizontalGroup("Aim At Target While:/Hor", 0.25f)]
-    // [LabelText("Idle")][LabelWidth(20)]
-    // public bool aimFiring = false;
-
-    // [BoxGroup("Aim At Target While:")]
-    // [HorizontalGroup("Aim At Target While:/Hor", 0.25f)]
-    // [LabelText("Idle")][LabelWidth(20)]
-    // public bool aimCooldown = false;
 
 
+    private GunState _state = GunState.Idle;
+    public GunState State { get { return _state; } }
 
-    public FireState state = FireState.Idle;
-
-
-    [Header("Firing Settings")]
-    [Tooltip("The minimum time between projectiles being fired (sec)")]
-    public float fireRate = 0.05f;
-
-    // [Tooltip("How long before actually firing (sec)")]
-    // public float warmUpTime = 0f;
-
-    // [Tooltip("How long after firing a burst before we can try again (sec)")]
-    // public float cooldownTime = 0f;
-
-    // [Tooltip("Does this gun use burst fire")]
-    // public bool useBurstFire = false;
-
-    // [ShowIf("useBurstFire")]
-    // [Tooltip("Minimum burst size (shots)")]
-    // public int minBurst = 1;
-    // [ShowIf("useBurstFire")]
-    // [Tooltip("Maximum burst size (shots)")]
-    // public int maxBurst = int.MaxValue;
-
-    //private int shotsFired = 0;
-
-
-
-    // [Tooltip("Should the current velocity of this controller be added to the projectile.")]
-    // public bool addRelativeVelocity = false;
-
-
-
-    // [Tooltip("The maximum diference between the direction the" +
-    //     " shooting controller is facing and the direction projectiles are launched.")]
-    // public float projectileSpread = 1.0f;
-
-    // The last time this component was fired
-    private float lastFired = Mathf.NegativeInfinity;
-
-    [FoldoutGroup("Effects", 1000)]
-    [Tooltip("The effect to create when this fires")]
-    public EffectRef fireEffect;
-
+    // The last time this gun was fired
+    private float lastFired = Mathf.NegativeInfinity; 
     //The input manager which manages player input
     private InputManager inputManager = null;
 
+    private bool fireQueued;
+
+    public UnityEvent onTriggerFire;
+
+    #region Public Interface
     /// <summary>
     /// Description:
-    /// Standard unity function that runs every frame
-    /// Inputs:
+    /// Fires a projectile if possible
+    /// Inputs: 
     /// none
-    /// Returns:
+    /// Returns: 
     /// void (no return)
     /// </summary>
-    private void Update()
-    {
-        // UpdateVelocity();
-        ProcessInput();
+    public void FireHeld(bool shouldFire) {
+        if (gunType.fireOnTrigger)
+            return;
+
+        fireQueued = shouldFire;
+        // // If the cooldown is over fire a projectile
+        // if ((Time.time - lastFired) > gunType.fireRate) {
+        //     FireProjectiles();
+        // }
     }
 
+    int roundsFired = 0;
+    float waitUntil; // The meaning of this depends on its state
+    float spoolUp = 0;
 
-    // private Vector3 lastPosition;
-    // private Vector3 velocity;
+    private void UpdateFireState() {
+        //Debug.LogFormat("State: {0} Queued: {1}", this.State, fireQueued);
+        float deltaTime = Time.deltaTime;
+        float time = Time.time;
+        if (fireQueued) { // Spool up
+            switch (_state) {
+                case GunState.Idle:
+                    if (gunType.warmupTime > 0) { // Start spooling up
+                        _state = GunState.Warmup;
+                        spoolUp = 0;
+                        waitUntil = time + gunType.warmupTime;
+                    } else {    // Start firing
+                        _state = GunState.Firing;
+                        waitUntil = float.NegativeInfinity;
+                        roundsFired = 0;
+                        UpdateFireState();
+                    }
+                    break;
+                case GunState.Warmup:
+                    spoolUp += deltaTime;
+                    if (spoolUp >= gunType.warmupTime) { // Spooled up. Start firing
+                        _state = GunState.Firing;
+                        waitUntil = float.NegativeInfinity;
+                        roundsFired = 0;
+                    }
+                    break;
+                case GunState.Firing:
+                    if (waitUntil <= time) {
+                        FireProjectiles();
+                        roundsFired++;
+                        waitUntil = time + gunType.fireRate;
+                        if (roundsFired >= gunType.maxBurstSize) {
+                            if (gunType.fireOnTrigger) { // Reset the fire trigger
+                                fireQueued = false;
+                            }
+                            if (gunType.cooldownTime.IsSet) {
+                                _state = GunState.Cooldown;
+                                waitUntil = time + gunType.cooldownTime;
+                            } else {
+                                _state = GunState.Idle;
+                            }
+                        }
+                    }
+                    break;
+                case GunState.Cooldown:
+                    if (waitUntil <= time) { 
+                        _state = GunState.Idle;
+                    }
+                    break;
+                default:
+                    Debug.LogErrorFormat("Unknown GunState {0}", _state);
+                    break;
+            }
+        } else { // Spool down
+            switch (_state) {
+                case GunState.Idle:
+                    break;
+                case GunState.Warmup:
+                    spoolUp -= deltaTime;
+                    if (spoolUp <= 0) { // Spooled down. Start idling
+                        _state = GunState.Idle;
+                    }
+                    break;
+                case GunState.Firing:
+                    if (roundsFired >= gunType.minBurstSize) { // Can stop firing. Spool down
+                        if (gunType.warmupTime.IsSet) {
+                            spoolUp = gunType.warmupTime;
+                            _state = GunState.Warmup;
+                        } else {
+                            _state = GunState.Idle;
+                        }
+                    } else if (waitUntil <= time) { // Still firing burst, keep firing
+                        FireProjectiles();
+                        roundsFired++;
+                        waitUntil = time + gunType.fireRate;
+                        if (roundsFired >= gunType.maxBurstSize) { // Finished burst
+                            if (gunType.fireOnTrigger) { // Reset the fire trigger
+                                fireQueued = false;
+                            }
+                            if (gunType.cooldownTime.IsSet) {
+                                _state = GunState.Cooldown;
+                                waitUntil = time + gunType.cooldownTime;
+                            } else {
+                                _state = GunState.Idle;
+                            }
+                        }
+                    }
+                    break;
+                case GunState.Cooldown:
+                    if (waitUntil <= time) { 
+                        _state = GunState.Idle;
+                    }
+                    break;
+                default:
+                    Debug.LogErrorFormat("Unknown GunState {0}", _state);
+                    break;
+            }
+        }        
+    }
 
-    // private void UpdateVelocity() {
-    //     velocity = (transform.position - lastPosition) * Time.deltaTime;
-    //     lastPosition = transform.position;
-    // }
+    public void SetFireTrigger() {
+        if (gunType.fireOnTrigger) {
+            //Debug.Log("TriggerFire");
+            fireQueued = true;
+            onTriggerFire.Invoke();
+        }           // FireProjectiles();
+    }
 
+    public void Reset() {
+        lastFired = Mathf.NegativeInfinity;
+    }
+
+    public bool ShouldFire(int shootChannels) {
+        return ((int)channel & shootChannels) != 0;
+    }
+    #endregion
+
+
+    #region Unity Messages
 
     /// <summary>
     /// Description:
@@ -179,10 +197,49 @@ public class Gun : MonoBehaviour
     /// </summary>
     private void Start()
     {
+
         SetupInput();
         // lastPosition = transform.position;
         // velocity = Vector3.zero;
     }
+
+    protected void OnEnable() {
+        gunType.RequestPreallocate();
+    }
+
+    protected void OnDisable() {
+        gunType.CancelPreallocate();
+    }
+
+
+    /// <summary>
+    /// Description:
+    /// Standard unity function that runs every frame
+    /// Inputs:
+    /// none
+    /// Returns:
+    /// void (no return)
+    /// </summary>
+    private void FixedUpdate()
+    {
+        // UpdateVelocity();
+        UpdateFireState();
+    }
+
+    private void LateUpdate() {
+        ProcessInput();
+        //Debug.LogFormat("LateUpdate[{0}]({1})", Time.frameCount, Time.realtimeSinceStartupAsDouble);
+    }
+
+
+    // private Vector3 lastPosition;
+    // private Vector3 velocity;
+
+    // private void UpdateVelocity() {
+    //     velocity = (transform.position - lastPosition) * Time.deltaTime;
+    //     lastPosition = transform.position;
+    // }
+    #endregion
 
     /// <summary>
     /// Description:
@@ -192,19 +249,13 @@ public class Gun : MonoBehaviour
     /// Returns:
     /// void (no return)
     /// </summary>
-    void SetupInput()
-    {
-        if (isPlayerControlled)
-        {
+    void SetupInput() {
+        if (isPlayerControlled) {
             if (inputManager == null)
-            {
                 inputManager = InputManager.instance;
-            }
             if (inputManager == null)
-            {
                 Debug.LogError("Player Shooting Controller can not find an InputManager in the scene, there needs to be one in the " +
                     "scene for it to run");
-            }
         }
     }
 
@@ -216,57 +267,29 @@ public class Gun : MonoBehaviour
     /// Returns:
     /// void (no return)
     /// </summary>
-    void ProcessInput()
-    {
-        if (isPlayerControlled)
-        {
-            if (inputManager.firePressed || inputManager.fireHeld)
-            {
-                FireHeld();
+    void ProcessInput() {
+        if (isPlayerControlled) {
+            if (gunType.fireOnTrigger) {
+                if (inputManager.firePressed) {
+                    SetFireTrigger();
+                }
+            } else {
+                FireHeld(inputManager.firePressed || inputManager.fireHeld);
             }
+
         }
     }
 
-    /// <summary>
-    /// Description:
-    /// Fires a projectile if possible
-    /// Inputs: 
-    /// none
-    /// Returns: 
-    /// void (no return)
-    /// </summary>
-    public void FireHeld()
-    {
-        if (fireOnTrigger)
-            return;
 
-        if (!AllowedShootingBox.Value.Contains(transform.position))
-            return;
-
-        // If the cooldown is over fire a projectile
-        if ((Time.time - lastFired) > fireRate)
-        {
-            Fire();
-        }
-    }
-
-    private void Fire()
+    private void FireProjectiles()
     {
         // Launches a projectile
         SpawnProjectiles();
-        fireEffect.Fire(transform);
+        gunType.fireEffect.Play(transform);
 
         // Restart the cooldown
         lastFired = Time.time;
     }
-
-    public bool fireOnTrigger = false;
-    public void FireTrigger() {
-        if (fireOnTrigger)
-            Fire();
-    }
-
-
 
 
     /// <summary>
@@ -277,27 +300,10 @@ public class Gun : MonoBehaviour
     /// Returns: 
     /// void (no return)
     /// </summary>
-    public void SpawnProjectiles()
-    {
-        foreach (var shot in shots) {
-            float z = Random.Range(-shot.dirSpread, shot.dirSpread) + shot.dirOffset;
-            Vector3 pos = transform.TransformDirection((Vector3)shot.posOffset);
-
-
-            Projectile shotObj = shotPrefabs[shot.prefabIndex].Get<Projectile>(transform.position, transform.rotation);
-            shotObj.transform.position += pos;
-            shotObj.transform.eulerAngles += new Vector3(0,0,z);
-            shotObj.transform.position += shotObj.transform.TransformVector((Vector3)shot.rotatedOffset);
-            shotObj.projectileSpeed += shot.speedOffset + Random.Range(-shot.speedSpread, shot.speedSpread);
-
-            shotObj.TryGetComponent<Damage>(out var damage);
-            damage.teamId = this.teamId;
-        }
+    private void SpawnProjectiles() {
+        gunType.SpawnProjectiles(this.transform, teamId);
     }
 
-    public void Reset() {
-        lastFired = Mathf.NegativeInfinity;
-    }
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.red * 0.7f;

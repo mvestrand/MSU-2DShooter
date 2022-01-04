@@ -45,9 +45,10 @@ public class Projectile : PooledMonoBehaviour
     }
 
     private void CheckBounds() {
-        if (!despawnBoundingBox.Value.Contains(transform.position))
+        if (despawnBoundingBox != null && despawnBoundingBox.Value != null && !despawnBoundingBox.Value.Contains(transform.position))
             this.Release();
     }
 
-    protected override void Restart() { }
+    public override void Restart() {}
+
 }

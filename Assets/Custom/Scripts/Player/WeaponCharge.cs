@@ -23,7 +23,7 @@ public class WeaponCharge : ChargedAbility {
     {
         base.OnPowerStart();
         this.ResetCharge();
-        upgradeEffect.Fire(transform);
+        upgradeEffect.Play(transform);
 
         curWeapon = System.Math.Max(curWeapon, 0);
         if (curWeapon < weaponTiers.Count-1) {
