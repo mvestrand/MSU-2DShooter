@@ -32,7 +32,7 @@ public class Shield : MonoBehaviour
     private Animator _animator;
     #endregion
 
-    public FloatVariable chargeFraction; // from 0 to 1
+    public GlobalFloat chargeFraction; // from 0 to 1
 
     #region Event Hooks
     [FoldoutGroup("Events")] public UnityEvent onBreak;
@@ -63,9 +63,6 @@ public class Shield : MonoBehaviour
     public EffectRef activateEffect;
 
     public ShieldVariable variableHook;
-
-    public float allDamageMod = 1f;
-    public float allChargeMod = 1f;
 
 
 
@@ -201,7 +198,7 @@ public class Shield : MonoBehaviour
     public void HandleDamage(Damage damage) {
         Debug.Assert(IsActive, "Shield HandleDamage() should not be called while inactive");
         if (special != null && special.Value != null)
-            special.Value.ModifyCharge(chargeModifier.Modify(damage.element) * damage.chargeAmount * chargeModScale);
+            special.Value.ModifyCharge(chargeModifier.Modify(damage.element) *  damage.chargeAmount * chargeModScale);
         _currentCharge -= damageModifier.Modify(damage.element) * damage.damageAmount * damageModScale;
         _animator.SetTrigger("Hit");
         if (_currentCharge <= 0) {

@@ -15,6 +15,6 @@ public class EnemyType : ScriptableObject {
 
     public int scoreValue = 5;
 
-    public StateMachineTemplate<Enemy> stateMachine = null;
-    public StateBase<Enemy> entryState = null;
+    public StateMachineTemplate<EnemyFSM> stateMachine = null;
+    public StateBase<EnemyFSM> entryState = null;
 }

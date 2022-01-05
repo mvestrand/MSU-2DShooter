@@ -5,4 +5,4 @@ using UnityEngine;
 using MVest;
 
 [CreateAssetMenu(menuName="Custom/FSM/Enemies")]
-public class EnemyStateMachine : StateMachineTemplate<Enemy> {}
+public class EnemyStateMachine : StateMachineTemplate<EnemyFSM> {}

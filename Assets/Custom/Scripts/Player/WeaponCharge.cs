@@ -10,8 +10,8 @@ using MVest;
 
 public class WeaponCharge : ChargedAbility {
 
-    public IntVariable weaponLevel;
-    public FloatVariable weaponCharge;
+    public GlobalInt weaponLevel;
+    public GlobalFloat weaponCharge;
     public bool shouldResetWeaponLevel = false;
     public bool shouldResetWeaponCharge = false;
     [FoldoutGroup("Effects")] public EffectRef upgradeEffect;
@@ -21,15 +21,20 @@ public class WeaponCharge : ChargedAbility {
 
     protected override void OnPowerStart()
     {
+        Debug.Log("Powerup");
+        if (curWeapon >= weaponTiers.Count-1) // Do nothing when 
+            return;
+
         base.OnPowerStart();
         this.ResetCharge();
         upgradeEffect.Play(transform);
 
         curWeapon = System.Math.Max(curWeapon, 0);
         if (curWeapon < weaponTiers.Count-1) {
-            weaponTiers[curWeapon].enabled = false;
+            weaponTiers[curWeapon].gameObject.SetActive(false);
             curWeapon++;
-            weaponTiers[curWeapon].enabled = true;
+            weaponTiers[curWeapon].gameObject.SetActive(true);
+            
         }
     }
 
@@ -48,7 +53,7 @@ public class WeaponCharge : ChargedAbility {
         }
 
         for (int i = 1; i < weaponTiers.Count; i++) {
-            weaponTiers[i].enabled = false;
+            weaponTiers[i].gameObject.SetActive(false);;
         }
     }
 

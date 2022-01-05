@@ -4,11 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 namespace MVest {
-
-
-
-public interface IGlobalVar<T> {
-    
+public interface IGlobalVariable<T> {
     T Value {
         get;
         set;
@@ -22,7 +18,7 @@ public interface IGlobalVariableCallback {
     void UpdateListeners();
 }
 
-public class GlobalVar<T> : ScriptableObject, IGlobalVar<T>, IGlobalVariableCallback {
+public class GlobalVariable<T> : ScriptableObject, IGlobalVariable<T>, IGlobalVariableCallback {
     private bool setLock = false;
     private event Action<T> onChange;
     [SerializeField] private T _value;
@@ -31,7 +27,7 @@ public class GlobalVar<T> : ScriptableObject, IGlobalVar<T>, IGlobalVariableCall
         set { _value = value; UpdateListeners(); }
     }
 
-    public static implicit operator T(GlobalVar<T> v) => v._value;
+    public static implicit operator T(GlobalVariable<T> v) => v._value;
 
 
     public void Register(Action<T> listener) {
@@ -53,7 +49,7 @@ public class GlobalVar<T> : ScriptableObject, IGlobalVar<T>, IGlobalVariableCall
     }
 }
 
-public interface IReadOnlyGlobalRef<TVar, T> where TVar : IGlobalVar<T> {
+public interface IReadOnlyGlobalRef<TVar, T> where TVar : IGlobalVariable<T> {
     bool UseConstant { get; }
     T ConstantValue { get; }
     TVar Variable { get; }
@@ -61,20 +57,20 @@ public interface IReadOnlyGlobalRef<TVar, T> where TVar : IGlobalVar<T> {
 }
 
 [Serializable][DrawWithUnity]
-public class GlobalRef<T> {
+public class GlobalRef<TVar, T> : IReadOnlyGlobalRef<TVar, T> where TVar : IGlobalVariable<T> {
     [SerializeField] private bool useConstant = true;
     [SerializeField] private T constantValue;
-    [SerializeField] private GlobalVar<T> variable;
+    [SerializeField] private TVar variable;
     public bool UseConstant { get { return useConstant; } set { useConstant = value; } }
     public T ConstantValue { get { return constantValue; } set { constantValue = value; } }
-    public GlobalVar<T> Variable { get {return variable;} set {variable = value;} }
+    public TVar Variable { get {return variable;} set {variable = value;} }
 
     public T Value {
         get { return useConstant ? constantValue : variable.Value; }
         set { if (UseConstant) constantValue = value; else variable.Value = value; }
     }
 
-    public static implicit operator T(GlobalRef<T> v) => v.Value;
+    public static implicit operator T(GlobalRef<TVar, T> v) => v.Value;
 
 }
 

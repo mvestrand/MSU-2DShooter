@@ -51,7 +51,7 @@ public class Damage : MonoBehaviour
     public float initialGrazeDelay = 0f;
     private static int GrazeCollisionLayer = 8;
 
-    public IntReference pointsOnGraze = new IntReference();
+    public GlobalIntRef pointsOnGraze = new GlobalIntRef();
 
 
     /// <summary>

@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using MVest;
+
 public class BoundingBox : MonoBehaviour
 {
     public Rect bounds;
-    public BoundingBoxVariable boxVariable;
-
+    //public BoundingBoxVariable boxVariable;
+    public ObjectHookSetter<BoundingBox> objectHook;
 
 
     public bool Contains(in Vector3 pos) {
@@ -20,30 +22,20 @@ public class BoundingBox : MonoBehaviour
     }
 
     void OnEnable() {
-        if(boxVariable != null)
-            boxVariable.Value = this;
+        objectHook.Attach(this);
     }
 
     void OnDisable() {
-        if (boxVariable != null && boxVariable.Value == this)
-            boxVariable.Value = null;
+        objectHook.Detach(this);
     }
 
     void OnDrawGizmos() {
-        if (boxVariable != null)
-            Gizmos.color = (boxVariable.Value == this ? boxVariable.DebugColor : boxVariable.DebugColor * new Color(0.4f,.4f,.4f,1));
-        else
-            Gizmos.color = Color.gray;
+        Gizmos.color = objectHook.Color * Color.gray;
         DrawRect(ref bounds);
     }
 
     void OnDrawGizmosSelected() {
-        if (boxVariable != null) {
-            Gizmos.color = (boxVariable.Value == this ? boxVariable.DebugColor : boxVariable.DebugColor * new Color(0.4f,.4f,.4f,1));
-            Gizmos.color = Gizmos.color * new Color(1.5f, 1.5f, 1.5f, 1f);
-        }
-        else
-            Gizmos.color = Color.white;
+        Gizmos.color = objectHook.Color * new Color(1.5f, 1.5f, 1.5f, 1f);
         DrawRect(ref bounds);
     }
 

@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ShootAllowedBounds_Player
   m_EditorClassIdentifier: 
   _value: {fileID: 0}
+  _color: {r: 0.4269758, g: 0.9528302, b: 0.93285507, a: 1}

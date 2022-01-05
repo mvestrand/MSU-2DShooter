@@ -9,6 +9,8 @@ using UnityEngine.InputSystem;
 [SelectionBase]
 public class Controller : MonoBehaviour
 {
+
+
     [Header("GameObject/Component References")]
     [Tooltip("The animator controller used to animate the player.")]
     public RuntimeAnimatorController animator = null;
@@ -26,7 +28,7 @@ public class Controller : MonoBehaviour
     [Tooltip("Should the player be restricted to the bounding box")]
     public bool useBoundingBox = false;
     [Tooltip("The bounding box which the player is limited to")]
-    public BoundingBoxVariable boundingBox;
+    public MVest.ObjectHookRef<BoundingBox> boundingBox;
 
     //The InputManager to read input from
     private InputManager inputManager;
@@ -256,9 +258,9 @@ public class Controller : MonoBehaviour
             // Move the player's transform
             float focusMod = (inputManager.focusHeld && inputManager.playerHasControl ? focusSpeedModifier : 1);
             transform.position = transform.position + (focusMod * movement * Time.deltaTime * moveSpeed);
-            if (useBoundingBox && boundingBox.Value != null)
-                transform.position = boundingBox.Value.ClampXY(transform.position);
-            
+            if (boundingBox.TryGet(out var bb)) {
+                transform.position = bb.ClampXY(transform.position);
+            }            
         }
     }
 

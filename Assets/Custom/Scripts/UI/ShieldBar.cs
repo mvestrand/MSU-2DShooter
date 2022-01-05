@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ShieldBar : MonoBehaviour
 {
-    [SerializeField] private MVest.FloatVariable shieldFill;
+    [SerializeField] private MVest.GlobalFloat shieldFill;
     // [SerializeField] private ShieldVariable shield;
     [SerializeField] private Slider slider;
 

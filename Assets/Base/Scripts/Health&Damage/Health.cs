@@ -275,6 +275,9 @@ public class Health : MonoBehaviour
             {
                 gameObject.GetComponent<Enemy>().DoBeforeDestroy();
             }
+            if (gameObject.TryGetComponent<EnemyFSM>(out var enemyFSM)) {
+                enemyFSM.DoBeforeDestroy();
+            }
             gameObject.DestroyPooled();
         }
     }
@@ -297,6 +300,9 @@ public class Health : MonoBehaviour
         {
             enemy.DoBeforeDestroy();
             enemy.Release();
+        } else if (gameObject.TryGetComponent<EnemyFSM>(out var enemyFSM)) {
+            enemyFSM.DoBeforeDestroy();
+            enemyFSM.Release();
         }
     }
 

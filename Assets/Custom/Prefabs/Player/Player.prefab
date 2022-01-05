@@ -175,7 +175,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 4
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.15351725, a: 0.9137255}
+  m_Color: {r: 0, g: 0.5821352, b: 1, a: 0.9137255}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -314,13 +314,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcba33f7f009a424e8f7a603aaec8262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type:
+    _typename: 
   animator: {fileID: 0}
   myRigidbody: {fileID: 4158717808732573772}
   moveSpeed: 10
   focusSpeedModifier: 0.7
   rotationSpeed: 60
   useBoundingBox: 1
-  boundingBox: {fileID: 11400000, guid: 651a992040b2c0645ba6ee787038f4b0, type: 2}
+  boundingBox:
+    hook: {fileID: 11400000, guid: aeedd4bba7dc9e84f95aa2edbc7b17d5, type: 2}
   aimMode: 1
   movementMode: 2
 --- !u!114 &4158717808732573763
@@ -348,9 +351,11 @@ MonoBehaviour:
   shield: {fileID: 347857042730639177}
   deathEffect:
     effect: {fileID: 936663828348224636, guid: bdfd85e056b56ff4098bd25f559fbdab, type: 3}
+    preload: 0
     offset: {x: 0, y: 0, z: 0}
   hitEffect:
     effect: {fileID: 0}
+    preload: 0
     offset: {x: 0, y: 0, z: 0}
 --- !u!50 &4158717808732573772
 Rigidbody2D:
@@ -547,7 +552,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 851172bca21fdfb4287b1df8bbbe65fa, type: 3}
-  m_Color: {r: 1, g: 0.08962262, b: 0.08962262, a: 1}
+  m_Color: {r: 0.09019607, g: 0.80887824, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -565,9 +570,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 4158717808732573775}
     m_Modifications:
     - target: {fileID: 33985427046422138, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
-      propertyPath: variableHook
-      value: 
-      objectReference: {fileID: 11400000, guid: ba9f9d0e474ede84695b0894c6fac693, type: 2}
+      propertyPath: rechargeRate
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 33985427046422138, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
+      propertyPath: dischargeRate
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 33985427046422138, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
+      propertyPath: chargeModScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2787234976951095299, guid: 4629b479b80aec54789fcae74dcea3a6, type: 3}
       propertyPath: m_Name
       value: ShieldBase
@@ -980,6 +993,10 @@ PrefabInstance:
     - target: {fileID: 6876390711810908497, guid: 2b304c7421b97554bb9222fd1d047c23, type: 3}
       propertyPath: m_Name
       value: WeaponCharge
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725309600519572239, guid: 2b304c7421b97554bb9222fd1d047c23, type: 3}
+      propertyPath: maximumCharge
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 8725309600519572239, guid: 2b304c7421b97554bb9222fd1d047c23, type: 3}
       propertyPath: upgradeEffect.effect

@@ -20,7 +20,7 @@ public sealed class SpawnController : MonoBehaviour
 
 
     [Tooltip("This determines how far outside the spawn box this object should be to not spawn on screen")]
-    [SerializeField] Rect maxAABB;
+    [SerializeField] float spawnRadius;
 
     [Tooltip("Keep this object from despawning even when leaving the spawn area")]
     [SerializeField] bool _forbidDespawn = false;

@@ -102,6 +102,7 @@ public class ChargedAbility : MonoBehaviour, IChargedAbility {
         if (deltaCharge == 0) 
             return;
         _currentCharge += deltaCharge;
+        UpdateFull();
     }
 
     public bool CanActivate() {

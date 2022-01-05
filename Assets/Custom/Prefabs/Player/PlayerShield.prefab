@@ -76,22 +76,25 @@ MonoBehaviour:
       m_Calls: []
   breakEffect:
     effect: {fileID: 4393270401346188235, guid: 413f054744a583c40a0c654d6edebaab, type: 3}
+    preload: 0
     offset: {x: 0, y: 0, z: 0}
   hitNoBreakEffect:
     effect: {fileID: 4393270401346188235, guid: b530d3274c4f3814aadfd22d10d17fe7, type: 3}
+    preload: 0
     offset: {x: 0, y: 0, z: 0}
   hitAllEffect:
     effect: {fileID: 0}
+    preload: 0
     offset: {x: 0, y: 0, z: 0}
   deactivateEffect:
     effect: {fileID: 4393270401346188235, guid: df700a7343091024fb7f672865acb2c7, type: 3}
+    preload: 0
     offset: {x: 0, y: 0, z: 0}
   activateEffect:
     effect: {fileID: 4393270401346188235, guid: c0780447f2e8f334f94322015a6ce382, type: 3}
+    preload: 0
     offset: {x: 0, y: 0, z: 0}
-  variableHook: {fileID: 0}
-  allDamageMod: 10
-  allChargeMod: 10
+  variableHook: {fileID: 11400000, guid: ba9f9d0e474ede84695b0894c6fac693, type: 2}
   _teamId: 0
   initialCharge: 100
   startActive: 0
@@ -103,9 +106,9 @@ MonoBehaviour:
   breakRequiresFullRecharge: 0
   brokenRechargeDelay: 1
   damageModifier: {fileID: 11400000, guid: 48e4ad6213c0e284e8689b4b234ced17, type: 2}
-  damageModScale: 10
+  damageModScale: 1
   chargeModifier: {fileID: 11400000, guid: 87306cc102b85604191d665dea9b4b36, type: 2}
-  chargeModScale: 1
+  chargeModScale: 3
   special: {fileID: 11400000, guid: ba5e39c6f6f4c034c9e6f1e51ef4814a, type: 2}
   breakOnFullDrain: 1
   disableOnDeactivate: 0

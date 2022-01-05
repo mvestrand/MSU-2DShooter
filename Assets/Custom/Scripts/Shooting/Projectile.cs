@@ -13,7 +13,7 @@ public class Projectile : PooledMonoBehaviour
     [Tooltip("The distance this projectile will move each second.")]
     public float projectileSpeed = 3.0f;
     public float turnSpeed = 0.0f;
-    public BoundingBoxVariable despawnBoundingBox;
+    public ObjectHookRef<BoundingBox> despawnBoundingBox;
 
     /// <summary>
     /// Description:
@@ -45,10 +45,15 @@ public class Projectile : PooledMonoBehaviour
     }
 
     private void CheckBounds() {
-        if (despawnBoundingBox != null && despawnBoundingBox.Value != null && !despawnBoundingBox.Value.Contains(transform.position))
+        if (despawnBoundingBox.TryGet(out var despawnBox) && !despawnBox.Contains(transform.position)) {
             this.Release();
+        }
     }
 
-    public override void Restart() {}
+    public override void Restart() {
+        Projectile original = Original as Projectile;
+        projectileSpeed = original.projectileSpeed;
+        turnSpeed = original.turnSpeed;
+    }
 
 }

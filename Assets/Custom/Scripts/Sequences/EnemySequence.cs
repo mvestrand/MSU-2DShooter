@@ -29,13 +29,14 @@ public class EnemySequence : TimedSequence {
     public int EnemiesDefeated { get { return _enemiesDefeated; } }
     public int TotalEnemies { get { return enemyPrefabs.Count; } }
 
-    public BoundingBoxReference boundingBox;
+    public MVest.ObjectHookRef<BoundingBox> boundingBox;
 
     protected override void Awake() {
         base.Awake();
-        BoundingBox despawnBox = boundingBox.Value;
-        foreach (var controller in controllers) {
-            controller.despawnBox = despawnBox;
+        if (boundingBox.TryGet(out var despawnBox)) {
+            foreach (var controller in controllers) {
+                controller.despawnBox = despawnBox;
+            }
         }
     }
 

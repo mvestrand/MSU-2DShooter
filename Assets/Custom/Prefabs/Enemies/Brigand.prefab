@@ -1,5 +1,68 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4032485256335652926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4080868519374611640}
+  - component: {fileID: 939431283300023633}
+  - component: {fileID: 8229517061258376432}
+  m_Layer: 14
+  m_Name: SpawnController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4080868519374611640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4032485256335652926}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8282131552441171986}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &939431283300023633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4032485256335652926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed386d53db0153640aba33d0dd2690ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRadius: 1
+  _forbidDespawn: 0
+--- !u!58 &8229517061258376432
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4032485256335652926}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
 --- !u!1 &4094903069713155335
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +288,7 @@ Transform:
   - {fileID: 4153887929743374432}
   - {fileID: 5215956913526415917}
   - {fileID: 2081683752630185618}
+  - {fileID: 4080868519374611640}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -241,8 +305,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _path: 
+  _minPoolSize: 0
   _maxPoolSize: 10000
-  _defaultPoolCapacity: 10
+  _spawnRadius: 0
   moveSpeed: 2
   curSpeed: 5
   maxSpeed: 5
@@ -284,9 +349,11 @@ MonoBehaviour:
   shield: {fileID: 0}
   deathEffect:
     effect: {fileID: -5630922745775229061, guid: 9ac98dac13b0d5e44b134550f5e6d822, type: 3}
+    preload: 0
     offset: {x: 0, y: 0, z: 0}
   hitEffect:
     effect: {fileID: -3771462043961099955, guid: 9daf9602c6babd54984adecaa4e6b736, type: 3}
+    preload: 0
     offset: {x: 0, y: 0, z: 0}
 --- !u!50 &4327850106528714602
 Rigidbody2D:
@@ -343,9 +410,11 @@ MonoBehaviour:
   element: {fileID: 0}
   hitEffect:
     effect: {fileID: -5630922745775229061, guid: 9ac98dac13b0d5e44b134550f5e6d822, type: 3}
+    preload: 0
     offset: {x: 0, y: 0, z: 0}
   absorbEffect:
     effect: {fileID: -5630922745775229061, guid: 9ac98dac13b0d5e44b134550f5e6d822, type: 3}
+    preload: 0
     offset: {x: 0, y: 0, z: 0}
   destroyAfterDamage: 1
   destroyAfterAbsorb: 1
@@ -355,6 +424,7 @@ MonoBehaviour:
   ignoreShield: 0
   grazeEffect:
     effect: {fileID: 0}
+    preload: 0
     offset: {x: 0, y: 0, z: 0}
   grazeOnTriggerEnter: 0
   grazeOnTriggerStay: 0

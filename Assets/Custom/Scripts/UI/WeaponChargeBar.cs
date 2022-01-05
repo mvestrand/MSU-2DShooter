@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class WeaponChargeBar : MonoBehaviour
 {
-    [SerializeField] private MVest.FloatReference ChargeLevel = new MVest.FloatReference();
-    [SerializeField] private MVest.IntReference CurrentlyCharged = new MVest.IntReference();
+    [SerializeField] private MVest.GlobalFloatRef ChargeLevel = new MVest.GlobalFloatRef();
+    [SerializeField] private MVest.GlobalIntRef CurrentlyCharged = new MVest.GlobalIntRef();
     [SerializeField] private List<Slider> sliders;
 
 

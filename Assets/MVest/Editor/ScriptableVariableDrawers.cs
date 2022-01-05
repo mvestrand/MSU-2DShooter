@@ -8,7 +8,7 @@ using Sirenix.OdinInspector;
 
 namespace MVest {
 
-[CustomPropertyDrawer(typeof(ScriptableReference<,>), true)]
+[CustomPropertyDrawer(typeof(GlobalRef<,>), true)]
 public class ScriptableReferenceDrawer : PropertyDrawer {
 
     private static string[] options = {"Constant", "Variable"};
@@ -40,13 +40,13 @@ public class ScriptableReferenceDrawer : PropertyDrawer {
 }
 
 
-[CustomEditor(typeof(ScriptableVariable<>),true)]
+[CustomEditor(typeof(GlobalVariable<>),true)]
 public class ScriptableVariableEditor : Editor {
 
     public override void OnInspectorGUI() {
         DrawDefaultInspector();
 
-        var targetVar = (IScriptableVariableCallback)target;
+        var targetVar = (IGlobalVariableCallback)target;
 
         if (GUILayout.Button("Update")) {
             targetVar.UpdateListeners();

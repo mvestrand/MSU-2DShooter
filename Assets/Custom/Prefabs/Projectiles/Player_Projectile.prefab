@@ -48,11 +48,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _path: 
+  _minPoolSize: 0
   _maxPoolSize: 10000
-  _defaultPoolCapacity: 10
   projectileSpeed: 30
   turnSpeed: 0
-  despawnBoundingBox: {fileID: 11400000, guid: 014a6b65962f9ab47a3f415dc4116378, type: 2}
+  despawnBoundingBox:
+    hook: {fileID: 11400000, guid: c8cd88d8a9602034a9329093188975e1, type: 2}
 --- !u!114 &3089550953289248105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,18 +70,32 @@ MonoBehaviour:
   damageAmount: 1
   chargeAmount: 1
   element: {fileID: 0}
-  hitEffect: {fileID: 3287935543775063484, guid: 2593d5461178baf439ad53cc44f920d0, type: 3}
-  absorbEffect: {fileID: 0}
+  hitEffect:
+    effect: {fileID: 0}
+    preload: 0
+    offset: {x: 0, y: 0, z: 0}
+  absorbEffect:
+    effect: {fileID: 0}
+    preload: 0
+    offset: {x: 0, y: 0, z: 0}
   destroyAfterDamage: 1
   destroyAfterAbsorb: 1
   dealDamageOnTriggerEnter: 1
   dealDamageOnTriggerStay: 0
   dealDamageOnCollision: 0
-  grazeEffect: {fileID: 0}
+  ignoreShield: 0
+  grazeEffect:
+    effect: {fileID: 0}
+    preload: 0
+    offset: {x: 0, y: 0, z: 0}
   grazeOnTriggerEnter: 0
   grazeOnTriggerStay: 0
   grazeCooldown: 1
   initialGrazeDelay: 0
+  pointsOnGraze:
+    useConstant: 1
+    constantValue: 0
+    variable: {fileID: 0}
 --- !u!58 &-1762849259214779372
 CircleCollider2D:
   m_ObjectHideFlags: 0

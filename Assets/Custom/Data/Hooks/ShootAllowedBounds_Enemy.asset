@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ShootAllowedBounds_Enemy
   m_EditorClassIdentifier: 
   _value: {fileID: 0}
+  _color: {r: 0.8113208, g: 0.3366368, b: 0, a: 1}
