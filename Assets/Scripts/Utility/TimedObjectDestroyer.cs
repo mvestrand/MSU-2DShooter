@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using MVest.Unity.Pool;
+
 /// <summary>
 /// A class which destroys it's gameobject after a certain amount of time
 /// </summary>
@@ -35,6 +37,10 @@ public class TimedObjectDestroyer : MonoBehaviour
         DestroyImmediate(this.gameObject);
     }
 
+    void OnEnable() {
+        timeAlive = 0;
+    }
+
     /// <summary>
     /// Description:
     /// Every frame, increment the amount of time that this gameobject has been alive,
@@ -46,7 +52,11 @@ public class TimedObjectDestroyer : MonoBehaviour
     {
         if (timeAlive > lifetime)
         {
-            Destroy(this.gameObject);
+            if (TryGetComponent<PooledMonoBehaviour>(out var pooling)) {
+                pooling.Release();
+            } else {
+                Destroy(this.gameObject);
+            }
         }
         else
         {

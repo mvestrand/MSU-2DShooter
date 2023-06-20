@@ -1,0 +1,5 @@
+- Plan out 3 levels
+	- Enemy types
+		- Just movement
+			- Clip driven movement & spawning
+		- 

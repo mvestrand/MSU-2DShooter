@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6488860508406065010}
   - component: {fileID: 4625570402135317304}
   - component: {fileID: -6021635682603994582}
+  - component: {fileID: -8013683156131950817}
+  - component: {fileID: -4576133318901123402}
   m_Layer: 0
   m_Name: PlayerHitEffect
   m_TagString: Untagged
@@ -41,9 +43,9 @@ AudioSource:
   m_GameObject: {fileID: 5156419567158778961}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 792618d7eb3d43b45803d6775714eb2d, type: 3}
-  m_PlayOnAwake: 1
+  OutputAudioMixerGroup: {fileID: -5924939123123954878, guid: 54e48b673146d03438fe18d457bac84a, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -142,3 +144,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetime: 3
   destroyChildrenOnDeath: 1
+--- !u!114 &-8013683156131950817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5156419567158778961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e1ca249bf3ca9f428ad6301f1802d80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _path: 
+  _minPoolSize: 0
+  _maxPoolSize: 10000
+--- !u!114 &-4576133318901123402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5156419567158778961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b464916a6e50fe488dd73bcab67270d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioRef: {fileID: 11400000, guid: b268f2707b28d8a4bbd61991700ce9a9, type: 2}
+  source: {fileID: 4625570402135317304}
+  volume: 1
+  playOnAwake: 1

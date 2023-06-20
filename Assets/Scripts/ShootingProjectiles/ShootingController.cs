@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+using MVest.Unity.Pool;
+
 /// <summary>
 /// A class which controlls player aiming and shooting
 /// </summary>
@@ -116,14 +118,18 @@ public class ShootingController : MonoBehaviour
     public void Fire()
     {
         // If the cooldown is over fire a projectile
-        if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
+        if ((Time.timeSinceLevelLoad - lastFired) > fireRate && Time.timeScale != 0)
         {
             // Launches a projectile
             SpawnProjectile();
 
             if (fireEffect != null)
             {
-                Instantiate(fireEffect, transform.position, transform.rotation, null);
+                if (fireEffect.TryGetComponent<PooledMonoBehaviour>(out var prefabPooler)) {
+                    prefabPooler.Get(transform.position, transform.rotation);
+                } else {
+                    Instantiate(fireEffect, transform.position, transform.rotation, null);
+                }
             }
 
             // Restart the cooldown
@@ -145,7 +151,12 @@ public class ShootingController : MonoBehaviour
         if (projectilePrefab != null)
         {
             // Create the projectile
-            GameObject projectileGameObject = Instantiate(projectilePrefab, transform.position, transform.rotation, null);
+            GameObject projectileGameObject;
+            if (projectilePrefab.TryGetComponent<PooledMonoBehaviour>(out var prefabPooler)) {
+                projectileGameObject = prefabPooler.Get(transform.position, transform.rotation).gameObject;
+            } else {
+                projectileGameObject = Instantiate(projectilePrefab, transform.position, transform.rotation, null);
+            }
 
             // Account for spread
             Vector3 rotationEulerAngles = projectileGameObject.transform.rotation.eulerAngles;

@@ -96,7 +96,7 @@ public class EnemySpawner : MonoBehaviour
             // Setup the enemy if necessary
             if (enemy != null)
             {
-                enemy.followTarget = target;
+                enemy.steerTarget = target;
             }
             foreach (ShootingController gun in shootingControllers)
             {

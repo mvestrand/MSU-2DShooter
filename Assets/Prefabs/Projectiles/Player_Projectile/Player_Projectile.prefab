@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 6049354612434518188}
   - component: {fileID: 4099572394843378986}
   - component: {fileID: 3089550953289248105}
+  - component: {fileID: -4806382143892095050}
+  - component: {fileID: 6368346996241585279}
   m_Layer: 12
   m_Name: Player_Projectile
   m_TagString: Untagged
@@ -89,7 +91,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &2410745567102331090
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,10 +104,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &6955890141537850218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,3 +190,33 @@ MonoBehaviour:
   dealDamageOnTriggerEnter: 1
   dealDamageOnTriggerStay: 0
   dealDamageOnCollision: 0
+--- !u!114 &-4806382143892095050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562651836113712045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e1ca249bf3ca9f428ad6301f1802d80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _path: 
+  _minPoolSize: 0
+  _maxPoolSize: 10000
+--- !u!114 &6368346996241585279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562651836113712045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e382a388d9cf88469ae14826c027370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minBound: {x: -10, y: -12}
+  maxBound: {x: 10, y: 12}
+  destroyChildrenOnDeath: 1

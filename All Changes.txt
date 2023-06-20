@@ -1,0 +1,26 @@
+=== Minor Changes ================
+- Player death effect changed to not loop
+- ShootingController no longer allows the player to fire a single shot while paused
+- UI Backdrop switched from scaled image to 9-slice
+- Camera made to render at 3:4 aspect ratio to emulate arcade shmups
+	- UI and viewport rescale to preserve the correct aspect ratio at arbitrary resolutions
+	by letterboxing or pillarboxing
+- Added delay before player respawning
+	- Separated out damage and respawn invincibility times
+- Changed player hitbox to be a small central core
+- Enemy explosion changed to not loop
+- Enemy projectiles changed to be larger pellets for visibility
+- Locked player movement to the bounds of the screen area
+- Changed projectiles and effects to be pooled using a small pooling package I wrote previously
+- Projectiles now despawn after leaving the screen instead of on a timer
+- Added intermediary classes to SFX to keep them from playing multiple times per frame to prevent volume problems
+- Changed backgrounds to be tiled
+- Script to make the background scroll
+
+
+=== External / Reverted Changes ===
+- Pooling code refactored
+
+
+=== Timeline changes ===
+- Added an annotation marker class

@@ -22,9 +22,13 @@ public class Health : MonoBehaviour
     [Tooltip("The current in game health value")]
     public int currentHealth = 1;
     [Tooltip("Invulnerability duration, in seconds, after taking damage")]
-    public float invincibilityTime = 3f;
+    public float damageInvincibilityTime = 1f;
+    [Tooltip("Invulnerability duration, in seconds, after taking damage")]
+    public float respawnInvincibilityTime = 3f;
     [Tooltip("Whether or not this health is always invincible")]
     public bool isAlwaysInvincible = false;
+    [Tooltip("Respawn delay, in seconds, after dying")]
+    public float respawnDelayTime = 0.5f;
 
     [Header("Lives settings")]
     [Tooltip("Whether or not to use lives")]
@@ -106,8 +110,15 @@ public class Health : MonoBehaviour
     /// Returns:
     /// void (no return)
     /// </summary>
-    void Respawn()
+    IEnumerator Respawn()
     {
+        Debug.Log("Starting respawn");
+        yield return new WaitForEndOfFrame();
+        gameObject.SetActive(false);
+        yield return new WaitForSeconds(Mathf.Max(respawnDelayTime, 0));
+        Debug.Log("Finishing respawn");
+        gameObject.SetActive(true);
+        MakeInvincible(respawnInvincibilityTime);
         transform.position = respawnPosition;
         currentHealth = defaultHealth;
     }
@@ -133,11 +144,18 @@ public class Health : MonoBehaviour
             {
                 Instantiate(hitEffect, transform.position, transform.rotation, null);
             }
-            timeToBecomeDamagableAgain = Time.time + invincibilityTime;
-            isInvincableFromDamage = true;
+            MakeInvincible(damageInvincibilityTime);
             currentHealth -= damageAmount;
             CheckDeath();
         }
+    }
+
+    private void MakeInvincible(float invincibilityTime)
+    {
+        if (invincibilityTime <= 0)
+            return;
+        timeToBecomeDamagableAgain = Time.time + invincibilityTime;
+        isInvincableFromDamage = true;
     }
 
     /// <summary>
@@ -224,7 +242,7 @@ public class Health : MonoBehaviour
         currentLives -= 1;
         if (currentLives > 0)
         {
-            Respawn();
+            GameManager.instance.StartCoroutine(Respawn());
         }
         else
         {

@@ -1,0 +1,27 @@
+JumpMarker {
+    width: 18px;
+    height: 18px;
+    background-image: resource("Assets/Scripts/Sequencing/Editor/Stylesheets/imgs/jumpTo_collapsed.png");
+}
+
+JumpMarker:checked {
+    background-image: resource("Assets/Scripts/Sequencing/Editor/Stylesheets/imgs/jumpTo_normal.png");
+}
+
+JumpMarker:hover:focus:checked {
+    background-image: resource("Assets/Scripts/Sequencing/Editor/Stylesheets/imgs/jumpTo_selected.png");
+}
+
+DestinationMarker {
+    width: 18px;
+    height: 18px;
+    background-image: resource("Assets/Scripts/Sequencing/Editor/Stylesheets/imgs/destination_collapsed.png");
+}
+
+DestinationMarker:checked {
+    background-image: resource("Assets/Scripts/Sequencing/Editor/Stylesheets/imgs/destination_normal.png");
+}
+
+DestinationMarker:hover:focus:checked {
+    background-image: resource("Assets/Scripts/Sequencing/Editor/Stylesheets/imgs/destination_selected.png");
+}

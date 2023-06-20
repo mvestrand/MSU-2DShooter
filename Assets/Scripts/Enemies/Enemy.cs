@@ -7,6 +7,9 @@ using UnityEngine;
 /// </summary>
 public class Enemy : MonoBehaviour
 {
+    public EnemyControlClip controlClip;
+    public EnemyControlState state;
+    public int clipIndex;
     [Header("Settings")]
     [Tooltip("The speed at which the enemy moves.")]
     public float moveSpeed = 5.0f;
@@ -15,7 +18,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Following Settings")]
     [Tooltip("The transform of the object that this enemy should follow.")]
-    public Transform followTarget = null;
+    public Transform steerTarget = null;
     [Tooltip("The distance at which the enemy begins following the follow target.")]
     public float followRange = 10.0f;
 
@@ -36,7 +39,7 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Enum to help wih different movement modes
     /// </summary>
-    public enum MovementModes { NoMovement, FollowTarget, Scroll };
+    public enum MovementModes { NoMovement, FollowTarget, Scroll};
 
     [Tooltip("The way this enemy will move\n" +
         "NoMovement: This enemy will not move.\n" +
@@ -70,11 +73,11 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        if (movementMode == MovementModes.FollowTarget && followTarget == null)
+        if (movementMode == MovementModes.FollowTarget && steerTarget == null)
         {
             if (GameManager.instance != null && GameManager.instance.player != null)
             {
-                followTarget = GameManager.instance.player.transform;
+                steerTarget = GameManager.instance.player.transform;
             }
         }
     }
@@ -89,13 +92,17 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void HandleBehaviour()
     {
-        // Check if the target is in range, then move
-        if (followTarget != null && (followTarget.position - transform.position).magnitude < followRange)
-        {
-            MoveEnemy();
+        if (controlClip != null) {
+            controlClip.UpdateEnemy(this);
+        } else {
+            if (steerTarget != null && (steerTarget.position - transform.position).magnitude < followRange)
+            {
+                MoveEnemy();
+            }
+            // Attempt to shoot, according to this enemy's shooting mode
+            TryToShoot();
+
         }
-        // Attempt to shoot, according to this enemy's shooting mode
-        TryToShoot();
     }
 
     /// <summary>
@@ -229,7 +236,7 @@ public class Enemy : MonoBehaviour
     /// Returns: 
     /// void (no return)
     /// </summary>
-    private void TryToShoot()
+    public void TryToShoot()
     {
         switch (shootMode)
         {
@@ -255,7 +262,7 @@ public class Enemy : MonoBehaviour
     /// <returns>Vector3: The movement to be used in follow movement mode.</returns>
     private Vector3 GetFollowPlayerMovement()
     {
-        Vector3 moveDirection = (followTarget.position - transform.position).normalized;
+        Vector3 moveDirection = (steerTarget.position - transform.position).normalized;
         Vector3 movement = moveDirection * moveSpeed * Time.deltaTime;
         return movement;
     }
@@ -271,7 +278,7 @@ public class Enemy : MonoBehaviour
     /// <returns>Quaternion: The rotation to be used in follow movement mode.</returns>
     private Quaternion GetFollowPlayerRotation()
     {
-        float angle = Vector3.SignedAngle(Vector3.down, (followTarget.position - transform.position).normalized, Vector3.forward);
+        float angle = Vector3.SignedAngle(Vector3.down, (steerTarget.position - transform.position).normalized, Vector3.forward);
         Quaternion rotationToTarget = Quaternion.Euler(0, 0, angle);
         return rotationToTarget;
     }
@@ -329,4 +336,10 @@ public class Enemy : MonoBehaviour
         }
         return scrollDirection;
     }
+
+    void OnEnable() {
+        clipIndex = 0;
+    }
+
+
 }

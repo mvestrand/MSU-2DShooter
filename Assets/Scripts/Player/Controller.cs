@@ -46,6 +46,10 @@ public class Controller : MonoBehaviour
     public MovementModes movementMode = MovementModes.FreeRoam;
 
 
+    public bool useMoveBound = true;
+    public Vector2 moveBoundMin = new Vector2(-7, -9);
+    public Vector2 moveBoundMax = new Vector2(7, 9);
+
     // Whether the player can aim with the mouse or not
     private bool canAimWithMouse
     {
@@ -231,6 +235,11 @@ public class Controller : MonoBehaviour
             }
             // Move the player's transform
             transform.position = transform.position + (movement * Time.deltaTime * moveSpeed);
+        }
+        if (useMoveBound) {
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, moveBoundMin.x, moveBoundMax.x),
+                                             Mathf.Clamp(transform.position.y, moveBoundMin.y, moveBoundMax.y),
+                                             transform.position.z);
         }
     }
 

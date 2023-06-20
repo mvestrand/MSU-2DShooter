@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - BackgroundPanel
   layers:
   - Default
   - TransparentFX
@@ -38,8 +39,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 3884667925
+  - name: Background_Far
+    uniqueID: 833457071
+    locked: 0
+  - name: Background_Mid
+    uniqueID: 25631021
+    locked: 0
+  - name: Background_Near
+    uniqueID: 2793527619
     locked: 0
   - name: Default
     uniqueID: 0

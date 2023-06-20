@@ -43,18 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75388997f8d4264a86b7441dc9ea74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 4641165794769155162, guid: 5089b9cd653abda4ba6013a20e42c774, type: 3}
+  projectilePrefab: {fileID: 4641165794769155162, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
   projectileHolder: {fileID: 0}
-  animator: {fileID: 0}
   isPlayerControlled: 0
   fireRate: 3
   projectileSpread: 1
-  overrideProjectileSettings: 0
-  projectileDamage: 1
-  teamID: 1
-  projectileSpeed: 5
   fireEffect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
-  inputManager: {fileID: 0}
 --- !u!1 &8282131552441171991
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +140,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &8282131552441171988
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -159,10 +153,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &8282131552441171987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,11 +197,13 @@ MonoBehaviour:
   defaultHealth: 2
   maximumHealth: 2
   currentHealth: 2
-  invincibilityTime: 0
+  damageInvincibilityTime: 0
+  respawnInvincibilityTime: 3
+  isAlwaysInvincible: 0
+  respawnDelayTime: 0.5
   useLives: 0
   currentLives: 3
   maximumLives: 5
-  isInvincible: 0
   deathEffect: {fileID: 2452382815751308013, guid: 990f3751046a4d840806774f23579fe2, type: 3}
   hitEffect: {fileID: 6229913163069739088, guid: d6029318d740811488fd5dd38a7e1ce1, type: 3}
 --- !u!50 &4327850106528714602
@@ -306,15 +304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75388997f8d4264a86b7441dc9ea74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 4641165794769155162, guid: 5089b9cd653abda4ba6013a20e42c774, type: 3}
+  projectilePrefab: {fileID: 4641165794769155162, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
   projectileHolder: {fileID: 0}
-  animator: {fileID: 0}
   isPlayerControlled: 0
   fireRate: 3
   projectileSpread: 1
-  overrideProjectileSettings: 0
-  projectileDamage: 1
-  teamID: 1
-  projectileSpeed: 5
   fireEffect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
-  inputManager: {fileID: 0}
