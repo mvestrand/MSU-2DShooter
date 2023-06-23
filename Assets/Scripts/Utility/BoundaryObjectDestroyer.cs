@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using MVest.Unity.Pool;
+using MVest.Unity.Pooling;
 
 /// <summary>
 /// A class which destroys it's gameobject after a certain amount of time

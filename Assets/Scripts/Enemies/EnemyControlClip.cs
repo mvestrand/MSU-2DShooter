@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using MVest.Unity.Pool;
+using MVest.Unity.Pooling;
 
 public abstract class EnemyControlState : MonoBehaviour {
     public abstract void EnterState(Enemy enemy);

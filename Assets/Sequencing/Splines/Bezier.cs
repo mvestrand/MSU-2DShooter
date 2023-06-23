@@ -35,4 +35,5 @@ public static class Bezier {
 			6f * oneMinusT * t * (p2 - p1) +
 			3f * t * t * (p3 - p2);
 	}
+
 }

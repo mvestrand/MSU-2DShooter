@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-using MVest.Unity.Pool;
+using MVest.Unity.Pooling;
 
 /// <summary>
 /// A class which controlls player aiming and shooting

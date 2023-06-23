@@ -1,5 +1,15 @@
 - Plan out 3 levels
-	- Enemy types
+	- Enemy types		
 		- Just movement
 			- Clip driven movement & spawning
 		- 
+		
+		
+		
+		
+- Enemy movement control
+	- Movement path designation
+	- Facing direction animation
+	- Fire signal
+		- Fire pattern designation
+	- Aim mode designation

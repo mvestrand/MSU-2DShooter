@@ -1,6 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+using MVest.Unity;
+
 [CustomEditor(typeof(BezierSpline))]
 public class BezierSplineInspector : Editor {
 
@@ -16,6 +18,7 @@ public class BezierSplineInspector : Editor {
 	};
 
 	private BezierSpline spline;
+	//private FloatTransform handleTransform;
 	private Transform handleTransform;
 	private Quaternion handleRotation;
 	private int selectedIndex = -1;
@@ -29,28 +32,41 @@ public class BezierSplineInspector : Editor {
 			EditorUtility.SetDirty(spline);
 			spline.Loop = loop;
 		}
-		if (selectedIndex >= 0 && selectedIndex < spline.ControlPointCount) {
-			DrawSelectedPointInspector();
-		}
-		if (GUILayout.Button("Add Curve")) {
-			Undo.RecordObject(spline, "Add Curve");
-			spline.AddCurve();
+        bool pointIsSelected = selectedIndex >= 0 && selectedIndex < spline.ControlPointCount;
+
+        EditorGUI.BeginDisabledGroup(!pointIsSelected);
+
+        DrawSelectedPointInspector(pointIsSelected);
+
+		if (GUILayout.Button("Add Waypoint")) {
+			Undo.RecordObject(spline, "Add Waypoint");
+			spline.InsertWaypoint(selectedIndex / 3);
 			EditorUtility.SetDirty(spline);
 		}
-	}
+		if (GUILayout.Button("Remove Waypoint")) {
+			Undo.RecordObject(spline, "Remove Waypoint");
+			spline.RemoveWaypoint((selectedIndex+1) / 3);
+			EditorUtility.SetDirty(spline);
+		}
+        EditorGUI.EndDisabledGroup();
+    }
 
-	private void DrawSelectedPointInspector() {
-		GUILayout.Label("Selected Point");
+	private void DrawSelectedPointInspector(bool pointIsSelected) {
+        Vector3 positionValue = (pointIsSelected ? spline.GetControlPoint(selectedIndex) : Vector3.zero);
+        BezierControlPointMode modeValue = (pointIsSelected ? spline.GetControlPointMode(selectedIndex) : BezierControlPointMode.Free);
+
+        GUILayout.Label("Selected Point");
 		EditorGUI.BeginChangeCheck();
-		Vector3 point = EditorGUILayout.Vector3Field("Position", spline.GetControlPoint(selectedIndex));
+		Vector3 point = EditorGUILayout.Vector3Field("Position", positionValue);
 		if (EditorGUI.EndChangeCheck()) {
 			Undo.RecordObject(spline, "Move Point");
 			EditorUtility.SetDirty(spline);
 			spline.SetControlPoint(selectedIndex, point);
 		}
 		EditorGUI.BeginChangeCheck();
-		BezierControlPointMode mode = (BezierControlPointMode)EditorGUILayout.EnumPopup("Mode", spline.GetControlPointMode(selectedIndex));
+		BezierControlPointMode mode = (BezierControlPointMode)EditorGUILayout.EnumPopup("Mode", modeValue);
 		if (EditorGUI.EndChangeCheck()) {
+			
 			Undo.RecordObject(spline, "Change Point Mode");
 			spline.SetControlPointMode(selectedIndex, mode);
 			EditorUtility.SetDirty(spline);

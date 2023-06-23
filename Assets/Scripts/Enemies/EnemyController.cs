@@ -1,10 +1,26 @@
+using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
+using System;
 
-public class EnemyController : MonoBehaviour {
+using UnityEngine.Timeline;
 
-    
+public class EnemyController : MonoBehaviour  {
+
+    public Enemy prefab;
+    [System.NonSerialized] public EnemyControlBehaviour behaviour;
+
+    public void SpawnEnemy() {
+            var startPoint = GetComponent<BezierSpline>().GetPoint(0);
+            if (behaviour.instance == null)
+                behaviour.instance = Instantiate(prefab, startPoint, Quaternion.identity);
+    }
+
+    public void FireOnce() {
+
+    }
 
     void OnDrawGizmos() {
         Gizmos.color = Color.white;
