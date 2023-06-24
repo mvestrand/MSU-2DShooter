@@ -3,6 +3,10 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class BezierSpline : MonoBehaviour {
 
     [SerializeField]
@@ -131,6 +135,10 @@ public class BezierSpline : MonoBehaviour {
 		}
 	}
 
+	public Vector3 GetControlPointWorld(int i) {
+        return transform.TransformPoint(points[i]);
+    }
+
 	public Vector3 GetPoint (float t) {
 		int i;
 		if (t >= 1f) {
@@ -164,7 +172,7 @@ public class BezierSpline : MonoBehaviour {
 	public Vector3 GetCurvePoint(float t, int i) {
         t = Mathf.Clamp01(t);
         i = i * 3;
-        return Bezier.GetPoint(points[i], points[i + 1], points[i + 2], points[i + 3], t);
+		return Bezier.GetPoint(points[i], points[i + 1], points[i + 2], points[i + 3], t);
     }
 	public Vector3 GetCurveVelocity(float t, int i) {
         t = Mathf.Clamp01(t);
@@ -240,6 +248,17 @@ public class BezierSpline : MonoBehaviour {
 		modes = new List<BezierControlPointMode> {
 			BezierControlPointMode.Free,
 			BezierControlPointMode.Free
-		};
+		}; 
 	}
+
+#if UNITY_EDITOR
+	public void OnDrawGizmos() {
+		for (int i = 0; i < points.Count-3; i += 3) {
+			Handles.DrawBezier(GetControlPointWorld(i), 
+				GetControlPointWorld(i+3), 
+				GetControlPointWorld(i+1), 
+				GetControlPointWorld(i+2), Color.gray, null, 2f);
+		}
+	}
+#endif
 }

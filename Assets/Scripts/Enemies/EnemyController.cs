@@ -7,26 +7,34 @@ using System;
 
 using UnityEngine.Timeline;
 
+[RequireComponent(typeof(PlayableDirector))]
 public class EnemyController : MonoBehaviour  {
+    // public Enemy prefab;
+    // public Enemy instance;
+    // public Vector3 startPoint = Vector3.zero;
 
-    public Enemy prefab;
-    [System.NonSerialized] public EnemyControlBehaviour behaviour;
+    // public void OnEnable() {
+    //     Debug.Log("Enable");
+    //     if (prefab == null)
+    //         return;
 
-    public void SpawnEnemy() {
-            var startPoint = GetComponent<BezierSpline>().GetPoint(0);
-            if (behaviour.instance == null)
-                behaviour.instance = Instantiate(prefab, startPoint, Quaternion.identity);
-    }
+    //     if (instance == null) {
+    //         // var startPoint = GetComponent<BezierSpline>().GetPoint(0);
+    //         instance = Instantiate(prefab, startPoint, Quaternion.identity);
+    //     }
 
-    public void FireOnce() {
+    //     var timeline = GetComponent<PlayableDirector>();
+    //     var timelineAsset = (TimelineAsset)timeline.playableAsset;
+    //     foreach (var binding in timelineAsset.outputs) {
+    //         if (binding.sourceObject is EnemyControlTrack track) {
+    //             timeline.SetGenericBinding(track, instance);
+    //         }
+    //     }
 
-    }
+    // }
 
-    void OnDrawGizmos() {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.localPosition, 0.5f);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.localPosition, transform.localPosition + transform.localRotation * Vector3.down);
-    }
+    // public void OnDisable() {
+    //     Debug.Log("Disable");
+    // }
 
 }

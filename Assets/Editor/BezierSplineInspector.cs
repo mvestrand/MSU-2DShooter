@@ -11,7 +11,12 @@ public class BezierSplineInspector : Editor {
 	private const float handleSize = 0.04f;
 	private const float pickSize = 0.06f;
 
-	private static Color[] modeColors = {
+    private static readonly Color slowColor = Color.green;
+    private static readonly Color fastColor = Color.red;
+
+
+
+    private static Color[] modeColors = {
 		Color.white,
 		Color.yellow,
 		Color.cyan
@@ -92,13 +97,43 @@ public class BezierSplineInspector : Editor {
 			Handles.DrawBezier(p0, p3, p1, p2, Color.white, null, 2f);
 			p0 = p3;
 		}
-		ShowDirections();
+		//ShowDirections();
+        ShowVelocityColor();
+    }
+
+	private void ShowVelocityColor () {
+		Vector3 point = spline.GetPoint(0f);
+		int steps = stepsPerCurve * spline.CurveCount;
+        float maxDist = float.NegativeInfinity;
+        float minDist = float.PositiveInfinity;
+        for (int i = 1; i <= steps; i++) {
+			var nextPoint = spline.GetPoint(i / (float)steps);
+            float dist = Vector3.Magnitude(nextPoint - point);
+            maxDist = Mathf.Max(maxDist, dist);
+            minDist = Mathf.Min(minDist, dist);
+            point = nextPoint;
+        }
+
+        point = spline.GetPoint(0f);
+        for (int i = 1; i <= steps; i++) {
+			var nextPoint = spline.GetPoint(i / (float)steps);
+            float dist = Vector3.Magnitude(nextPoint - point);
+            float t = (dist - minDist) / (maxDist - minDist);
+			
+            var colorVec = Vector3.Slerp(new Vector3(slowColor.r, slowColor.g, slowColor.b), new Vector3(fastColor.r, fastColor.g, fastColor.b), t);
+            Color finalColor = new Color(colorVec.x, colorVec.y, colorVec.z, Mathf.Lerp(slowColor.a, fastColor.a, t));
+            Handles.color = finalColor;
+            Handles.DrawLine(point, nextPoint, 5f);
+            point = nextPoint;
+        }
+
 	}
 
 	private void ShowDirections () {
 		Handles.color = Color.green;
 		Vector3 point = spline.GetPoint(0f);
 		Handles.DrawLine(point, point + spline.GetDirection(0f) * directionScale);
+
 		int steps = stepsPerCurve * spline.CurveCount;
 		for (int i = 1; i <= steps; i++) {
 			point = spline.GetPoint(i / (float)steps);

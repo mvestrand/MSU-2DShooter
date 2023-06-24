@@ -7,9 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Enemy : MonoBehaviour
 {
-    public EnemyControlClip controlClip;
-    public EnemyControlState state;
-    public int clipIndex;
+    [SerializeField] bool overrideControls;
     [Header("Settings")]
     [Tooltip("The speed at which the enemy moves.")]
     public float moveSpeed = 5.0f;
@@ -92,16 +90,13 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void HandleBehaviour()
     {
-        if (controlClip != null) {
-            controlClip.UpdateEnemy(this);
-        } else {
+        if (!overrideControls) {
             if (steerTarget != null && (steerTarget.position - transform.position).magnitude < followRange)
             {
                 MoveEnemy();
             }
             // Attempt to shoot, according to this enemy's shooting mode
             TryToShoot();
-
         }
     }
 
@@ -337,9 +332,6 @@ public class Enemy : MonoBehaviour
         return scrollDirection;
     }
 
-    void OnEnable() {
-        clipIndex = 0;
-    }
 
 
 }
