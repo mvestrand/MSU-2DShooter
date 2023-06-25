@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 224509604997882141}
   - component: {fileID: 3396636813441726392}
   - component: {fileID: -97918419314795120}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Enemy_PelletProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
