@@ -18,14 +18,14 @@ public class EnemyControlBehaviour : PlayableBehaviour {
         Enemy enemy = playerData as Enemy;
         if (enemy == null || spline == null)
             return;
-        Vector3 desiredPosition = enemy.transform.position;
         float desiredRotation = 0;
+        float u = spline.ArcLengthParameter(t);
 
 
-        desiredRotation += Vector3.SignedAngle(Vector3.down, spline.GetVelocity(t).normalized, Vector3.forward) * moveDirectionWeight;
+        desiredRotation += Vector3.SignedAngle(Vector3.down, spline.GetVelocity(u).normalized, Vector3.forward) * moveDirectionWeight;
         desiredRotation += (1 - moveDirectionWeight) * direction;
 
-        enemy.transform.position = spline.GetPoint(t);
+        enemy.transform.position = spline.GetPoint(u);
         enemy.transform.eulerAngles = new Vector3(0, 0, desiredRotation);
     }
 

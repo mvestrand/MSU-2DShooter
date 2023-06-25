@@ -29,7 +29,8 @@ public class BezierSplineInspector : Editor {
 	private int selectedIndex = -1;
 
 	public override void OnInspectorGUI () {
-		spline = target as BezierSpline;
+        base.OnInspectorGUI();
+        spline = target as BezierSpline;
 		EditorGUI.BeginChangeCheck();
 		bool loop = EditorGUILayout.Toggle("Loop", spline.Loop);
 		if (EditorGUI.EndChangeCheck()) {
@@ -54,6 +55,16 @@ public class BezierSplineInspector : Editor {
 			EditorUtility.SetDirty(spline);
 		}
         EditorGUI.EndDisabledGroup();
+
+		if (GUILayout.Button("Update renderer")) {
+            var renderer = UpdateLineRenderer();
+			if (renderer != null)
+                EditorUtility.SetDirty(renderer);
+        }
+		if (GUILayout.Button("Update arc lengths")) {
+            spline.UpdateArcLengths();
+            EditorUtility.SetDirty(spline);
+        }
     }
 
 	private void DrawSelectedPointInspector(bool pointIsSelected) {
@@ -163,4 +174,36 @@ public class BezierSplineInspector : Editor {
 		}
 		return point;
 	}
+
+	LineRenderer UpdateLineRenderer() {
+        var spline = target as BezierSpline;
+        LineRenderer renderer = spline.GetComponent<LineRenderer>();
+		if (renderer == null)
+            renderer = InitLineRenderer();
+
+		int steps = stepsPerCurve * spline.CurveCount;
+
+        Vector3[] points = new Vector3[steps+1];
+        for (int i = 0; i <= steps; i++) {
+			points[i] = spline.GetPoint(i / (float)steps, worldSpace:false);
+        }
+
+        renderer.positionCount = steps+1;
+        renderer.SetPositions(points);
+
+        return renderer;
+    }
+
+	LineRenderer InitLineRenderer() {
+        var gameObject = (target as BezierSpline).gameObject;
+        var renderer = gameObject.AddComponent<LineRenderer>();
+        renderer.useWorldSpace = false;
+        renderer.startColor = Color.gray;
+        renderer.endColor = Color.gray;
+        renderer.widthMultiplier = 0.1f;
+        renderer.material = AssetDatabase.GetBuiltinExtraResource<Material>("Default-Line.mat");
+        return renderer;
+    }
+
 }
+

@@ -12,7 +12,12 @@ public class BezierSpline : MonoBehaviour {
     [SerializeField]
 	private List<Vector3> points;
 
-	[SerializeField]
+    [SerializeField]
+    private float[] arcLengths = new float[0];
+
+    private static readonly int stepsPerCurve = 8;
+
+    [SerializeField]
 	private List<BezierControlPointMode> modes;
 
 	[SerializeField]
@@ -139,7 +144,7 @@ public class BezierSpline : MonoBehaviour {
         return transform.TransformPoint(points[i]);
     }
 
-	public Vector3 GetPoint (float t) {
+	public Vector3 GetPoint (float t, bool worldSpace = true) {
 		int i;
 		if (t >= 1f) {
 			t = 1f;
@@ -151,7 +156,10 @@ public class BezierSpline : MonoBehaviour {
 			t -= i;
 			i *= 3;
 		}
-		return transform.TransformPoint(Bezier.GetPoint(points[i], points[i + 1], points[i + 2], points[i + 3], t));
+		if (worldSpace)
+			return transform.TransformPoint(Bezier.GetPoint(points[i], points[i + 1], points[i + 2], points[i + 3], t));
+		else
+			return Bezier.GetPoint(points[i], points[i + 1], points[i + 2], points[i + 3], t);
 	}
 	
 	public Vector3 GetVelocity (float t) {
@@ -183,6 +191,44 @@ public class BezierSpline : MonoBehaviour {
 	public Vector3 GetDirection (float t) {
 		return GetVelocity(t).normalized;
 	}
+
+	public void UpdateArcLengths() {
+		if (arcLengths == null) {
+            arcLengths = new float[stepsPerCurve * CurveCount + 1];
+        } else {
+	        Array.Resize<float>(ref arcLengths, stepsPerCurve * CurveCount+1);
+		}
+        arcLengths[0] = 0;
+        Vector3 point = GetPoint(0, worldSpace:false);
+        for (int i = 1; i < arcLengths.Length; i++) {
+            Vector3 nextPoint = GetPoint(i / (float)arcLengths.Length, false);
+            arcLengths[i] = (nextPoint - point).magnitude + arcLengths[i - 1];
+            point = nextPoint;
+        }
+    }
+
+	public float ArcLengthParameter(float u) {
+        u = Mathf.Clamp01(u);
+
+        float targetLength = u * arcLengths[arcLengths.Length - 1];
+
+        int i = Array.BinarySearch(arcLengths, targetLength);
+        if (i >= 0) { // Exact match found
+            return i / (float)(arcLengths.Length-1);
+        }
+        i = ~i; // Index of first length greater than target length
+		if (i >= arcLengths.Length)
+            return 1;
+		if (i <= 0)
+            return 0;
+
+		float a = (targetLength - arcLengths[i - 1]) / (arcLengths[i] - arcLengths[i - 1]);
+        float b = a / (float)(arcLengths.Length - 1);
+        float c = (i - 1) / (float)(arcLengths.Length - 1);
+
+        return ((targetLength - arcLengths[i-1]) / (arcLengths[i] - arcLengths[i-1])) / (arcLengths.Length-1) // t value along the closest segment
+			+ (i-1) / (float)(arcLengths.Length-1); // t value at segment start
+    }
 
 	public void InsertWaypoint(int curveIndex) {
         Vector3 knot = GetCurvePoint(0.5f, curveIndex);
@@ -248,12 +294,12 @@ public class BezierSpline : MonoBehaviour {
 		modes = new List<BezierControlPointMode> {
 			BezierControlPointMode.Free,
 			BezierControlPointMode.Free
-		}; 
+		};
 	}
 
 #if UNITY_EDITOR
 	public void OnDrawGizmos() {
-		for (int i = 0; i < points.Count-3; i += 3) {
+        for (int i = 0; i < points.Count-3; i += 3) {
 			Handles.DrawBezier(GetControlPointWorld(i), 
 				GetControlPointWorld(i+3), 
 				GetControlPointWorld(i+1), 
