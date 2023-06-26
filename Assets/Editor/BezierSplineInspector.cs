@@ -109,7 +109,7 @@ public class BezierSplineInspector : Editor {
 			p0 = p3;
 		}
 		//ShowDirections();
-        ShowVelocityColor();
+        //ShowVelocityColor();
     }
 
 	private void ShowVelocityColor () {

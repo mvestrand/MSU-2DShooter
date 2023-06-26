@@ -23,4 +23,11 @@
 
 
 === Timeline changes ===
-- Added an annotation marker class
+- Added annotation, jump, and destination marker classes from Unity sample code: https://github.com/needle-mirror/com.unity.timeline
+- Added a custom type of track and clip to control enemy behaviour
+	- Controls enemy movement, facing, player tracking, and shooting
+- Added a basic bezier spline implementation from example code at: https://catlikecoding.com/unity/tutorials/curves-and-splines/
+	- Spline modifications:
+		- Added editor functions to insert and remove curve segments
+		- Added computations to compute arc lengths and reparameterize X(t) to X(u) where u is the scaled arc length
+		- Added LineRenderer generation code to resolve problem with gizmos not rendering for control track spawned objects
