@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 224509604997882141}
   - component: {fileID: 3396636813441726392}
   - component: {fileID: -97918419314795120}
+  - component: {fileID: 1499602440405864723}
   m_Layer: 0
   m_Name: Enemy_PelletProjectile
   m_TagString: Untagged
@@ -187,3 +188,16 @@ MonoBehaviour:
   minBound: {x: -10, y: -12}
   maxBound: {x: 10, y: 12}
   destroyChildrenOnDeath: 1
+--- !u!114 &1499602440405864723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4641165794769155162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bd8ed0746ef8324aa9b33326bd46bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSpeed: 3
