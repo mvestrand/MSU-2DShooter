@@ -192,8 +192,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3562651836113712045, guid: aee1688b385340b4bab2b46707955895, type: 3}
   projectileHolder: {fileID: 0}
   isPlayerControlled: 1
-  fireRate: 0.05
-  projectileSpread: 1
+  fireRate: 0.025
+  projectileSpread: 1.5
   fireEffect: {fileID: 2403646867487861855, guid: 6bb29ce188f45834cbb55ab1504938dd, type: 3}
 --- !u!58 &5343993829854313127
 CircleCollider2D:

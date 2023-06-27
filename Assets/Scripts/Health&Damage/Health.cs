@@ -242,13 +242,13 @@ public class Health : MonoBehaviour
         currentLives -= 1;
         if (currentLives > 0)
         {
-            GameManager.instance.StartCoroutine(Respawn());
+            GameManager.Instance.StartCoroutine(Respawn());
         }
         else
         {
-            if (gameObject.tag == "Player" && GameManager.instance != null)
+            if (gameObject.tag == "Player" && GameManager.Instance != null)
             {
-                GameManager.instance.GameOver();
+                GameManager.Instance.GameOver();
             }
             if (gameObject.GetComponent<Enemy>() != null)
             {
@@ -268,9 +268,9 @@ public class Health : MonoBehaviour
     /// </summary>
     void HandleDeathWithoutLives()
     {
-        if (gameObject.tag == "Player" && GameManager.instance != null)
+        if (gameObject.tag == "Player" && GameManager.Instance != null)
         {
-            GameManager.instance.GameOver();
+            GameManager.Instance.GameOver();
         }
         if (gameObject.GetComponent<Enemy>() != null)
         {

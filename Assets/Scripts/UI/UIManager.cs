@@ -66,9 +66,9 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void SetupGameManagerUIManager()
     {
-        if (GameManager.instance != null && GameManager.instance.uiManager == null)
+        if (GameManager.Instance != null && GameManager.Instance.uiManager == null)
         {
-            GameManager.instance.uiManager = this;
+            GameManager.Instance.uiManager = this;
         }     
     }
 

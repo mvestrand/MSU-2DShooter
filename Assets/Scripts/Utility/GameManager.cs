@@ -13,7 +13,15 @@ using UnityEngine.UIElements;
 public class GameManager : MonoBehaviour
 {
     // The script that manages all others
-    public static GameManager instance = null;
+    private static GameManager _instance = null;
+    public static GameManager Instance {
+        get {
+            if (_instance == null) {
+                _instance = FindObjectOfType<GameManager>();
+            }
+            return _instance;
+        }
+    }
 
     [Tooltip("The UIManager component which manages the current scene's UI")]
     public UIManager uiManager = null;
@@ -31,11 +39,11 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            return instance.gameManagerScore;
+            return Instance.gameManagerScore;
         }
         set
         {
-            instance.gameManagerScore = value;
+            Instance.gameManagerScore = value;
         }
     }
 
@@ -75,9 +83,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            _instance = this;
         }
         else
         {
@@ -221,7 +229,7 @@ public class GameManager : MonoBehaviour
     public static void AddScore(int scoreAmount)
     {
         score += scoreAmount;
-        if (score > instance.highScore)
+        if (score > Instance.highScore)
         {
             SaveHighScore();
         }
@@ -252,10 +260,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public static void SaveHighScore()
     {
-        if (score > instance.highScore)
+        if (score > Instance.highScore)
         {
             PlayerPrefs.SetInt("highscore", score);
-            instance.highScore = score;
+            Instance.highScore = score;
         }
         UpdateUIElements();
     }
@@ -271,9 +279,9 @@ public class GameManager : MonoBehaviour
     public static void ResetHighScore()
     {
         PlayerPrefs.SetInt("highscore", 0);
-        if (instance != null)
+        if (Instance != null)
         {
-            instance.highScore = 0;
+            Instance.highScore = 0;
         }
         UpdateUIElements();
     }
@@ -288,9 +296,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public static void UpdateUIElements()
     {
-        if (instance != null && instance.uiManager != null)
+        if (Instance != null && Instance.uiManager != null)
         {
-            instance.uiManager.UpdateUI();
+            Instance.uiManager.UpdateUI();
         }
     }
 

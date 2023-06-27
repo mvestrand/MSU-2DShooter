@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1672050329635436308}
   - component: {fileID: 1672050329635436309}
   m_Layer: 0
-  m_Name: WeakDrone_BottomRightLoop
+  m_Name: Drone_BottomRightLoop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,11 +157,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 111767558614867184, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.7896953
+      value: -0.39691997
       objectReference: {fileID: 0}
     - target: {fileID: 111767558614867184, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.70893705
+      value: 6.8157396
       objectReference: {fileID: 0}
     - target: {fileID: 111767558614867184, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
       propertyPath: m_LocalPosition.z
@@ -169,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 111767558614867184, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.74398416
+      value: 0.40102056
       objectReference: {fileID: 0}
     - target: {fileID: 111767558614867184, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
       propertyPath: m_LocalRotation.x
@@ -181,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 111767558614867184, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.66819733
+      value: 0.91606903
       objectReference: {fileID: 0}
     - target: {fileID: 111767558614867184, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -197,11 +197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 111767558614867189, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
       propertyPath: m_Name
-      value: WeakDrone
-      objectReference: {fileID: 0}
-    - target: {fileID: 111767558614867189, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
-      propertyPath: m_Layer
-      value: 0
+      value: Drone
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}

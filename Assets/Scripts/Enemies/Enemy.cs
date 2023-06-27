@@ -73,9 +73,9 @@ public class Enemy : MonoBehaviour
     {
         if (movementMode == MovementModes.FollowTarget && steerTarget == null)
         {
-            if (GameManager.instance != null && GameManager.instance.player != null)
+            if (GameManager.Instance != null && GameManager.Instance.player != null)
             {
-                steerTarget = GameManager.instance.player.transform;
+                steerTarget = GameManager.Instance.player.transform;
             }
         }
     }
@@ -126,7 +126,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void AddToScore()
     {
-        if (GameManager.instance != null && !GameManager.instance.gameIsOver)
+        if (GameManager.Instance != null && !GameManager.Instance.gameIsOver)
         {
             GameManager.AddScore(scoreValue);
         }
@@ -142,9 +142,9 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void IncrementEnemiesDefeated()
     {
-        if (GameManager.instance != null && !GameManager.instance.gameIsOver)
+        if (GameManager.Instance != null && !GameManager.Instance.gameIsOver)
         {
-            GameManager.instance.IncrementEnemiesDefeated();
+            GameManager.Instance.IncrementEnemiesDefeated();
         }       
     }
 

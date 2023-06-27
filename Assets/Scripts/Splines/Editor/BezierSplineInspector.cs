@@ -56,12 +56,10 @@ public class BezierSplineInspector : Editor {
 		}
         EditorGUI.EndDisabledGroup();
 
-		if (GUILayout.Button("Update renderer")) {
+		if (GUILayout.Button("Bake")) {
             var renderer = UpdateLineRenderer();
 			if (renderer != null)
                 EditorUtility.SetDirty(renderer);
-        }
-		if (GUILayout.Button("Update arc lengths")) {
             spline.UpdateArcLengths();
             EditorUtility.SetDirty(spline);
         }

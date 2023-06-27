@@ -616,7 +616,7 @@ GameObject:
   m_Component:
   - component: {fileID: 792744214}
   m_Layer: 0
-  m_Name: X+.5
+  m_Name: Seq1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -630,8 +630,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792744213}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: -1, z: 1}
   m_Children: []
   m_Father: {fileID: 530205698}
   m_RootOrder: 0
@@ -725,19 +725,28 @@ PlayableDirector:
     m_References:
     - c1b550383eb97be4a9eb0f025c907551: {fileID: 1323938577}
     - cd91548d1a2af8d44a85e75d7c360792: {fileID: 1323938577}
+    - 6fdec8f24f3b1ea488d5c815e51c728e: {fileID: 792744213}
+    - 1b79f55686fa4fe409c685e50042d901: {fileID: 792744213}
     - d8c1820cbc569764ba7a7af0ca83257a: {fileID: 792744213}
+    - 0d9711ef0a9c17e4b824c6bf24bd694a: {fileID: 792744213}
     - 7201549c68e48f046adc2e692387b102: {fileID: 1323938577}
     - 14559062e1756f94190d3fb8463452a0: {fileID: 0}
     - 84c87f9f666e6ac4cbc557f20fc45422: {fileID: 1323938577}
     - 948532c4819e03e4bb11a1ca6918a2c7: {fileID: 792744213}
     - 25e2dc9230591df41ac70cce2014a207: {fileID: 1323938577}
+    - 0df4dfb3ce03a34438b758be5ff30ca1: {fileID: 792744213}
     - 40c8ca207151e9842948970c463cccba: {fileID: 792744213}
     - 2cc8258d86e9af043b9014404f01c393: {fileID: 792744213}
+    - 76d0031121eadb3499f1a78442f88e51: {fileID: 792744213}
     - 7f5d293565dda024493b242b17d0d58d: {fileID: 792744213}
     - 7f211b2846f357e4b91c8d3de1c87326: {fileID: 1323938577}
     - 9bfff4d65fd5f93498da9aac55ae63d5: {fileID: 792744213}
     - cb10e2e6d1cfb6e459ee825ddcda1c4d: {fileID: 1323938577}
+    - 9cf7083dc4af12d4c9bf53b8553bb5aa: {fileID: 792744213}
+    - 2d7eb6889c8364b4db00c0a173ef5afc: {fileID: 792744213}
+    - 2b4b03c7f978f074f997aa20ff7002bb: {fileID: 792744213}
     - e12aabcc68aa8ed419dff77ee33956bd: {fileID: 792744213}
+    - 8051b7b09ac75cf409c8587ba665b4cd: {fileID: 792744213}
     - 861c96050d5ae0f4ba0bf59a3537b47e: {fileID: 792744213}
     - 851765d4527ea4643b2a54f40f61e1a8: {fileID: 1323938577}
     - d057f4eae95a8994e99b2773a342c804: {fileID: 1323938577}
@@ -926,7 +935,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1323938578}
   m_Layer: 0
-  m_Name: -X, X-.5
+  m_Name: Seq2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -940,7 +949,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1323938577}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0.2, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 530205698}
@@ -1735,9 +1744,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 193887341358005031, guid: 311e8b40e33ae8341ab543b4a2d35c41, type: 3}
+      propertyPath: fireRate
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 193887341358005031, guid: 311e8b40e33ae8341ab543b4a2d35c41, type: 3}
       propertyPath: projectileHolder
       value: 
       objectReference: {fileID: 2044433894}
+    - target: {fileID: 193887341358005031, guid: 311e8b40e33ae8341ab543b4a2d35c41, type: 3}
+      propertyPath: projectileSpread
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 193887341358005035, guid: 311e8b40e33ae8341ab543b4a2d35c41, type: 3}
       propertyPath: moveBoundMax.x
       value: 7.25
