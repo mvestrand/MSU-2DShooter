@@ -29,7 +29,7 @@ public class BezierSplineInspector : Editor {
 	private int selectedIndex = -1;
 
 	public override void OnInspectorGUI () {
-        base.OnInspectorGUI();
+        //base.OnInspectorGUI();
         spline = target as BezierSpline;
 		EditorGUI.BeginChangeCheck();
 		bool loop = EditorGUILayout.Toggle("Loop", spline.Loop);

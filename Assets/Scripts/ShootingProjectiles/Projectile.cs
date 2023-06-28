@@ -10,6 +10,8 @@ public class Projectile : MonoBehaviour
     [Tooltip("The distance this projectile will move each second.")]
     public float projectileSpeed = 3.0f;
 
+    public FloatCurve testCurve = new FloatCurve();
+
     /// <summary>
     /// Description:
     /// Standard Unity function called once per frame

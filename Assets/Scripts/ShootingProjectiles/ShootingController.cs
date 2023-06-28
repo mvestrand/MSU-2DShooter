@@ -10,11 +10,17 @@ using MVest.Unity.Pooling;
 /// </summary>
 public class ShootingController : MonoBehaviour
 {
+    public enum FireMode { Single, Pattern, Sequence }
+
     [Header("GameObject/Component References")]
     [Tooltip("The projectile to be fired.")]
     public GameObject projectilePrefab = null;
     [Tooltip("The transform in the heirarchy which holds projectiles if any")]
     public Transform projectileHolder = null;
+
+    public BulletPattern projectilePattern;
+    public FireMode mode = FireMode.Single;
+
 
     [Header("Input")]
     [Tooltip("Whether this shooting controller is controled by the player")]
@@ -148,7 +154,7 @@ public class ShootingController : MonoBehaviour
     public void SpawnProjectile()
     {
         // Check that the prefab is valid
-        if (projectilePrefab != null)
+        if (mode == FireMode.Single && projectilePrefab != null)
         {
             // Create the projectile
             GameObject projectileGameObject;
@@ -168,6 +174,11 @@ public class ShootingController : MonoBehaviour
             {
                 projectileGameObject.transform.SetParent(projectileHolder);
             }
+        } else if (mode == FireMode.Pattern && projectilePattern != null) {
+            projectilePattern.Spawn(transform.position, transform.rotation, projectileHolder);
+
+        } else {
+            // TODO: Execute fire sequence
         }
     }
 }

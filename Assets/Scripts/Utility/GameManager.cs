@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance == null || Instance == this)
         {
             _instance = this;
         }

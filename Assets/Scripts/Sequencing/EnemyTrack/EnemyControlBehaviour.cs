@@ -27,10 +27,10 @@ public class EnemyControlBehaviour : PlayableBehaviour {
         float unusedRotationWeight = 1;
 
         // Specified direction
-        desiredRotation += AllocateWeight(ref unusedRotationWeight, directionWeight) * direction;
+        desiredRotation += AllocateWeight(ref unusedRotationWeight, Mathf.Clamp01(directionWeight)) * direction;
 
         // Movement direction
-        desiredRotation += AllocateWeight(ref unusedRotationWeight, moveDirectionWeight) * 
+        desiredRotation += AllocateWeight(ref unusedRotationWeight, Mathf.Clamp01(moveDirectionWeight)) * 
                             Vector3.SignedAngle(Vector3.down, spline.GetVelocity(u).normalized, Vector3.forward);
 
         // Player track direction

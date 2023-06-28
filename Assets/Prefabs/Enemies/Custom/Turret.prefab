@@ -33,7 +33,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6098164061916050795}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -122,13 +123,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overrideControls: 0
-  moveSpeed: 2
+  moveSpeed: 0
   scoreValue: 10
   steerTarget: {fileID: 0}
   followRange: 100
-  guns: []
+  guns:
+  - {fileID: 3405021446013444324}
   shootMode: 1
-  movementMode: 0
+  movementMode: 1
   scrollDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &2029536735206158367
 MonoBehaviour:
@@ -143,9 +145,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamId: 1
-  defaultHealth: 3
-  maximumHealth: 3
-  currentHealth: 3
+  defaultHealth: 5
+  maximumHealth: 5
+  currentHealth: 5
   damageInvincibilityTime: 0
   respawnInvincibilityTime: 3
   isAlwaysInvincible: 0
@@ -230,3 +232,54 @@ MonoBehaviour:
   dealDamageOnTriggerEnter: 1
   dealDamageOnTriggerStay: 0
   dealDamageOnCollision: 0
+--- !u!1 &7340133325313639286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6098164061916050795}
+  - component: {fileID: 3405021446013444324}
+  m_Layer: 9
+  m_Name: EnemyGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6098164061916050795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7340133325313639286}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: 0.012, y: -0.699, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 111767558614867184}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!114 &3405021446013444324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7340133325313639286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f75388997f8d4264a86b7441dc9ea74e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4641165794769155162, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
+  projectileHolder: {fileID: 0}
+  projectilePattern: {fileID: 11400000, guid: bb5f68fbbf3d36044846abed86aba7c9, type: 2}
+  mode: 1
+  isPlayerControlled: 0
+  fireRate: 0.5
+  projectileSpread: 1
+  fireEffect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
