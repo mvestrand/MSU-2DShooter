@@ -1,15 +1,145 @@
 - Plan out 3 levels
-	- Enemy types		
-		- Just movement
-			- Clip driven movement & spawning
-		- 
-		
-		
-		
-		
-- Enemy movement control
-	- Movement path designation
-	- Facing direction animation
-	- Fire signal
-		- Fire pattern designation
-	- Aim mode designation
+	- Use provided music to help pace-out levels
+		- Sync gameplay transitions to musical transitions
+		- Sync gameplay with the music rhythm when possible
+	- Remember, constant action is quickly exhausting or desensitizing 
+		- Instead, we need bursts of action with ramping intensity, separated by brief moments of calm for the player to recover and reorient themselves
+		- Add rests:
+			- At level beginnings
+			- After (and to lesser extent before) mid-boss fights
+			- Before and after main bosses
+			- Small rests between boss phases
+			- After intense enemy sequences
+			- During major shifts in environment and level design
+		- Keep the rests from becoming tedious for players that don't need them
+			- Merge rests where possible (e.g. rest after intense enemy sequence is also the rest before a boss fight)
+			- Resting doesn't mean nothing is happening, just that the player doesn't feel expected to do much or provide their focused attention (give them something to look at)
+				- Have interesting things in the background
+					- See boss approach in the background before it appears in the foreground
+					- See what storytelling you can do with things happening in the background
+				- Play animations
+					- Maybe a boss plays an animation or changes stance between different phases
+					- Fade in to new levels or play some type of level intro if doing a seemless transition
+				- Present the player with info
+					- Level title overlay at beginning of the level during the intro or during a major transition
+					- Level score details at end of level
+				
+
+- Critical functionality
+	- Enemy movement control
+		- Movement path designation
+		- Facing direction animation
+		- Fire signal
+			- Fire pattern designation
+		- Aim mode designation
+
+
+
+
+
+
+Projectile types
+	- Pellet - slow, round 
+	- Bolt - fast, narrow
+	- Missile - tracking, limited turn speed, runs out of fuel
+	- Unguided missile - changes speed and trajectory over time
+	- Bomb - moves for a while then explodes
+		- Energy bomb - explosion damages large area around it, telegraph explosion radius with charge up particle effect
+		- Shrapnel bomb - explosion shoots out pellets in radius
+	- Laser 	- instant, charge up delay, telegraph position with laser pointer or particle effects
+		- Player tracking needs to stop long enough before firing to allow player to dodge
+	- Mines - slow, track player precisely or just explode after time, limited lifetime
+		- Maybe these can also be directed into enemies after their initial activation 
+
+Implied goals
+	- Destroy all enemies
+	- Avoid getting hit
+	- Power up ship
+	- Complete timed segments as quickly as possible
+	- Get high score
+	- Pacifist/No-shoot runs?
+		- Maybe provide bonus score or change gameplay sequences (probably beyond the scope of this project)
+
+Risk vs. Reward
+	- Distance?
+		- Being closer does more damage but leaves less time to react and has tighter bullet grouping
+		- Maybe some attacks are easier to dodge if the player is brave and moves very close to the enemy
+		- Enemies that expose a vulnerability while preparing a big attack
+			- Need to either stay far away or do enough damage up close to prevent the attack  
+	
+
+Unorganized Ideas
+	- Wake-up animation
+		- Change to be just the eye to be more generally useful
+		- Turrets/enemies that have an activation proximity
+		- Small turrets
+		- Mines
+			- Seeker mines
+				- Destroy after time or maybe you have to use the environment like in an asteroid field
+				- Maybe they can be used to also destroy enemies
+		- Enemies that activate only when fired at
+		- Boss phase activation
+	- Small sprites of just blocks to make destructible parts
+		- Network of structural dependencies so that they break apart instead of floating
+		- Destructible armor for some enemies/bosses
+		- Build larger multi-part ships
+		- Build static structure lattices for environmental enemy structures
+			- Desaturate to distinguish what is in background vs foreground
+	- Blocker type enemies
+		- High health but don’t attack
+			- Act as shields around other enemies
+		- Add guns along outside for radial shooting patterns
+	- Missiles
+		- Enemy missiles track player with limited turning force (they overshoot the player and fly off screen when dodged)
+			- Physics based approach w/ lateral vs tangential acceleration components
+				- Lateral tries to steer towards player, tangential is always applied
+				- Lateral (turning) force needs to scale with the current speed
+				- Limited time before acceleration runs out (stops turning and accelerating)
+		- Player missiles can potentially be more forgiving, with more precise seeking
+	- Mini-turrets / Point defense
+		- Small free-floating turrets or orbs that fire independent of enemy facing direction
+		- Destroyed only when the parent is destroyed
+	- Shields
+		- Damageable shields the player has to destroy first
+			- Shield used to protect other weak ships and must be destroyed first
+		- Timed shields that the player needs to avoid shooting 
+			- Absorber shield that absorbs shots to charge up a weapon
+				- Maybe while enemy is preparing to fire, the shield is up and absorbed shots strengthen the final weapon
+				- Maybe too many absorbed shots overheat the weapon
+				- Risk vs. reward aspect - avoid shooting the shield to face a weaker attack, vs. attack shield to overheat/destroy enemy with risk of bigger attack on failure 
+		- Deflector shield that deflects shots as hostile bullets
+			- Maybe also slows down shots to make it easier for the player
+				- Maybe neutral bullets instead so the player can bounce shots off of them
+		- Different shields need to be disinguishable visually
+		- Special player attack that can bypass shields
+			- Missiles that go through shields - ignore shields
+			- Fast, small pulse that goes through shields - bypass shields to try and hit shield generator
+			- Beam that damages shields - break through shields
+			- Emp blast that drops shields temporarily - limited window to destroy shield generator or do damage
+	- Midground enemies
+		- Can be flown over without damage
+		- Turret emplacements
+		- Harmless environment that is destroyable for points / pickups
+		- Enemy structures
+			- Eyes that follow player movement
+		- Need to clearly telegraph what is and isn’t in the midground
+			- Midground parallax box that the player knows they don’t collide with
+			- Objects need to appear to move with the midground parallax
+			- Desaturate sprites
+			- Make things smaller
+	- Pickups
+		- What to drop
+			- Power-ups that give player stronger weapons
+			- Tokens that give the player extra points
+			- Extra lives
+		- How to drop
+			- Get from sufficient score (e.g. lives bonus from high enough score)
+			- Formations where every enemy needs to be destroyed to drop
+			- Rare large enemies
+			- Hidden in specific destructibles
+				- Rewards player for destroying everything
+				- Con: this may distract the player from the primary gameplay; destroying some things may be fun, but having to try destroying everything to find secrets may just be tedious
+				- Maybe this can be counteracted by having some telegraph as to where secrets are hidden
+
+
+

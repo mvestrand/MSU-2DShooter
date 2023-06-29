@@ -240,7 +240,7 @@ public class Enemy : MonoBehaviour
             case ShootMode.ShootAll:
                 foreach (ShootingController gun in guns)
                 {
-                    gun.Fire();
+                    gun.UpdateFireState(true);
                 }
                 break;
         }

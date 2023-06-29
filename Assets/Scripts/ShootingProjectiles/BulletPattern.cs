@@ -21,7 +21,7 @@ public class BulletPattern : ScriptableObject {
     [SerializeField] private List<ProjectileData> projectiles = new List<ProjectileData>();
 
 
-    public void Spawn(Vector3 position, Quaternion rotation, Transform parent) {
+    public void Spawn(Vector3 position, Quaternion rotation, Transform parent, float advanceTime=0) {
         foreach (var projectile in projectiles) {
             if (projectile == null || projectile.prefab == null)
                 continue;
@@ -43,10 +43,13 @@ public class BulletPattern : ScriptableObject {
             if (projectile.speed.Enabled) {
                 instance.projectileSpeed = projectile.speed.Get(speedRand, projectile.prefab.projectileSpeed);
             }
+            
+            if (advanceTime>0)
+                instance.MoveProjectile(advanceTime);
         }
     }
 
-    public void Spawn(Vector2 position, float rotation, Transform parent) {
-        Spawn(new Vector3(position.x, position.y, 0), Quaternion.AngleAxis(rotation, Vector3.forward), parent);
+    public void Spawn(Vector2 position, float rotation, Transform parent, float advanceTime=0) {
+        Spawn(new Vector3(position.x, position.y, 0), Quaternion.AngleAxis(rotation, Vector3.forward), parent, advanceTime);
     }
 }

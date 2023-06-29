@@ -12,17 +12,9 @@ public class Projectile : MonoBehaviour
 
     public FloatCurve testCurve = new FloatCurve();
 
-    /// <summary>
-    /// Description:
-    /// Standard Unity function called once per frame
-    /// Inputs: 
-    /// none
-    /// Returns: 
-    /// void (no return)
-    /// </summary>
-    private void Update()
+    private void FixedUpdate()
     {
-        MoveProjectile();
+        MoveProjectile(Time.fixedDeltaTime);
     }
 
     /// <summary>
@@ -33,9 +25,9 @@ public class Projectile : MonoBehaviour
     /// Returns: 
     /// void (no return)
     /// </summary>
-    private void MoveProjectile()
+    public void MoveProjectile(float time)
     {
         // move the transform
-        transform.position = transform.position + transform.up * projectileSpeed * Time.deltaTime;
+        transform.position += transform.up * projectileSpeed * time;
     }
 }

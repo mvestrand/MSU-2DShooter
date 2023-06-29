@@ -19,7 +19,11 @@ public class ShootingController : MonoBehaviour
     public Transform projectileHolder = null;
 
     public BulletPattern projectilePattern;
+    public FireSequence fireSequence;
+    public FireSequenceState fireSequenceState;
     public FireMode mode = FireMode.Single;
+
+
 
 
     [Header("Input")]
@@ -36,6 +40,7 @@ public class ShootingController : MonoBehaviour
 
     // The last time this component was fired
     private float lastFired = Mathf.NegativeInfinity;
+    private float lastFrameTime;
 
     [Header("Effects")]
     [Tooltip("The effect to create when this fires")]
@@ -68,6 +73,7 @@ public class ShootingController : MonoBehaviour
     private void Start()
     {
         SetupInput();
+        lastFrameTime = Time.timeSinceLevelLoad;
     }
 
     /// <summary>
@@ -104,13 +110,9 @@ public class ShootingController : MonoBehaviour
     /// </summary>
     void ProcessInput()
     {
-        if (isPlayerControlled)
-        {
-            if (inputManager.firePressed || inputManager.fireHeld)
-            {
-                Fire();
-            }
-        }   
+        if (isPlayerControlled) {
+            UpdateFireState(inputManager.firePressed || inputManager.fireHeld);
+        }
     }
 
     /// <summary>
@@ -121,25 +123,33 @@ public class ShootingController : MonoBehaviour
     /// Returns: 
     /// void (no return)
     /// </summary>
-    public void Fire()
+    public void UpdateFireState(bool shouldFire)
     {
-        // If the cooldown is over fire a projectile
-        if ((Time.timeSinceLevelLoad - lastFired) > fireRate && Time.timeScale != 0)
-        {
-            // Launches a projectile
-            SpawnProjectile();
-
-            if (fireEffect != null)
+        if (mode == FireMode.Single || mode == FireMode.Pattern) {
+            // If the cooldown is over fire a projectile
+            if ((Time.timeSinceLevelLoad - lastFired) > fireRate && Time.timeScale != 0 && shouldFire)
             {
-                if (fireEffect.TryGetComponent<PooledMonoBehaviour>(out var prefabPooler)) {
-                    prefabPooler.Get(transform.position, transform.rotation);
-                } else {
-                    Instantiate(fireEffect, transform.position, transform.rotation, null);
-                }
-            }
+                // Launches a projectile
+                SpawnProjectiles();
 
-            // Restart the cooldown
-            lastFired = Time.timeSinceLevelLoad;
+                if (fireEffect != null)
+                {
+                    if (fireEffect.TryGetComponent<PooledMonoBehaviour>(out var prefabPooler)) {
+                        prefabPooler.Get(transform.position, transform.rotation);
+                    } else {
+                        Instantiate(fireEffect, transform.position, transform.rotation, null);
+                    }
+                }
+
+                // Restart the cooldown
+                lastFired = Time.timeSinceLevelLoad;
+            }
+        } else if (mode == FireMode.Sequence) {
+            float deltaTime = Time.timeSinceLevelLoad - lastFrameTime;
+            if (Time.timeScale != 0) {
+                fireSequence.Execute(this, ref fireSequenceState, deltaTime, shouldFire);
+            }
+            lastFrameTime = Time.timeSinceLevelLoad;
         }
     }
 
@@ -151,34 +161,60 @@ public class ShootingController : MonoBehaviour
     /// Returns: 
     /// void (no return)
     /// </summary>
-    public void SpawnProjectile()
+    public void SpawnProjectiles()
     {
         // Check that the prefab is valid
-        if (mode == FireMode.Single && projectilePrefab != null)
-        {
-            // Create the projectile
-            GameObject projectileGameObject;
-            if (projectilePrefab.TryGetComponent<PooledMonoBehaviour>(out var prefabPooler)) {
-                projectileGameObject = prefabPooler.Get(transform.position, transform.rotation).gameObject;
-            } else {
-                projectileGameObject = Instantiate(projectilePrefab, transform.position, transform.rotation, null);
-            }
-
-            // Account for spread
-            Vector3 rotationEulerAngles = projectileGameObject.transform.rotation.eulerAngles;
-            rotationEulerAngles.z += Random.Range(-projectileSpread, projectileSpread);
-            projectileGameObject.transform.rotation = Quaternion.Euler(rotationEulerAngles);
-
-            // Keep the heirarchy organized
-            if (projectileHolder != null)
-            {
-                projectileGameObject.transform.SetParent(projectileHolder);
-            }
+        if (mode == FireMode.Single && projectilePrefab != null) {
+            SpawnSingleProjectile();
         } else if (mode == FireMode.Pattern && projectilePattern != null) {
-            projectilePattern.Spawn(transform.position, transform.rotation, projectileHolder);
-
-        } else {
-            // TODO: Execute fire sequence
+            SpawnPattern();
         }
+    }
+
+    public void SpawnSingleProjectile(GameObject proj = null, float advanceTime=0) { SpawnSingleProjectile(transform.position, transform.rotation, proj, advanceTime); }
+
+    public void SpawnSingleProjectile(Vector3 position, Quaternion rotation, GameObject proj = null, float advanceTime=0) {
+        // Use our stored projectile prefab if no prefab is specified
+        proj = (proj == null ? projectilePrefab : proj);
+        if (proj == null)
+            return;
+
+        // Create the projectile
+        GameObject projectileGameObject = Pool.Instantiate(proj, position, rotation, null);
+        // if (proj.TryGetComponent<PooledMonoBehaviour>(out var prefabPooler)) {
+        //     projectileGameObject = prefabPooler.Get(transform.position, transform.rotation).gameObject;
+        // } else {
+        //     projectileGameObject = Instantiate(projectilePrefab, transform.position, transform.rotation, null);
+        // }
+
+        // Account for spread
+        Vector3 rotationEulerAngles = projectileGameObject.transform.rotation.eulerAngles;
+        rotationEulerAngles.z += Random.Range(-projectileSpread, projectileSpread);
+        projectileGameObject.transform.rotation = Quaternion.Euler(rotationEulerAngles);
+
+        // Keep the heirarchy organized
+        if (projectileHolder != null)
+        {
+            projectileGameObject.transform.SetParent(projectileHolder);
+        }
+
+        if (projectileGameObject.TryGetComponent<Projectile>(out var projectileInstance)) {
+            // Reset the projectile speed to match it's prefab
+            projectileInstance.projectileSpeed = proj.GetComponent<Projectile>().projectileSpeed;
+
+            if (advanceTime > 0)
+                projectileInstance.MoveProjectile(advanceTime);
+        }
+
+    }
+
+    public void SpawnPattern(BulletPattern pattern = null, float advanceTime=0) { SpawnPattern(transform.position, transform.rotation, pattern, advanceTime); }
+
+    public void SpawnPattern(Vector3 position, Quaternion rotation, BulletPattern pattern = null, float advanceTime = 0) {
+        pattern = (pattern == null ? projectilePattern : pattern);
+        if (pattern == null)
+            return;
+
+        projectilePattern.Spawn(position, rotation, projectileHolder, advanceTime);
     }
 }

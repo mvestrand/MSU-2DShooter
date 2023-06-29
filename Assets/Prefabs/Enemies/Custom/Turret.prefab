@@ -191,7 +191,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -278,8 +278,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4641165794769155162, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
   projectileHolder: {fileID: 0}
   projectilePattern: {fileID: 11400000, guid: bb5f68fbbf3d36044846abed86aba7c9, type: 2}
-  mode: 1
+  fireSequence: {fileID: 11400000, guid: 07628a0e04a00bf47945127704e2900f, type: 2}
+  mode: 2
   isPlayerControlled: 0
   fireRate: 0.5
   projectileSpread: 1
-  fireEffect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
+  fireEffect: {fileID: 6229913163069739088, guid: 04ff83012aababc4688c34ffa9d0e214, type: 3}
