@@ -7,15 +7,18 @@ using MVest.Unity.Pooling;
 public struct FireSequenceState {
     public float t;
     public int index;
+    public int jumpsDone;
 
     public void Stop() {
         t = 0;
         index = -1;
+        jumpsDone = 0;
     }
 
     public void Start() {
         t = 0;
         index = 0;
+        jumpsDone = 0;
     }
 }
 
@@ -24,15 +27,22 @@ public enum FireSequenceFrameMode {
     NoProjectile,
     Projectile,
     Pattern,
+    JumpFrame
 }
 
 [System.Serializable]
 public struct FireSequenceFrame {
-    [Min(0)]public float time;
+    [Delayed][Min(0)]public float time;
     public Projectile projectile;
     public BulletPattern pattern;
+    public ProjectileModifiers modifiers;
+    public bool useControllerSpread;
     public GameObject effect;
     public FireSequenceFrameMode mode;
+    public int jumpTargetFrame;
+    public int maxLoops;
+    public bool ignoreJumpOnNoShoot;
+
 
 }
 
@@ -95,17 +105,38 @@ public class FireSequence : ScriptableObject {
     private void ExecuteFrame(ShootingController controller, ref FireSequenceState state, float deltaTime, bool tryingToFire) {
         // Spawn projectiles specified by the frame
         if (frames[state.index].mode == FireSequenceFrameMode.Projectile)
-            controller.SpawnSingleProjectile(frames[state.index].projectile?.gameObject, deltaTime);
+            controller.FireSingle(
+                frames[state.index].projectile, deltaTime, 
+                frames[state.index].useControllerSpread, 
+                frames[state.index].modifiers);
         else if (frames[state.index].mode == FireSequenceFrameMode.Pattern)
-            controller.SpawnPattern(frames[state.index].pattern, deltaTime);
+            controller.FirePattern(
+                frames[state.index].pattern, deltaTime, 
+                frames[state.index].useControllerSpread, 
+                frames[state.index].modifiers);
         
         if (frames[state.index].effect != null) { // Create effect if any is needed
             Pool.Instantiate(frames[state.index].effect, controller.transform.position, controller.transform.rotation);
         }
 
-        // Update the state
-        state.t = frames[state.index].time;
-        state.index++;
+        if (frames[state.index].mode == FireSequenceFrameMode.JumpFrame) {
+
+            if (state.jumpsDone >= frames[state.index].maxLoops || (frames[state.index].ignoreJumpOnNoShoot && !tryingToFire)) {
+                // Advance past the jump frame
+                state.jumpsDone = 0;
+                state.t = frames[state.index].time;
+                state.index++;
+            } else {
+                // Jump to the target frame
+                state.jumpsDone++;
+                state.index = frames[state.index].jumpTargetFrame;
+                state.t = frames[state.index].time;
+            }
+        } else {
+            // Update the state
+            state.t = frames[state.index].time;
+            state.index++;
+        }
     }
 
 }

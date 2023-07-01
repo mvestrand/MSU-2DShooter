@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 4503674926074659469}
   - component: {fileID: 2160022830150475293}
   - component: {fileID: 2535222879597372320}
+  - component: {fileID: -4607439997237921241}
   m_Layer: 0
-  m_Name: Enemy_StraightProjectile 1_0
+  m_Name: Enemy_Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1637650933
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -1751347004918293022, guid: e7e0a76a7d54dde42b1f5560acf51139, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -175,9 +176,25 @@ MonoBehaviour:
   testCurve:
     mode: 0
     value: 0
+    curveScale: 0
     curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+--- !u!114 &-4607439997237921241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4641165794769155162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e1ca249bf3ca9f428ad6301f1802d80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _path: 
+  _minPoolSize: 0
+  _maxPoolSize: 10000

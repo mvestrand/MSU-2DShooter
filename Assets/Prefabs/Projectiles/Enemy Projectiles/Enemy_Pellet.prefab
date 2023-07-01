@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3396636813441726392}
   - component: {fileID: -97918419314795120}
   m_Layer: 0
-  m_Name: Enemy_PelletProjectile
+  m_Name: Enemy_Pellet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1637650933
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -8530346601100385531, guid: 1ee5d9356c56cd94da2c4afbc531a523, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

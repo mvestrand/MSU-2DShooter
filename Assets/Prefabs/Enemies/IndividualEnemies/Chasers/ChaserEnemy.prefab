@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1399807659
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 4760475040570215109, guid: f33c91ee715a39d448ef7f030babf230, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -121,9 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86999d6afe103ad4c881a51052cc6b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overrideControls: 0
   moveSpeed: 2
   scoreValue: 20
-  followTarget: {fileID: 0}
+  steerTarget: {fileID: 0}
   followRange: 100
   guns: []
   shootMode: 1

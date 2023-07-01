@@ -125,12 +125,17 @@ public class ShootingController : MonoBehaviour
     /// </summary>
     public void UpdateFireState(bool shouldFire)
     {
+        float deltaTime = Time.timeSinceLevelLoad - lastFrameTime;
+        lastFrameTime = Time.timeSinceLevelLoad;
+        if (Time.timeScale == 0)
+            return;
+
         if (mode == FireMode.Single || mode == FireMode.Pattern) {
             // If the cooldown is over fire a projectile
-            if ((Time.timeSinceLevelLoad - lastFired) > fireRate && Time.timeScale != 0 && shouldFire)
+            if ((Time.timeSinceLevelLoad - lastFired) >= fireRate && Time.timeScale != 0 && shouldFire)
             {
                 // Launches a projectile
-                SpawnProjectiles();
+                FireBaseProjectiles();
 
                 if (fireEffect != null)
                 {
@@ -145,11 +150,7 @@ public class ShootingController : MonoBehaviour
                 lastFired = Time.timeSinceLevelLoad;
             }
         } else if (mode == FireMode.Sequence) {
-            float deltaTime = Time.timeSinceLevelLoad - lastFrameTime;
-            if (Time.timeScale != 0) {
-                fireSequence.Execute(this, ref fireSequenceState, deltaTime, shouldFire);
-            }
-            lastFrameTime = Time.timeSinceLevelLoad;
+            fireSequence.Execute(this, ref fireSequenceState, deltaTime, shouldFire);
         }
     }
 
@@ -161,60 +162,48 @@ public class ShootingController : MonoBehaviour
     /// Returns: 
     /// void (no return)
     /// </summary>
-    public void SpawnProjectiles()
+    public void FireBaseProjectiles(float advanceTime=0)
     {
         // Check that the prefab is valid
         if (mode == FireMode.Single && projectilePrefab != null) {
-            SpawnSingleProjectile();
+            FireSingle(advanceTime:advanceTime);
         } else if (mode == FireMode.Pattern && projectilePattern != null) {
-            SpawnPattern();
+            FirePattern(advanceTime:advanceTime);
         }
     }
 
-    public void SpawnSingleProjectile(GameObject proj = null, float advanceTime=0) { SpawnSingleProjectile(transform.position, transform.rotation, proj, advanceTime); }
+    public void FireSingle(Projectile projectile=null, float advanceTime=0, bool applySpread=true, ProjectileModifiers modifiers=null) { 
+        FireSingle(transform.position, transform.rotation, projectile, advanceTime, applySpread, modifiers); 
+    }
 
-    public void SpawnSingleProjectile(Vector3 position, Quaternion rotation, GameObject proj = null, float advanceTime=0) {
+    public void FireSingle(Vector3 position, Quaternion rotation, Projectile projectile = null, float advanceTime=0, bool applySpread=false, ProjectileModifiers modifiers=null) {
         // Use our stored projectile prefab if no prefab is specified
-        proj = (proj == null ? projectilePrefab : proj);
-        if (proj == null)
+        projectile = (projectile == null ? projectilePrefab.GetComponent<Projectile>() : projectile);
+        if (projectile == null)
             return;
 
-        // Create the projectile
-        GameObject projectileGameObject = Pool.Instantiate(proj, position, rotation, null);
-        // if (proj.TryGetComponent<PooledMonoBehaviour>(out var prefabPooler)) {
-        //     projectileGameObject = prefabPooler.Get(transform.position, transform.rotation).gameObject;
-        // } else {
-        //     projectileGameObject = Instantiate(projectilePrefab, transform.position, transform.rotation, null);
-        // }
-
-        // Account for spread
-        Vector3 rotationEulerAngles = projectileGameObject.transform.rotation.eulerAngles;
-        rotationEulerAngles.z += Random.Range(-projectileSpread, projectileSpread);
-        projectileGameObject.transform.rotation = Quaternion.Euler(rotationEulerAngles);
-
-        // Keep the heirarchy organized
-        if (projectileHolder != null)
-        {
-            projectileGameObject.transform.SetParent(projectileHolder);
-        }
-
-        if (projectileGameObject.TryGetComponent<Projectile>(out var projectileInstance)) {
-            // Reset the projectile speed to match it's prefab
-            projectileInstance.projectileSpeed = proj.GetComponent<Projectile>().projectileSpeed;
-
-            if (advanceTime > 0)
-                projectileInstance.MoveProjectile(advanceTime);
-        }
-
+        Quaternion spread = (applySpread ? ComputeSpread() : Quaternion.identity);
+        projectile.Spawn(position, spread * rotation, projectileHolder, advanceTime, modifiers);
     }
 
-    public void SpawnPattern(BulletPattern pattern = null, float advanceTime=0) { SpawnPattern(transform.position, transform.rotation, pattern, advanceTime); }
+    public void FirePattern(BulletPattern pattern = null, float advanceTime=0, bool applySpread=true, ProjectileModifiers modifiers=null) {
+        FirePattern(transform.position, transform.rotation, pattern, advanceTime, applySpread, modifiers);  
+    }
 
-    public void SpawnPattern(Vector3 position, Quaternion rotation, BulletPattern pattern = null, float advanceTime = 0) {
+    public void FirePattern(Vector3 position, Quaternion rotation, BulletPattern pattern = null, float advanceTime = 0, bool applySpread = false, ProjectileModifiers modifiers=null) {
         pattern = (pattern == null ? projectilePattern : pattern);
         if (pattern == null)
             return;
 
-        projectilePattern.Spawn(position, rotation, projectileHolder, advanceTime);
+        Quaternion spread = (applySpread ? ComputeSpread() : Quaternion.identity);
+        pattern.Spawn(position, spread * rotation, projectileHolder, advanceTime, projectilePrefab.GetComponent<Projectile>(), modifiers);
+    }
+
+    private Quaternion ComputeSpread() {
+        return Quaternion.Euler(0, 0, Random.Range(-projectileSpread, projectileSpread));
+    }
+
+    private void SpawnEffect() {
+        
     }
 }

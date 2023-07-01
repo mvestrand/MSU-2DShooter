@@ -10,55 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b231723913557b446a881ee74301fb67, type: 3}
-  m_Name: TestFireSequence
+  m_Name: ChargeUp7Way
   m_EditorClassIdentifier: 
-  endTime: 2
+  endTime: 4
   frames:
   - time: 0
-    projectile: {fileID: 0}
-    pattern: {fileID: 11400000, guid: bb5f68fbbf3d36044846abed86aba7c9, type: 2}
-    modifiers:
-      offset: {x: 0, y: 0}
-      projectileDirection:
-        mode: 0
-        value: 0
-        curveScale: 0
-        curve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-      rotation:
-        mode: 0
-        value: 0
-        curveScale: 0
-        curve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-      rotationAffectsProjectile: 1
-      rotatedOffset: {x: 0, y: 0}
-      speed:
-        mode: 0
-        value: 0
-        curveScale: 0
-        curve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-      speedMode: 0
-    useControllerSpread: 0
-    effect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
-    mode: 1
-    jumpTargetFrame: 0
-    maxLoops: 0
-    ignoreJumpOnNoShoot: 0
-  - time: 0.5
     projectile: {fileID: 0}
     pattern: {fileID: 0}
     modifiers:
@@ -70,9 +26,9 @@ MonoBehaviour:
         curve:
           serializedVersion: 2
           m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
       rotation:
         mode: 0
         value: 0
@@ -80,10 +36,10 @@ MonoBehaviour:
         curve:
           serializedVersion: 2
           m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-      rotationAffectsProjectile: 1
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      rotationAffectsProjectile: 0
       rotatedOffset: {x: 0, y: 0}
       speed:
         mode: 0
@@ -92,17 +48,105 @@ MonoBehaviour:
         curve:
           serializedVersion: 2
           m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
       speedMode: 0
     useControllerSpread: 0
-    effect: {fileID: 6229913163069739088, guid: 04ff83012aababc4688c34ffa9d0e214, type: 3}
-    mode: 1
+    effect: {fileID: 6229913163069739088, guid: ddc8e3f31ef0a884582573e69f45cd62, type: 3}
+    mode: 0
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
-  - time: 1
+  - time: 1.8
+    projectile: {fileID: 0}
+    pattern: {fileID: 11400000, guid: 653057087970e914ebc48983c7e02f9d, type: 2}
+    modifiers:
+      offset: {x: 0, y: 0}
+      projectileDirection:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      rotation:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      rotationAffectsProjectile: 0
+      rotatedOffset: {x: 0, y: 0}
+      speed:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      speedMode: 0
+    useControllerSpread: 1
+    effect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
+    mode: 2
+    jumpTargetFrame: 0
+    maxLoops: 0
+    ignoreJumpOnNoShoot: 0
+  - time: 2
+    projectile: {fileID: 0}
+    pattern: {fileID: 11400000, guid: 4c3dfe3f4821b00439e7b474bff69469, type: 2}
+    modifiers:
+      offset: {x: 0, y: 0}
+      projectileDirection:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      rotation:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      rotationAffectsProjectile: 0
+      rotatedOffset: {x: 0, y: 0}
+      speed:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      speedMode: 0
+    useControllerSpread: 1
+    effect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
+    mode: 2
+    jumpTargetFrame: 0
+    maxLoops: 0
+    ignoreJumpOnNoShoot: 0
+  - time: 2.2
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: bb5f68fbbf3d36044846abed86aba7c9, type: 2}
     modifiers:
@@ -114,9 +158,9 @@ MonoBehaviour:
         curve:
           serializedVersion: 2
           m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
       rotation:
         mode: 0
         value: 0
@@ -124,10 +168,10 @@ MonoBehaviour:
         curve:
           serializedVersion: 2
           m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-      rotationAffectsProjectile: 1
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      rotationAffectsProjectile: 0
       rotatedOffset: {x: 0, y: 0}
       speed:
         mode: 0
@@ -136,11 +180,11 @@ MonoBehaviour:
         curve:
           serializedVersion: 2
           m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
       speedMode: 0
-    useControllerSpread: 0
+    useControllerSpread: 1
     effect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
     mode: 2
     jumpTargetFrame: 0

@@ -72,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1637650933
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -1751347004918293022, guid: e7e0a76a7d54dde42b1f5560acf51139, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -172,3 +172,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpeed: 6
+  testCurve:
+    mode: 0
+    value: 0
+    curveScale: 0
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4

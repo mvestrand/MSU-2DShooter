@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b231723913557b446a881ee74301fb67, type: 3}
-  m_Name: TestFireSequence
+  m_Script: {fileID: 11500000, guid: 18eab574c5054634f85c64bf94702d5d, type: 3}
+  m_Name: Spread3_15
   m_EditorClassIdentifier: 
-  endTime: 2
-  frames:
-  - time: 0
-    projectile: {fileID: 0}
-    pattern: {fileID: 11400000, guid: bb5f68fbbf3d36044846abed86aba7c9, type: 2}
+  projectiles:
+  - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
     modifiers:
       offset: {x: 0, y: 0}
       projectileDirection:
@@ -52,15 +49,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
       speedMode: 0
-    useControllerSpread: 0
-    effect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
-    mode: 1
-    jumpTargetFrame: 0
-    maxLoops: 0
-    ignoreJumpOnNoShoot: 0
-  - time: 0.5
-    projectile: {fileID: 0}
-    pattern: {fileID: 0}
+  - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
     modifiers:
       offset: {x: 0, y: 0}
       projectileDirection:
@@ -75,7 +64,7 @@ MonoBehaviour:
           m_RotationOrder: 4
       rotation:
         mode: 0
-        value: 0
+        value: 15
         curveScale: 0
         curve:
           serializedVersion: 2
@@ -96,15 +85,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
       speedMode: 0
-    useControllerSpread: 0
-    effect: {fileID: 6229913163069739088, guid: 04ff83012aababc4688c34ffa9d0e214, type: 3}
-    mode: 1
-    jumpTargetFrame: 0
-    maxLoops: 0
-    ignoreJumpOnNoShoot: 0
-  - time: 1
-    projectile: {fileID: 0}
-    pattern: {fileID: 11400000, guid: bb5f68fbbf3d36044846abed86aba7c9, type: 2}
+  - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
     modifiers:
       offset: {x: 0, y: 0}
       projectileDirection:
@@ -119,7 +100,7 @@ MonoBehaviour:
           m_RotationOrder: 4
       rotation:
         mode: 0
-        value: 0
+        value: -15
         curveScale: 0
         curve:
           serializedVersion: 2
@@ -140,9 +121,3 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
       speedMode: 0
-    useControllerSpread: 0
-    effect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
-    mode: 2
-    jumpTargetFrame: 0
-    maxLoops: 0
-    ignoreJumpOnNoShoot: 0

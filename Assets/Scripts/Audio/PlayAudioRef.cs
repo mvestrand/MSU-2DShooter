@@ -8,8 +8,12 @@ public class PlayAudioRef : MonoBehaviour
     [SerializeField] AudioSource source;
     [SerializeField] float volume = 1f;
     [SerializeField] bool playOnAwake = true;
+    [SerializeField] float delay = 0;
 
-    public void Play() {
+    public IEnumerator Play() {
+        if (delay > 0) {
+            yield return new WaitForSeconds(delay);
+        }
         audioRef?.PlayAudio(source, volume);
     }
 
@@ -21,8 +25,9 @@ public class PlayAudioRef : MonoBehaviour
 
 
     void OnEnable() {
-        if (playOnAwake)
-            Play();
+        if (playOnAwake) {
+            StartCoroutine(Play());
+        }
     }
 
 }

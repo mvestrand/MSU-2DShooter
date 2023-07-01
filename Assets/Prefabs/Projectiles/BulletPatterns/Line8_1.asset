@@ -1,0 +1,303 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18eab574c5054634f85c64bf94702d5d, type: 3}
+  m_Name: Line8_1
+  m_EditorClassIdentifier: 
+  projectiles:
+  - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
+    modifiers:
+      offset: {x: 0, y: 0}
+      projectileDirection:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotation:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotationAffectsProjectile: 1
+      rotatedOffset: {x: 0, y: 0}
+      speed:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      speedMode: 1
+  - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
+    modifiers:
+      offset: {x: 0, y: 0}
+      projectileDirection:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotation:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotationAffectsProjectile: 1
+      rotatedOffset: {x: 0, y: 0}
+      speed:
+        mode: 0
+        value: 1
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      speedMode: 1
+  - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
+    modifiers:
+      offset: {x: 0, y: 0}
+      projectileDirection:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotation:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotationAffectsProjectile: 1
+      rotatedOffset: {x: 0, y: 0}
+      speed:
+        mode: 0
+        value: 2
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      speedMode: 1
+  - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
+    modifiers:
+      offset: {x: 0, y: 0}
+      projectileDirection:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotation:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotationAffectsProjectile: 1
+      rotatedOffset: {x: 0, y: 0}
+      speed:
+        mode: 0
+        value: 3
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      speedMode: 1
+  - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
+    modifiers:
+      offset: {x: 0, y: 0}
+      projectileDirection:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotation:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotationAffectsProjectile: 1
+      rotatedOffset: {x: 0, y: 0}
+      speed:
+        mode: 0
+        value: 4
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      speedMode: 1
+  - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
+    modifiers:
+      offset: {x: 0, y: 0}
+      projectileDirection:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotation:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotationAffectsProjectile: 1
+      rotatedOffset: {x: 0, y: 0}
+      speed:
+        mode: 0
+        value: 5
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      speedMode: 1
+  - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
+    modifiers:
+      offset: {x: 0, y: 0}
+      projectileDirection:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotation:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotationAffectsProjectile: 1
+      rotatedOffset: {x: 0, y: 0}
+      speed:
+        mode: 0
+        value: 6
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      speedMode: 1
+  - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
+    modifiers:
+      offset: {x: 0, y: 0}
+      projectileDirection:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotation:
+        mode: 0
+        value: 0
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      rotationAffectsProjectile: 1
+      rotatedOffset: {x: 0, y: 0}
+      speed:
+        mode: 0
+        value: 7
+        curveScale: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      speedMode: 1

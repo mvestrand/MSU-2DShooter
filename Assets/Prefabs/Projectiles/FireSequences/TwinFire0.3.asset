@@ -10,59 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b231723913557b446a881ee74301fb67, type: 3}
-  m_Name: TestFireSequence
+  m_Name: TwinFire0.3
   m_EditorClassIdentifier: 
-  endTime: 2
+  endTime: 0.6
   frames:
   - time: 0
-    projectile: {fileID: 0}
-    pattern: {fileID: 11400000, guid: bb5f68fbbf3d36044846abed86aba7c9, type: 2}
-    modifiers:
-      offset: {x: 0, y: 0}
-      projectileDirection:
-        mode: 0
-        value: 0
-        curveScale: 0
-        curve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-      rotation:
-        mode: 0
-        value: 0
-        curveScale: 0
-        curve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-      rotationAffectsProjectile: 1
-      rotatedOffset: {x: 0, y: 0}
-      speed:
-        mode: 0
-        value: 0
-        curveScale: 0
-        curve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-      speedMode: 0
-    useControllerSpread: 0
-    effect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
-    mode: 1
-    jumpTargetFrame: 0
-    maxLoops: 0
-    ignoreJumpOnNoShoot: 0
-  - time: 0.5
-    projectile: {fileID: 0}
+    projectile: {fileID: 2535222879597372320, guid: 5089b9cd653abda4ba6013a20e42c774, type: 3}
     pattern: {fileID: 0}
     modifiers:
-      offset: {x: 0, y: 0}
+      offset: {x: -0.13, y: 0}
       projectileDirection:
         mode: 0
         value: 0
@@ -102,11 +58,11 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
-  - time: 1
-    projectile: {fileID: 0}
-    pattern: {fileID: 11400000, guid: bb5f68fbbf3d36044846abed86aba7c9, type: 2}
+  - time: 0.3
+    projectile: {fileID: 2535222879597372320, guid: 5089b9cd653abda4ba6013a20e42c774, type: 3}
+    pattern: {fileID: 0}
     modifiers:
-      offset: {x: 0, y: 0}
+      offset: {x: 0.13, y: 0}
       projectileDirection:
         mode: 0
         value: 0
@@ -141,8 +97,8 @@ MonoBehaviour:
           m_RotationOrder: 4
       speedMode: 0
     useControllerSpread: 0
-    effect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
-    mode: 2
+    effect: {fileID: 6229913163069739088, guid: 04ff83012aababc4688c34ffa9d0e214, type: 3}
+    mode: 1
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0

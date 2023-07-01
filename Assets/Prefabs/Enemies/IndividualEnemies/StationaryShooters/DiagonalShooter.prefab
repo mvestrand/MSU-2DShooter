@@ -45,6 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 4641165794769155162, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
   projectileHolder: {fileID: 0}
+  projectilePattern: {fileID: 0}
+  fireSequence: {fileID: 0}
+  mode: 0
   isPlayerControlled: 0
   fireRate: 3
   projectileSpread: 1
@@ -124,8 +127,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1399807659
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 6604310613814641884, guid: 35293284ff3944d4d8c1f7ca980df347, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -171,9 +174,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86999d6afe103ad4c881a51052cc6b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overrideControls: 0
   moveSpeed: 2
   scoreValue: 10
-  followTarget: {fileID: 0}
+  steerTarget: {fileID: 0}
   followRange: 0
   guns:
   - {fileID: 8282131553695226666}
@@ -306,6 +310,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 4641165794769155162, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
   projectileHolder: {fileID: 0}
+  projectilePattern: {fileID: 0}
+  fireSequence: {fileID: 0}
+  mode: 0
   isPlayerControlled: 0
   fireRate: 3
   projectileSpread: 1
