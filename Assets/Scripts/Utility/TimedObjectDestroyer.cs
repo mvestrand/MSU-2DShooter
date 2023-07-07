@@ -74,18 +74,18 @@ public class TimedObjectDestroyer : MonoBehaviour
     /// </summary>
     private void OnDestroy()
     {
-        if (destroyChildrenOnDeath && !quitting && Application.isPlaying)
-        {
-            int childCount = transform.childCount;
-            for (int i = childCount - 1; i >= 0; i--)
-            {
-                GameObject childObject = transform.GetChild(i).gameObject;
-                if (childObject != null)
-                {
-                    DestroyImmediate(childObject);
-                }
-            }
-        }
-        transform.DetachChildren();
+        // if (destroyChildrenOnDeath && !quitting && Application.isPlaying)
+        // {
+        //     int childCount = transform.childCount;
+        //     for (int i = childCount - 1; i >= 0; i--)
+        //     {
+        //         GameObject childObject = transform.GetChild(i).gameObject;
+        //         if (childObject != null)
+        //         {
+        //             DestroyImmediate(childObject);
+        //         }
+        //     }
+        // }
+        // transform.DetachChildren();
     }
 }

@@ -8,17 +8,22 @@ public struct FireSequenceState {
     public float t;
     public int index;
     public int jumpsDone;
+    public int lastJumpIndex;
+
+    public bool IsRunning { get { return index >= 0; } }
 
     public void Stop() {
         t = 0;
         index = -1;
         jumpsDone = 0;
+        lastJumpIndex = -1;
     }
 
     public void Start() {
         t = 0;
         index = 0;
         jumpsDone = 0;
+        lastJumpIndex = -1;
     }
 }
 
@@ -38,6 +43,7 @@ public struct FireSequenceFrame {
     public ProjectileModifiers modifiers;
     public bool useControllerSpread;
     public GameObject effect;
+    public bool shouldParentEffect;
     public FireSequenceFrameMode mode;
     public int jumpTargetFrame;
     public int maxLoops;
@@ -116,7 +122,7 @@ public class FireSequence : ScriptableObject {
                 frames[state.index].modifiers);
         
         if (frames[state.index].effect != null) { // Create effect if any is needed
-            Pool.Instantiate(frames[state.index].effect, controller.transform.position, controller.transform.rotation);
+            Pool.Instantiate(frames[state.index].effect, controller.transform.position, controller.transform.rotation, (frames[state.index].shouldParentEffect ? controller.transform : null));
         }
 
         if (frames[state.index].mode == FireSequenceFrameMode.JumpFrame) {
@@ -128,6 +134,10 @@ public class FireSequence : ScriptableObject {
                 state.index++;
             } else {
                 // Jump to the target frame
+                if (state.lastJumpIndex != state.index) {
+                    state.lastJumpIndex = state.index;
+                    state.jumpsDone = 0;
+                }
                 state.jumpsDone++;
                 state.index = frames[state.index].jumpTargetFrame;
                 state.t = frames[state.index].time;

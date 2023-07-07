@@ -42,6 +42,7 @@ MonoBehaviour:
     directionWeight: 0
     moveDirectionWeight: 1
     playerTrackWeight: 0
+    shouldShoot: 0
 --- !u!74 &6888958663380469368
 AnimationClip:
   m_ObjectHideFlags: 0

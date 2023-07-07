@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5724781533654324104}
   - component: {fileID: 8890150608144808246}
   - component: {fileID: 4413798097735496473}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ChaserEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

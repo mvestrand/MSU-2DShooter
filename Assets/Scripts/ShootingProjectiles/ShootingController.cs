@@ -23,7 +23,13 @@ public class ShootingController : MonoBehaviour
     public FireSequenceState fireSequenceState;
     public FireMode mode = FireMode.Single;
 
+    public int channel = 0;
 
+    public bool IsRunning {
+        get {
+            return mode == FireMode.Sequence && fireSequenceState.IsRunning;
+        }
+    }
 
 
     [Header("Input")]
@@ -73,7 +79,11 @@ public class ShootingController : MonoBehaviour
     private void Start()
     {
         SetupInput();
+    }
+
+    private void OnEnable() {
         lastFrameTime = Time.timeSinceLevelLoad;
+        fireSequenceState.Stop();
     }
 
     /// <summary>
@@ -203,7 +213,9 @@ public class ShootingController : MonoBehaviour
         return Quaternion.Euler(0, 0, Random.Range(-projectileSpread, projectileSpread));
     }
 
-    private void SpawnEffect() {
-        
-    }
+    // public void OnDrawGizmos() {
+    //     Gizmos.color = (isPlayerControlled ? new Color(1, .5f, 0, .5f) : new Color(1, 0, 0, .5f));
+    //     Gizmos.DrawLine(transform.position, transform.position + 20 * transform.up);
+    // }
+
 }

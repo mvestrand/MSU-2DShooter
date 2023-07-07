@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77121a33bee40dd42a13de2fe74291ee, type: 3}
+  m_Name: Stars
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 22893275928494745bcc15bd21f35118, type: 3}
+  - {fileID: 21300000, guid: caf673ae5ddd4094693ef54c3d388122, type: 3}
+  - {fileID: 21300000, guid: 50b6f3d49aed775409eec157bbdd0da3, type: 3}
+  - {fileID: 21300000, guid: 606776ebbe2fe9d4ea5f3c82e15ee313, type: 3}
+  canFlipX: 1
+  canFlipY: 1

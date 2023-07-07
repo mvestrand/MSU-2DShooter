@@ -5,6 +5,7 @@ using UnityEngine;
 //[ExecuteAlways]
 public class ScrollingBox : MonoBehaviour
 {
+    [SerializeField] private BackgroundController controller;
     [SerializeField] private float height;
     [SerializeField] private float scrollSpeed;
     [SerializeField] private SpriteSet spriteSet;
@@ -21,15 +22,18 @@ public class ScrollingBox : MonoBehaviour
             return;
             
         foreach (Transform tf in transform) {
-            float y = tf.localPosition.y - scrollSpeed * Time.deltaTime;
+            float deltaY = scrollSpeed * Time.deltaTime * (controller != null ? controller.SpeedMultiplier : 1);
+            float y = tf.localPosition.y - deltaY;
             if (y <= -height / 2) {
-                y += height;
                 if (tf.tag == "BackgroundPanel" && tf.TryGetComponent<SpriteRenderer>(out var r)) {
+                    y += height;
                     if (spriteSet != null)
                         spriteSet.ChangeSprite(r);
                     else {
                         r.sprite = null;
                     }
+                } else {
+                    Destroy(tf.gameObject);
                 }
             } else if (y > height / 2) {
                 y -= height;

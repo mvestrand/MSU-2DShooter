@@ -20,6 +20,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -30,6 +32,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -42,6 +46,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -56,6 +62,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -66,6 +74,8 @@ MonoBehaviour:
         mode: 0
         value: 15
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -78,6 +88,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -92,6 +104,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -102,6 +116,8 @@ MonoBehaviour:
         mode: 0
         value: -15
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -114,6 +130,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -128,6 +146,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -138,6 +158,8 @@ MonoBehaviour:
         mode: 0
         value: -30
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -150,6 +172,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -164,6 +188,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -174,6 +200,8 @@ MonoBehaviour:
         mode: 0
         value: 30
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -186,6 +214,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -200,6 +230,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -210,6 +242,8 @@ MonoBehaviour:
         mode: 0
         value: 45
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -222,6 +256,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -236,6 +272,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -246,6 +284,8 @@ MonoBehaviour:
         mode: 0
         value: -45
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -258,6 +298,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []

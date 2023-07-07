@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7284441853823400748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7284441853823400750}
+  - component: {fileID: 7284441853823400751}
+  m_Layer: 0
+  m_Name: Seq001
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7284441853823400750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7284441853823400748}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &7284441853823400751
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7284441853823400748}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: c8a79c84ea78f98479e648752713aaaa, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings: []
+  m_ExposedReferences:
+    m_References:
+    - 43ff6e3503991154890ccba15bf2edb8: {fileID: 0}
+    - 8fe7be9b8b6dcc048af610b67af99874: {fileID: 0}
+    - 466311a512272a04490a3a54a4029107: {fileID: 0}
+    - 636144604995ab647893665c8788ca0e: {fileID: 0}
+    - 5fca5387e2a1aa542b0c1aaeaa17acea: {fileID: 0}
+    - e9dab2817ecf50540b8b79f0eacb31c2: {fileID: 0}
+    - ce51ff72d01c612459041a0ef8c16666: {fileID: 0}
+    - 2ee6f6640598ed54a9c2486b15eb900a: {fileID: 0}
+    - 0790291fd73a5454d9883921ecc375f5: {fileID: 0}
+    - 7440df3ffb7023f4b9f176615c93f42b: {fileID: 0}
+    - f058658b8b8c16545adc26db2555db2c: {fileID: 0}
+    - 31a64299f6ba93d4582a00b3cfd0cd4c: {fileID: 0}
+    - c8005505261e34a429689c96c4e3ccbd: {fileID: 0}
+    - 8f001572669c7d1449d19fdbcb663855: {fileID: 0}
+    - 46b5c5a5a2388ce4483389aefd6693ab: {fileID: 0}
+    - 79f6b2a01e255cb44973ca5964985177: {fileID: 0}
+    - c033ba451013b09479e446c9d5fc5d3e: {fileID: 0}
+    - 25468dba79fcfb5438ef2856036d73d1: {fileID: 0}
+    - 601bf1835a3c6ac489eaaa61f7167deb: {fileID: 0}
+    - 609059642ba0d8f4c892a48076862ddf: {fileID: 0}
+    - 0e2f8fb63127fd64d946f55068d1bd75: {fileID: 0}
+    - 38ae2888812c4ce4fafeed253553cc80: {fileID: 0}
+    - c27a173abcd75b844aad22d35bd888f3: {fileID: 0}
+    - b6b5bb1fc6a146949bf3f3302251022c: {fileID: 0}
+    - 368ac234344d1624e88d1672fbba40ff: {fileID: 0}
+    - 07a669627b4b6dd4786e828ae642a2ca: {fileID: 0}
+    - 8eb188d48fba37b4fa7c783b9f743ff4: {fileID: 0}
+    - d0631751e07645549b5ab36a83a1cc65: {fileID: 0}
+    - 9293132e36232394aad2835a5c7e6ef6: {fileID: 0}
+    - 40e3da6be7ff887448e7575c8388269b: {fileID: 0}
+    - 72eb85b33ed6caa4da51dc144bf72588: {fileID: 0}
+    - a594619378f82ef40a83f71b689bee04: {fileID: 0}
+    - d2d25608823dbb148b072fdd6c37fa94: {fileID: 0}
+    - da0dbdcbbbca04b489f45afccf8e8b41: {fileID: 0}
+    - 4ca14f67c657b2343beb49c03f9482aa: {fileID: 0}
+    - 170ee24213d334040b14a2b7be07af99: {fileID: 0}
+    - 879d0cac2b0cdbb4aac1732011b5eddc: {fileID: 0}
+    - 0e28ae7fd165ff9409c8240bfce71113: {fileID: 0}
+    - c23d7696a8efce44dbcb2163ae8d0381: {fileID: 0}
+    - 54fc2f953164ffd4fa607f763010d5d4: {fileID: 0}
+    - 5026cc364d1e10f419cd86db2381da78: {fileID: 0}
+    - 031776871f4c1c24db80a3e5e3b98947: {fileID: 0}
+    - e849e8fb2e1296c4db33f8eca22c909d: {fileID: 0}
+    - f579e64c4745db24ebfd0c1d7969959b: {fileID: 0}
+    - e4ed64a86cee4d241a95578f0b0992f9: {fileID: 0}
+    - 2bc8e900d7195f848bcc9b7c3dbae1dc: {fileID: 0}
+    - 7210e9d75db8c1646a437a2cedb819ec: {fileID: 0}
+    - 87a4e8ee66980174fbaa2eac741cf185: {fileID: 0}
+    - e74011b4e33c23f428aa3f6860358207: {fileID: 0}
+    - f3c28e96f1fe6e14692e9b4a119c308c: {fileID: 0}
+    - e4eec71e62d1c9b4ab221f7db33c6326: {fileID: 0}
+    - 7f797488df786b34a9294642fe5ab4bb: {fileID: 0}

@@ -7,7 +7,8 @@ public enum FloatCurveMode : int {
     Constant,
     Curve,
     Disabled,
-    CurvePlusConstant
+    CurvePlusConstant,
+    BetweenTwoConstants
 }
 
 [System.Serializable]
@@ -15,6 +16,8 @@ public class FloatCurve {
     public FloatCurveMode mode;
     public float value;
     public float curveScale;
+    public float min;
+    public float max;
     public AnimationCurve curve;
 
     public FloatCurve() {
@@ -37,6 +40,7 @@ public class FloatCurve {
             FloatCurveMode.Constant => value,
             FloatCurveMode.Curve => (curve != null ? curveScale * curve.Evaluate(t) : defaultValue),
             FloatCurveMode.CurvePlusConstant => (curve != null ? curveScale * curve.Evaluate(t) + value : value),
+            FloatCurveMode.BetweenTwoConstants => (1-t)*min + t*max,
             _ => defaultValue
         };
     }

@@ -12,6 +12,7 @@ public class BezierSpline : MonoBehaviour {
     [SerializeField]
 	private List<Vector3> points;
 
+
     [SerializeField]
     private float[] arcLengths = new float[0];
 
@@ -296,6 +297,7 @@ public class BezierSpline : MonoBehaviour {
 			BezierControlPointMode.Free
 		};
 	}
+	
 
 #if UNITY_EDITOR
 	public void OnDrawGizmos() {
@@ -304,7 +306,10 @@ public class BezierSpline : MonoBehaviour {
 				GetControlPointWorld(i+3), 
 				GetControlPointWorld(i+1), 
 				GetControlPointWorld(i+2), Color.gray, null, 2f);
+			
 		}
+		
 	}
+	
 #endif
 }

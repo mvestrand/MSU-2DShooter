@@ -121,13 +121,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86999d6afe103ad4c881a51052cc6b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overrideControls: 0
+  overrideControls: 1
   moveSpeed: 2
   scoreValue: 10
   steerTarget: {fileID: 0}
   followRange: 100
   guns: []
   shootMode: 1
+  shouldShoot: 0
   movementMode: 0
   scrollDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &2029536735206158367

@@ -23,6 +23,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -33,6 +35,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -45,6 +49,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -54,6 +60,7 @@ MonoBehaviour:
       speedMode: 0
     useControllerSpread: 0
     effect: {fileID: 6229913163069739088, guid: ddc8e3f31ef0a884582573e69f45cd62, type: 3}
+    shouldParentEffect: 1
     mode: 0
     jumpTargetFrame: 0
     maxLoops: 0
@@ -67,6 +74,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -77,6 +86,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -89,6 +100,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -98,6 +111,7 @@ MonoBehaviour:
       speedMode: 0
     useControllerSpread: 1
     effect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
+    shouldParentEffect: 0
     mode: 2
     jumpTargetFrame: 0
     maxLoops: 0
@@ -111,6 +125,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -121,6 +137,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -133,6 +151,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -142,6 +162,7 @@ MonoBehaviour:
       speedMode: 0
     useControllerSpread: 1
     effect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
+    shouldParentEffect: 0
     mode: 2
     jumpTargetFrame: 0
     maxLoops: 0
@@ -155,6 +176,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -165,6 +188,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -177,6 +202,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -186,6 +213,7 @@ MonoBehaviour:
       speedMode: 0
     useControllerSpread: 1
     effect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
+    shouldParentEffect: 0
     mode: 2
     jumpTargetFrame: 0
     maxLoops: 0

@@ -47,6 +47,24 @@ public class FloatCurveDrawer : PropertyDrawer {
 
             EditorGUI.PropertyField(valueRect, property.FindPropertyRelative("value"), GUIContent.none);
             DrawCurveFields(curveRect, property);
+
+        } else if (modeProp.intValue == (int)FloatCurveMode.BetweenTwoConstants) {
+
+            float usedWidth = ModeWidth + PaddingWidth;
+            float halfWidth = (position.width - usedWidth) / 2f;
+            float labelWidth = 40f;
+
+            var xLabelRect = new Rect(position.x + usedWidth, position.y, labelWidth, position.height);
+            var xRect = new Rect(position.x + usedWidth + labelWidth, position.y, halfWidth-labelWidth, position.height);
+            var yLabelRect = new Rect(position.x + usedWidth + halfWidth, position.y, labelWidth, position.height);
+            var yRect = new Rect(position.x + usedWidth + halfWidth+labelWidth, position.y, halfWidth-labelWidth, position.height);
+
+            EditorGUI.LabelField(xLabelRect, "    min:");
+            EditorGUI.PropertyField(xRect, property.FindPropertyRelative("min"), GUIContent.none);
+
+            EditorGUI.LabelField(yLabelRect, "    max:");
+            EditorGUI.PropertyField(yRect, property.FindPropertyRelative("max"), GUIContent.none);
+            
         }
 
         EditorGUI.indentLevel = indent;

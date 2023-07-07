@@ -73,6 +73,8 @@ AudioMixerController:
     name: MasterVolume
   - guid: 5fb23b69a13706b4ebd33273304f6b7f
     name: MusicVolume
+  - guid: d7dd4b981eef8c94c99e547687be3f1a
+    name: MusicLowpassCutoff
   m_AudioMixerGroupViews:
   - guids:
     - 23345c070eb7eb24f8ab7e1cee2eb32d

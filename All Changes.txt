@@ -16,6 +16,9 @@
 - Added intermediary classes to SFX to keep them from playing multiple times per frame to prevent volume problems
 - Changed backgrounds to be tiled
 - Script to make the background scroll
+- Lengthened player projectiles to reduce flashing
+- Added two variants to player fire sound to reduce repetitiveness
+- Added backgrounds of just stars moving at different speeds to create a sense of parallax
 
 
 === External / Reverted Changes ===
@@ -31,3 +34,31 @@
 		- Added editor functions to insert and remove curve segments
 		- Added computations to compute arc lengths and reparameterize X(t) to X(u) where u is the scaled arc length
 		- Added LineRenderer generation code to resolve problem with gizmos not rendering for control track spawned objects
+
+- Created ScriptableObjects to hold projectile patterns and sequences
+	- Created custom property drawers to make editing easier
+	- Changed shooting controller to be switchable between firing single projectiles, patterns of projectiles, and timed sequences
+
+
+====== Created Assets ======
+============================
+
+=== Sprites, Animations, Particles ===	
+- Enemies
+	- Turret
+	- Blocker
+	- Awake/Sleep animation to overlay on existing enemy sprites
+- Projectiles
+	- Round spinning enemy projectile
+	- (Unused) Player pellet projectile
+	- Longer laser enemy projectile
+- Player
+	- Core w/ pulsing animation
+	
+- Particle Effects
+	- Enemy charge up 
+
+
+=== Audio ===
+- Enemy charge up SFX
+- Enemy laser fire SFX

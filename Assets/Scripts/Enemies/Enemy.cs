@@ -27,12 +27,14 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Enum to help with shooting modes
     /// </summary>
-    public enum ShootMode { None, ShootAll };
+    public enum ShootMode { Never, Always, OnSignal, SetByTrack, TrackAndSignal };
+
 
     [Tooltip("The way the enemy shoots:\n" +
         "None: Enemy does not shoot.\n" +
         "ShootAll: Enemy fires all guns whenever it can.")]
-    public ShootMode shootMode = ShootMode.ShootAll;
+    public ShootMode shootMode = ShootMode.TrackAndSignal;
+    [HideInInspector] public bool shouldShoot = false;
 
     /// <summary>
     /// Enum to help wih different movement modes
@@ -96,8 +98,8 @@ public class Enemy : MonoBehaviour
                 MoveEnemy();
             }
             // Attempt to shoot, according to this enemy's shooting mode
-            TryToShoot();
         }
+        TryToShoot();
     }
 
     /// <summary>
@@ -235,14 +237,16 @@ public class Enemy : MonoBehaviour
     {
         switch (shootMode)
         {
-            case ShootMode.None:
+            case ShootMode.Never:
                 break;
-            case ShootMode.ShootAll:
+            default:
+                bool tryingToShoot = (shootMode == ShootMode.Always || 
+                                        (shootMode == ShootMode.TrackAndSignal || shootMode == ShootMode.SetByTrack) && shouldShoot);
                 foreach (ShootingController gun in guns)
                 {
-                    gun.UpdateFireState(true);
+                    gun.UpdateFireState(tryingToShoot);
                 }
-                break;
+                break;       
         }
     }
 

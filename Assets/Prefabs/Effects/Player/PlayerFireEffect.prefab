@@ -173,5 +173,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioRef: {fileID: 11400000, guid: 9d99698f60b98ed49bfdef4200c6d800, type: 2}
   source: {fileID: 2403646867487861854}
-  volume: 1
+  volume: 0.2
   playOnAwake: 1
+  delay: 0

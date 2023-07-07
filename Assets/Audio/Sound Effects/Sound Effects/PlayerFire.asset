@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aab8814396801948a9e61fe0d8d53ce, type: 3}
   m_Name: PlayerFire
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 2f7ee51cc1e5f3e4fb1b273aa57cf7b4, type: 3}
+  clips:
+  - {fileID: 8300000, guid: 2f7ee51cc1e5f3e4fb1b273aa57cf7b4, type: 3}
+  - {fileID: 8300000, guid: ab1aaf1523c988a4aa8701eaa16ef0da, type: 3}
+  - {fileID: 8300000, guid: f6ad3c9644a80604ea2d2250a7be3485, type: 3}
   minInterval: 0.015

@@ -14,6 +14,7 @@ public class EnemyControlBehaviour : PlayableBehaviour {
     [Range(0, 1)] public float directionWeight;
     [Range(0, 1)] public float moveDirectionWeight;
     [Range(0, 1)] public float playerTrackWeight;
+    public bool shouldShoot;
 
     public override void ProcessFrame(Playable playable, FrameData info, object playerData) {
         Enemy enemy = playerData as Enemy;
@@ -35,16 +36,19 @@ public class EnemyControlBehaviour : PlayableBehaviour {
 
         // Player track direction
         if (GameManager.Instance != null && GameManager.Instance.player != null) {
+
             var steerTarget = GameManager.Instance.player.transform;
-            float angle = Vector3.SignedAngle(Vector3.down, (steerTarget.position - enemy.transform.position).normalized, Vector3.forward);
+            var targetDirection = new Vector3(steerTarget.position.x - enemy.transform.position.x, steerTarget.position.y - enemy.transform.position.y, 0).normalized;
+            float angle = Vector3.SignedAngle(Vector3.down, targetDirection, Vector3.forward);
             desiredRotation += AllocateWeight(ref unusedRotationWeight, playerTrackWeight) * angle;
         }
 
         enemy.transform.eulerAngles = new Vector3(0, 0, desiredRotation);
+        enemy.shouldShoot = shouldShoot;
     }
 
     private static float AllocateWeight(ref float unusedWeight, float desiredWeight) {
-        float weight = Mathf.Min(unusedWeight, desiredWeight);
+        float weight = Mathf.Min(unusedWeight, Mathf.Clamp01(desiredWeight));
         unusedWeight = Mathf.Max(unusedWeight - desiredWeight, 0);
         return weight;
     }

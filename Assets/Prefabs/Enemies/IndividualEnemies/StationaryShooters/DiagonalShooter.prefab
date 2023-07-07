@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8282131552140209219}
   - component: {fileID: 8282131552140209218}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GunTwo
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 8022954021460962557}
   - component: {fileID: 4327850106528714602}
   - component: {fileID: 584683058982610388}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: DiagonalShooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8282131553695226667}
   - component: {fileID: 8282131553695226666}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GunOne
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}

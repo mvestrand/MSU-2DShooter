@@ -189,14 +189,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75388997f8d4264a86b7441dc9ea74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3562651836113712045, guid: aee1688b385340b4bab2b46707955895, type: 3}
+  projectilePrefab: {fileID: 0}
   projectileHolder: {fileID: 0}
   projectilePattern: {fileID: 0}
-  fireSequence: {fileID: 0}
-  mode: 0
+  fireSequence: {fileID: 11400000, guid: 357e5ae4d70fc5d4288dfd2705f3aa4a, type: 2}
+  mode: 2
   isPlayerControlled: 1
-  fireRate: 0.025
-  projectileSpread: 1.5
+  fireRate: 0.04
+  projectileSpread: 0
   fireEffect: {fileID: 2403646867487861855, guid: 6bb29ce188f45834cbb55ab1504938dd, type: 3}
 --- !u!58 &5343993829854313127
 CircleCollider2D:
