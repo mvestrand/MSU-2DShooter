@@ -13,9 +13,13 @@ public class OptionalFloatDrawer : PropertyDrawer {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
         EditorGUI.BeginProperty(position, label, property);
 
+        position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
+
         var indent = EditorGUI.indentLevel;
         EditorGUI.indentLevel = 0;
 
+
+        
         var toggleRect = new Rect(position.x, position.y, ToggleWidth, position.height);
         var valueRect = new Rect(position.x + ToggleWidth + PaddingWidth, position.y, position.width - ToggleWidth - PaddingWidth, position.height);
 

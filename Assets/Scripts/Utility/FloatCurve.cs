@@ -34,6 +34,10 @@ public class FloatCurve {
         get { return mode == FloatCurveMode.Curve || mode == FloatCurveMode.CurvePlusConstant;  }
     }
 
+    public bool UsesT {
+        get { return mode == FloatCurveMode.Curve || mode == FloatCurveMode.CurvePlusConstant || mode == FloatCurveMode.BetweenTwoConstants;  }
+    }
+
     public float Get(float t, float defaultValue) {
         return mode switch
         {            

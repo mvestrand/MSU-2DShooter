@@ -58,9 +58,13 @@ public class Enemy : MonoBehaviour
     /// Returns:
     /// void (no return)
     /// </summary>
-    private void LateUpdate()
+    private void Update()
     {
         HandleBehaviour();       
+    }
+
+    private void LateUpdate() {
+        TryToShoot();
     }
 
     /// <summary>
@@ -99,7 +103,6 @@ public class Enemy : MonoBehaviour
             }
             // Attempt to shoot, according to this enemy's shooting mode
         }
-        TryToShoot();
     }
 
     /// <summary>

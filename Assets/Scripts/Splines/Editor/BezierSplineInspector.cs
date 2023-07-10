@@ -46,7 +46,11 @@ public class BezierSplineInspector : Editor {
 
 		if (GUILayout.Button("Add Waypoint")) {
 			Undo.RecordObject(spline, "Add Waypoint");
-			spline.InsertWaypoint(selectedIndex / 3);
+			if (selectedIndex >= spline.ControlPointCount-2) {
+                spline.AddCurve();
+            } else {
+				spline.InsertWaypoint(selectedIndex / 3);
+			}
 			EditorUtility.SetDirty(spline);
 		}
 		if (GUILayout.Button("Remove Waypoint")) {

@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6787025656147788036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8239156673302008203}
+  m_Layer: 0
+  m_Name: InvX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8239156673302008203
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6787025656147788036}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7284441853823400750}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7284441853823400748
 GameObject:
   m_ObjectHideFlags: 0
@@ -26,8 +56,9 @@ Transform:
   m_GameObject: {fileID: 7284441853823400748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8239156673302008203}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -57,9 +88,12 @@ PlayableDirector:
     - ce51ff72d01c612459041a0ef8c16666: {fileID: 0}
     - 2ee6f6640598ed54a9c2486b15eb900a: {fileID: 0}
     - 0790291fd73a5454d9883921ecc375f5: {fileID: 0}
+    - ba39c87f95890bc4ea96c50b37f73aca: {fileID: 0}
     - 7440df3ffb7023f4b9f176615c93f42b: {fileID: 0}
+    - 10f041d5ad088ca41a6e95f619ba4d9f: {fileID: 6787025656147788036}
     - f058658b8b8c16545adc26db2555db2c: {fileID: 0}
     - 31a64299f6ba93d4582a00b3cfd0cd4c: {fileID: 0}
+    - 1a2c975f0b5e1e04495754c3a7e8ac15: {fileID: 6787025656147788036}
     - c8005505261e34a429689c96c4e3ccbd: {fileID: 0}
     - 8f001572669c7d1449d19fdbcb663855: {fileID: 0}
     - 46b5c5a5a2388ce4483389aefd6693ab: {fileID: 0}
@@ -76,11 +110,14 @@ PlayableDirector:
     - 07a669627b4b6dd4786e828ae642a2ca: {fileID: 0}
     - 8eb188d48fba37b4fa7c783b9f743ff4: {fileID: 0}
     - d0631751e07645549b5ab36a83a1cc65: {fileID: 0}
+    - 2d3a42505b7e89a44aad1e581de6602c: {fileID: 6787025656147788036}
     - 9293132e36232394aad2835a5c7e6ef6: {fileID: 0}
     - 40e3da6be7ff887448e7575c8388269b: {fileID: 0}
     - 72eb85b33ed6caa4da51dc144bf72588: {fileID: 0}
     - a594619378f82ef40a83f71b689bee04: {fileID: 0}
+    - 8f7638b301aef094ab7767003b136f29: {fileID: 6787025656147788036}
     - d2d25608823dbb148b072fdd6c37fa94: {fileID: 0}
+    - 57dcfb45289ec004786ab09606e800b9: {fileID: 6787025656147788036}
     - da0dbdcbbbca04b489f45afccf8e8b41: {fileID: 0}
     - 4ca14f67c657b2343beb49c03f9482aa: {fileID: 0}
     - 170ee24213d334040b14a2b7be07af99: {fileID: 0}
@@ -95,8 +132,13 @@ PlayableDirector:
     - e4ed64a86cee4d241a95578f0b0992f9: {fileID: 0}
     - 2bc8e900d7195f848bcc9b7c3dbae1dc: {fileID: 0}
     - 7210e9d75db8c1646a437a2cedb819ec: {fileID: 0}
+    - e86b598facb819141a2665c9c324eb2e: {fileID: 6787025656147788036}
+    - d03533b9aa6233f4fa327a1d3c9975cc: {fileID: 6787025656147788036}
+    - 43c9844e4ccf10e47915bdd70e2b3aaf: {fileID: 6787025656147788036}
+    - 69979c40ec8ec544488b744dd2c442d2: {fileID: 6787025656147788036}
     - 87a4e8ee66980174fbaa2eac741cf185: {fileID: 0}
     - e74011b4e33c23f428aa3f6860358207: {fileID: 0}
     - f3c28e96f1fe6e14692e9b4a119c308c: {fileID: 0}
     - e4eec71e62d1c9b4ab221f7db33c6326: {fileID: 0}
     - 7f797488df786b34a9294642fe5ab4bb: {fileID: 0}
+    - e5a22ae5a99da7840ba4ebde6ed3a2b2: {fileID: 6787025656147788036}

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
+using MVest.Unity;
+using MVest.Unity.Pooling;
+
 /// <summary>
 /// This class handles the health state of a game object.
 /// 
 /// Implementation Notes: 2D Rigidbodies must be set to never sleep for this to interact with trigger stay damage
 /// </summary>
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, IRestartable
 {
     [Header("Team Settings")]
     [Tooltip("The team associated with this damage")]
@@ -37,6 +40,11 @@ public class Health : MonoBehaviour
     public int currentLives = 3;
     [Tooltip("The maximum number of lives this health can have")]
     public int maximumLives = 5;
+
+    [System.NonSerialized]
+    private bool _isDying = false;
+
+    public UnityGameObjectEvent onDeath = new UnityGameObjectEvent();
 
     /// <summary>
     /// Description:
@@ -214,6 +222,11 @@ public class Health : MonoBehaviour
     /// </summary>
     public void Die()
     {
+        if (_isDying) // Prevent multiple calls to die
+            return;
+        _isDying = true;
+        onDeath.Invoke(gameObject);
+
         if (deathEffect != null)
         {
             Instantiate(deathEffect, transform.position, transform.rotation, null);
@@ -227,6 +240,7 @@ public class Health : MonoBehaviour
         {
             HandleDeathWithoutLives();
         }      
+        _isDying = false;
     }
 
     /// <summary>
@@ -277,5 +291,14 @@ public class Health : MonoBehaviour
             gameObject.GetComponent<Enemy>().DoBeforeDestroy();
         }
         Destroy(this.gameObject);
+    }
+
+    public void Restart(IRestartable original)
+    {
+        if (original is Health health) {
+            currentHealth = health.currentHealth;
+            defaultHealth = health.defaultHealth;
+            maximumHealth = health.maximumHealth;
+        }
     }
 }

@@ -83,6 +83,7 @@ public class ShootingController : MonoBehaviour
 
     private void OnEnable() {
         lastFrameTime = Time.timeSinceLevelLoad;
+        lastFired = Mathf.NegativeInfinity;
         fireSequenceState.Stop();
     }
 
@@ -125,20 +126,31 @@ public class ShootingController : MonoBehaviour
         }
     }
 
+    public void PlayOneShot() {
+        if (mode == FireMode.Single || mode == FireMode.Pattern) {
+            FireBaseProjectiles();
+            PlayEffect();
+            lastFired = Time.timeSinceLevelLoad;
+        } else if (mode == FireMode.Sequence){
+            fireSequenceState.Start();
+        }
+    }
+
+
     /// <summary>
     /// Description:
     /// Fires a projectile if possible
     /// Inputs: 
     /// none
     /// Returns: 
-    /// void (no return)
+    /// True if still firing, false otherwise. Always matches shouldFire, EXCEPT when running a fire sequence
     /// </summary>
-    public void UpdateFireState(bool shouldFire)
+    public bool UpdateFireState(bool shouldFire)
     {
         float deltaTime = Time.timeSinceLevelLoad - lastFrameTime;
         lastFrameTime = Time.timeSinceLevelLoad;
         if (Time.timeScale == 0)
-            return;
+            return shouldFire;
 
         if (mode == FireMode.Single || mode == FireMode.Pattern) {
             // If the cooldown is over fire a projectile
@@ -146,21 +158,29 @@ public class ShootingController : MonoBehaviour
             {
                 // Launches a projectile
                 FireBaseProjectiles();
-
-                if (fireEffect != null)
-                {
-                    if (fireEffect.TryGetComponent<PooledMonoBehaviour>(out var prefabPooler)) {
-                        prefabPooler.Get(transform.position, transform.rotation);
-                    } else {
-                        Instantiate(fireEffect, transform.position, transform.rotation, null);
-                    }
-                }
+                PlayEffect();
 
                 // Restart the cooldown
                 lastFired = Time.timeSinceLevelLoad;
             }
         } else if (mode == FireMode.Sequence) {
-            fireSequence.Execute(this, ref fireSequenceState, deltaTime, shouldFire);
+            return fireSequence.Execute(this, ref fireSequenceState, deltaTime, shouldFire);
+        }
+        return shouldFire;
+    }
+
+    private void PlayEffect()
+    {
+        if (fireEffect != null)
+        {
+            if (fireEffect.TryGetComponent<PooledMonoBehaviour>(out var prefabPooler))
+            {
+                prefabPooler.Get(transform.position, transform.rotation);
+            }
+            else
+            {
+                Instantiate(fireEffect, transform.position, transform.rotation, null);
+            }
         }
     }
 
@@ -206,12 +226,13 @@ public class ShootingController : MonoBehaviour
             return;
 
         Quaternion spread = (applySpread ? ComputeSpread() : Quaternion.identity);
-        pattern.Spawn(position, spread * rotation, projectileHolder, advanceTime, projectilePrefab.GetComponent<Projectile>(), modifiers);
+        pattern.Spawn(position, spread * rotation, projectileHolder, advanceTime, (projectilePrefab!=null ? projectilePrefab.GetComponent<Projectile>() : null), modifiers);
     }
 
     private Quaternion ComputeSpread() {
         return Quaternion.Euler(0, 0, Random.Range(-projectileSpread, projectileSpread));
     }
+
 
     // public void OnDrawGizmos() {
     //     Gizmos.color = (isPlayerControlled ? new Color(1, .5f, 0, .5f) : new Color(1, 0, 0, .5f));

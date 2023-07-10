@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -197,9 +197,9 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 
+    exposedName: 69979c40ec8ec544488b744dd2c442d2
     defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 8395518684384510212, guid: 4c07cde46ea9f82499791c73d7411999, type: 3}
+  prefabGameObject: {fileID: 8395518684384510212, guid: 2d0cc0d206e2d4241a67c419ad046509, type: 3}
   updateParticle: 1
   particleRandomSeed: 7765
   updateDirector: 1
@@ -207,6 +207,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &-7429293024254204913
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -221,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -312,9 +313,9 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 
+    exposedName: 69979c40ec8ec544488b744dd2c442d2
     defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 8395518684384510212, guid: 4c07cde46ea9f82499791c73d7411999, type: 3}
+  prefabGameObject: {fileID: 8395518684384510212, guid: 2d0cc0d206e2d4241a67c419ad046509, type: 3}
   updateParticle: 1
   particleRandomSeed: 7765
   updateDirector: 1
@@ -322,6 +323,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &-5834808287003936986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -336,7 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -428,7 +430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -520,7 +522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -621,6 +623,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &-5207119363295488980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -634,9 +637,9 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 
+    exposedName: 69979c40ec8ec544488b744dd2c442d2
     defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 8395518684384510212, guid: 4c07cde46ea9f82499791c73d7411999, type: 3}
+  prefabGameObject: {fileID: 8395518684384510212, guid: 2d0cc0d206e2d4241a67c419ad046509, type: 3}
   updateParticle: 1
   particleRandomSeed: 7765
   updateDirector: 1
@@ -644,6 +647,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &-4852451349404235127
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -658,7 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -750,7 +754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -842,7 +846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -933,9 +937,9 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 
+    exposedName: 69979c40ec8ec544488b744dd2c442d2
     defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 8395518684384510212, guid: 4c07cde46ea9f82499791c73d7411999, type: 3}
+  prefabGameObject: {fileID: 8395518684384510212, guid: 2d0cc0d206e2d4241a67c419ad046509, type: 3}
   updateParticle: 1
   particleRandomSeed: 7765
   updateDirector: 1
@@ -943,6 +947,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &-2251278861719785613
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -957,7 +962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -1058,6 +1063,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &-1850881864533039474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1072,7 +1078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -1164,7 +1170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -1256,7 +1262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -1348,7 +1354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -1449,6 +1455,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &-102743829438396355
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1462,9 +1469,9 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 
+    exposedName: 69979c40ec8ec544488b744dd2c442d2
     defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 8395518684384510212, guid: 4c07cde46ea9f82499791c73d7411999, type: 3}
+  prefabGameObject: {fileID: 8395518684384510212, guid: 2d0cc0d206e2d4241a67c419ad046509, type: 3}
   updateParticle: 1
   particleRandomSeed: 7765
   updateDirector: 1
@@ -1472,6 +1479,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1553,7 +1561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -1645,7 +1653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -1737,7 +1745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -1829,7 +1837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -1930,6 +1938,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &2210728502290981935
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1953,6 +1962,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &2464918150665846007
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1966,9 +1976,9 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 
+    exposedName: 69979c40ec8ec544488b744dd2c442d2
     defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 8395518684384510212, guid: 4c07cde46ea9f82499791c73d7411999, type: 3}
+  prefabGameObject: {fileID: 8395518684384510212, guid: 2d0cc0d206e2d4241a67c419ad046509, type: 3}
   updateParticle: 1
   particleRandomSeed: 7765
   updateDirector: 1
@@ -1976,6 +1986,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &2717588916942991367
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1999,6 +2010,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &2890215475728517440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2022,6 +2034,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &2907305370401560613
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2035,9 +2048,9 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 
+    exposedName: 69979c40ec8ec544488b744dd2c442d2
     defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 8395518684384510212, guid: 4c07cde46ea9f82499791c73d7411999, type: 3}
+  prefabGameObject: {fileID: 8395518684384510212, guid: 2d0cc0d206e2d4241a67c419ad046509, type: 3}
   updateParticle: 1
   particleRandomSeed: 7765
   updateDirector: 1
@@ -2045,6 +2058,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &3220403650807640216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2058,9 +2072,9 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 
+    exposedName: 69979c40ec8ec544488b744dd2c442d2
     defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 8395518684384510212, guid: 4c07cde46ea9f82499791c73d7411999, type: 3}
+  prefabGameObject: {fileID: 8395518684384510212, guid: 2d0cc0d206e2d4241a67c419ad046509, type: 3}
   updateParticle: 1
   particleRandomSeed: 7765
   updateDirector: 1
@@ -2068,6 +2082,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &3956881863210887773
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2091,6 +2106,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &5360787060109702654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2104,9 +2120,9 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 
+    exposedName: 69979c40ec8ec544488b744dd2c442d2
     defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 8395518684384510212, guid: 4c07cde46ea9f82499791c73d7411999, type: 3}
+  prefabGameObject: {fileID: 8395518684384510212, guid: 2d0cc0d206e2d4241a67c419ad046509, type: 3}
   updateParticle: 1
   particleRandomSeed: 7765
   updateDirector: 1
@@ -2114,6 +2130,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &6262316068191563832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2128,7 +2145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -2220,7 +2237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -2321,6 +2338,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &6917068041348334747
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2335,7 +2353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -2436,6 +2454,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &7372172133343759224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2459,6 +2478,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &7555438101255769155
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2482,6 +2502,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &7750323075352486868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2513,7 +2534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -2604,9 +2625,9 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 
+    exposedName: 69979c40ec8ec544488b744dd2c442d2
     defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 8395518684384510212, guid: 4c07cde46ea9f82499791c73d7411999, type: 3}
+  prefabGameObject: {fileID: 8395518684384510212, guid: 2d0cc0d206e2d4241a67c419ad046509, type: 3}
   updateParticle: 1
   particleRandomSeed: 7765
   updateDirector: 1
@@ -2614,6 +2635,7 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0
 --- !u!114 &9107438006210171665
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2628,7 +2650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -2719,9 +2741,9 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 
+    exposedName: 69979c40ec8ec544488b744dd2c442d2
     defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 8395518684384510212, guid: 4c07cde46ea9f82499791c73d7411999, type: 3}
+  prefabGameObject: {fileID: 8395518684384510212, guid: 2d0cc0d206e2d4241a67c419ad046509, type: 3}
   updateParticle: 1
   particleRandomSeed: 7765
   updateDirector: 1
@@ -2729,3 +2751,4 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+  directorOnClipEnd: 0

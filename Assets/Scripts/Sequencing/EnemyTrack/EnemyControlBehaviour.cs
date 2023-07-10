@@ -9,6 +9,8 @@ using MVest.Unity.Pooling;
 public class EnemyControlBehaviour : PlayableBehaviour {
 
     [System.NonSerialized] public BezierSpline spline;
+    [System.NonSerialized] public BezierSpline spline2;
+    [Range(0, 1)] public float splineWeight;
     public float t;
     public float direction;
     [Range(0, 1)] public float directionWeight;
@@ -22,7 +24,8 @@ public class EnemyControlBehaviour : PlayableBehaviour {
             return;
 
         float u = spline.ArcLengthParameter(t);
-        enemy.transform.position = spline.GetPoint(u);
+        float u2 = (spline2 != null ? spline2.ArcLengthParameter(t) : 0);
+        enemy.transform.position = InterpSplinePosition(u, u2);
 
         float desiredRotation = 0;
         float unusedRotationWeight = 1;
@@ -32,7 +35,7 @@ public class EnemyControlBehaviour : PlayableBehaviour {
 
         // Movement direction
         desiredRotation += AllocateWeight(ref unusedRotationWeight, Mathf.Clamp01(moveDirectionWeight)) * 
-                            Vector3.SignedAngle(Vector3.down, spline.GetVelocity(u).normalized, Vector3.forward);
+                            Vector3.SignedAngle(Vector3.down, InterpSplineVelocity(u, u2).normalized, Vector3.forward);
 
         // Player track direction
         if (GameManager.Instance != null && GameManager.Instance.player != null) {
@@ -45,6 +48,18 @@ public class EnemyControlBehaviour : PlayableBehaviour {
 
         enemy.transform.eulerAngles = new Vector3(0, 0, desiredRotation);
         enemy.shouldShoot = shouldShoot;
+    }
+
+    private Vector3 InterpSplineVelocity(float u, float u2) {
+        if (spline2 == null)
+            return spline.GetVelocity(u);
+        return (1 - splineWeight) * spline.GetVelocity(u) + splineWeight * spline2.GetVelocity(u2);
+    }
+
+    private Vector3 InterpSplinePosition(float u, float u2) {
+        if (spline2 == null)
+            return spline.GetPoint(u);
+        return (1 - splineWeight) * spline.GetPoint(u) + splineWeight * spline2.GetPoint(u2);
     }
 
     private static float AllocateWeight(ref float unusedWeight, float desiredWeight) {
