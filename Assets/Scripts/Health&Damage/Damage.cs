@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+using MVest.Unity.Pooling;
+
 /// <summary>
 /// This class handles the dealing of damage to health components.
 /// </summary>
@@ -24,6 +27,12 @@ public class Damage : MonoBehaviour
     public bool dealDamageOnTriggerStay = false;
     [Tooltip("Whether or not to apply damage on non-trigger collider collisions")]
     public bool dealDamageOnCollision = false;
+
+    private bool destroyed = false;
+
+    private void OnEnable() {
+        destroyed = false;
+    }
 
     /// <summary>
     /// Description: 
@@ -88,25 +97,31 @@ public class Damage : MonoBehaviour
     /// <param name="collisionGameObject">The game object that has been collided with</param>
     private void DealDamage(GameObject collisionGameObject)
     {
-        Health collidedHealth = collisionGameObject.GetComponent<Health>();
-        if (collidedHealth != null)
-        {
-            if (collidedHealth.teamId != this.teamId)
-            {
-                collidedHealth.TakeDamage(damageAmount);
-                if (hitEffect != null)
-                {
-                    Instantiate(hitEffect, transform.position, transform.rotation, null);
-                }
-                if (destroyAfterDamage)
-                {
-                    if (gameObject.GetComponent<Enemy>() != null)
-                    {
-                        gameObject.GetComponent<Enemy>().DoBeforeDestroy();
-                    }
-                    Destroy(this.gameObject);
-                }
+        IHealth collidedHealth = collisionGameObject.GetComponent<IHealth>();
+        if (collidedHealth != null 
+            && collidedHealth.TeamId != this.teamId
+            && (!collidedHealth.IsInvincible || collidedHealth.InvincibleCanDestroy)) {
+
+
+            collidedHealth.TakeDamage(damageAmount);
+            if (hitEffect != null) {
+                Instantiate(hitEffect, transform.position, transform.rotation, null);
             }
+            if (destroyAfterDamage && !destroyed) {
+                destroyed = true;
+                if (gameObject.TryGetComponent<IHealth>(out var health)) {
+                    health.Die();
+                } else {
+                    Pool.Release(gameObject);
+                }
+                // if (gameObject.GetComponent<Enemy>() != null)
+                // {
+                    
+                //     gameObject.GetComponent<Enemy>().DoBeforeDestroy();
+                // }
+                //Destroy(this.gameObject);
+            }
+            
         }
     }
 }

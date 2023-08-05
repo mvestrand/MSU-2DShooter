@@ -127,7 +127,7 @@ MonoBehaviour:
   steerTarget: {fileID: 0}
   followRange: 30
   guns:
-  - {fileID: 8282131553695226666}
+  - _underlyingValue: {fileID: 8282131553695226666}
   shootMode: 1
   shouldShoot: 0
   movementMode: 2
@@ -155,6 +155,9 @@ MonoBehaviour:
   useLives: 0
   currentLives: 3
   maximumLives: 5
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
   deathEffect: {fileID: 2452382815751308013, guid: 990f3751046a4d840806774f23579fe2, type: 3}
   hitEffect: {fileID: 6229913163069739088, guid: d6029318d740811488fd5dd38a7e1ce1, type: 3}
 --- !u!50 &4327850106528714602

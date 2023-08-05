@@ -8,7 +8,7 @@ using UnityEngine.Timeline;
 public class EnemyControlClip : PlayableAsset , ITimelineClipAsset {
     public ExposedReference<BezierSpline> spline;
     public ExposedReference<BezierSpline> spline2;
-        public EnemyControlBehaviour template;
+    public EnemyControlBehaviour template;
     public ClipCaps clipCaps { get { return ClipCaps.None; } }
 
     public override Playable CreatePlayable(PlayableGraph graph, GameObject owner) {

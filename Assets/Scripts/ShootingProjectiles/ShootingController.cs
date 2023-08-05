@@ -5,11 +5,22 @@ using UnityEngine.InputSystem;
 
 using MVest.Unity.Pooling;
 
+public interface IShootingController {
+    void PlayOneShot();
+    bool UpdateFireState(bool shouldFire, ref float turnSpeedLimit);
+    bool UpdateFireState(bool shouldFire, float deltaTime, float extraTime, ref float turnSpeedLimit);
+    float TimeToNextEvent(bool shouldFire);
+}
+
+
 /// <summary>
 /// A class which controlls player aiming and shooting
 /// </summary>
-public class ShootingController : MonoBehaviour
+public class ShootingController : MonoBehaviour, IShootingController
 {
+    public const float MinFireTime = 0.001f;
+
+
     public enum FireMode { Single, Pattern, Sequence }
 
     [Header("GameObject/Component References")]
@@ -39,14 +50,17 @@ public class ShootingController : MonoBehaviour
     [Header("Firing Settings")]
     [Tooltip("The minimum time between projectiles being fired.")]
     public float fireRate = 0.05f;
+    public FloatCurve fireRateAdv = new FloatCurve(FloatCurveMode.Disabled);
 
     [Tooltip("The maximum diference between the direction the" +
         " shooting controller is facing and the direction projectiles are launched.")]
     public float projectileSpread = 1.0f;
 
+    private float fireCooldown = 0;
+
     // The last time this component was fired
-    private float lastFired = Mathf.NegativeInfinity;
-    private float lastFrameTime;
+    // private float lastFired = Mathf.NegativeInfinity;
+    // private float lastFrameTime;
 
     [Header("Effects")]
     [Tooltip("The effect to create when this fires")]
@@ -55,15 +69,7 @@ public class ShootingController : MonoBehaviour
     //The input manager which manages player input
     private InputManager inputManager = null;
 
-    /// <summary>
-    /// Description:
-    /// Standard unity function that runs every frame
-    /// Inputs:
-    /// none
-    /// Returns:
-    /// void (no return)
-    /// </summary>
-    private void Update()
+    protected void Update()
     {
         ProcessInput();
     }
@@ -76,14 +82,14 @@ public class ShootingController : MonoBehaviour
     /// Returns:
     /// void (no return)
     /// </summary>
-    private void Start()
+    protected void Start()
     {
         SetupInput();
     }
 
-    private void OnEnable() {
-        lastFrameTime = Time.timeSinceLevelLoad;
-        lastFired = Mathf.NegativeInfinity;
+    protected void OnEnable() {
+        // lastFrameTime = Time.timeSinceLevelLoad;
+        // lastFired = Mathf.NegativeInfinity;
         fireSequenceState.Stop();
     }
 
@@ -122,7 +128,8 @@ public class ShootingController : MonoBehaviour
     void ProcessInput()
     {
         if (isPlayerControlled) {
-            UpdateFireState(inputManager.firePressed || inputManager.fireHeld);
+            float dummy = 0;
+            UpdateFireState(inputManager.firePressed || inputManager.fireHeld, Time.deltaTime, 0, ref dummy);
         }
     }
 
@@ -130,12 +137,17 @@ public class ShootingController : MonoBehaviour
         if (mode == FireMode.Single || mode == FireMode.Pattern) {
             FireBaseProjectiles();
             PlayEffect();
-            lastFired = Time.timeSinceLevelLoad;
+            fireCooldown = fireRate;
+            // lastFired = Time.timeSinceLevelLoad;
         } else if (mode == FireMode.Sequence){
             fireSequenceState.Start();
         }
     }
 
+
+    public bool UpdateFireState(bool shouldFire, ref float turnSpeedLimit) {
+        return UpdateFireState(shouldFire, Time.deltaTime, 0, ref turnSpeedLimit);
+    }
 
     /// <summary>
     /// Description:
@@ -145,26 +157,28 @@ public class ShootingController : MonoBehaviour
     /// Returns: 
     /// True if still firing, false otherwise. Always matches shouldFire, EXCEPT when running a fire sequence
     /// </summary>
-    public bool UpdateFireState(bool shouldFire)
+    public bool UpdateFireState(bool shouldFire, float deltaTime, float extraTime, ref float turnSpeedLimit)
     {
-        float deltaTime = Time.timeSinceLevelLoad - lastFrameTime;
-        lastFrameTime = Time.timeSinceLevelLoad;
+        //float deltaTime = Time.timeSinceLevelLoad - lastFrameTime;
+        // lastFrameTime = Time.timeSinceLevelLoad;
         if (Time.timeScale == 0)
             return shouldFire;
 
         if (mode == FireMode.Single || mode == FireMode.Pattern) {
+            if (shouldFire || !fireRateAdv.Enabled)
+                fireCooldown -= deltaTime;
             // If the cooldown is over fire a projectile
-            if ((Time.timeSinceLevelLoad - lastFired) >= fireRate && Time.timeScale != 0 && shouldFire)
-            {
+            if (fireCooldown <= 0 && Time.timeScale != 0 && shouldFire) {
                 // Launches a projectile
                 FireBaseProjectiles();
                 PlayEffect();
 
                 // Restart the cooldown
-                lastFired = Time.timeSinceLevelLoad;
+                float rand = (fireRateAdv.UsesT ? Random.Range(0f, 1f) : 0);
+                fireCooldown = Mathf.Max(fireRateAdv.Get(rand, fireRate), MinFireTime);
             }
         } else if (mode == FireMode.Sequence) {
-            return fireSequence.Execute(this, ref fireSequenceState, deltaTime, shouldFire);
+            return fireSequence.Execute(this, ref fireSequenceState, deltaTime, extraTime, shouldFire, ref turnSpeedLimit);
         }
         return shouldFire;
     }
@@ -231,6 +245,16 @@ public class ShootingController : MonoBehaviour
 
     private Quaternion ComputeSpread() {
         return Quaternion.Euler(0, 0, Random.Range(-projectileSpread, projectileSpread));
+    }
+
+    public float TimeToNextEvent(bool shouldFire)
+    {
+        if (mode == FireMode.Single || mode == FireMode.Pattern) {
+            return (shouldFire ? fireCooldown : float.MaxValue);
+        }
+        else if (mode == FireMode.Sequence)
+            return fireSequence.TimeToNextEvent(fireSequenceState, shouldFire);
+        return float.MaxValue;
     }
 
 

@@ -5,25 +5,57 @@ using UnityEngine;
 
 using MVest.Unity;
 using MVest.Unity.Pooling;
+using MVest.Unity.Globals;
+
+public interface IHealth {
+    /// <summary> Owning team of this health object. </summary>
+    int TeamId { get; }
+    /// <summary> True if the object is currently invincible. </summary>
+    bool IsInvincible { get; }
+    /// <summary> Current health of the object </summary>
+    bool InvincibleCanDestroy { get; }
+    int CurrentHealth { get; }
+    /// <summary> Maximum health of the object </summary>
+    int MaxHealth { get; }
+    /// <summary>
+    /// Deal damage to the object
+    /// </summary>
+    /// <param name="damageAmount">Amount of health to remove. Ignored if invincible. </param>
+    void TakeDamage(int damageAmount);
+    /// <summary>
+    /// Event called when the object dies. The dying GameObject is given as a parameter.
+    /// </summary>
+    UnityGameObjectEvent OnDeath { get; }
+    /// <summary>
+    /// Sets health to zero and kills the game object.
+    /// </summary>
+    void Die();
+}
 
 /// <summary>
 /// This class handles the health state of a game object.
 /// 
 /// Implementation Notes: 2D Rigidbodies must be set to never sleep for this to interact with trigger stay damage
 /// </summary>
-public class Health : MonoBehaviour, IRestartable
+public class Health : MonoBehaviour, IRestartable, IHealth
 {
     [Header("Team Settings")]
     [Tooltip("The team associated with this damage")]
     public int teamId = 0;
+    public int TeamId { get { return teamId; } }
+
+    [SerializeField] private bool invincibleCanDestroy = false;
+    public bool InvincibleCanDestroy { get { return invincibleCanDestroy; } }
 
     [Header("Health Settings")]
     [Tooltip("The default health value")]
     public int defaultHealth = 1;
     [Tooltip("The maximum health value")]
     public int maximumHealth = 1;
+    public int MaxHealth {get { return maximumHealth; } }
     [Tooltip("The current in game health value")]
     public int currentHealth = 1;
+    public int CurrentHealth { get { return currentHealth; } }
     [Tooltip("Invulnerability duration, in seconds, after taking damage")]
     public float damageInvincibilityTime = 1f;
     [Tooltip("Invulnerability duration, in seconds, after taking damage")]
@@ -41,10 +73,17 @@ public class Health : MonoBehaviour, IRestartable
     [Tooltip("The maximum number of lives this health can have")]
     public int maximumLives = 5;
 
+
+    public bool infiniteLives = false;
+
     [System.NonSerialized]
     private bool _isDying = false;
 
+    [SerializeField]
+    private GlobalInt lives;
+
     public UnityGameObjectEvent onDeath = new UnityGameObjectEvent();
+    public UnityGameObjectEvent OnDeath { get { return onDeath; } }
 
     /// <summary>
     /// Description:
@@ -76,6 +115,9 @@ public class Health : MonoBehaviour, IRestartable
     private float timeToBecomeDamagableAgain = 0;
     // Whether or not the health is invincible
     private bool isInvincableFromDamage = false;
+    public bool IsInvincible {
+        get { return isInvincableFromDamage || isAlwaysInvincible; }
+    }
 
     /// <summary>
     /// Description:
@@ -253,22 +295,29 @@ public class Health : MonoBehaviour, IRestartable
     /// </summary>
     void HandleDeathWithLives()
     {
-        currentLives -= 1;
-        if (currentLives > 0)
-        {
+        if (!infiniteLives) {
+            if (lives != null) {
+                lives.Value -= 1;
+            } else {
+                currentLives -= 1;
+            }
+        }
+
+        if (infiniteLives || lives != null && lives.Value >= 0 || lives == null && currentLives >= 0) {
             GameManager.Instance.StartCoroutine(Respawn());
         }
         else
         {
             if (gameObject.tag == "Player" && GameManager.Instance != null)
             {
+                gameObject.SetActive(false);
                 GameManager.Instance.GameOver();
+            } else {
+                if (gameObject.GetComponent<Enemy>() != null) {
+                    gameObject.GetComponent<Enemy>().DoBeforeDestroy();
+                }
+                Destroy(this.gameObject);
             }
-            if (gameObject.GetComponent<Enemy>() != null)
-            {
-                gameObject.GetComponent<Enemy>().DoBeforeDestroy();
-            }
-            Destroy(this.gameObject);
         }
     }
 

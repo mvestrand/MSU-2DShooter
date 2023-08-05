@@ -31,11 +31,11 @@ public class TimedObjectDestroyer : MonoBehaviour
     /// Returns: 
     /// void (no return)
     /// </summary>
-    private void OnApplicationQuit()
-    {
-        quitting = true;
-        DestroyImmediate(this.gameObject);
-    }
+    // private void OnApplicationQuit()
+    // {
+    //     quitting = true;
+    //     DestroyImmediate(this.gameObject);
+    // }
 
     void OnEnable() {
         timeAlive = 0;
@@ -72,20 +72,20 @@ public class TimedObjectDestroyer : MonoBehaviour
     /// Returns: 
     /// void (no return)
     /// </summary>
-    private void OnDestroy()
-    {
-        // if (destroyChildrenOnDeath && !quitting && Application.isPlaying)
-        // {
-        //     int childCount = transform.childCount;
-        //     for (int i = childCount - 1; i >= 0; i--)
-        //     {
-        //         GameObject childObject = transform.GetChild(i).gameObject;
-        //         if (childObject != null)
-        //         {
-        //             DestroyImmediate(childObject);
-        //         }
-        //     }
-        // }
-        // transform.DetachChildren();
-    }
+    // private void OnDestroy()
+    // {
+    //     // if (destroyChildrenOnDeath && !quitting && Application.isPlaying)
+    //     // {
+    //     //     int childCount = transform.childCount;
+    //     //     for (int i = childCount - 1; i >= 0; i--)
+    //     //     {
+    //     //         GameObject childObject = transform.GetChild(i).gameObject;
+    //     //         if (childObject != null)
+    //     //         {
+    //     //             DestroyImmediate(childObject);
+    //     //         }
+    //     //     }
+    //     // }
+    //     // transform.DetachChildren();
+    // }
 }

@@ -173,11 +173,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd8ed0746ef8324aa9b33326bd46bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 8
+  projectileSpeed: 15
   testCurve:
     mode: 0
     value: 0
     curveScale: 0
+    min: 0
+    max: 0
     curve:
       serializedVersion: 2
       m_Curve: []

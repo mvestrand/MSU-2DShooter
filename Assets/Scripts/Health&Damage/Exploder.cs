@@ -19,14 +19,14 @@ public class Exploder : MonoBehaviour {
 
     public void OnEnable() {
         if (explodeOnDeath) {
-            GetComponent<Health>()?.onDeath.AddListener(OnDeath);
+            GetComponent<IHealth>()?.OnDeath.AddListener(OnDeath);
         }
         _hasExploded = false;
     }
 
     public void OnDisable() {
         if (explodeOnDeath) {
-            GetComponent<Health>()?.onDeath.RemoveListener(OnDeath);
+            GetComponent<IHealth>()?.OnDeath.RemoveListener(OnDeath);
         }
     }
 
@@ -43,7 +43,7 @@ public class Exploder : MonoBehaviour {
         if (_hasExploded)
             return;
         _hasExploded = true;
-        if (explodeOnDeath && TryGetComponent<Health>(out var health)) {
+        if (explodeOnDeath && TryGetComponent<IHealth>(out var health)) {
             health.Die();
         } else {
             SpawnExplosion();

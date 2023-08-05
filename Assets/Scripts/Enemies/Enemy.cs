@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using AYellowpaper;
+
 /// <summary>
 /// A class which controls enemy behaviour
 /// </summary>
+[SelectionBase]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] bool overrideControls;
@@ -22,7 +25,8 @@ public class Enemy : MonoBehaviour
 
     [Header("Shooting")]
     [Tooltip("The enemy's gun components")]
-    public List<ShootingController> guns = new List<ShootingController>();
+    public List<InterfaceReference<IShootingController, MonoBehaviour>> guns = new List<InterfaceReference<IShootingController, MonoBehaviour>>();
+    
 
     /// <summary>
     /// Enum to help with shooting modes
@@ -34,7 +38,7 @@ public class Enemy : MonoBehaviour
         "None: Enemy does not shoot.\n" +
         "ShootAll: Enemy fires all guns whenever it can.")]
     public ShootMode shootMode = ShootMode.TrackAndSignal;
-    [HideInInspector] public bool shouldShoot = false;
+    public bool shouldShoot = false;
 
     /// <summary>
     /// Enum to help wih different movement modes
@@ -49,6 +53,10 @@ public class Enemy : MonoBehaviour
 
     //The direction that this enemy will try to scroll if it is set as a scrolling enemy.
     [SerializeField] private Vector3 scrollDirection = Vector3.right;
+
+
+    public float turnSpeed = -1f;
+    public TrackPlayer playerTracker;
 
     /// <summary>
     /// Description:
@@ -245,9 +253,22 @@ public class Enemy : MonoBehaviour
             default:
                 bool tryingToShoot = (shootMode == ShootMode.Always || 
                                         (shootMode == ShootMode.TrackAndSignal || shootMode == ShootMode.SetByTrack) && shouldShoot);
-                foreach (ShootingController gun in guns)
+                foreach (var gun in guns)
                 {
-                    gun.UpdateFireState(tryingToShoot);
+                    gun.Value.UpdateFireState(tryingToShoot, ref turnSpeed);                    
+                }
+                if (playerTracker != null) {
+                    if (turnSpeed < 0) {
+                        if (playerTracker.baseTurnSpeed < 0)
+                            playerTracker.useTurnSpeed = false;
+                        else {
+                            playerTracker.useTurnSpeed = true;
+                            playerTracker.turnSpeed = playerTracker.baseTurnSpeed;
+                        }
+                    } else {
+                        playerTracker.useTurnSpeed = true;
+                        playerTracker.turnSpeed = turnSpeed;
+                    }
                 }
                 break;       
         }

@@ -6,14 +6,14 @@ using MVest.Unity.Pooling;
 
 [System.Serializable]
 public class ProjectileData {
+    [Tooltip("Projectile prefab")]
     public Projectile prefab;
     public ProjectileModifiers modifiers;
 }
 
 [CreateAssetMenu(menuName = "Bullet Pattern")]
 public class BulletPattern : ScriptableObject {
-
-    [SerializeField] private List<ProjectileData> projectiles = new List<ProjectileData>();
+    [SerializeField]private List<ProjectileData> projectiles = new List<ProjectileData>();
 
     public void Spawn(Vector3 position, Quaternion rotation, Transform parent, float advanceTime=0, Projectile fallback=null, ProjectileModifiers globalModifiers=null) {
         if (globalModifiers != null) {

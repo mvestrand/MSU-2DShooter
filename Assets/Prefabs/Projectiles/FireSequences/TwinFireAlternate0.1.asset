@@ -15,7 +15,7 @@ MonoBehaviour:
   endTime: 0.2
   frames:
   - time: 0
-    projectile: {fileID: 2535222879597372320, guid: 5089b9cd653abda4ba6013a20e42c774, type: 3}
+    projectile: {fileID: 2535222879597372320, guid: 0840effb688c968499835ab189238a63, type: 3}
     pattern: {fileID: 0}
     modifiers:
       offset: {x: -0.13, y: 0}
@@ -23,6 +23,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -33,6 +35,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -45,6 +49,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -54,12 +60,13 @@ MonoBehaviour:
       speedMode: 0
     useControllerSpread: 0
     effect: {fileID: 6229913163069739088, guid: 04ff83012aababc4688c34ffa9d0e214, type: 3}
+    shouldParentEffect: 0
     mode: 1
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
   - time: 0.1
-    projectile: {fileID: 2535222879597372320, guid: 5089b9cd653abda4ba6013a20e42c774, type: 3}
+    projectile: {fileID: 2535222879597372320, guid: 0840effb688c968499835ab189238a63, type: 3}
     pattern: {fileID: 0}
     modifiers:
       offset: {x: 0.13, y: 0}
@@ -67,6 +74,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -77,6 +86,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -89,6 +100,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -98,6 +111,7 @@ MonoBehaviour:
       speedMode: 0
     useControllerSpread: 0
     effect: {fileID: 6229913163069739088, guid: 04ff83012aababc4688c34ffa9d0e214, type: 3}
+    shouldParentEffect: 0
     mode: 1
     jumpTargetFrame: 0
     maxLoops: 0

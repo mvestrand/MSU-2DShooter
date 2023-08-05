@@ -20,6 +20,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -30,6 +32,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -42,13 +46,15 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      speedMode: 0
+      speedMode: 1
   - prefab: {fileID: 2535222879597372320, guid: 0840effb688c968499835ab189238a63, type: 3}
     modifiers:
       offset: {x: -0.15, y: 0}
@@ -56,6 +62,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -66,6 +74,8 @@ MonoBehaviour:
         mode: 0
         value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
@@ -76,12 +86,14 @@ MonoBehaviour:
       rotatedOffset: {x: 0, y: 0}
       speed:
         mode: 0
-        value: 1
+        value: 0
         curveScale: 0
+        min: 0
+        max: 0
         curve:
           serializedVersion: 2
           m_Curve: []
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      speedMode: 0
+      speedMode: 1

@@ -15,6 +15,9 @@ public class TrackPlayer : MonoBehaviour
     //     Idle,
     //     ReturnToDefault
     // }
+    public float baseTurnSpeed = -1f;
+    public bool useTurnSpeed = false;
+    public float turnSpeed = 10f;
 
     public bool trackingEnabled = true;
     // public OptionalFloat turnSpeed;
@@ -23,6 +26,7 @@ public class TrackPlayer : MonoBehaviour
     // public float defaultAngle;
     // public OptionalFloat range;
 
+    public float defaultAngle;
 
     // Update is called once per frame
 
@@ -30,8 +34,8 @@ public class TrackPlayer : MonoBehaviour
 
     void Update()
     {
-        float desiredRotation = 0;
-        if (GameManager.Instance != null && GameManager.Instance.player != null) {
+        float desiredRotation = defaultAngle;
+        if (GameManager.Instance != null && GameManager.Instance.player != null && trackingEnabled) {
 
             var steerTarget = GameManager.Instance.player.transform;
             var targetDirection = new Vector3(steerTarget.position.x - transform.position.x, steerTarget.position.y - transform.position.y, 0).normalized;
@@ -40,7 +44,15 @@ public class TrackPlayer : MonoBehaviour
         }
 
 
+        if (useTurnSpeed) {
+            float currentRotation = transform.eulerAngles.z;
+            desiredRotation = Mathf.MoveTowardsAngle(currentRotation, desiredRotation, Time.deltaTime * turnSpeed);
+        }
 
         transform.eulerAngles = new Vector3(0, 0, desiredRotation);
+    }
+
+    void OnEnable() {
+        turnSpeed = baseTurnSpeed;
     }
 }

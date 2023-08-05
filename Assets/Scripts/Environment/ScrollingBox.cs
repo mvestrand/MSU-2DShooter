@@ -8,7 +8,9 @@ public class ScrollingBox : MonoBehaviour
     [SerializeField] private BackgroundController controller;
     [SerializeField] private float height;
     [SerializeField] private float scrollSpeed;
-    [SerializeField] private SpriteSet spriteSet;
+
+    [ContextMenuItem("Randomize sprites", "RandomizeSprites")]
+    [SerializeField] public SpriteSet spriteSet;
     [SerializeField] private bool runInEditor = false;
     [Range(0f, 1f)]
     public float transparency = 1.0f;
@@ -42,6 +44,21 @@ public class ScrollingBox : MonoBehaviour
 
             if (tf.tag == "BackgroundPanel" && tf.TryGetComponent<SpriteRenderer>(out var renderer))
                 renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, transparency);                
+        }
+    }
+
+    // public void SetSpriteSet(SpriteSet newSet) {
+    //     spriteSet = newSet;
+    // }
+
+    public void RandomizeSprites() {
+        foreach (Transform tf in transform) {
+            if (tf.tag == "BackgroundPanel" && tf.TryGetComponent<SpriteRenderer>(out var r)) {
+                if (spriteSet != null)
+                    spriteSet.ChangeSprite(r);
+                else
+                    r.sprite = null;
+            }
         }
     }
 }

@@ -65,6 +65,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 1
     projectile: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
     pattern: {fileID: 11400000, guid: 5e956c31a4a42644593eb0f845cb1f29, type: 2}
@@ -116,6 +118,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 1.2
     projectile: {fileID: 0}
     pattern: {fileID: 0}
@@ -167,6 +171,8 @@ MonoBehaviour:
     jumpTargetFrame: 1
     maxLoops: 3
     ignoreJumpOnNoShoot: 1
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 1.4
     projectile: {fileID: 0}
     pattern: {fileID: 0}
@@ -218,3 +224,5 @@ MonoBehaviour:
     jumpTargetFrame: 1
     maxLoops: 100
     ignoreJumpOnNoShoot: 1
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0

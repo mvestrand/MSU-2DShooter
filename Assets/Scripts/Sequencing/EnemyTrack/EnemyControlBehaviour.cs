@@ -46,6 +46,11 @@ public class EnemyControlBehaviour : PlayableBehaviour {
             desiredRotation += AllocateWeight(ref unusedRotationWeight, playerTrackWeight) * angle;
         }
 
+        if (enemy.turnSpeed >= 0) {
+            float currentRotation = enemy.transform.eulerAngles.z;
+            desiredRotation = Mathf.MoveTowardsAngle(currentRotation, desiredRotation, Time.deltaTime * enemy.turnSpeed);
+        }
+
         enemy.transform.eulerAngles = new Vector3(0, 0, desiredRotation);
         enemy.shouldShoot = shouldShoot;
     }

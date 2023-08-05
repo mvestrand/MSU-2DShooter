@@ -107,7 +107,11 @@ MonoBehaviour:
   spline:
     exposedName: df5471ab5c48d814d83295bb43d7b470
     defaultValue: {fileID: 0}
+  spline2:
+    exposedName: 
+    defaultValue: {fileID: 0}
   template:
+    splineWeight: 0
     t: 0
     direction: 0
     directionWeight: 0

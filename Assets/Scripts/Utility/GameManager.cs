@@ -322,7 +322,7 @@ public class GameManager : MonoBehaviour
             {
                 Instantiate(victoryEffect, transform.position, transform.rotation, null);
             }
-        }     
+        }
     }
 
     [Header("Game Over Settings:")]

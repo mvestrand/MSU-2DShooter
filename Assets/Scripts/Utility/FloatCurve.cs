@@ -25,6 +25,11 @@ public class FloatCurve {
         value = 0;
         curve = new AnimationCurve();
     }
+    public FloatCurve(FloatCurveMode mode) {
+        this.mode = mode;
+        value = 0;
+        curve = new AnimationCurve();
+    }
 
     public bool Enabled {
         get { return mode != FloatCurveMode.Disabled; }

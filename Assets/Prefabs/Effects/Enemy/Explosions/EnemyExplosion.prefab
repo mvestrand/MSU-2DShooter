@@ -32,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2452382815751308013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.47029, y: 2.76, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioRef: {fileID: 11400000, guid: a65ca2722061e9f40acdfcbe7d27227c, type: 2}
   source: {fileID: 7808391201307655013}
-  volume: 1
+  volume: 0.5
   playOnAwake: 1
   delay: 0
 --- !u!114 &-8864557170095298626
@@ -268,7 +268,7 @@ MonoBehaviour:
     enabled: 0
     value: 0
   shooters:
-  - {fileID: -2151259037767228965}
+  - _underlyingValue: {fileID: -2151259037767228965}
 --- !u!114 &-2151259037767228965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,5 +289,17 @@ MonoBehaviour:
   channel: 0
   isPlayerControlled: 0
   fireRate: 0.05
+  fireRateAdv:
+    mode: 2
+    value: 0
+    curveScale: 0
+    min: 0
+    max: 0
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   projectileSpread: 1
   fireEffect: {fileID: 6229913163069739088, guid: 04ff83012aababc4688c34ffa9d0e214, type: 3}

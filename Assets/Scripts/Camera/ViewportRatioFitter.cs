@@ -37,7 +37,7 @@ public class ViewportRatioFitter : MonoBehaviour
     //     UpdateViewport();        
     // }
 
-    void LateUpdate() {
+    void OnPreRender() {
         UpdateViewport();
     }
 }

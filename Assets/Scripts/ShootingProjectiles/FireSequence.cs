@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using MVest.Unity;
 using MVest.Unity.Pooling;
+using System;
 
 public struct FireSequenceState {
     public float t;
@@ -37,7 +39,7 @@ public enum FireSequenceFrameMode {
 
 [System.Serializable]
 public struct FireSequenceFrame {
-    [Delayed][Min(0)]public float time;
+    public float time;
     public Projectile projectile;
     public BulletPattern pattern;
     public ProjectileModifiers modifiers;
@@ -48,7 +50,10 @@ public struct FireSequenceFrame {
     public int jumpTargetFrame;
     public int maxLoops;
     public bool ignoreJumpOnNoShoot;
+    public bool shouldLimitTurnSpeed;
+    public float limitTurnSpeed;
 
+    //public OptionalFloat 
 
 }
 
@@ -63,17 +68,22 @@ public class FireSequence : ScriptableObject {
     /// </summary>
     /// <param name="controller">The ShootingController to use </param>
     /// <param name="deltaTime">The amount of time in seconds to advance the sequence</param>
+    /// <param name="extraTime">The amount of extra time in seconds to project projectiles forwards</param>
     /// <param name="state">The controller's instance state to use and update.</param>
     /// <param name="tryingToFire">Is the controlling entity trying to keep firing?</param>
     /// <returns>True if the fire sequence is still running, false otherwise</returns>
-    public bool Execute(ShootingController controller, ref FireSequenceState state, float deltaTime, bool tryingToFire) {
+    public bool Execute(ShootingController controller, ref FireSequenceState state, float deltaTime, float extraTime, bool tryingToFire, ref float turnSpeed) {
+        if (endTime <= 0) {
+            Debug.LogWarning($"Fire Sequence \"{this.DebugName()}\" has 0 length duration");
+            return false;
+        }
         if (state.index < 0) {
             if (!tryingToFire)
                 return false;
             else
                 state.Start();
         }
-        while (deltaTime > 0) {
+        while (deltaTime >= 0) {
             if (state.index >= frames.Count || frames[state.index].time > endTime) {  // No more frames, go until end time is hit
                 state.t += deltaTime;
                 deltaTime = state.t - endTime;
@@ -89,7 +99,7 @@ public class FireSequence : ScriptableObject {
 
             } else if (state.t + deltaTime >= frames[state.index].time) { // Enough time has passed to execute the next frame
                 deltaTime = deltaTime - (frames[state.index].time - state.t);
-                ExecuteFrame(controller, ref state, deltaTime, tryingToFire);
+                ExecuteFrame(controller, ref state, deltaTime + extraTime, tryingToFire, ref turnSpeed);
 
             } else {  // Wait for next frame
                 state.t += deltaTime;
@@ -108,21 +118,26 @@ public class FireSequence : ScriptableObject {
         frames.Sort((f1, f2) => f1.time.CompareTo(f2.time));
     }
 
-    private void ExecuteFrame(ShootingController controller, ref FireSequenceState state, float deltaTime, bool tryingToFire) {
+    private void ExecuteFrame(ShootingController controller, ref FireSequenceState state, float extraTime, bool tryingToFire, ref float turnSpeed) {
+        
         // Spawn projectiles specified by the frame
         if (frames[state.index].mode == FireSequenceFrameMode.Projectile)
             controller.FireSingle(
-                frames[state.index].projectile, deltaTime, 
+                frames[state.index].projectile, extraTime, 
                 frames[state.index].useControllerSpread, 
                 frames[state.index].modifiers);
         else if (frames[state.index].mode == FireSequenceFrameMode.Pattern)
             controller.FirePattern(
-                frames[state.index].pattern, deltaTime, 
+                frames[state.index].pattern, extraTime, 
                 frames[state.index].useControllerSpread, 
                 frames[state.index].modifiers);
         
         if (frames[state.index].effect != null) { // Create effect if any is needed
             Pool.Instantiate(frames[state.index].effect, controller.transform.position, controller.transform.rotation, (frames[state.index].shouldParentEffect ? controller.transform : null));
+        }
+
+        if (frames[state.index].shouldLimitTurnSpeed) {
+            turnSpeed = frames[state.index].limitTurnSpeed;
         }
 
         if (frames[state.index].mode == FireSequenceFrameMode.JumpFrame) {
@@ -149,4 +164,15 @@ public class FireSequence : ScriptableObject {
         }
     }
 
+    public float TimeToNextEvent(in FireSequenceState state, bool tryingToFire) {
+        if (state.index < 0) { // Sequence is not running
+            if (tryingToFire && frames.Count > 0)
+                return frames[0].time;
+            else
+                return float.MaxValue;
+        } else if (state.index >= frames.Count || frames[state.index].time > endTime) // Next event is sequence end
+            return endTime - state.t;
+        else
+            return frames[state.index].time - state.t;
+    }
 }

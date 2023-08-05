@@ -4,14 +4,16 @@ using UnityEngine;
 
 using MVest.Unity.Pooling;
 
+using AYellowpaper;
+
 public class OneShotShooter : MonoBehaviour
 {
     [SerializeField] OptionalFloat lifetime;
-    [SerializeField] List<ShootingController> shooters;
+    [SerializeField] List<InterfaceReference<IShootingController, MonoBehaviour>> shooters = new List<InterfaceReference<IShootingController, MonoBehaviour>>();
 
     void OnEnable() {
         foreach (var shooter in shooters) {
-            shooter.PlayOneShot();
+            shooter.Value.PlayOneShot();
         }
     }
 
@@ -23,7 +25,8 @@ public class OneShotShooter : MonoBehaviour
         bool shouldFire = lifetime.enabled && lifetime.value > 0;
         bool isDone = true;
         foreach (var shooter in shooters) {
-            isDone = isDone && !shooter.UpdateFireState(shouldFire);
+            float dummy = 0;
+            isDone = isDone && !shooter.Value.UpdateFireState(shouldFire, ref dummy);
         }
         // if (isDone)
         //     Pool.Release(gameObject);
