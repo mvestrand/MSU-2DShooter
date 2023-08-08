@@ -17,6 +17,7 @@ public class EnemyControlBehaviour : PlayableBehaviour {
     [Range(0, 1)] public float moveDirectionWeight;
     [Range(0, 1)] public float playerTrackWeight;
     public bool shouldShoot;
+    public bool useTurnSpeed = false;
 
     public override void ProcessFrame(Playable playable, FrameData info, object playerData) {
         Enemy enemy = playerData as Enemy;
@@ -46,9 +47,9 @@ public class EnemyControlBehaviour : PlayableBehaviour {
             desiredRotation += AllocateWeight(ref unusedRotationWeight, playerTrackWeight) * angle;
         }
 
-        if (enemy.turnSpeed >= 0) {
+        if (enemy.useTurnSpeed && useTurnSpeed) {
             float currentRotation = enemy.transform.eulerAngles.z;
-            desiredRotation = Mathf.MoveTowardsAngle(currentRotation, desiredRotation, Time.deltaTime * enemy.turnSpeed);
+            desiredRotation = Mathf.MoveTowardsAngle(currentRotation, desiredRotation, Time.deltaTime * enemy.turnSpeedMod*enemy.maxTurnSpeed);
         }
 
         enemy.transform.eulerAngles = new Vector3(0, 0, desiredRotation);

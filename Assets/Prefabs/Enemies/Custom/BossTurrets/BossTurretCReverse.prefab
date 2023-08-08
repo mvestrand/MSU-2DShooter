@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 9058137129984906912}
   - component: {fileID: 6952909048625997974}
   m_Layer: 0
-  m_Name: BossTurretA
+  m_Name: BossTurretCReverse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,7 +131,7 @@ Animator:
   m_GameObject: {fileID: 4400138444423042616}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2bf230d963e4f9a44b127ad5fc01c8e0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4d689d5747ff95243ac9da4ccee78ffc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -296,8 +296,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 0}
   projectileHolder: {fileID: 0}
-  projectilePattern: {fileID: 11400000, guid: bb5f68fbbf3d36044846abed86aba7c9, type: 2}
-  fireSequence: {fileID: 0}
+  projectilePattern: {fileID: 11400000, guid: f78d4586aa9dd76469a1c96b9d430a03, type: 2}
+  fireSequence: {fileID: 11400000, guid: 9829facef3fd16a46b777f263bd1c2ab, type: 2}
   mode: 1
   channel: 0
   isPlayerControlled: 0

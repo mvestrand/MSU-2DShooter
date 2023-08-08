@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class BossTurret : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField] GameObject prefab;
+    [SerializeField] GameObject turret;
+
+    public void ActivateTurret() {
+        if (turret != null) {
+            DeactivateTurret();
+        }
+        turret = Instantiate(prefab, transform);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void DeactivateTurret() {
+        if (turret != null) {
+            turret.GetComponent<Animator>().SetTrigger("deactivate");
+        }
     }
 }

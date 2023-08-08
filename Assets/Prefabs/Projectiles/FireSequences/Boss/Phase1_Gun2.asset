@@ -59,7 +59,7 @@ MonoBehaviour:
           m_RotationOrder: 0
       speedMode: 0
     useControllerSpread: 0
-    effect: {fileID: 0}
+    effect: {fileID: 6229913163069739088, guid: 04ff83012aababc4688c34ffa9d0e214, type: 3}
     shouldParentEffect: 0
     mode: 1
     jumpTargetFrame: 0

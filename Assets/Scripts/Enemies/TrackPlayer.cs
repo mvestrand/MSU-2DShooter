@@ -15,7 +15,7 @@ public class TrackPlayer : MonoBehaviour
     //     Idle,
     //     ReturnToDefault
     // }
-    public float baseTurnSpeed = -1f;
+    public float baseTurnSpeed = 10f;
     public bool useTurnSpeed = false;
     public float turnSpeed = 10f;
 

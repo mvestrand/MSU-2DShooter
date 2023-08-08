@@ -55,7 +55,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Vector3 scrollDirection = Vector3.right;
 
 
-    public float turnSpeed = -1f;
+    public bool useTurnSpeed = false;
+    public float maxTurnSpeed = 5f;
+    public float turnSpeedMod = 1f;
+    
     public TrackPlayer playerTracker;
 
     /// <summary>
@@ -255,19 +258,14 @@ public class Enemy : MonoBehaviour
                                         (shootMode == ShootMode.TrackAndSignal || shootMode == ShootMode.SetByTrack) && shouldShoot);
                 foreach (var gun in guns)
                 {
-                    gun.Value.UpdateFireState(tryingToShoot, ref turnSpeed);                    
+                    gun.Value.UpdateFireState(tryingToShoot, ref turnSpeedMod);                    
                 }
                 if (playerTracker != null) {
-                    if (turnSpeed < 0) {
-                        if (playerTracker.baseTurnSpeed < 0)
-                            playerTracker.useTurnSpeed = false;
-                        else {
-                            playerTracker.useTurnSpeed = true;
-                            playerTracker.turnSpeed = playerTracker.baseTurnSpeed;
-                        }
-                    } else {
+                    if (useTurnSpeed) {
                         playerTracker.useTurnSpeed = true;
-                        playerTracker.turnSpeed = turnSpeed;
+                        playerTracker.turnSpeed = turnSpeedMod * maxTurnSpeed;
+                    } else {
+                        playerTracker.useTurnSpeed = false;
                     }
                 }
                 break;       
