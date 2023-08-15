@@ -9,8 +9,12 @@ public class JumpReceiver : MonoBehaviour, INotificationReceiver
             return;
         var destinationMarker = jumpMarker.destinationMarker;
         if (destinationMarker != null && destinationMarker.active) {
-            var timelinePlayable = origin.GetGraph().GetRootPlayable(0);
-            timelinePlayable.SetTime(destinationMarker.time);
+            var director = GetComponent<PlayableDirector>();
+            director.Pause();
+            director.time = destinationMarker.time;
+            director.Resume();
+            // var timelinePlayable = origin.GetGraph().GetRootPlayable(0);
+            // timelinePlayable.SetTime(destinationMarker.time);
         }
     }
 }

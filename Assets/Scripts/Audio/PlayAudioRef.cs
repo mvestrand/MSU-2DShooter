@@ -10,6 +10,10 @@ public class PlayAudioRef : MonoBehaviour
     [SerializeField] bool playOnAwake = true;
     [SerializeField] float delay = 0;
 
+    // void Update() {
+    //     source.
+    // }
+
     public IEnumerator Play() {
         if (delay > 0) {
             yield return new WaitForSeconds(delay);

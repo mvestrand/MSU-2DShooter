@@ -52,7 +52,7 @@ public struct FireSequenceFrame {
     public bool ignoreJumpOnNoShoot;
     public bool shouldLimitTurnSpeed;
     public float limitTurnSpeed;
-
+    
     //public OptionalFloat 
 
 }

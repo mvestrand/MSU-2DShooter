@@ -144,7 +144,7 @@ public class Enemy : MonoBehaviour
     {
         if (GameManager.Instance != null && !GameManager.Instance.gameIsOver)
         {
-            GameManager.AddScore(scoreValue);
+            GameManager.Instance.AddScore(scoreValue);
         }
     }
 

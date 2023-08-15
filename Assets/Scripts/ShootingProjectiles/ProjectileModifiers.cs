@@ -20,16 +20,19 @@ public class ProjectileModifiers {
     public Vector2 rotatedOffset;
     public FloatCurve speed = new FloatCurve();
     public SpeedApplyMode speedMode = SpeedApplyMode.Unused;
+    public bool invert = false;
 
-    public (Vector3 pos, Quaternion rot) ApplyOffsets(Vector3 rootPos, Quaternion rootRot) {
+    public (Vector3 pos, Quaternion rot, bool inv) ApplyOffsets(Vector3 rootPos, Quaternion rootRot, bool rootInv) {
+
+        float sign = (invert == rootInv ? 1 : -1);
 
         // Get the randomized local rotation
         float rotationRand = (rotation.UsesT ? Random.Range(0f, 1f) : 0);
-        Quaternion localRotation = Quaternion.AngleAxis(rotation.Get(rotationRand, 0), Vector3.forward);
+        Quaternion localRotation = Quaternion.AngleAxis(sign * rotation.Get(rotationRand, 0), Vector3.forward);
 
         // Get the randomized projectile direction            
         float projectileDirectionRand = (projectileDirection.UsesT ? Random.Range(0f, 1f) : 0);
-        Quaternion projDirection = Quaternion.AngleAxis(projectileDirection.Get(projectileDirectionRand, 0), Vector3.forward);
+        Quaternion projDirection = Quaternion.AngleAxis(sign * projectileDirection.Get(projectileDirectionRand, 0), Vector3.forward);
 
         // Compute the final position to spawn the projectile at
         Vector3 pos = rootPos + rootRot * new Vector3(offset.x, offset.y, 0);
@@ -38,7 +41,7 @@ public class ProjectileModifiers {
         // Compute the final rotation for the projectile
         Quaternion rot = projDirection * (rotationAffectsProjectile ? localRotation : Quaternion.identity) * rootRot;
 
-        return (pos, rot);
+        return (pos, rot, invert == rootInv);
 
     }
 

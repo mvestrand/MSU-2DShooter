@@ -20,6 +20,7 @@ public class LevelLoadButton : MonoBehaviour
     /// <param name="levelToLoadName">The name of the level to load</param>
     public void LoadLevelByName(string levelToLoadName)
     {
+        AudioListener.pause = false;
         Time.timeScale = 1;
         SceneManager.LoadScene(levelToLoadName);
     }

@@ -125,7 +125,11 @@ MonoBehaviour:
   animator: {fileID: 0}
   myRigidbody: {fileID: 0}
   moveSpeed: 10
+  focusedMoveSpeed: 5
   rotationSpeed: 60
+  focusTime: 0.1
+  focus: 0
+  locked: 0
   aimMode: 1
   movementMode: 2
   useMoveBound: 1
@@ -144,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamId: 0
+  invincibleCanDestroy: 0
   defaultHealth: 1
   maximumHealth: 1
   currentHealth: 1
@@ -152,8 +157,14 @@ MonoBehaviour:
   isAlwaysInvincible: 0
   respawnDelayTime: 0.5
   useLives: 1
-  currentLives: 3
+  currentLives: 2
+  startingLives: 2
   maximumLives: 5
+  infiniteLives: 0
+  lives: {fileID: 0}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
   deathEffect: {fileID: 6218169049356006189, guid: 68794701c80057447857bb433e54c579, type: 3}
   hitEffect: {fileID: 5156419567158778961, guid: d35295653acdbe24081a5caee3d9c353, type: 3}
 --- !u!50 &193887341358005032
@@ -194,8 +205,21 @@ MonoBehaviour:
   projectilePattern: {fileID: 0}
   fireSequence: {fileID: 11400000, guid: 357e5ae4d70fc5d4288dfd2705f3aa4a, type: 2}
   mode: 2
+  channel: 0
   isPlayerControlled: 1
   fireRate: 0.04
+  fireRateAdv:
+    mode: 2
+    value: 0
+    curveScale: 0
+    min: 0
+    max: 0
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   projectileSpread: 0
   fireEffect: {fileID: 2403646867487861855, guid: 6bb29ce188f45834cbb55ab1504938dd, type: 3}
 --- !u!58 &5343993829854313127
@@ -225,6 +249,7 @@ GameObject:
   - component: {fileID: 1463321022074112340}
   - component: {fileID: 3427960963355484755}
   - component: {fileID: 7357746420549905005}
+  - component: {fileID: 4664607950297054445}
   m_Layer: 0
   m_Name: Core
   m_TagString: Untagged
@@ -318,3 +343,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4664607950297054445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7005346669660652367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46e11720e8684e468f8af729b1be82f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 193887341358005035}
+  sr: {fileID: 3427960963355484755}

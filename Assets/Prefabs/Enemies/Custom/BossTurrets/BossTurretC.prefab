@@ -297,11 +297,11 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   projectileHolder: {fileID: 0}
   projectilePattern: {fileID: 11400000, guid: bcad115bac0527c4c908240291c40c58, type: 2}
-  fireSequence: {fileID: 11400000, guid: b4336ca0747c4d240acf8dc03488ee57, type: 2}
+  fireSequence: {fileID: 11400000, guid: 3bcad198e253023409d8a27c5aaa72d4, type: 2}
   mode: 1
   channel: 0
   isPlayerControlled: 0
-  fireRate: 1
+  fireRate: 1.5
   fireRateAdv:
     mode: 2
     value: 0

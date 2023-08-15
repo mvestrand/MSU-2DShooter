@@ -8,6 +8,8 @@ public class AudioRef : ScriptableObject {
 
     [SerializeField] private List<AudioClip> clips = new List<AudioClip>();
     [SerializeField] private float minInterval = 0.015f;
+    [SerializeField] private bool ignoreListenerPause = false;
+    [SerializeField] private bool ignoreTimescale = false;
 
     private float lastPlayed = float.NegativeInfinity;
 
@@ -16,11 +18,18 @@ public class AudioRef : ScriptableObject {
     }
 
     public void PlayAudio(AudioSource source, float volume) {
-        if (Time.time >= lastPlayed + minInterval) {
-            lastPlayed = Time.time;
+        var t = (ignoreTimescale ? Time.unscaledTime : Time.time);
+        if (t >= lastPlayed + minInterval) {
+            lastPlayed = t;
+
+            UpdateSourceSettings(source);
             AudioClip clip = clips[Random.Range(0, clips.Count)];
             source.PlayOneShot(clip, volume);
         }
+    }
+
+    private void UpdateSourceSettings(AudioSource source) {
+        source.ignoreListenerPause = ignoreListenerPause;        
     }
 
 }

@@ -54,6 +54,8 @@ public class InputManager : MonoBehaviour
         fireHeld = default;
 
         pausePressed = default;
+
+        focusHeld = default;
     }
 
     [Header("Player Movement Input")]
@@ -66,6 +68,12 @@ public class InputManager : MonoBehaviour
         Vector2 inputVector = context.ReadValue<Vector2>();
         horizontalMoveAxis = inputVector.x;
         verticalMoveAxis = inputVector.y;
+    }
+
+    public bool focusHeld;
+
+    public void ReadFocusInput(InputAction.CallbackContext context) {
+        focusHeld = !context.canceled;
     }
 
     [Header("Look Around input")]
@@ -110,7 +118,7 @@ public class InputManager : MonoBehaviour
     {
         firePressed = !context.canceled;
         fireHeld = !context.canceled;
-        StartCoroutine("ResetFireStart");
+        StartCoroutine(ResetFireStart());
     }
 
     /// <summary>

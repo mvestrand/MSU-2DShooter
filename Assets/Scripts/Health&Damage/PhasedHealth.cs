@@ -14,6 +14,7 @@ public class HealthPhase {
     public int phaseScore = 100;
     public int phaseTimeBonus = 100;
     public float maxExtraTimeBonus = 30f;
+    public int bonusHealth = 0;
 }
 
 public class PhasedHealth : MonoBehaviour, IHealth
@@ -58,7 +59,7 @@ public class PhasedHealth : MonoBehaviour, IHealth
     public bool invincible = false;
     public bool invincibleCanDestroy = true;
     public bool InvincibleCanDestroy { get { return invincibleCanDestroy; } }
-    private bool waitingOnPhaseChange = false;
+    private bool waitingOnPhaseChange = true;
 
 
     [Header("Effects & Polish")]
@@ -112,6 +113,44 @@ public class PhasedHealth : MonoBehaviour, IHealth
     //     }
     // }
 
+    int GetTotalMaxHealth() {
+        int total = 0;
+        foreach (var phase in phases) {
+            total += phase.maxHealth;
+        }
+        return total;
+    }
+
+    int GetReserveHealth() {
+        int total = 0;
+        for (int i = 0; i < phases.Count; i++) {
+            if (i != currentPhase || IsInvincible) {
+                total += phases[i].currentHealth + phases[i].bonusHealth;
+            }
+        }
+        return total;
+    }
+
+    int GetActiveHealth() {
+        int total = 0;
+        for (int i = 0; i < phases.Count; i++) {
+            total += phases[i].currentHealth + phases[i].bonusHealth;
+        }
+        return total;
+    }
+
+    public float ActiveHealthFrac() {
+        return GetActiveHealth() / (float)GetTotalMaxHealth();
+    }
+    public float ReserveHealthFrac() {
+        return GetReserveHealth() / (float)GetTotalMaxHealth();
+    }
+
+    public bool TimerIsActive() {
+        return !waitingOnPhaseChange;
+    }
+
+
     protected void Update() {
         UpdateTime();
     }
@@ -126,10 +165,14 @@ public class PhasedHealth : MonoBehaviour, IHealth
         foreach (var phase in phases) {
             phase.currentHealth = phase.maxHealth;            
         }
+        if (phases.Count > 0)
+            phases[phases.Count - 1].bonusHealth = 0;
     }
 
     private void UpdateTime() {
         if (waitingOnPhaseChange)
+            return;
+        if (GameManager.Instance.gameIsOver)
             return;
         if (timeLeft > 0) {
             timeLeft = Mathf.Max(timeLeft - Time.deltaTime, 0);
@@ -174,21 +217,26 @@ public class PhasedHealth : MonoBehaviour, IHealth
     public void PhaseBeaten() {
         waitingOnPhaseChange = true;
         onPhaseBeaten.Invoke(currentPhase);
-        AddToScore(GetPhaseScore(true));
-        AddToScore(GetTimeBonus());
+        AddToScore(GetPhaseScore(true), false);
+        AddToScore(GetTimeBonus(), true);
     }
 
     public void PhaseTimeout() {
         waitingOnPhaseChange = true;
         onPhaseTimeout.Invoke(currentPhase);
-        AddToScore(GetPhaseScore(false));
+        AddToScore(GetPhaseScore(false), false);
+        if (phases.Count > 0) {
+            phases[phases.Count - 1].bonusHealth += phases[currentPhase].currentHealth;
+            phases[currentPhase].currentHealth = 0;
+        }
     }
 
     public void PreparePhase(int newPhase) {
         waitingOnPhaseChange = true;
 
         currentPhase = newPhase;
-        phases[newPhase].currentHealth = phases[newPhase].maxHealth;
+        phases[newPhase].currentHealth = phases[newPhase].maxHealth + phases[newPhase].bonusHealth;
+        phases[newPhase].bonusHealth = 0;
         timeLeft = phases[newPhase].phaseTime + (phases[newPhase].extraTimeCarriesOver ? Mathf.Max(timeLeft, 0) : 0);
         onPhasePreStart.Invoke(newPhase);
     }
@@ -230,11 +278,11 @@ public class PhasedHealth : MonoBehaviour, IHealth
         _isEnding = false;
     }
 
-    private void AddToScore(int scoreValue)
+    private void AddToScore(int scoreValue, bool isTimeBonus)
     {
         if (GameManager.Instance != null && !GameManager.Instance.gameIsOver)
         {
-            GameManager.AddScore(scoreValue);
+            GameManager.Instance.AddScore(scoreValue, isTimeBonus);
         }
     }
 

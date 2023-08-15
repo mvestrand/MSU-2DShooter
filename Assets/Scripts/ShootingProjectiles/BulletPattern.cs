@@ -15,9 +15,9 @@ public class ProjectileData {
 public class BulletPattern : ScriptableObject {
     [SerializeField]private List<ProjectileData> projectiles = new List<ProjectileData>();
 
-    public void Spawn(Vector3 position, Quaternion rotation, Transform parent, float advanceTime=0, Projectile fallback=null, ProjectileModifiers globalModifiers=null) {
+    public void Spawn(Vector3 position, Quaternion rotation, Transform parent, float advanceTime=0, Projectile fallback=null, ProjectileModifiers globalModifiers=null, bool invert = false) {
         if (globalModifiers != null) {
-            (position, rotation) = globalModifiers.ApplyOffsets(position, rotation);
+            (position, rotation, invert) = globalModifiers.ApplyOffsets(position, rotation, invert);
         }
         
         foreach (var projectile in projectiles) {
@@ -25,9 +25,9 @@ public class BulletPattern : ScriptableObject {
                 continue;
 
             if (projectile.prefab != null)
-                projectile.prefab.Spawn(position, rotation, parent, advanceTime, projectile.modifiers);
+                projectile.prefab.Spawn(position, rotation, parent, advanceTime, projectile.modifiers, invert);
             else
-                fallback.Spawn(position, rotation, parent, advanceTime, projectile.modifiers);
+                fallback.Spawn(position, rotation, parent, advanceTime, projectile.modifiers, invert);
         }
     }
 

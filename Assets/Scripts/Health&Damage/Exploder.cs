@@ -7,14 +7,19 @@ using MVest.Unity.Pooling;
 public class Exploder : MonoBehaviour {
 
     public float lifetime;
+    public float currentLifetime;
     [SerializeField] bool explodeOnDeath = true;
     [SerializeField] bool explodeOnTimer = false;
     [SerializeField] bool inheritRotation = true;
     [SerializeField] bool rotationTrackPlayer = false;
+    [SerializeField] float countdownTime = 1f;
+    [SerializeField] GameObject countdownEffect;
     [SerializeField] FloatCurve rotationOffset = new FloatCurve();
 
     [SerializeField] GameObject explodeEffect;
     bool _hasExploded = false;
+    [SerializeField] Animator animator;
+    [SerializeField] string countdownTrigger = "countdown";
 
 
     public void OnEnable() {
@@ -22,6 +27,8 @@ public class Exploder : MonoBehaviour {
             GetComponent<IHealth>()?.OnDeath.AddListener(OnDeath);
         }
         _hasExploded = false;
+        countingDown = false;
+        currentLifetime = lifetime;
     }
 
     public void OnDisable() {
@@ -29,16 +36,37 @@ public class Exploder : MonoBehaviour {
             GetComponent<IHealth>()?.OnDeath.RemoveListener(OnDeath);
         }
     }
+    bool countingDown = false;
 
     public void Update() {
-        if (explodeOnTimer) {
-            lifetime -= Time.deltaTime;
-            if (lifetime <= 0)
+        if (explodeOnTimer && !countingDown) {
+            currentLifetime -= Time.deltaTime;
+            if (currentLifetime <= 0) {
+                if (countdownTime > 0) {
+                    StartCountdown();
+                } else {
+                    Explode();
+                }
+            }
+        } else if (countingDown) {
+            currentLifetime -= Time.deltaTime;
+            if (currentLifetime <= 0) {
                 Explode();
+            }
         }
     }
 
-    
+
+    public void StartCountdown() {
+        if (countingDown)
+            return;
+        countingDown = true;
+        currentLifetime = countdownTime;
+        Pool.Instantiate(countdownEffect, transform.position, DetermineRotation(), transform);
+        if (animator != null)
+            animator.SetTrigger(countdownTrigger);
+    }
+
     public void Explode() {
         if (_hasExploded)
             return;

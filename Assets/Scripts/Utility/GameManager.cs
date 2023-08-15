@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -67,6 +68,10 @@ public class GameManager : MonoBehaviour
     public int gameVictoryPageIndex = 0;
     [Tooltip("The effect to create upon winning the game")]
     public GameObject victoryEffect;
+
+    [SerializeField] string gameOverLevelName;
+    public float showContinueDelay = 0.5f;
+    public float gameOverTime = 2f;
 
     //The number of enemies observed by the game manager in this scene at start up"
     private int numberOfEnemiesFoundAtStart;
@@ -226,9 +231,12 @@ public class GameManager : MonoBehaviour
     /// void (no return)
     /// </summary>
     /// <param name="scoreAmount">The amount to add to the score</param>
-    public static void AddScore(int scoreAmount)
+    public void AddScore(int scoreAmount, bool timeBonus=false)
     {
         score += scoreAmount;
+        if (timeBonus) {
+            uiManager.ShowTimeBonus(scoreAmount);
+        }
         if (score > Instance.highScore)
         {
             SaveHighScore();
@@ -318,6 +326,7 @@ public class GameManager : MonoBehaviour
             player.SetActive(false);
             uiManager.allowPause = false;
             uiManager.GoToPage(gameVictoryPageIndex);
+            uiManager.SetWinScreenScore(score);
             if (victoryEffect != null)
             {
                 Instantiate(victoryEffect, transform.position, transform.rotation, null);
@@ -330,6 +339,7 @@ public class GameManager : MonoBehaviour
     public int gameOverPageIndex = 0;
     [Tooltip("The game over effect to create when the game is lost")]
     public GameObject gameOverEffect;
+
 
     // Whether or not the game is over
     [HideInInspector]
@@ -352,8 +362,75 @@ public class GameManager : MonoBehaviour
         }
         if (uiManager != null)
         {
+            Paused = false;
+            SetPlayerFrozen(true);
             uiManager.allowPause = false;
-            uiManager.GoToPage(gameOverPageIndex);
+            uiManager.GoToPage(gameOverPageIndex);                        
+        }
+
+    }
+    // private IEnumerator SetLevelAfterGameOver() {
+    //     yield return new WaitForSecondsRealtime(gameOverTime);
+
+    //     LoadLevelByName(gameOverLevelName);
+    // }
+
+    public void SetPlayerFrozen(bool frozen) {
+        if (player == null)
+            return;
+        if (player.TryGetComponent<Health>(out var health)){
+            health.isAlwaysInvincible = frozen;
+        }
+        if (player.TryGetComponent<Controller>(out var controller)){
+            controller.locked = frozen;
         }
     }
+
+    public GameObject playerOutOfLivesEffect;
+    public GameObject continueEffect;
+
+    public void PlayerOutOfLives() {
+        if (playerOutOfLivesEffect != null)
+        {
+            Instantiate(playerOutOfLivesEffect, transform.position, transform.rotation, null);
+        }
+        uiManager.allowPause = false;
+        StartCoroutine(ShowContinueScreen());
+    }
+
+    private IEnumerator ShowContinueScreen() {
+        yield return new WaitForSeconds(Mathf.Clamp01(showContinueDelay));
+        uiManager.ShowContinuePage(true);
+    }
+
+    public void Continue() {
+        uiManager.ShowContinuePage(false);
+        uiManager.allowPause = true;
+        if (continueEffect != null)
+        {
+            Instantiate(continueEffect, transform.position, transform.rotation, null);
+        }
+        player.GetComponent<Health>().UseContinue();
+        var oldScore = score;
+        ResetScore();
+        AddScore(Mathf.Max(oldScore/2,0));
+    }
+
+    [SerializeField] AudioListener listener;
+    private bool _paused = false;
+    public bool Paused {
+        get { return _paused; }
+        set {
+            _paused = value;
+            Time.timeScale = (value ? 0 : 1);
+            AudioListener.pause = value;
+        }
+    }
+
+    public void LoadLevelByName(string levelToLoadName)
+    {
+        Paused = false;
+        SceneManager.LoadScene(levelToLoadName);
+    }
+
 }

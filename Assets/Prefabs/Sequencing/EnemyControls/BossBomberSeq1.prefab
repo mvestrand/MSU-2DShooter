@@ -784,6 +784,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7035507106317635648}
     m_Modifications:
+    - target: {fileID: 8022954021460962557, guid: 629e3a4ad801f6a41b17e8ccaa5dd72a, type: 3}
+      propertyPath: currentHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8022954021460962557, guid: 629e3a4ad801f6a41b17e8ccaa5dd72a, type: 3}
+      propertyPath: defaultHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8022954021460962557, guid: 629e3a4ad801f6a41b17e8ccaa5dd72a, type: 3}
+      propertyPath: maximumHealth
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8282131552441171986, guid: 629e3a4ad801f6a41b17e8ccaa5dd72a, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -855,7 +867,7 @@ PrefabInstance:
     - target: {fileID: 8282131553695226666, guid: 629e3a4ad801f6a41b17e8ccaa5dd72a, type: 3}
       propertyPath: fireSequence
       value: 
-      objectReference: {fileID: 11400000, guid: ddcc8b30a25e0cc40bc150f646ea44a2, type: 2}
+      objectReference: {fileID: 11400000, guid: 41f3f224e525d8a4cb2118a7d67ec6d8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 629e3a4ad801f6a41b17e8ccaa5dd72a, type: 3}
 --- !u!4 &7279777915498890050 stripped
@@ -881,6 +893,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7035507106317635648}
     m_Modifications:
+    - target: {fileID: 8022954021460962557, guid: 629e3a4ad801f6a41b17e8ccaa5dd72a, type: 3}
+      propertyPath: currentHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8022954021460962557, guid: 629e3a4ad801f6a41b17e8ccaa5dd72a, type: 3}
+      propertyPath: defaultHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8022954021460962557, guid: 629e3a4ad801f6a41b17e8ccaa5dd72a, type: 3}
+      propertyPath: maximumHealth
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8282131552441171986, guid: 629e3a4ad801f6a41b17e8ccaa5dd72a, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -952,7 +976,7 @@ PrefabInstance:
     - target: {fileID: 8282131553695226666, guid: 629e3a4ad801f6a41b17e8ccaa5dd72a, type: 3}
       propertyPath: fireSequence
       value: 
-      objectReference: {fileID: 11400000, guid: ddcc8b30a25e0cc40bc150f646ea44a2, type: 2}
+      objectReference: {fileID: 11400000, guid: 41f3f224e525d8a4cb2118a7d67ec6d8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 629e3a4ad801f6a41b17e8ccaa5dd72a, type: 3}
 --- !u!4 &5834234475403371832 stripped

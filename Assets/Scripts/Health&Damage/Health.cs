@@ -70,6 +70,8 @@ public class Health : MonoBehaviour, IRestartable, IHealth
     public bool useLives = false;
     [Tooltip("Current number of lives this health has")]
     public int currentLives = 3;
+
+    public int startingLives = 3;
     [Tooltip("The maximum number of lives this health can have")]
     public int maximumLives = 5;
 
@@ -162,11 +164,9 @@ public class Health : MonoBehaviour, IRestartable, IHealth
     /// </summary>
     IEnumerator Respawn()
     {
-        Debug.Log("Starting respawn");
         yield return new WaitForEndOfFrame();
         gameObject.SetActive(false);
         yield return new WaitForSeconds(Mathf.Max(respawnDelayTime, 0));
-        Debug.Log("Finishing respawn");
         gameObject.SetActive(true);
         MakeInvincible(respawnInvincibilityTime);
         transform.position = respawnPosition;
@@ -311,7 +311,7 @@ public class Health : MonoBehaviour, IRestartable, IHealth
             if (gameObject.tag == "Player" && GameManager.Instance != null)
             {
                 gameObject.SetActive(false);
-                GameManager.Instance.GameOver();
+                GameManager.Instance.PlayerOutOfLives();
             } else {
                 if (gameObject.GetComponent<Enemy>() != null) {
                     gameObject.GetComponent<Enemy>().DoBeforeDestroy();
@@ -340,6 +340,11 @@ public class Health : MonoBehaviour, IRestartable, IHealth
             gameObject.GetComponent<Enemy>().DoBeforeDestroy();
         }
         Destroy(this.gameObject);
+    }
+
+    public void UseContinue() {
+        currentLives = startingLives;
+        GameManager.Instance.StartCoroutine(Respawn());
     }
 
     public void Restart(IRestartable original)

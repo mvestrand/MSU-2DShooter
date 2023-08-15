@@ -64,7 +64,7 @@ public class FireSequenceFrameDrawer : PropertyDrawer {
 
             EditorGUI.LabelField(line3[0], "target frame");
             EditorGUI.PropertyField(line3[1], property.FindPropertyRelative("jumpTargetFrame"), GUIContent.none);
-            EditorGUI.LabelField(line3[2], "loops");
+            EditorGUI.LabelField(line3[2], "jumps");
             EditorGUI.PropertyField(line3[3], property.FindPropertyRelative("maxLoops"), GUIContent.none);
             EditorGUI.LabelField(line3[4], "skip on no shoot");
             EditorGUI.PropertyField(line3[5], property.FindPropertyRelative("ignoreJumpOnNoShoot"), GUIContent.none);			

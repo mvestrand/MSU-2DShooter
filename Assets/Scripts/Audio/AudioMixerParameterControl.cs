@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MVest.Unity;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -15,16 +16,24 @@ public class AudioMixerParameterControl : MonoBehaviour
     [SerializeField] private float disabledValue;
 
     void OnEnable() {
-        mixer.SetFloat(parameterName, value);
+        mixer.SetFloat(parameterName, GetValue());
     }
 
     void OnDisable() {
+
         mixer.SetFloat(parameterName, disabledValue);
 
     }
 
     // Update is called once per frame
     void Update() {
-        mixer.SetFloat(parameterName, value);
+        mixer.SetFloat(parameterName, GetValue());
+    }
+
+    float GetValue() {
+        if (logScale) {
+            return min * Mathf.Pow(max / min, value);
+        }
+        return Mathf.Lerp(min, max, value);
     }
 }

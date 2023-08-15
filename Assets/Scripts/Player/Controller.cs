@@ -6,8 +6,9 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// This class controls player movement
 /// </summary>
-public class Controller : MonoBehaviour
-{
+public class Controller : MonoBehaviour {
+    private const float Epsilon = 1E-08f;
+
     [Header("GameObject/Component References")]
     [Tooltip("The animator controller used to animate the player.")]
     public RuntimeAnimatorController animator = null;
@@ -17,8 +18,18 @@ public class Controller : MonoBehaviour
     [Header("Movement Variables")]
     [Tooltip("The speed at which the player will move.")]
     public float moveSpeed = 10.0f;
+    [Tooltip("The speed at which the player will move while focused")]
+    public float focusedMoveSpeed = 5.0f;
+
+    public float MoveSpeed { get { return Mathf.Lerp(moveSpeed, focusedMoveSpeed, focus); } }
+
     [Tooltip("The speed at which the player rotates in asteroids movement mode")]
     public float rotationSpeed = 60f;
+
+    public float focusTime = 0.2f;
+    public float focus = 0f;
+
+    public bool locked = false;
 
     //The InputManager to read input from
     private InputManager inputManager;
@@ -99,6 +110,8 @@ public class Controller : MonoBehaviour
     /// </summary>
     void Update()
     {
+        if (locked)
+            return;
         // Collect input and move the player accordingly
         HandleInput();
         // Sends information to an animator component if one is assigned
@@ -142,6 +155,13 @@ public class Controller : MonoBehaviour
         // Move the player
         MovePlayer(movementVector);
         LookAtPoint(lookPosition);
+        AdjustFocus(inputManager.focusHeld);
+    }
+
+    private void AdjustFocus(bool active) {
+        float maxDelta = (focusTime < Epsilon ? 1f : Time.deltaTime / focusTime);
+        focus = Mathf.Clamp01(Mathf.MoveTowards(focus, (active ? 1f : 0f), maxDelta));
+        
     }
 
     /// <summary>
@@ -208,7 +228,7 @@ public class Controller : MonoBehaviour
             }
 
             // Move the player using physics
-            Vector2 force = transform.up * movement.y * Time.deltaTime * moveSpeed;
+            Vector2 force = transform.up * movement.y * Time.deltaTime * MoveSpeed;
             Debug.Log(force);
             myRigidbody.AddForce(force);
 
@@ -234,7 +254,7 @@ public class Controller : MonoBehaviour
                 movement.y = 0;
             }
             // Move the player's transform
-            transform.position = transform.position + (movement * Time.deltaTime * moveSpeed);
+            transform.position = transform.position + (movement * Time.deltaTime * MoveSpeed);
         }
         if (useMoveBound) {
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, moveBoundMin.x, moveBoundMax.x),

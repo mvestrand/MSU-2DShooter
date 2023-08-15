@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4983108845545363007}
   - component: {fileID: 7686680468036957511}
   - component: {fileID: 1648529185202031362}
+  - component: {fileID: 1641438462700500129}
+  - component: {fileID: 7987759416754046329}
   m_Layer: 0
   m_Name: PauseEffect
   m_TagString: Untagged
@@ -41,8 +43,8 @@ AudioSource:
   m_GameObject: {fileID: 3623134921759700094}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -5924939123123954878, guid: 54e48b673146d03438fe18d457bac84a, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2ee8db168070cea4bb1ea13a024acce9, type: 3}
+  OutputAudioMixerGroup: {fileID: -6196987554654450368, guid: 54e48b673146d03438fe18d457bac84a, type: 2}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -140,5 +142,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58ca2f55b8d54e44921b14b727bf610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 5
+  lifetime: 2
   destroyChildrenOnDeath: 1
+--- !u!114 &1641438462700500129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3623134921759700094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b464916a6e50fe488dd73bcab67270d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioRef: {fileID: 11400000, guid: ed4468f8cca0885488fd8fd6a614167d, type: 2}
+  source: {fileID: 7686680468036957511}
+  volume: 1
+  playOnAwake: 1
+  delay: 0
+--- !u!114 &7987759416754046329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3623134921759700094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e1ca249bf3ca9f428ad6301f1802d80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _path: 
+  _minPoolSize: 0
+  _maxPoolSize: 10

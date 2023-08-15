@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4983108845545363007}
   - component: {fileID: 7686680468036957511}
   - component: {fileID: 1648529185202031362}
+  - component: {fileID: 8081860857990076347}
   m_Layer: 0
   m_Name: GameOverEffect
   m_TagString: Untagged
@@ -41,9 +42,9 @@ AudioSource:
   m_GameObject: {fileID: 3623134921759700094}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ade6cecbd2e4a4c4582f5e52be8d85a6, type: 3}
-  m_PlayOnAwake: 1
+  OutputAudioMixerGroup: {fileID: 8190017916994228981, guid: 54e48b673146d03438fe18d457bac84a, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -142,3 +143,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetime: 5
   destroyChildrenOnDeath: 1
+--- !u!114 &8081860857990076347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3623134921759700094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b464916a6e50fe488dd73bcab67270d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioRef: {fileID: 11400000, guid: 99cf887e3f33bae4f997696a57c82df2, type: 2}
+  source: {fileID: 7686680468036957511}
+  volume: 1
+  playOnAwake: 1
+  delay: 0

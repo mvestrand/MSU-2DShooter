@@ -122,7 +122,60 @@ MonoBehaviour:
     limitTurnSpeed: 0
   - time: 1
     projectile: {fileID: 0}
-    pattern: {fileID: 11400000, guid: 9d51c3c8ffbff06438ebbfc0ee5a5297, type: 2}
+    pattern: {fileID: 11400000, guid: 37a022b6c9a3b9f4aafd2def734739a5, type: 2}
+    modifiers:
+      offset: {x: 0, y: 0}
+      projectileDirection:
+        mode: 0
+        value: 0
+        curveScale: 0
+        min: 0
+        max: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      rotation:
+        mode: 0
+        value: 30
+        curveScale: 0
+        min: 0
+        max: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      rotationAffectsProjectile: 1
+      rotatedOffset: {x: 0, y: 0}
+      speed:
+        mode: 0
+        value: 0
+        curveScale: 0
+        min: 0
+        max: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      speedMode: 0
+    useControllerSpread: 0
+    effect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
+    shouldParentEffect: 0
+    mode: 2
+    jumpTargetFrame: 0
+    maxLoops: 0
+    ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 1
+    limitTurnSpeed: 0
+  - time: 1.1
+    projectile: {fileID: 0}
+    pattern: {fileID: 11400000, guid: 37a022b6c9a3b9f4aafd2def734739a5, type: 2}
     modifiers:
       offset: {x: 0, y: 0}
       projectileDirection:
@@ -149,7 +202,7 @@ MonoBehaviour:
           m_PreInfinity: 0
           m_PostInfinity: 0
           m_RotationOrder: 0
-      rotationAffectsProjectile: 0
+      rotationAffectsProjectile: 1
       rotatedOffset: {x: 0, y: 0}
       speed:
         mode: 0
@@ -164,7 +217,60 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
-    useControllerSpread: 1
+    useControllerSpread: 0
+    effect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
+    shouldParentEffect: 0
+    mode: 2
+    jumpTargetFrame: 0
+    maxLoops: 0
+    ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 1
+    limitTurnSpeed: 0
+  - time: 1.2
+    projectile: {fileID: 0}
+    pattern: {fileID: 11400000, guid: 37a022b6c9a3b9f4aafd2def734739a5, type: 2}
+    modifiers:
+      offset: {x: 0, y: 0}
+      projectileDirection:
+        mode: 0
+        value: 0
+        curveScale: 0
+        min: 0
+        max: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      rotation:
+        mode: 0
+        value: -30
+        curveScale: 0
+        min: 0
+        max: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      rotationAffectsProjectile: 1
+      rotatedOffset: {x: 0, y: 0}
+      speed:
+        mode: 0
+        value: 0
+        curveScale: 0
+        min: 0
+        max: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      speedMode: 0
+    useControllerSpread: 0
     effect: {fileID: 6229913163069739088, guid: a499391aa95bee24ab8e999366f75fe4, type: 3}
     shouldParentEffect: 0
     mode: 2

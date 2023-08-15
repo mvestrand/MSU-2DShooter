@@ -18,9 +18,9 @@ public class ProjectileModifiersDrawer : PropertyDrawer
     private Rect[] line2 = new Rect[4];
     private static float[] line2MinWidths = new float[4] { 100f, 80f, 65f, 40f};
     private static float[] line2Weights = new float[4] { 0, 500f, 0, 300f};
-    private Rect[] line3 = new Rect[5];
-    private static float[] line3MinWidths = new float[5] { 140f, 20f, 50f, 80f, 80f};
-    private static float[] line3Weights = new float[5] { 0, 1, 0, 1, 300f};
+    private Rect[] line3 = new Rect[7];
+    private static float[] line3MinWidths = new float[7] { 140f, 20f, 50f, 80f, 80f, 50f, 20f};
+    private static float[] line3Weights = new float[7] { 0, 1, 0, 1, 300f,0,1};
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
@@ -65,8 +65,9 @@ public class ProjectileModifiersDrawer : PropertyDrawer
         EditorGUI.PropertyField(line3[3], speedMode, GUIContent.none);
         EditorGUI.BeginDisabledGroup(speedMode.intValue == (int)ProjectileModifiers.SpeedApplyMode.Unused);
         EditorGUI.PropertyField(line3[4], property.FindPropertyRelative("speed"), GUIContent.none);
-
         EditorGUI.EndDisabledGroup();
+        EditorGUI.LabelField(line3[5], "   invert");
+        EditorGUI.PropertyField(line3[6], property.FindPropertyRelative("invert"), GUIContent.none);
 
         EditorGUI.indentLevel = indent;
 

@@ -25,6 +25,8 @@ public class UIManager : MonoBehaviour
     [Header("Pause Settings")]
     [Tooltip("The index of the pause page in the pages list")]
     public int pausePageIndex = 1;
+
+    public int continuePageIndex = 1;
     [Tooltip("Whether or not to allow pausing")]
     public bool allowPause = true;
 
@@ -40,6 +42,15 @@ public class UIManager : MonoBehaviour
     // The Input Manager to listen for pausing
     [SerializeField]
     private InputManager inputManager;
+
+    [SerializeField] private GameObject pauseEffect;
+    [SerializeField] private GameObject unpauseEffect;
+
+    [SerializeField] private BossHealthBar healthBar;
+    [SerializeField] private Text timeBonus;
+    [SerializeField] private float timeBonusFadeDelay = 2;
+    [SerializeField] private float timeBonusFadeTime = 1;
+    [SerializeField] private Text winScreenScoreText;
 
     /// <summary>
     /// Description:
@@ -83,6 +94,10 @@ public class UIManager : MonoBehaviour
     private void SetUpUIElements()
     {
         UIelements = FindObjectsOfType<UIelement>().ToList();
+    }
+
+    public void SetWinScreenScore(int score) {
+        winScreenScoreText.text = "Score: " + score;
     }
 
     /// <summary>
@@ -141,17 +156,35 @@ public class UIManager : MonoBehaviour
             if (isPaused)
             {
                 SetActiveAllPages(false);
-                Time.timeScale = 1;
-                isPaused = false;
+                GameManager.Instance.Paused = false;
+                isPaused = !isPaused;
+                if (unpauseEffect != null)
+                    Instantiate(unpauseEffect, transform.position, transform.rotation, null);
             }
             else
             {
                 GoToPage(pausePageIndex);
-                Time.timeScale = 0;
-                isPaused = true;
+                GameManager.Instance.Paused = true;
+                isPaused = !isPaused;
+                if (pauseEffect != null)
+                    Instantiate(pauseEffect, transform.position, transform.rotation, null);
             }
         }      
     }
+
+    public void ShowContinuePage(bool show) {
+        if (show) {
+            GoToPage(continuePageIndex);
+            allowPause = false;
+            GameManager.Instance.Paused = true;
+        } else {
+            SetActiveAllPages(false);
+            allowPause = true;
+            GameManager.Instance.Paused = false;
+        }
+    }
+
+
 
     /// <summary>
     /// Description:
@@ -271,5 +304,26 @@ public class UIManager : MonoBehaviour
                     page.gameObject.SetActive(activated);
             }
         }
+    }
+
+    public void ShowHealthBar() {
+        if (healthBar != null && healthBar.gameObject.activeSelf == false)
+            healthBar.gameObject.SetActive(true);
+    }
+
+    public void HideHealthBar() {
+        if (healthBar != null && healthBar.gameObject.activeSelf == true)
+            healthBar.Hide();
+    }
+
+    public void ShowTimeBonus(int score) {
+        timeBonus.text = "Time Bonus: " + score;
+        timeBonus.gameObject.SetActive(true);
+        timeBonus.color = new Color(timeBonus.color.r, timeBonus.color.g, timeBonus.color.b, 1);
+        LeanTween.alphaText(timeBonus.GetComponent<RectTransform>(), 0, timeBonusFadeTime).setDelay(timeBonusFadeDelay).setOnComplete(DisableTimeBonusText);
+    }
+
+    public void DisableTimeBonusText() {
+        timeBonus.gameObject.SetActive(false);
     }
 }

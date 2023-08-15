@@ -544,3 +544,56 @@ MonoBehaviour:
     ignoreJumpOnNoShoot: 0
     shouldLimitTurnSpeed: 0
     limitTurnSpeed: 0
+  - time: 1.99
+    projectile: {fileID: 0}
+    pattern: {fileID: 11400000, guid: ea90695e81297cf4fa8faf4cf6ece681, type: 2}
+    modifiers:
+      offset: {x: 0, y: 0}
+      projectileDirection:
+        mode: 0
+        value: 0
+        curveScale: 0
+        min: 0
+        max: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      rotation:
+        mode: 0
+        value: 0
+        curveScale: 0
+        min: 0
+        max: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      rotationAffectsProjectile: 0
+      rotatedOffset: {x: 0, y: 0}
+      speed:
+        mode: 0
+        value: 0
+        curveScale: 0
+        min: 0
+        max: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+      speedMode: 0
+    useControllerSpread: 0
+    effect: {fileID: 0}
+    shouldParentEffect: 0
+    mode: 0
+    jumpTargetFrame: 0
+    maxLoops: 0
+    ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 1
+    limitTurnSpeed: 1

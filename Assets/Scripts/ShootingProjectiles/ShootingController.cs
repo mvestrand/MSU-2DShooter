@@ -36,6 +36,8 @@ public class ShootingController : MonoBehaviour, IShootingController
 
     public int channel = 0;
 
+    public bool invert = false;
+
     public bool IsRunning {
         get {
             return mode == FireMode.Sequence && fireSequenceState.IsRunning;
@@ -227,7 +229,7 @@ public class ShootingController : MonoBehaviour, IShootingController
             return;
 
         Quaternion spread = (applySpread ? ComputeSpread() : Quaternion.identity);
-        projectile.Spawn(position, spread * rotation, projectileHolder, advanceTime, modifiers);
+        projectile.Spawn(position, spread * rotation, projectileHolder, advanceTime, modifiers, invert);
     }
 
     public void FirePattern(BulletPattern pattern = null, float advanceTime=0, bool applySpread=true, ProjectileModifiers modifiers=null) {
@@ -240,7 +242,7 @@ public class ShootingController : MonoBehaviour, IShootingController
             return;
 
         Quaternion spread = (applySpread ? ComputeSpread() : Quaternion.identity);
-        pattern.Spawn(position, spread * rotation, projectileHolder, advanceTime, (projectilePrefab!=null ? projectilePrefab.GetComponent<Projectile>() : null), modifiers);
+        pattern.Spawn(position, spread * rotation, projectileHolder, advanceTime, (projectilePrefab!=null ? projectilePrefab.GetComponent<Projectile>() : null), modifiers, invert);
     }
 
     private Quaternion ComputeSpread() {
