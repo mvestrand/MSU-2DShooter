@@ -21,6 +21,7 @@ public class Exploder : MonoBehaviour {
     [SerializeField] Animator animator;
     [SerializeField] string countdownTrigger = "countdown";
 
+    GameObject countdownEffectInstance;
 
     public void OnEnable() {
         if (explodeOnDeath) {
@@ -29,6 +30,8 @@ public class Exploder : MonoBehaviour {
         _hasExploded = false;
         countingDown = false;
         currentLifetime = lifetime;
+        if (animator != null)
+            animator.ResetTrigger(countdownTrigger);
     }
 
     public void OnDisable() {
@@ -62,7 +65,7 @@ public class Exploder : MonoBehaviour {
             return;
         countingDown = true;
         currentLifetime = countdownTime;
-        Pool.Instantiate(countdownEffect, transform.position, DetermineRotation(), transform);
+        countdownEffectInstance = Pool.Instantiate(countdownEffect, transform.position, DetermineRotation(), transform);
         if (animator != null)
             animator.SetTrigger(countdownTrigger);
     }
@@ -71,6 +74,9 @@ public class Exploder : MonoBehaviour {
         if (_hasExploded)
             return;
         _hasExploded = true;
+        if (countdownEffectInstance != null) {
+            Pool.Release(countdownEffectInstance);
+        }
         if (explodeOnDeath && TryGetComponent<IHealth>(out var health)) {
             health.Die();
         } else {

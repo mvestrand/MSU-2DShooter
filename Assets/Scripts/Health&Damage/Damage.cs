@@ -109,7 +109,9 @@ public class Damage : MonoBehaviour
             }
             if (destroyAfterDamage && !destroyed) {
                 destroyed = true;
-                if (gameObject.TryGetComponent<IHealth>(out var health)) {
+                if (gameObject.TryGetComponent<Exploder>(out var exploder)) {
+                    exploder.Explode();
+                } else if (gameObject.TryGetComponent<IHealth>(out var health)) {
                     health.Die();
                 } else {
                     Pool.Release(gameObject);
