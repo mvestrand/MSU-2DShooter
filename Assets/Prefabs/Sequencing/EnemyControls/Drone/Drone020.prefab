@@ -604,15 +604,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2029536735206158367, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
       propertyPath: currentHealth
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2029536735206158367, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
       propertyPath: defaultHealth
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2029536735206158367, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
       propertyPath: maximumHealth
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}

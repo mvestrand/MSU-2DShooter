@@ -1956,7 +1956,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299706010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4375, y: -8.872501, z: -25}
+  m_LocalPosition: {x: 1.4397087, y: -8.872501, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1819599382}
@@ -2976,7 +2976,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377709167}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.99, y: -11.109999, z: -50}
+  m_LocalPosition: {x: -1.9855826, y: -11.109999, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 290580241}
@@ -5745,7 +5745,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647665945}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0500002, y: 13.534498, z: 35}
+  m_LocalPosition: {x: 1.0469079, y: 13.534498, z: 35}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1613460331}
@@ -6837,7 +6837,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736167905}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.29999995, y: -6.3119984, z: -15}
+  m_LocalPosition: {x: -0.2986747, y: -6.3119984, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1589570016}
@@ -10497,7 +10497,7 @@ PlayableDirector:
   m_InitialState: 1
   m_WrapMode: 0
   m_DirectorUpdateMode: 1
-  m_InitialTime: 0
+  m_InitialTime: 104
   m_SceneBindings:
   - key: {fileID: -197254722612835784, guid: 5f8d0308e9a3a2d4a9a69a850353404e, type: 2}
     value: {fileID: 1207696414}
@@ -15033,36 +15033,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phases:
-  - currentHealth: 200
-    maxHealth: 200
+  - currentHealth: 300
+    maxHealth: 300
     phaseTime: 16
     extraTimeCarriesOver: 0
-    phaseScore: 100
-    phaseTimeBonus: 100
+    phaseScore: 200
+    phaseTimeBonus: 500
+    minExtraTimeBonus: 2
+    maxExtraTimeBonus: 6
+    bonusHealth: 0
+  - currentHealth: 300
+    maxHealth: 300
+    phaseTime: 20
+    extraTimeCarriesOver: 0
+    phaseScore: 200
+    phaseTimeBonus: 500
+    minExtraTimeBonus: 2
     maxExtraTimeBonus: 8
     bonusHealth: 0
-  - currentHealth: 200
-    maxHealth: 200
-    phaseTime: 20
-    extraTimeCarriesOver: 0
-    phaseScore: 100
-    phaseTimeBonus: 100
-    maxExtraTimeBonus: 10
-    bonusHealth: 0
   - currentHealth: 300
     maxHealth: 300
     phaseTime: 20
     extraTimeCarriesOver: 0
-    phaseScore: 100
-    phaseTimeBonus: 100
+    phaseScore: 200
+    phaseTimeBonus: 500
+    minExtraTimeBonus: 2
     maxExtraTimeBonus: 10
     bonusHealth: 0
-  - currentHealth: 300
-    maxHealth: 300
+  - currentHealth: 500
+    maxHealth: 500
     phaseTime: 30
     extraTimeCarriesOver: 0
-    phaseScore: 100
-    phaseTimeBonus: 100
+    phaseScore: 400
+    phaseTimeBonus: 500
+    minExtraTimeBonus: 2
     maxExtraTimeBonus: 15
     bonusHealth: 0
   onPhaseTimeout:

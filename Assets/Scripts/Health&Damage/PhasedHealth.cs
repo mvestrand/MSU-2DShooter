@@ -10,9 +10,10 @@ public class HealthPhase {
     public int currentHealth = 1;
     public int maxHealth = 1;
     public float phaseTime = 30f;
-    public bool extraTimeCarriesOver = true;
+    public bool extraTimeCarriesOver = false;
     public int phaseScore = 100;
     public int phaseTimeBonus = 100;
+    public float minExtraTimeBonus = 5f;
     public float maxExtraTimeBonus = 30f;
     public int bonusHealth = 0;
 }
@@ -209,16 +210,26 @@ public class PhasedHealth : MonoBehaviour, IHealth
         float damageFrac = 1f - (Mathf.Max(phases[currentPhase].currentHealth, 0f) / (float)phases[currentPhase].maxHealth);        
         return (int)(phases[currentPhase].phaseScore * damageFrac);
     }
+
+
+    private const int TimeBonusGradation = 5;
+
+    private int RoundToNearest(float value, int gradation) {
+        return Mathf.RoundToInt(value / gradation) * gradation;
+    }
+
     private int GetTimeBonus() {
-        float timeFrac = (Mathf.Min(timeLeft, phases[currentPhase].maxExtraTimeBonus) / (float)phases[currentPhase].maxExtraTimeBonus);
-        return (int)(phases[currentPhase].phaseTimeBonus * timeFrac);
+        float timeFrac = Mathf.Clamp01((timeLeft - phases[currentPhase].minExtraTimeBonus) / (phases[currentPhase].maxExtraTimeBonus - phases[currentPhase].minExtraTimeBonus));
+        return RoundToNearest(phases[currentPhase].phaseTimeBonus * timeFrac, TimeBonusGradation);
     }
 
     public void PhaseBeaten() {
         waitingOnPhaseChange = true;
         onPhaseBeaten.Invoke(currentPhase);
         AddToScore(GetPhaseScore(true), false);
-        AddToScore(GetTimeBonus(), true);
+        int timeBonus = GetTimeBonus();
+        if (timeBonus > 0)
+            AddToScore(timeBonus, true);
     }
 
     public void PhaseTimeout() {
