@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 5724781533654324104}
   - component: {fileID: 8890150608144808246}
   - component: {fileID: 4413798097735496473}
+  - component: {fileID: 545397486}
+  - component: {fileID: 2680553875204331771}
   m_Layer: 0
   m_Name: Minelayer
   m_TagString: Untagged
@@ -57,7 +59,7 @@ MonoBehaviour:
   guns:
   - _underlyingValue: {fileID: 3163240079814715901}
   - _underlyingValue: {fileID: 8126007675326474078}
-  shootMode: 1
+  shootMode: 4
   shouldShoot: 0
   movementMode: 0
   scrollDirection: {x: 0, y: 0, z: 0}
@@ -79,9 +81,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamId: 1
   invincibleCanDestroy: 0
-  defaultHealth: 100
-  maximumHealth: 100
-  currentHealth: 100
+  defaultHealth: 250
+  maximumHealth: 250
+  currentHealth: 250
   damageInvincibilityTime: 0
   respawnInvincibilityTime: 3
   isAlwaysInvincible: 0
@@ -94,7 +96,19 @@ MonoBehaviour:
   lives: {fileID: 0}
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: WasDestroyedBool, Assembly-CSharp
+        m_MethodName: SetTrueDelayed
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   deathEffect: {fileID: 2452382815751308013, guid: 7280107696ace2b42843296dd7d07a29, type: 3}
   hitEffect: {fileID: 6229913163069739088, guid: d6029318d740811488fd5dd38a7e1ce1, type: 3}
 --- !u!50 &5724781533654324104
@@ -175,6 +189,40 @@ MonoBehaviour:
   dealDamageOnTriggerEnter: 1
   dealDamageOnTriggerStay: 0
   dealDamageOnCollision: 0
+--- !u!95 &545397486
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111767558614867189}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2680553875204331771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111767558614867189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a551600fe272e49a2c34ce65746416, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 11400000, guid: 0a65ca4647fb0ff4aa28a3237cd7628f, type: 2}
 --- !u!1 &2665859178243453175
 GameObject:
   m_ObjectHideFlags: 0

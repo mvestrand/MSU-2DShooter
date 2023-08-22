@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
-  m_Locked: 0
+  m_Locked: 1
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
@@ -118,6 +118,7 @@ MonoBehaviour:
     moveDirectionWeight: 1
     playerTrackWeight: 0
     shouldShoot: 0
+    useTurnSpeed: 0
 --- !u!74 &-1745350226774353038
 AnimationClip:
   m_ObjectHideFlags: 0

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f074883322cce42ac189e328bf0d2b, type: 3}
   m_Name: MidbossDefeated
   m_EditorClassIdentifier: 
-  _value: 0
+  _value: 1

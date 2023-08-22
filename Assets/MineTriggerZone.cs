@@ -11,6 +11,8 @@ public class MineTriggerZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("Environment"))
+            return;
         IHealth collidedHealth = collision.gameObject.GetComponent<IHealth>();
         if (collidedHealth != null && collidedHealth.TeamId != this.teamId) {
             onEnter.Invoke();

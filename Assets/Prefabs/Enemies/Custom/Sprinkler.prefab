@@ -60,6 +60,10 @@ MonoBehaviour:
   shouldShoot: 0
   movementMode: 0
   scrollDirection: {x: 0, y: 0, z: 0}
+  useTurnSpeed: 0
+  maxTurnSpeed: 5
+  turnSpeedMod: 1
+  playerTracker: {fileID: 0}
 --- !u!114 &2029536735206158367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,16 +77,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamId: 1
-  defaultHealth: 40
-  maximumHealth: 40
-  currentHealth: 40
+  invincibleCanDestroy: 0
+  defaultHealth: 80
+  maximumHealth: 80
+  currentHealth: 80
   damageInvincibilityTime: 0
   respawnInvincibilityTime: 3
   isAlwaysInvincible: 0
   respawnDelayTime: 0.5
   useLives: 0
   currentLives: 3
+  startingLives: 3
   maximumLives: 5
+  infiniteLives: 0
+  lives: {fileID: 0}
   onDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -315,8 +323,21 @@ MonoBehaviour:
   fireSequence: {fileID: 11400000, guid: 105f9a2086a55c640a2c82bdcccc73f6, type: 2}
   mode: 2
   channel: 0
+  invert: 0
   isPlayerControlled: 0
   fireRate: 0.05
+  fireRateAdv:
+    mode: 2
+    value: 0
+    curveScale: 0
+    min: 0
+    max: 0
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   projectileSpread: 1
   fireEffect: {fileID: 0}
 --- !u!114 &733968692243996479
@@ -332,3 +353,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 1
+  curve:
+    mode: 0
+    value: 0
+    curveScale: 0
+    min: 0
+    max: 0
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  useCurve: 0

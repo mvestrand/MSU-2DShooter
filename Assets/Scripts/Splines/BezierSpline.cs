@@ -24,7 +24,10 @@ public class BezierSpline : MonoBehaviour {
 	[SerializeField]
 	private bool loop;
 
-	public bool Loop {
+    [SerializeField]
+    private List<int> waypoints;
+
+    public bool Loop {
 		get {
 			return loop;
 		}
@@ -274,6 +277,7 @@ public class BezierSpline : MonoBehaviour {
         points.Add(point);
         point += dir;
         points.Add(point);
+
 
         modes.Add(modes.Last());
         //modes[modes.Count - 1] = modes[modes.Count - 1];

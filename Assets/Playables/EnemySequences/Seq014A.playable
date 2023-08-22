@@ -1,30 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7338293468788996812
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
-  m_Name: ControlPlayableAsset(Clone)
-  m_EditorClassIdentifier: 
-  sourceGameObject:
-    exposedName: 87b54aca760cd554aac79ad6529f1868
-    defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 3775609117788168668, guid: f6d84fa4f6b95d14b9ce458cf640c227, type: 3}
-  updateParticle: 1
-  particleRandomSeed: 8434
-  updateDirector: 1
-  updateITimeControl: 1
-  searchHierarchy: 0
-  active: 1
-  postPlayback: 2
-  directorOnClipEnd: 0
---- !u!114 &-6789497256891379070
+--- !u!114 &-7934589974935621791
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
-  m_Name: Control Track (8)
+  m_Name: Control Track (2)
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
@@ -46,12 +22,12 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 4.999999999999999
+    m_Start: 3
     m_ClipIn: 0
-    m_Asset: {fileID: -2037859615910074547}
-    m_Duration: 4
+    m_Asset: {fileID: 4618529307860886845}
+    m_Duration: 5.25
     m_TimeScale: 1
-    m_ParentTrack: {fileID: -6789497256891379070}
+    m_ParentTrack: {fileID: -7934589974935621791}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 0
@@ -140,31 +116,7 @@ MonoBehaviour:
   active: 1
   postPlayback: 2
   directorOnClipEnd: 0
---- !u!114 &-6453777520774244919
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
-  m_Name: ControlPlayableAsset(Clone)
-  m_EditorClassIdentifier: 
-  sourceGameObject:
-    exposedName: 68d33a3c4231ee04289a4843ee8c4b31
-    defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 3775609117788168668, guid: f6d84fa4f6b95d14b9ce458cf640c227, type: 3}
-  updateParticle: 1
-  particleRandomSeed: 8434
-  updateDirector: 1
-  updateITimeControl: 1
-  searchHierarchy: 0
-  active: 1
-  postPlayback: 2
-  directorOnClipEnd: 0
---- !u!114 &-5490960283580454125
+--- !u!114 &-5905269787413657296
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,7 +129,7 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 7310436b1bb8f67439c0b5572fd5afc3
+    exposedName: b8c879719167d024e8a600f8ddfc45b0
     defaultValue: {fileID: 0}
   prefabGameObject: {fileID: 3775609117788168668, guid: f6d84fa4f6b95d14b9ce458cf640c227, type: 3}
   updateParticle: 1
@@ -188,7 +140,7 @@ MonoBehaviour:
   active: 1
   postPlayback: 2
   directorOnClipEnd: 0
---- !u!114 &-5439005546004374375
+--- !u!114 &-4643840513665329692
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,24 +150,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
-  m_Name: Control Track (1)
+  m_Name: Control Track (7)
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
   m_Locked: 0
-  m_Muted: 0
+  m_Muted: 1
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 1
+    m_Start: 5.249999999999999
     m_ClipIn: 0
-    m_Asset: {fileID: -7338293468788996812}
-    m_Duration: 4
+    m_Asset: {fileID: -117863886108213505}
+    m_Duration: 5.25
     m_TimeScale: 1
-    m_ParentTrack: {fileID: -5439005546004374375}
+    m_ParentTrack: {fileID: -4643840513665329692}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 0
@@ -280,7 +232,99 @@ MonoBehaviour:
     m_DisplayName: Drone014
   m_Markers:
     m_Objects: []
---- !u!114 &-3161920659835692294
+--- !u!114 &-3259662974860727019
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
+  m_Name: Control Track (8)
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips:
+  - m_Version: 1
+    m_Start: 6
+    m_ClipIn: 0
+    m_Asset: {fileID: 8918499536785044097}
+    m_Duration: 5.25
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -3259662974860727019}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0
+    m_BlendOutDuration: 0
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: Drone014
+  m_Markers:
+    m_Objects: []
+--- !u!114 &-2820692659376911587
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -293,7 +337,7 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 56a0eee925853c3469887cd5c5aaa191
+    exposedName: 813b67f240d76684299aa86ab59cc0a3
     defaultValue: {fileID: 0}
   prefabGameObject: {fileID: 3775609117788168668, guid: f6d84fa4f6b95d14b9ce458cf640c227, type: 3}
   updateParticle: 1
@@ -304,6 +348,98 @@ MonoBehaviour:
   active: 1
   postPlayback: 2
   directorOnClipEnd: 0
+--- !u!114 &-2615717909910711879
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
+  m_Name: Control Track (9)
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 1
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips:
+  - m_Version: 1
+    m_Start: 6.749999999999998
+    m_ClipIn: 0
+    m_Asset: {fileID: -5905269787413657296}
+    m_Duration: 5.25
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -2615717909910711879}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0
+    m_BlendOutDuration: 0
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: Drone014
+  m_Markers:
+    m_Objects: []
 --- !u!114 &-2548952112469586726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -319,17 +455,17 @@ MonoBehaviour:
   m_Version: 3
   m_AnimClip: {fileID: 0}
   m_Locked: 0
-  m_Muted: 0
+  m_Muted: 1
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0.5
+    m_Start: 0.75
     m_ClipIn: 0
     m_Asset: {fileID: 6130606052747308259}
-    m_Duration: 4
+    m_Duration: 5.25
     m_TimeScale: 1
     m_ParentTrack: {fileID: -2548952112469586726}
     m_EaseInDuration: 0
@@ -396,7 +532,7 @@ MonoBehaviour:
     m_DisplayName: Drone014
   m_Markers:
     m_Objects: []
---- !u!114 &-2051693653626506293
+--- !u!114 &-215345303394497539
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -405,90 +541,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
-  m_Name: Control Track (9)
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
+  m_Name: ControlPlayableAsset(Clone)
   m_EditorClassIdentifier: 
-  m_Version: 3
-  m_AnimClip: {fileID: 0}
-  m_Locked: 0
-  m_Muted: 0
-  m_CustomPlayableFullTypename: 
-  m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
-  m_Children: []
-  m_Clips:
-  - m_Version: 1
-    m_Start: 3.5
-    m_ClipIn: 0
-    m_Asset: {fileID: -3161920659835692294}
-    m_Duration: 4
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: -2051693653626506293}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: Drone014
-  m_Markers:
-    m_Objects: []
---- !u!114 &-2037859615910074547
+  sourceGameObject:
+    exposedName: 6fc6f179f57af22499d4f2cb81dec3f3
+    defaultValue: {fileID: 0}
+  prefabGameObject: {fileID: 3775609117788168668, guid: f6d84fa4f6b95d14b9ce458cf640c227, type: 3}
+  updateParticle: 1
+  particleRandomSeed: 8434
+  updateDirector: 1
+  updateITimeControl: 1
+  searchHierarchy: 0
+  active: 1
+  postPlayback: 2
+  directorOnClipEnd: 0
+--- !u!114 &-117863886108213505
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -501,7 +569,7 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 179fcd87aca5a8d488f267f671b7f8f5
+    exposedName: e039cffc9f16f2f4d93b6fc49618c185
     defaultValue: {fileID: 0}
   prefabGameObject: {fileID: 3775609117788168668, guid: f6d84fa4f6b95d14b9ce458cf640c227, type: 3}
   updateParticle: 1
@@ -512,98 +580,6 @@ MonoBehaviour:
   active: 1
   postPlayback: 2
   directorOnClipEnd: 0
---- !u!114 &-1150866808258165271
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
-  m_Name: Control Track (4)
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_AnimClip: {fileID: 0}
-  m_Locked: 0
-  m_Muted: 0
-  m_CustomPlayableFullTypename: 
-  m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
-  m_Children: []
-  m_Clips:
-  - m_Version: 1
-    m_Start: 1.5000000000000009
-    m_ClipIn: 0
-    m_Asset: {fileID: 3769589556015294642}
-    m_Duration: 4
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: -1150866808258165271}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: Drone014
-  m_Markers:
-    m_Objects: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,115 +595,21 @@ MonoBehaviour:
   m_Version: 0
   m_Tracks:
   - {fileID: 567201931296723628}
-  - {fileID: -5439005546004374375}
-  - {fileID: 273579915843445212}
   - {fileID: -2548952112469586726}
-  - {fileID: -1150866808258165271}
-  - {fileID: 4687246806050646626}
-  - {fileID: 2072786795018396191}
-  - {fileID: 1023975294177492014}
-  - {fileID: -6789497256891379070}
-  - {fileID: -2051693653626506293}
-  - {fileID: 3492769379644501730}
-  - {fileID: 3091796693583979805}
+  - {fileID: 879098571337778547}
+  - {fileID: 1518824622118587869}
+  - {fileID: -7934589974935621791}
+  - {fileID: 5794139027097395547}
+  - {fileID: 5599275955029760721}
+  - {fileID: -4643840513665329692}
+  - {fileID: -3259662974860727019}
+  - {fileID: -2615717909910711879}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
     m_ScenePreview: 1
   m_DurationMode: 0
   m_MarkerTrack: {fileID: 0}
---- !u!114 &273579915843445212
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
-  m_Name: Control Track (2)
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_AnimClip: {fileID: 0}
-  m_Locked: 0
-  m_Muted: 0
-  m_CustomPlayableFullTypename: 
-  m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
-  m_Children: []
-  m_Clips:
-  - m_Version: 1
-    m_Start: 2
-    m_ClipIn: 0
-    m_Asset: {fileID: 821098753858804690}
-    m_Duration: 4
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 273579915843445212}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: Drone014
-  m_Markers:
-    m_Objects: []
 --- !u!114 &567201931296723628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -753,7 +635,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 2791338396025607855}
-    m_Duration: 4
+    m_Duration: 5.25
     m_TimeScale: 1
     m_ParentTrack: {fileID: 567201931296723628}
     m_EaseInDuration: 0
@@ -820,7 +702,7 @@ MonoBehaviour:
     m_DisplayName: Drone014
   m_Markers:
     m_Objects: []
---- !u!114 &821098753858804690
+--- !u!114 &570278019746386601
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -833,7 +715,7 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 26d9e28b0f9cc434b91e9dedd620ffa1
+    exposedName: 53393aabbbec1554eae2836fe576cae3
     defaultValue: {fileID: 0}
   prefabGameObject: {fileID: 3775609117788168668, guid: f6d84fa4f6b95d14b9ce458cf640c227, type: 3}
   updateParticle: 1
@@ -844,7 +726,7 @@ MonoBehaviour:
   active: 1
   postPlayback: 2
   directorOnClipEnd: 0
---- !u!114 &1023975294177492014
+--- !u!114 &879098571337778547
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -854,7 +736,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
-  m_Name: Control Track (7)
+  m_Name: Control Track (1)
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
@@ -866,12 +748,12 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 4
+    m_Start: 1.5
     m_ClipIn: 0
-    m_Asset: {fileID: 7057294326617623238}
-    m_Duration: 4
+    m_Asset: {fileID: -215345303394497539}
+    m_Duration: 5.25
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 1023975294177492014}
+    m_ParentTrack: {fileID: 879098571337778547}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 0
@@ -936,31 +818,7 @@ MonoBehaviour:
     m_DisplayName: Drone014
   m_Markers:
     m_Objects: []
---- !u!114 &1714118512093609049
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
-  m_Name: ControlPlayableAsset(Clone)(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  sourceGameObject:
-    exposedName: 3152835d9d00fd7478dacf5bb3b8a31d
-    defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 3775609117788168668, guid: f6d84fa4f6b95d14b9ce458cf640c227, type: 3}
-  updateParticle: 1
-  particleRandomSeed: 8434
-  updateDirector: 1
-  updateITimeControl: 1
-  searchHierarchy: 0
-  active: 1
-  postPlayback: 2
-  directorOnClipEnd: 0
---- !u!114 &2072786795018396191
+--- !u!114 &1518824622118587869
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -970,24 +828,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
-  m_Name: Control Track (6)
+  m_Name: Control Track (4)
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
   m_Locked: 0
-  m_Muted: 0
+  m_Muted: 1
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 3
+    m_Start: 2.249999999999999
     m_ClipIn: 0
-    m_Asset: {fileID: -6453777520774244919}
-    m_Duration: 4
+    m_Asset: {fileID: 6599413902132585365}
+    m_Duration: 5.25
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 2072786795018396191}
+    m_ParentTrack: {fileID: 1518824622118587869}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 0
@@ -1076,7 +934,31 @@ MonoBehaviour:
   active: 1
   postPlayback: 2
   directorOnClipEnd: 0
---- !u!114 &3091796693583979805
+--- !u!114 &4618529307860886845
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
+  m_Name: ControlPlayableAsset(Clone)
+  m_EditorClassIdentifier: 
+  sourceGameObject:
+    exposedName: 05208d43a33824c43b20f0b93ef31452
+    defaultValue: {fileID: 0}
+  prefabGameObject: {fileID: 3775609117788168668, guid: f6d84fa4f6b95d14b9ce458cf640c227, type: 3}
+  updateParticle: 1
+  particleRandomSeed: 8434
+  updateDirector: 1
+  updateITimeControl: 1
+  searchHierarchy: 0
+  active: 1
+  postPlayback: 2
+  directorOnClipEnd: 0
+--- !u!114 &5599275955029760721
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1086,7 +968,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
-  m_Name: Control Track (11)
+  m_Name: Control Track (6)
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
@@ -1098,12 +980,12 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 5.499999999999999
+    m_Start: 4.500000000000001
     m_ClipIn: 0
-    m_Asset: {fileID: -5490960283580454125}
-    m_Duration: 4
+    m_Asset: {fileID: -2820692659376911587}
+    m_Duration: 5.25
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 3091796693583979805}
+    m_ParentTrack: {fileID: 5599275955029760721}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 0
@@ -1168,147 +1050,7 @@ MonoBehaviour:
     m_DisplayName: Drone014
   m_Markers:
     m_Objects: []
---- !u!114 &3492769379644501730
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
-  m_Name: Control Track (10)
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_AnimClip: {fileID: 0}
-  m_Locked: 0
-  m_Muted: 0
-  m_CustomPlayableFullTypename: 
-  m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
-  m_Children: []
-  m_Clips:
-  - m_Version: 1
-    m_Start: 4.499999999999999
-    m_ClipIn: 0
-    m_Asset: {fileID: 1714118512093609049}
-    m_Duration: 4
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 3492769379644501730}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: Drone014
-  m_Markers:
-    m_Objects: []
---- !u!114 &3769589556015294642
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
-  m_Name: ControlPlayableAsset(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  sourceGameObject:
-    exposedName: 3848f1c57e2c31d42aaf030eebe4f360
-    defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 3775609117788168668, guid: f6d84fa4f6b95d14b9ce458cf640c227, type: 3}
-  updateParticle: 1
-  particleRandomSeed: 8434
-  updateDirector: 1
-  updateITimeControl: 1
-  searchHierarchy: 0
-  active: 1
-  postPlayback: 2
-  directorOnClipEnd: 0
---- !u!114 &4347968609086086292
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
-  m_Name: ControlPlayableAsset(Clone)(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  sourceGameObject:
-    exposedName: a78bfb92cbad2b44699938d89f9a3b87
-    defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 3775609117788168668, guid: f6d84fa4f6b95d14b9ce458cf640c227, type: 3}
-  updateParticle: 1
-  particleRandomSeed: 8434
-  updateDirector: 1
-  updateITimeControl: 1
-  searchHierarchy: 0
-  active: 1
-  postPlayback: 2
-  directorOnClipEnd: 0
---- !u!114 &4687246806050646626
+--- !u!114 &5794139027097395547
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1323,19 +1065,19 @@ MonoBehaviour:
   m_Version: 3
   m_AnimClip: {fileID: 0}
   m_Locked: 0
-  m_Muted: 0
+  m_Muted: 1
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 2.5000000000000013
+    m_Start: 3.749999999999999
     m_ClipIn: 0
-    m_Asset: {fileID: 4347968609086086292}
-    m_Duration: 4
+    m_Asset: {fileID: 570278019746386601}
+    m_Duration: 5.25
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 4687246806050646626}
+    m_ParentTrack: {fileID: 5794139027097395547}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 0
@@ -1424,7 +1166,7 @@ MonoBehaviour:
   active: 1
   postPlayback: 2
   directorOnClipEnd: 0
---- !u!114 &7057294326617623238
+--- !u!114 &6599413902132585365
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1437,7 +1179,31 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset(Clone)(Clone)
   m_EditorClassIdentifier: 
   sourceGameObject:
-    exposedName: 10645486444a50441bb1aa0d5331b319
+    exposedName: fb91ac684f330204a8a2f88db3c242aa
+    defaultValue: {fileID: 0}
+  prefabGameObject: {fileID: 3775609117788168668, guid: f6d84fa4f6b95d14b9ce458cf640c227, type: 3}
+  updateParticle: 1
+  particleRandomSeed: 8434
+  updateDirector: 1
+  updateITimeControl: 1
+  searchHierarchy: 0
+  active: 1
+  postPlayback: 2
+  directorOnClipEnd: 0
+--- !u!114 &8918499536785044097
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
+  m_Name: ControlPlayableAsset(Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  sourceGameObject:
+    exposedName: f726200e863bc4a4eb0d05558afbc39e
     defaultValue: {fileID: 0}
   prefabGameObject: {fileID: 3775609117788168668, guid: f6d84fa4f6b95d14b9ce458cf640c227, type: 3}
   updateParticle: 1

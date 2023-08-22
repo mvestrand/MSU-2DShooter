@@ -208,13 +208,13 @@ MonoBehaviour:
     defaultValue: {fileID: 0}
   template:
     splineWeight: 0
-    t: 1
+    t: 0
     direction: 0
     directionWeight: 0
-    moveDirectionWeight: 0
-    playerTrackWeight: 0.98542404
-    shouldShoot: 1
-    useTurnSpeed: 1
+    moveDirectionWeight: 1
+    playerTrackWeight: 0
+    shouldShoot: 0
+    useTurnSpeed: 0
 --- !u!74 &-2832502844493819392
 AnimationClip:
   m_ObjectHideFlags: 0
@@ -1134,13 +1134,13 @@ MonoBehaviour:
     defaultValue: {fileID: 0}
   template:
     splineWeight: 0
-    t: 0
+    t: 1
     direction: 0
     directionWeight: 0
-    moveDirectionWeight: 1
-    playerTrackWeight: 0
-    shouldShoot: 0
-    useTurnSpeed: 0
+    moveDirectionWeight: 0.10399979
+    playerTrackWeight: 0.8960002
+    shouldShoot: 1
+    useTurnSpeed: 1
 --- !u!74 &2444408715065266610
 AnimationClip:
   m_ObjectHideFlags: 1

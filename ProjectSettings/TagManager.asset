@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - BackgroundPanel
+  - Environment
   layers:
   - Default
   - TransparentFX
@@ -65,4 +66,7 @@ TagManager:
     locked: 0
   - name: Effects
     uniqueID: 2915055885
+    locked: 0
+  - name: Foreground
+    uniqueID: 3373782075
     locked: 0

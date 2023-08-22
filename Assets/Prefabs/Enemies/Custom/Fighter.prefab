@@ -133,6 +133,10 @@ MonoBehaviour:
   shouldShoot: 0
   movementMode: 1
   scrollDirection: {x: 0, y: 0, z: 0}
+  useTurnSpeed: 0
+  maxTurnSpeed: 50
+  turnSpeedMod: 1
+  playerTracker: {fileID: 0}
 --- !u!114 &2029536735206158367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamId: 1
+  invincibleCanDestroy: 0
   defaultHealth: 5
   maximumHealth: 5
   currentHealth: 5
@@ -155,7 +160,10 @@ MonoBehaviour:
   respawnDelayTime: 0.5
   useLives: 0
   currentLives: 3
+  startingLives: 3
   maximumLives: 5
+  infiniteLives: 0
+  lives: {fileID: 0}
   onDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -285,6 +293,7 @@ MonoBehaviour:
   fireSequence: {fileID: 11400000, guid: b4d7af0f59513ec4c8e40d7dc2ee34af, type: 2}
   mode: 2
   channel: 0
+  invert: 0
   isPlayerControlled: 0
   fireRate: 0.5
   fireRateAdv:

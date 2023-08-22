@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: NebulaBase
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 21300000, guid: bef27f2a0099c6c46909640d0115b1e5, type: 3}
   - {fileID: 21300000, guid: 670b9d84f6f86e74a8359716542dbc0b, type: 3}
   - {fileID: 21300000, guid: fef74fd6848227d4cb2c7dc988158669, type: 3}
   canFlipX: 0

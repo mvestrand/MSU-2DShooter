@@ -20,12 +20,13 @@ MonoBehaviour:
     defaultValue: {fileID: 0}
   template:
     splineWeight: 0
-    t: 1
+    t: 0
     direction: 0
     directionWeight: 0
     moveDirectionWeight: 0
-    playerTrackWeight: 1
-    shouldShoot: 1
+    playerTrackWeight: 0
+    shouldShoot: 0
+    useTurnSpeed: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +87,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 10
+        time: 6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -95,7 +96,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 11
+        time: 7
         value: 0
         inSlope: -2.7103174
         outSlope: -2.7103174
@@ -141,7 +142,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 10
+        time: 6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -150,7 +151,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 10.5
+        time: 6.5
         value: 0
         inSlope: 0
         outSlope: 0
@@ -187,7 +188,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 10
+        time: 6
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -216,7 +217,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 11
+    m_StopTime: 7
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -254,7 +255,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 10
+        time: 6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -263,7 +264,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 11
+        time: 7
         value: 0
         inSlope: -2.7103174
         outSlope: -2.7103174
@@ -309,7 +310,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 10
+        time: 6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -318,7 +319,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 10.5
+        time: 6.5
         value: 0
         inSlope: 0
         outSlope: 0
@@ -355,7 +356,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 10
+        time: 6
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -399,7 +400,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: -7379291990931131818}
-    m_Duration: 11
+    m_Duration: 7
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7146905465285029479}
     m_EaseInDuration: 0

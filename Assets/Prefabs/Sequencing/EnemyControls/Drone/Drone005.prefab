@@ -61,6 +61,7 @@ MonoBehaviour:
   - 8.932209
   modes: 0000000000000000
   loop: 0
+  waypoints: 
 --- !u!120 &7671685919716868482
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -229,6 +230,7 @@ MonoBehaviour:
   - 8.473661
   modes: 0000000000000000
   loop: 0
+  waypoints: 
 --- !u!120 &7671685919962696365
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -430,6 +432,7 @@ MonoBehaviour:
   - 18.29754
   modes: 0200000002000000020000000200000002000000
   loop: 1
+  waypoints: 
 --- !u!120 &7671685920706233671
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -684,6 +687,18 @@ PrefabInstance:
     - target: {fileID: 111767558614867189, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
       propertyPath: m_Name
       value: Drone
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029536735206158367, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
+      propertyPath: currentHealth
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029536735206158367, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
+      propertyPath: defaultHealth
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029536735206158367, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}
+      propertyPath: maximumHealth
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 616df562a35f3484f97d6c0b0a5e1297, type: 3}

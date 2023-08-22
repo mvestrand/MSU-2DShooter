@@ -9,4 +9,6 @@ public class BackgroundController : MonoBehaviour {
     public float sortingOrderScale = 5;
     public float SpeedMultiplier = 1;
 
+
+
 }
