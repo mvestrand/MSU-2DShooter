@@ -10,6 +10,8 @@ public interface IShootingController {
     bool UpdateFireState(bool shouldFire, ref float turnSpeedLimit);
     bool UpdateFireState(bool shouldFire, float deltaTime, float extraTime, ref float turnSpeedLimit);
     float TimeToNextEvent(bool shouldFire);
+    void StartSequence();
+    void StopSequence();
 }
 
 
@@ -257,6 +259,14 @@ public class ShootingController : MonoBehaviour, IShootingController
         else if (mode == FireMode.Sequence)
             return fireSequence.TimeToNextEvent(fireSequenceState, shouldFire);
         return float.MaxValue;
+    }
+
+    public void StopSequence() {
+        fireSequenceState.Stop();
+    }
+
+    public void StartSequence() {
+        fireSequenceState.Start();
     }
 
 

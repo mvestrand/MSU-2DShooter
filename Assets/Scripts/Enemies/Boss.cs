@@ -32,6 +32,7 @@ public class Boss : MonoBehaviour {
     [SerializeField] private List<double> destinationTimes = new List<double>();
 
     public int gunGroup;
+    public int turretGroup;
 
     public bool shouldShoot = false;
 
@@ -68,8 +69,21 @@ public class Boss : MonoBehaviour {
     }
 
     public void ActivateTurrets(int group) {
+        turretGroup = group;
         foreach (var turret in turretGroups[group].turrets) {
             turret.ActivateTurret();
+        }
+    }
+
+    public void StartTurrets() {
+        foreach (var turret in turretGroups[turretGroup].turrets) {
+            turret.StartTurret();
+        }
+    }
+
+    public void StopTurrets() {
+        foreach (var turret in turretGroups[turretGroup].turrets) {
+            turret.StopTurret();
         }
     }
 

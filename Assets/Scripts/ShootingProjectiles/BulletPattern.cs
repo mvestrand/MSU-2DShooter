@@ -18,14 +18,19 @@ public class BulletPattern : ScriptableObject {
     public void Spawn(Vector3 position, Quaternion rotation, Transform parent, float advanceTime=0, Projectile fallback=null, ProjectileModifiers globalModifiers=null, bool invert = false) {
         if (globalModifiers != null) {
             (position, rotation, invert) = globalModifiers.ApplyOffsets(position, rotation, invert);
+
         }
         
         foreach (var projectile in projectiles) {
             if (projectile == null)
                 continue;
 
-            if (projectile.prefab != null)
-                projectile.prefab.Spawn(position, rotation, parent, advanceTime, projectile.modifiers, invert);
+            if (projectile.prefab != null) {
+                if (globalModifiers != null)
+                    projectile.prefab.Spawn(position, rotation, parent, advanceTime, projectile.modifiers, invert, globalModifiers.ApplySpeed(projectile.prefab.projectileSpeed));
+                else
+                    projectile.prefab.Spawn(position, rotation, parent, advanceTime, projectile.modifiers, invert);
+            }
             else
                 fallback.Spawn(position, rotation, parent, advanceTime, projectile.modifiers, invert);
         }

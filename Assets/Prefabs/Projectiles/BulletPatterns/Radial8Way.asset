@@ -41,7 +41,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       rotationAffectsProjectile: 1
-      rotatedOffset: {x: 0, y: 0.2}
+      rotatedOffset: {x: 0, y: 0.4}
       speed:
         mode: 0
         value: 0
@@ -55,6 +55,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
   - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
     modifiers:
       offset: {x: 0, y: 0}
@@ -83,7 +84,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       rotationAffectsProjectile: 1
-      rotatedOffset: {x: 0, y: 0.2}
+      rotatedOffset: {x: 0, y: 0.4}
       speed:
         mode: 0
         value: 0
@@ -97,6 +98,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
   - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
     modifiers:
       offset: {x: 0, y: 0}
@@ -125,7 +127,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       rotationAffectsProjectile: 1
-      rotatedOffset: {x: 0, y: 0.2}
+      rotatedOffset: {x: 0, y: 0.4}
       speed:
         mode: 0
         value: 0
@@ -139,6 +141,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
   - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
     modifiers:
       offset: {x: 0, y: 0}
@@ -167,7 +170,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       rotationAffectsProjectile: 1
-      rotatedOffset: {x: 0, y: 0.2}
+      rotatedOffset: {x: 0, y: 0.4}
       speed:
         mode: 0
         value: 0
@@ -181,6 +184,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
   - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
     modifiers:
       offset: {x: 0, y: 0}
@@ -209,7 +213,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       rotationAffectsProjectile: 1
-      rotatedOffset: {x: 0, y: 0.2}
+      rotatedOffset: {x: 0, y: 0.4}
       speed:
         mode: 0
         value: 0
@@ -223,6 +227,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
   - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
     modifiers:
       offset: {x: 0, y: 0}
@@ -251,7 +256,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       rotationAffectsProjectile: 1
-      rotatedOffset: {x: 0, y: 0.2}
+      rotatedOffset: {x: 0, y: 0.4}
       speed:
         mode: 0
         value: 0
@@ -265,6 +270,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
   - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
     modifiers:
       offset: {x: 0, y: 0}
@@ -293,7 +299,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       rotationAffectsProjectile: 1
-      rotatedOffset: {x: 0, y: 0.2}
+      rotatedOffset: {x: 0, y: 0.4}
       speed:
         mode: 0
         value: 0
@@ -307,6 +313,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
   - prefab: {fileID: 2535222879597372320, guid: 57390660629686c41a7e93a6b16a827c, type: 3}
     modifiers:
       offset: {x: 0, y: 0}
@@ -335,7 +342,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       rotationAffectsProjectile: 1
-      rotatedOffset: {x: 0, y: 0.2}
+      rotatedOffset: {x: 0, y: 0.4}
       speed:
         mode: 0
         value: 0
@@ -349,3 +356,4 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0

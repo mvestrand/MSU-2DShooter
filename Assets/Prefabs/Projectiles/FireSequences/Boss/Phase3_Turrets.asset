@@ -47,7 +47,7 @@ MonoBehaviour:
       rotatedOffset: {x: 0, y: 0}
       speed:
         mode: 0
-        value: 0.5
+        value: 1.1
         curveScale: 0
         min: 0
         max: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
       rotatedOffset: {x: 0, y: 0}
       speed:
         mode: 0
-        value: 0.5
+        value: 1.1
         curveScale: 0
         min: 0
         max: 0
@@ -155,7 +155,7 @@ MonoBehaviour:
       rotatedOffset: {x: 0, y: 0}
       speed:
         mode: 0
-        value: 0.5
+        value: 1.1
         curveScale: 0
         min: 0
         max: 0
@@ -209,7 +209,7 @@ MonoBehaviour:
       rotatedOffset: {x: 0, y: 0}
       speed:
         mode: 0
-        value: 0.5
+        value: 1.1
         curveScale: 0
         min: 0
         max: 0
@@ -263,7 +263,7 @@ MonoBehaviour:
       rotatedOffset: {x: 0, y: 0}
       speed:
         mode: 0
-        value: 0.5
+        value: 1.1
         curveScale: 0
         min: 0
         max: 0

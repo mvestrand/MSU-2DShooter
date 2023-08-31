@@ -47,8 +47,10 @@ public class Projectile : MonoBehaviour
     }
 
 
-    public void Spawn(Vector3 position, Quaternion rotation, Transform parent, float advanceTime=0, ProjectileModifiers modifiers=null, bool invert=false)  {
-        float speed = projectileSpeed;
+    public void Spawn(Vector3 position, Quaternion rotation, Transform parent, float advanceTime=0, ProjectileModifiers modifiers=null, bool invert=false, float speed = float.NaN)  {
+        if (float.IsNaN(speed))
+            speed = projectileSpeed;
+
 
         var instance = Pool.Instantiate(gameObject, position, rotation, parent).GetComponent<Projectile>();
 

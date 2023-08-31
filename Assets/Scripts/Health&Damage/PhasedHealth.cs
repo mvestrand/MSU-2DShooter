@@ -207,7 +207,7 @@ public class PhasedHealth : MonoBehaviour, IHealth
         if (complete)
             return phases[currentPhase].phaseScore;
 
-        float damageFrac = 1f - (Mathf.Max(phases[currentPhase].currentHealth, 0f) / (float)phases[currentPhase].maxHealth);        
+        float damageFrac = Mathf.Clamp01(1f - (Mathf.Max(phases[currentPhase].currentHealth, 0f) / (float)phases[currentPhase].maxHealth));        
         return (int)(phases[currentPhase].phaseScore * damageFrac);
     }
 

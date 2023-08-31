@@ -35,8 +35,8 @@ public class ProjectileModifiers {
         Quaternion projDirection = Quaternion.AngleAxis(sign * projectileDirection.Get(projectileDirectionRand, 0), Vector3.forward);
 
         // Compute the final position to spawn the projectile at
-        Vector3 pos = rootPos + rootRot * new Vector3(offset.x, offset.y, 0);
-        pos = pos + localRotation * rootRot * new Vector3(rotatedOffset.x, rotatedOffset.y, 0);
+        Vector3 pos = rootPos + rootRot * new Vector3(sign * offset.x, offset.y, 0);
+        pos = pos + localRotation * rootRot * new Vector3(sign * rotatedOffset.x, rotatedOffset.y, 0);
 
         // Compute the final rotation for the projectile
         Quaternion rot = projDirection * (rotationAffectsProjectile ? localRotation : Quaternion.identity) * rootRot;

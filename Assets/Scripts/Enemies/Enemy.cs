@@ -238,6 +238,21 @@ public class Enemy : MonoBehaviour
         return rotation;
     }
 
+
+    public void StartShootingSequence() {
+        foreach (var gun in guns) {
+            gun.Value.StartSequence();
+        }
+    }
+
+    public void StopShootingSequence() {
+        foreach (var gun in guns) {
+            gun.Value.StopSequence();
+        }
+    }
+
+
+
     /// <summary>
     /// Description:
     /// Tries to fire all referenced ShootingController scripts

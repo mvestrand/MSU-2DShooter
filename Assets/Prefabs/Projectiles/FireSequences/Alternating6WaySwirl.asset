@@ -58,6 +58,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
     useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
@@ -65,6 +66,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 0.05
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -109,6 +112,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
     useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
@@ -116,6 +120,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 0.1
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -160,6 +166,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
     useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
@@ -167,6 +174,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 0.15
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -211,6 +220,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
     useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
@@ -218,6 +228,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 0.2
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -262,6 +274,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
     useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
@@ -269,6 +282,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 0.25
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -313,6 +328,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
     useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
@@ -320,6 +336,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 0.3
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -364,13 +382,16 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
-    useControllerSpread: 1
+      invert: 0
+    useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
     mode: 2
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 0.35
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -415,6 +436,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
     useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
@@ -422,6 +444,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 1
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -466,13 +490,16 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
-    useControllerSpread: 1
+      invert: 0
+    useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
     mode: 2
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 1.05
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -517,6 +544,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
     useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
@@ -524,6 +552,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 1.1
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -568,6 +598,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
     useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
@@ -575,6 +606,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 1.15
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -619,6 +652,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
     useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
@@ -626,6 +660,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 1.2
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -670,6 +706,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
     useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
@@ -677,6 +714,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 1.25
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -721,6 +760,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
     useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
@@ -728,6 +768,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 1.3
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -772,6 +814,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
     useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
@@ -779,6 +822,8 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0
   - time: 1.35
     projectile: {fileID: 0}
     pattern: {fileID: 11400000, guid: 858ddaabcb42a07458fd2f50c0f2b018, type: 2}
@@ -823,6 +868,7 @@ MonoBehaviour:
           m_PostInfinity: 0
           m_RotationOrder: 0
       speedMode: 0
+      invert: 0
     useControllerSpread: 0
     effect: {fileID: 0}
     shouldParentEffect: 0
@@ -830,3 +876,5 @@ MonoBehaviour:
     jumpTargetFrame: 0
     maxLoops: 0
     ignoreJumpOnNoShoot: 0
+    shouldLimitTurnSpeed: 0
+    limitTurnSpeed: 0

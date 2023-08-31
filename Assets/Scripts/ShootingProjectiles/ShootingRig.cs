@@ -134,4 +134,17 @@ public class ShootingRig : MonoBehaviour, IShootingController
 
         return isDone;
     }
+
+    public void StartSequence() {
+        foreach (IShootingController gun in guns) {
+            gun.StartSequence();
+        }
+    }
+
+    public void StopSequence()
+    {
+        foreach (IShootingController gun in guns) {
+            gun.StartSequence();
+        }
+    }
 }
