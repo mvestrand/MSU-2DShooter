@@ -16,6 +16,11 @@ public class ScrollingBox : MonoBehaviour
     public float transparency = 1.0f;
     public int spritesIndex = 0;
 
+    public bool randomizeX = false;
+    public float minX = -10;
+    public float maxX = 10;
+
+
 
     // Update is called once per frame
     void Update() {
@@ -27,6 +32,7 @@ public class ScrollingBox : MonoBehaviour
         foreach (Transform tf in transform) {
             float deltaY = scrollSpeed * Time.deltaTime * (controller != null ? controller.SpeedMultiplier : 1);
             float y = tf.localPosition.y - deltaY;
+            float x = tf.localPosition.x;
             if (y <= -height / 2) {
                 if (tf.tag == "BackgroundPanel" && tf.TryGetComponent<SpriteRenderer>(out var r)) {
                     y += height;
@@ -35,13 +41,16 @@ public class ScrollingBox : MonoBehaviour
                     else {
                         r.sprite = null;
                     }
+                    if (randomizeX) {
+                        x = Random.Range(minX, maxX);
+                    }
                 } else {
                     Destroy(tf.gameObject);
                 }
             } else if (y > height / 2) {
                 y -= height;
             }
-            tf.localPosition = new Vector3(tf.localPosition.x, y, tf.localPosition.z);
+            tf.localPosition = new Vector3(x, y, tf.localPosition.z);
 
             if (tf.tag == "BackgroundPanel" && tf.TryGetComponent<SpriteRenderer>(out var renderer))
                 renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, transparency);                
@@ -66,5 +75,19 @@ public class ScrollingBox : MonoBehaviour
 
     private bool SpriteSetIsValid() {
         return spriteSets != null && spritesIndex >= 0 && spritesIndex < spriteSets.Count && spriteSets[spritesIndex] != null;
+    }
+
+    protected void OnDrawGizmosSelected() {
+        Vector3 p0 = transform.TransformPoint(minX, height / 2, 0);
+        Vector3 p1 = transform.TransformPoint(maxX, height / 2, 0);
+        Vector3 p2 = transform.TransformPoint(maxX, -height / 2, 0);
+        Vector3 p3 = transform.TransformPoint(minX, -height / 2, 0);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(p0, p1);
+        Gizmos.DrawLine(p1, p2);
+        Gizmos.DrawLine(p2, p3);
+        Gizmos.DrawLine(p3, p0);
+
     }
 }

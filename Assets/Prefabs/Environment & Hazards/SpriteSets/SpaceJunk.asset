@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77121a33bee40dd42a13de2fe74291ee, type: 3}
+  m_Name: SpaceJunk
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 6122e7d6bb61d574088b0d5cfe631cee, type: 3}
+  - {fileID: 21300000, guid: c68b01210d6bdea4699de6158a3aeca2, type: 3}
+  - {fileID: 21300000, guid: 4a95492d114cfd94d8be5a000e114cdd, type: 3}
+  - {fileID: 21300000, guid: 4a95492d114cfd94d8be5a000e114cdd, type: 3}
+  - {fileID: 21300000, guid: 5a447b005acf82d4fb1296bf3d965075, type: 3}
+  - {fileID: 21300000, guid: 51862a871a02b3a44a68817ccc5ddb5b, type: 3}
+  - {fileID: 21300000, guid: 6d71081ad7e16e14eb017e1c476b26c1, type: 3}
+  - {fileID: 21300000, guid: 8da5428f56edaf849afef08e28efb21f, type: 3}
+  - {fileID: 21300000, guid: d0c64af2658d94a4a9dce0d88208e79b, type: 3}
+  - {fileID: 21300000, guid: 4e05e5077f5fddd46974ac76c5e4ec28, type: 3}
+  - {fileID: 21300000, guid: c12e0117f1ecad04d913d45d26b98a5f, type: 3}
+  - {fileID: 21300000, guid: 84c7537114d1a294185c029cec7fa934, type: 3}
+  canFlipX: 1
+  canFlipY: 0

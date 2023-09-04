@@ -83,6 +83,7 @@ MonoBehaviour:
   - 32.064674
   modes: 02000000020000000200000002000000
   loop: 0
+  waypoints: 
 --- !u!120 &2254203420794297634
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -346,6 +347,10 @@ PrefabInstance:
       propertyPath: projectilePattern
       value: 
       objectReference: {fileID: 11400000, guid: 5777915fd7c118d4a88c5222c0068330, type: 2}
+    - target: {fileID: 7340133325313639286, guid: 5dd40975d3278c442b51359dada89f57, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5dd40975d3278c442b51359dada89f57, type: 3}
 --- !u!4 &5844016753172810925 stripped

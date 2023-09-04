@@ -4863,6 +4863,9 @@ MonoBehaviour:
   runInEditor: 0
   transparency: 1
   spritesIndex: 0
+  randomizeX: 0
+  minX: -10
+  maxX: 10
 --- !u!1 &548162332
 GameObject:
   m_ObjectHideFlags: 0
@@ -5051,6 +5054,9 @@ MonoBehaviour:
   runInEditor: 0
   transparency: 1
   spritesIndex: 0
+  randomizeX: 0
+  minX: -10
+  maxX: 10
 --- !u!1001 &566623777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7295,6 +7301,9 @@ MonoBehaviour:
   runInEditor: 0
   transparency: 1
   spritesIndex: 0
+  randomizeX: 0
+  minX: -10
+  maxX: 10
 --- !u!1 &719241186
 GameObject:
   m_ObjectHideFlags: 0
@@ -7519,6 +7528,9 @@ MonoBehaviour:
   runInEditor: 0
   transparency: 1
   spritesIndex: 0
+  randomizeX: 0
+  minX: -10
+  maxX: 10
 --- !u!1 &737419922
 GameObject:
   m_ObjectHideFlags: 0
@@ -9255,6 +9267,9 @@ MonoBehaviour:
   runInEditor: 0
   transparency: 1
   spritesIndex: 0
+  randomizeX: 0
+  minX: -10
+  maxX: 10
 --- !u!1001 &952697091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9983,6 +9998,9 @@ MonoBehaviour:
   runInEditor: 0
   transparency: 0
   spritesIndex: 0
+  randomizeX: 0
+  minX: -10
+  maxX: 10
 --- !u!1001 &1026361784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10105,6 +10123,9 @@ MonoBehaviour:
   runInEditor: 0
   transparency: 0
   spritesIndex: 0
+  randomizeX: 0
+  minX: -10
+  maxX: 10
 --- !u!1 &1037747692
 GameObject:
   m_ObjectHideFlags: 0
@@ -11075,6 +11096,7 @@ GameObject:
   - component: {fileID: 1180719542}
   - component: {fileID: 1180719544}
   - component: {fileID: 1180719545}
+  - component: {fileID: 1180719546}
   m_Layer: 0
   m_Name: LevelDirector
   m_TagString: Untagged
@@ -11105,7 +11127,7 @@ PlayableDirector:
     value: {fileID: 533387988}
   - key: {fileID: -3841746424506220767, guid: 5f8d0308e9a3a2d4a9a69a850353404e, type: 2}
     value: {fileID: 533387991}
-  - key: {fileID: 2429285887209146184, guid: 5f8d0308e9a3a2d4a9a69a850353404e, type: 2}
+  - key: {fileID: 0}
     value: {fileID: 1750722469}
   - key: {fileID: -6470429246692393893, guid: 5f8d0308e9a3a2d4a9a69a850353404e, type: 2}
     value: {fileID: 1325114758}
@@ -11210,6 +11232,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 11400000, guid: 0a65ca4647fb0ff4aa28a3237cd7628f, type: 2}
+--- !u!114 &1180719546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180719541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41adeda082e45354f98775a152d48c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  director: {fileID: 1180719542}
 --- !u!1 &1183059195
 GameObject:
   m_ObjectHideFlags: 0
@@ -12516,6 +12551,9 @@ MonoBehaviour:
   runInEditor: 0
   transparency: 0
   spritesIndex: 0
+  randomizeX: 0
+  minX: -10
+  maxX: 10
 --- !u!1 &1405688350
 GameObject:
   m_ObjectHideFlags: 0
@@ -17080,6 +17118,9 @@ MonoBehaviour:
   runInEditor: 0
   transparency: 1
   spritesIndex: 0
+  randomizeX: 0
+  minX: -10
+  maxX: 10
 --- !u!4 &2007542160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4867940027157724174, guid: fb3863dec9ed61644a34a2455dd1bc1d, type: 3}
@@ -18898,8 +18939,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6931909669370019483, guid: d9cac9bf8d7211c40a3f1748a7a38c79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931909669370019483, guid: d9cac9bf8d7211c40a3f1748a7a38c79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadLevelByName
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931909669370019483, guid: d9cac9bf8d7211c40a3f1748a7a38c79, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931909669370019483, guid: d9cac9bf8d7211c40a3f1748a7a38c79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7975716839373305704, guid: d9cac9bf8d7211c40a3f1748a7a38c79, type: 3}
       propertyPath: m_AnchorMax.x

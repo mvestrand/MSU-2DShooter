@@ -8,6 +8,7 @@ using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
+
 /// <summary>
 /// Class which manages the game
 /// </summary>
@@ -430,7 +431,8 @@ public class GameManager : MonoBehaviour
     public void LoadLevelByName(string levelToLoadName)
     {
         Paused = false;
-        SceneManager.LoadScene(levelToLoadName);
+        LevelLoadManager.LoadLevel(levelToLoadName);
+        //SceneManager.LoadScene(levelToLoadName);
     }
 
 }

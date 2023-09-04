@@ -118,7 +118,8 @@ public class InputManager : MonoBehaviour
     {
         firePressed = !context.canceled;
         fireHeld = !context.canceled;
-        StartCoroutine(ResetFireStart());
+        if (gameObject != null && gameObject.activeInHierarchy)
+            StartCoroutine(ResetFireStart());
     }
 
     /// <summary>
@@ -141,7 +142,8 @@ public class InputManager : MonoBehaviour
     public void ReadPauseInput(InputAction.CallbackContext context)
     {
         pausePressed = !context.canceled;
-        StartCoroutine(ResetPausePressed());
+        if (gameObject != null && gameObject.activeInHierarchy)
+            StartCoroutine(ResetPausePressed());
     }
 
     /// <summary>
