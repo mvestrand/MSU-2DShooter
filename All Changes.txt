@@ -19,7 +19,7 @@
 - Lengthened player projectiles to reduce flashing
 - Added two variants to player fire sound to reduce repetitiveness
 - Added backgrounds of just stars moving at different speeds to create a sense of parallax
-
+- Game audio pauses while the game is paused
 
 === External / Reverted Changes ===
 - Pooling code refactored
